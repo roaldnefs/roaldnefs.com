@@ -1,0 +1,30 @@
+{
+  "name": "roaldnefs.com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal site for [Roald Nefs](https://github.com/roaldnefs), using the very fast and flexible static site generator called Hugo.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roaldnefs/roaldnefs.com.git"
+  },
+  "author": "Roald Nefs <info@roaldnefs.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roaldnefs/roaldnefs.com/issues"
+  },
+  "homepage": "https://github.com/roaldnefs/roaldnefs.com#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1"
+  }
+}

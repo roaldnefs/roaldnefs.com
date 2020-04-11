@@ -1,2 +1,6 @@
-/public/
-/resources/_gen/
+# Hugo
+public/
+resources/_gen/
+
+# NPM
+node_modules/
