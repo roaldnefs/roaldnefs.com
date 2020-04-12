@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html><head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://roaldnefs.com/css/theme.min.css">
+
+    <title>Roald Nefs</title>
+</head><body>
+
+<article class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Update YARD Stick One Firmware</h1>
+
+            <p>Today I received my <a href="https://greatscottgadgets.com/yardstickone/">YARD Stick One</a> (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle  can transmit and receive digital wireless signals at frequencies below  1GHz. The YARD Stick One is not a SDR, because the I/Q  samples are directly demodulated by the chipset instead of send to the  host over USB. The YARD Stick One therefore isn’t compatible with any  SDR software, but you can use something called <a href="https://github.com/atlas0fd00m/rfcat.git">rfcat</a>.</p>
+<p>Rfcat allows the user to drive the YARD Stick One using Python and abstracts a lot if complexity. The YARD Stick One has rfcat  pre-installed, with a USB bootloader to update the firmware. I’ve  received the YARD Stick One with outdated firmware, so I wanted to  update it before using it any further.</p>
+<p><strong>Note:</strong> I’m using Ubuntu 18.04 to update the firmware of my YARD Stick One!</p>
+<p>Start by cloning the rfcat repository:</p>
+<pre><code class="language-console" data-lang="console">$ git clone https://github.com/atlas0fd00m/rfcat.git
+$ cd rfcat
+</code></pre><p>In order to allow non-root access to the YARD Stick One you will need to update your udev rules using the following commands:</p>
+<pre><code class="language-console" data-lang="console">$ sudo cp etc/udev/rules.d/20-rfcat.rules /etc/udev/rules.d
+$ sudo udevadm control --reload-rules
+</code></pre><p>From within the rfcat directory you can install the software by running the install script:</p>
+<pre><code class="language-console" data-lang="console">$ sudo python setup.py install
+</code></pre><p>Once I started the interactive Python shell for rfcat I was greeted by the following error message:</p>
+<pre><code class="language-console" data-lang="console">$ rfcat -r
+Traceback (most recent call last):
+  File &quot;/usr/local/bin/rfcat&quot;, line 8, in &lt;module&gt;
+    from rflib import *
+  File &quot;/usr/local/lib/python2.7/dist-packages/rflib/__init__.py&quot;, line 2, in &lt;module&gt;
+    from chipcon_nic import *
+  File &quot;/usr/local/lib/python2.7/dist-packages/rflib/chipcon_nic.py&quot;, line 4, in &lt;module&gt;
+    import usb
+ImportError: No module named usb
+</code></pre><p>Install the missing dependencies. Make sure you install the correct version of <code>sdcc</code> because the newer version of <code>sdcc</code> seems to break according to <a href="https://github.com/atlas0fd00m/rfcat/issues/39#issuecomment-500005124">#39</a> and <a href="https://github.com/atlas0fd00m/rfcat/issues/42#issuecomment-499832234">#42</a>.</p>
+<pre><code class="language-console" data-lang="console">$ sudo apt install python-usb libusb-1.0.0 sdcc
+</code></pre><p>I was now able to start the Python interactive shell for rfcat and  printed the YARD Stick One radio configuration by running the print <code>d.reprRadioConfig()</code> command.</p>
+<pre><code class="language-console" data-lang="console">$ rfcat -r
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+Error in resetup():Exception('No Dongle Found.  Please insert a RFCAT dongle.',)
+No module named IPython.frontend.terminal.interactiveshell
+'RfCat, the greatest thing since Frequency Hopping!'
+
+Research Mode: enjoy the raw power of rflib
+
+currently your environment has an object called &quot;d&quot; for dongle.  this is how
+you interact with the rfcat dongle:
+    &gt;&gt;&gt; d.ping()
+    &gt;&gt;&gt; d.setFreq(433000000)
+    &gt;&gt;&gt; d.setMdmModulation(MOD_ASK_OOK)
+    &gt;&gt;&gt; d.makePktFLEN(250)
+    &gt;&gt;&gt; d.RFxmit(&quot;HALLO&quot;)
+    &gt;&gt;&gt; d.RFrecv()
+    &gt;&gt;&gt; print d.reprRadioConfig()
+
+
+&gt;&gt;&gt; print d.reprRadioConfig()
+
+== Hardware ==
+Dongle:              YARDSTICKONE
+Firmware rev:        0348
+Compiler:            Not found! Update needed!
+Bootloader:          CC-Bootloader
+
+== Software ==
+rflib rev:           65535
+
+...
+</code></pre><p>Take note of the following message in de radio configuration:</p>
+<blockquote>
+<p>Firmware rev: 0348 Compiler: Not found! Update needed!</p>
+</blockquote>
+<p>The firmware seems to be outdated and my YARD Stick One came without  compiler installed. I wanted to update my dongle before using in any  further. In order to set in in bootloader mode I used the <code>d.bootloader()</code> command and the LEDs on the YARD Stick One started flashing.</p>
+<pre><code class="language-console" data-lang="console">$ rfcat -r
+&gt;&gt;&gt; d.bootloader()
+</code></pre><p>In another terminal window I changed the directory to <code>rfcat/firware</code> and made sure the <code>rfcat_bootloader</code> command was in my path. This command is used to install the new firmware on the dongle.</p>
+<pre><code class="language-console" data-lang="console">$ cd rfcat/firmware
+$ which rfcat_bootloader
+/usr/local/bin/rfcat_bootloader
+</code></pre><p>I issued the <code>make installRfCatYS1CCBootloader</code> command to update the firmware.</p>
+<pre><code class="language-console" data-lang="console">$ make installRfCatYS1CCBootloader
+</code></pre><p>After checking the radio configuration of my YARD Stick One, the firmware seems to be updated.</p>
+<pre><code class="language-console" data-lang="console">$ rfcat -r
+&gt;&gt;&gt; print(d.reprRadioConfig())
+== Hardware ==
+Dongle:              YARDSTICKONE
+Firmware rev:        5535
+Compiler:            SDCCv350
+Bootloader:          CC-Bootloader
+
+== Software ==
+rflib rev:           65535
+
+...
+</code></pre><p>RfCat, the greatest thing since Frequency Hopping!</p>
+<h2 id="enable-bootloader-mode-when-the-firmware-isnt-running">Enable bootloader mode when the firmware isn’t running</h2>
+<p>The bootloader mode on the YARD Stick One can be triggered by connecting pins 7 and 9 on the P1 expansion header.</p>
+<pre><code>-----------------------------------------
+| YARD Stick One      2 4 6 8 10 12 14  |
+|                     1 3 5 7 9  11 13  ------
+|                                        USB |
+|                                       ------
+|                                       |
+-----------------------------------------
+</code></pre><p><strong>EDIT:</strong> I’m currently running Ubuntu 19.04 and thus installed sdcc version 3.9.0, which results in the same errors as <a href="https://github.com/atlas0fd00m/rfcat/issues/42">#42</a>. Version 3.5.0 of sdcc seems to work fine. I was able to ground pin 7 and pin 9 on the YS1 using a paperclip.</p>
+<p><img src="/images/posts/2019/01/17/ys1_bootloader.jpg" alt="Enable bootloader mode on the YARD Stick One using a paperclip"></p>
+
+        </div>
+    </div>
+</article>
+
+
+    </body>
+</html>

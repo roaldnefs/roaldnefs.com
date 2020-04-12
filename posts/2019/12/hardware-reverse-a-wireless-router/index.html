@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://roaldnefs.com/css/theme.min.css">
+
+    <title>Roald Nefs</title>
+</head><body>
+
+<article class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Hardware Reversing the Sitecom Wireless Router 150N X1</h1>
+
+            <p>Last week I&rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (<em>top left in the picture</em>). In this post we will go through the process of connecting to an unknown serial interface.</p>
+<p><img src="/images/posts/2019/12/15/sitecom_01.jpg" alt="Inside of the Sitecom Wireless Router 150N X1"></p>
+<p>The UART debugging interface wasn&rsquo;t labeled, so I had to figure out what each port was doing. The two pins on the right are directly connected to the IC, so I figured that those to are the <strong>RX</strong> and <strong>TX</strong> ports. By connecting a multi meter to the two left most pins I&rsquo;ve found that the serial port is using <strong>3.3V</strong> and the left most connector is the <strong>VCC</strong> followed by the <strong>GND</strong> pin. By connecting the ground lead of the multi meter to <strong>GND</strong> pin on the serial interface I quickly spotted <strong>RX</strong> port (<em>positive voltage</em>). From left to right the pins are: <strong>VCC</strong>, <strong>GND</strong>, <strong>TX</strong> and <strong>RX</strong>.</p>
+<p><img src="/images/posts/2019/12/15/sitecom_02.jpg" alt="Determining the pins on the serial interface using a multimeter"></p>
+<p>We now know the operating voltage and pin layout of the serial interface but the baud rate is still unknown, so I&rsquo;ve connected my new oscilloscope to the <strong>GND</strong> and <strong>TX</strong> pins on the serial interface and set it to trigger on a pulse. After power cycling the router is saw the following signal:</p>
+<p><img src="/images/posts/2019/12/15/sitecom_03.jpg" alt="Inspecting the serial connection using a oscilloscope"></p>
+<p>By determining the length of the shortest pulse I was able to figure out the baud rate using the following formula: <code>1 / time * 106</code>, in my case: <code>1 / (886µs / 870µs) * 106 = 62500</code>. But this isn&rsquo;t a usual baud rate, so I took once that was closest to 62500: <strong>57600</strong>.</p>
+<p><img src="/images/posts/2019/12/15/sitecom_04.jpg" alt="Inspecting length of the shortest pulse using a oscilloscope"></p>
+<p>The USB to TTL module (<em>PL2303</em>) I had laying around operated on <strong>5V</strong>, because I was not willing to risk breaking the router I had to down convert to voltage to <strong>3.3V</strong>. This can be done using a <a href="https://www.sparkfun.com/products/12009">bi-directional logic level converter</a>.</p>
+<p><img src="/images/posts/2019/12/15/sitecom_05.jpg" alt="Connecting the serial interface to the laptop using a logic level converter"></p>
+<p>Using the USB to serial connection we are able to connect to the router using minicom with the following command: <code>minicom -b 57600 -8 -D /dev/ttyUSB0</code>. After power cycling the router, the following output appears:</p>
+<p><img src="/images/posts/2019/12/15/sitecom_06.png" alt="Serial console on the Sitecom Wireless Router 150N X1"></p>
+<p>According the the boot log the Sitecom Wireless Router 150N X1 is using Linux!</p>
+
+        </div>
+    </div>
+</article>
+
+
+    </body>
+</html>
