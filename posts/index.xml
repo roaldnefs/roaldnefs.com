@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://roaldnefs.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ding Dong Ditch using SDR and Arduino</title>
+      <link>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</guid>
+      <description>In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
+This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
+The video is a short demonstration of the Ding Dong Ditch device.</description>
+    </item>
     
     <item>
       <title>Hardware Reversing the Sitecom Wireless Router 150N X1</title>
@@ -28,6 +39,16 @@ The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out wh
       
       <guid>https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/</guid>
       <description>Today I received my YARD Stick One (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle can transmit and receive digital wireless signals at frequencies below 1GHz. The YARD Stick One is not a SDR, because the I/Q samples are directly demodulated by the chipset instead of send to the host over USB. The YARD Stick One therefore isn’t compatible with any SDR software, but you can use something called rfcat.</description>
+    </item>
+    
+    <item>
+      <title>Software Defined Radio on Linux</title>
+      <link>https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/</link>
+      <pubDate>Sun, 06 Jan 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/</guid>
+      <description>In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.
+Prerequisites Start by installing the required packages for downloading and compiling the rtl-sdr package.</description>
     </item>
     
   </channel>
