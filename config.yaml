@@ -1,3 +1,6 @@
 baseURL: "https://roaldnefs.com/"
 languageCode: en-us
 title: Roald Nefs
+
+permalinks:
+  posts: /posts/:year/:month/:slug/

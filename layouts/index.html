@@ -7,7 +7,7 @@
             <h1>Welcome</h1>
 
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Sorry!</strong> My old blogposts will be restored shortly!
+                <strong>Sorry!</strong> My old blog posts will be restored shortly!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,6 +15,18 @@
             
             <p>The site is under construction, you can follow the development on <a href="https://github.com/roaldnefs/roaldnefs.com">GitHub</a>.</p>
             
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Posts</h2>
+            <ul>
+            {{ range where .Site.Pages "Type" "post" }}
+                <li>
+                    <a href="{{ .Permalink }}">{{ .Date.Format "2006-01-02" }} | {{ .Title }}</a>
+                </li>
+            {{ end }}
+            </ul>
         </div>
     </div>
 </div>
