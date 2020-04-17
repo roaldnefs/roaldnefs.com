@@ -6,10 +6,19 @@
     <description>Recent content on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2020 08:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://roaldnefs.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How To Create a Visual Studio Code Extension Pack</title>
+      <link>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</link>
+      <pubDate>Fri, 17 Apr 2020 08:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</guid>
+      <description>Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&amp;rsquo;ll create a Extension Pack for SaltStack requested in korekontrol/vscode-saltstack#5.</description>
+    </item>
     
     <item>
       <title>Ding Dong Ditch using SDR and Arduino</title>
