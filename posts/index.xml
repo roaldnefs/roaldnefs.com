@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Apr 2020 08:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2020 13:46:59 +0200</lastBuildDate>
     
 	<atom:link href="https://roaldnefs.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Getting Started with Git</title>
+      <link>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</link>
+      <pubDate>Mon, 20 Apr 2020 13:46:59 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</guid>
+      <description>Introduction Git is a free and opensource distributed version control system designed to handle everything from small to very large projects with speed and efficiency. While working with Git I often get asked questions about best practices or the more advanced usage of Git e.g.: a rebase, merge conflict or how to cherry pick. This post will serve as my personal Git reference as well as a getting started guide for my colleagues and friends.</description>
+    </item>
     
     <item>
       <title>How To Create a Visual Studio Code Extension Pack</title>
