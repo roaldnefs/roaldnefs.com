@@ -23,8 +23,8 @@ A few Git terms which are used within this post:
 - **working tree** - The tree of actual checked out files. The working tree contains the contents of the _HEAD_'s commit tree and any local changes not yet _commited_.
 - **index** - Also known as the _staging area_. The index is used to build a set of changes to be _commited_ together. When looking at the _working directory_, only the changed that are marked to be _commited_ are called the index. 
 - **commit** - Single point in the Git history, also seen as a snapshot of the _working tree_ at some point in time.
-- **branch**
-- **tag**
+- **branch** - An alternative line of development.
+- **tag** - Points to another tag of commit.
 - **master** - The default development _branch_, although this might be changed. Whenever a Git _repository_ is created, the **master** _branch_ is also created and becomes the active _branch_.
 - **HEAD** - The current _branch_.
 
@@ -48,7 +48,7 @@ After installing Git you might want to customize your Git environment using the 
 * `~/.gitconfig` or `~/.config/git/config` file, contains the global configuration for your user. To set global configuration you can use the `--global` option.
 * the `config` file in the repositories Git directory (`.git/config`), the configuration set in the file will only be used for repository it's set on. To set configuration options on a repository level you can execute the `git config` command without specifying the `--system` or `--global` options.
 
-Every commit in Git container information about the author, therefore we want to start by configuring our username and email address using the following commands:
+Every commit in Git contains information about the author, therefore we want to start by configuring our username and email address using the following commands:
 
 ```bash
 $ git config --global user.name "John Doe"
