@@ -27,8 +27,8 @@
 <li><strong>working tree</strong> - The tree of actual checked out files. The working tree contains the contents of the <em>HEAD</em>&lsquo;s commit tree and any local changes not yet <em>commited</em>.</li>
 <li><strong>index</strong> - Also known as the <em>staging area</em>. The index is used to build a set of changes to be <em>commited</em> together. When looking at the <em>working directory</em>, only the changed that are marked to be <em>commited</em> are called the index.</li>
 <li><strong>commit</strong> - Single point in the Git history, also seen as a snapshot of the <em>working tree</em> at some point in time.</li>
-<li><strong>branch</strong></li>
-<li><strong>tag</strong></li>
+<li><strong>branch</strong> - An alternative line of development.</li>
+<li><strong>tag</strong> - Points to another tag of commit.</li>
 <li><strong>master</strong> - The default development <em>branch</em>, although this might be changed. Whenever a Git <em>repository</em> is created, the <strong>master</strong> <em>branch</em> is also created and becomes the active <em>branch</em>.</li>
 <li><strong>HEAD</strong> - The current <em>branch</em>.</li>
 </ul>
@@ -45,7 +45,7 @@
 <li><code>~/.gitconfig</code> or <code>~/.config/git/config</code> file, contains the global configuration for your user. To set global configuration you can use the <code>--global</code> option.</li>
 <li>the <code>config</code> file in the repositories Git directory (<code>.git/config</code>), the configuration set in the file will only be used for repository it&rsquo;s set on. To set configuration options on a repository level you can execute the <code>git config</code> command without specifying the <code>--system</code> or <code>--global</code> options.</li>
 </ul>
-<p>Every commit in Git container information about the author, therefore we want to start by configuring our username and email address using the following commands:</p>
+<p>Every commit in Git contains information about the author, therefore we want to start by configuring our username and email address using the following commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global user.name <span style="color:#e6db74">&#34;John Doe&#34;</span>
 $ git config --global user.email johndoe@example.com
 </code></pre></div><p>The <code>--global</code> option indicates that we want to store the configuration in the <code>~/.gitconfig</code> or <code>~/.config/git/config</code> file. If you want to overwrite these option on a specific repository, you can simply omit the <code>--global</code> option while executing the above commands from within the directory of your local repository.</p>
