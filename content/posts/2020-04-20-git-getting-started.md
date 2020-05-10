@@ -363,3 +363,5 @@ $ mv README README.txt
 $ git rm README
 $ git add README.txt
 ```
+
+Make sure to read the next post in the Git series about [Git Braching]({{< ref "2020-05-10-git-branching.md" >}}).
