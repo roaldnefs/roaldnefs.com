@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html><head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://roaldnefs.com/css/theme.min.css">
+
+    <title>Roald Nefs</title>
+</head><body>
+
+<article class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Git Branching</h1>
+
+            <h2 id="introduction">Introduction</h2>
+<p>Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with that main line, it&rsquo;s called branching. Unlike may other version control systems, the Git branching model is lightweight. Each Git branch is simply just a file containing the 40 character SHA-1 checksum of the commit it points to. You can nearly instantaneous create or switch branches. It&rsquo;s therefore not surprising that Git users are encouraged to use workflows that branch and merge often.</p>
+<p>If you&rsquo;re new to Git make sure to read <a href="https://roaldnefs.com/posts/2020/04/getting-started-with-git/">Getting Started with Git</a> to get familiar with the basics of Git before diving into Git Branching.</p>
+<p>A brach in Git is simply a movable pointer to one of the commits in a Git repository. The default branch name in Git is <code>master</code>, it is exactly like any other branch. The only difference is the <code>master</code> branch is automatically created by the <code>git init</code> command.</p>
+<h3 id="creating-a-new-branch">Creating a New Branch</h3>
+<p>Using the <code>git branch</code> command you can create a new branch. The command below will create a new branch called <code>develop</code>. This creates a new pointer to the same commit, but didn&rsquo;t switch to the newly created branch!</p>
+<pre><code>$ git branch develop
+</code></pre><p>In the image below you also see a special pointer called <code>HEAD</code>, pointing to the <code>master</code> branch. Even though we&rsquo;ve created a new branch called <code>develop</code>, <code>HEAD</code> is stil pointing to the <code>master</code> branch.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-1.png" alt="Creating a new branch"></p>
+<p>Using the <code>git log</code> with the <code>--decorate</code> option shows you where the branch pointers are pointing. In the example below <code>HEAD</code> is pointing to <code>master</code>, while both <code>master</code> and <code>develop</code> are pointing to the same commit.</p>
+<pre><code>$ git log --oneline --decorate
+3c71f2e (HEAD -&gt; master, develop) Update README.md
+13d0d67 Initial commit
+</code></pre><h3 id="switching-branches">Switching Branches</h3>
+<p>After creating a new branch you probably want to switch to that branch. This can be done using the <code>git checkout</code> command. The command below will switch to the <code>develop</code> branch.</p>
+<pre><code>$ git checkout develop
+</code></pre><p>This results in <code>HEAD</code> pointing to the <code>develop</code> branch:</p>
+<p><img src="/images/posts/2020/05/10/git-branch-2.png" alt="HEAD points to the develop branch"></p>
+<p>After creating a new commit the <code>master</code> branch is still pointing to the same commit, while the <code>develop</code> branch has moved forward.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-3.png" alt="HEAD branch moves forward when a commit is made"></p>
+<p>Using the following command we can switch back to the <code>master</code> branch. This will move the <code>HEAD</code> pointer back to <code>master</code>.</p>
+<pre><code>$ git checkout master
+</code></pre><p><img src="/images/posts/2020/05/10/git-branch-4.png" alt="HEAD moves when a checkout is performed"></p>
+<p>Creating a new commit at this point will result in diverged history. Both commits are isolated in separate branches, and can be merged together when you&rsquo;re ready.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-5.png" alt="Divergent history"></p>
+<p>This can also be shown using the <code>git log --oneline --decorate --graph --all</code> command. By default the <code>git log</code> command will not show all of the branch, this the <code>--all</code> options is required.</p>
+<pre><code>$ git log --oneline --decorate --graph --all
+* 8fb061c (HEAD -&gt; master) Add authors to README.md
+| * 37d648d (develop) Add LICENSE file
+|/
+* 3c71f2e Update README.md
+* 13d0d67 Initial commit
+</code></pre><p>It&rsquo;s also possible to create a new branch and switch to it at the same time with the following command:</p>
+<pre><code>$ git checkout -b &lt;branchname&gt;
+</code></pre><h2 id="basic-branching-and-merging">Basic Branching and Merging</h2>
+<h3 id="basic-merging">Basic Merging</h3>
+<p>What if instead of creating a commit directory on the <code>master</code> branch we would have created branch called <code>hotfix</code>, made a single commit, and wanted to merge it back into <code>master</code>?</p>
+<p><img src="/images/posts/2020/05/10/git-branch-8.png" alt="Hotfix branch containg a single commit"></p>
+<p>You can do that using the <code>git merge</code> command. This example below will merge the <code>hotfix</code> branch back into <code>master</code>.</p>
+<pre><code>$ git checkout master
+Switched to branch 'master'
+$ git merge hotfix
+Updating 8fb061c..527a84d
+Fast-forward
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre><p>Because the commit <code>C4</code> pointed to by the branch <code>hotfix</code> was directly ahead of the commit <code>C3</code>, the commit previously pointed to by the<code>master</code> branch, Git was able to perform a &ldquo;<em>fast-forward</em>&rdquo; merge. During a fast-forward merge the pointer is moved forward. This only happens when you try to merge one commit that can be reached by following the firs commit&rsquo;s history. After merging the <code>master</code> and <code>hotfix</code> branch point to the same commit.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-9.png" alt="The master branch is fast-forwarded"></p>
+<p>While the <code>hotfix</code> branch was merged into <code>master</code> the <code>develop</code> branch diverged from master, containing two extra commits. If we wanted to merge <code>develop</code> into <code>master</code> the situation would look similar to this:</p>
+<p><img src="/images/posts/2020/05/10/git-branch-7.png" alt="Merging"></p>
+<p>Using the <code>git merge</code> command we can merge <code>develop</code> into <code>master</code>:</p>
+<pre><code>$ git checkout master
+$ git merge develop
+Merge made by the 'recursive' strategy.
+ LICENSE | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 LICENSE
+</code></pre><p>Instead of the &ldquo;<em>fast-forward</em>&rdquo; stategy it now used a &ldquo;<em>recursive</em>&rdquo; strategy. This is because the commit on the <code>develop</code> branch isn&rsquo;t a clear ancestor of the <code>master</code> branch. Git simply does a three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two, this results in a merge commit (<code>C7</code>). Compared to a normal commit, a merge commits has more than one parent.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-6.png" alt="Merging"></p>
+<p>After merging <code>develop</code>, the branch can be removed using the <code>git branch</code> command combined with the <code>-b</code> option:</p>
+<pre><code>$ git branch -d develop
+</code></pre><h3 id="basic-merge-conflict">Basic Merge Conflict</h3>
+<p>When the same part of a file has been changed in two branches the merging process doesn&rsquo;t go smoothly and results in a merge conflict. If for example both the <code>hotfix</code> and <code>develop</code> branch changed the same line in the <code>README.md</code> file, you would get a merge conflict that looks like this:</p>
+<pre><code>$ git merge develop
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre><p>Git wasn&rsquo;t able the merge the <code>develop</code> branch and left the <code>README.md</code> unmerged as show by the <code>git status</code> command:</p>
+<pre><code>$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run &quot;git commit&quot;)
+  (use &quot;git merge --abort&quot; to abort the merge)
+
+Unmerged paths:
+  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)
+	both modified:   README.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><p>Git will add standard conflict-resolution markers the the file(s) that have conflicts, so you can manually resolve them. In this example those conflict-resolution markers in the <code>README.md</code> file look like this:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Added this line in the hotfix branch.
+=======
+Added this line in the develop branch.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; develop
+</code></pre><p>This means the version in <code>HEAD</code> (the <code>master</code> branch, as <code>hotfix</code> branch has been fast-forward merged into <code>master</code>) is the top part of the block, while the version in <code>develop</code> is everything in the bottom part. To resolve the conflict you have to choose one side or edit the contents yourself. You might resolve the conflict by replacing the entire block with:</p>
+<pre><code>Added this line in the hotfix and develop branch.
+</code></pre><p>After resolving the conflict, run <code>git add</code> on each file to mark it as resolved. To conclude the merge run <code>git commit</code> afterward:</p>
+<pre><code>$ git add README.md
+$ git commit
+[master f7f17db] Merge branch 'develop'
+</code></pre><h2 id="branching-workflows">Branching Workflows</h2>
+<h2 id="remote-branches">Remote Branches</h2>
+<p>As the title suggests, remote branches are pointers in your remote repository. You can get a full list of all remote references (including branches, tags, and so) using the <code>git ls-remote &lt;remote&gt;</code> or <code>git remote show &lt;remote&gt;</code> commands. Remote-tracking branches can&rsquo;t be changed locally, they are updated by Git whenever you do any network communication.</p>
+<p>When cloning a repository using the <code>git clone</code> command the default remote is called <code>origin</code>. The names of the remote-tracking branches take the form of <code>&lt;remote&gt;/&lt;branch&gt;</code>. Cloning the blog will result in the local <code>master</code> branch originated from the remote <code>origin/master</code> branch:</p>
+<pre><code>$ git clone https://github.com/roaldnefs/roaldnefs.com.git
+$ cd roaldnefs.com
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+</code></pre><p>If the <code>master</code> branch contains a few commits, this results in the following situation:</p>
+<p><img src="/images/posts/2020/05/10/git-branch-10.png" alt="Remote and local master branch"></p>
+<p>The <code>origin</code> remote isn&rsquo;t different from other remotes it&rsquo;s, just the default alias for the remote after running <code>git clone</code>. You can show all the remotes using the <code>git remote -v</code> command:</p>
+<pre><code>$ git remote -v
+origin	https://github.com/roaldnefs/roaldnefs.com.git (fetch)
+origin	https://github.com/roaldnefs/roaldnefs.com.git (push)
+</code></pre><h3 id="fetching">Fetching</h3>
+<p>Just like normal branches, local and remote work can diverge. In the example below the local <code>master</code> branch in one commit forward of the remote-tracking <code>origin/master</code> branch:</p>
+<p><img src="/images/posts/2020/05/10/git-branch-11.png" alt="Commit on the local master branch"></p>
+<p>To synchronize your work you can run the <code>git fetch &lt;remote&gt;</code> command, e.g. <code>git fetch origin</code>. In the above example this will lookup the alias <code>alias</code> (in this case <em><a href="https://github.com/roaldnefs/roaldnefs.com.git">https://github.com/roaldnefs/roaldnefs.com.git</a></em>), and fetch any data from it, and update your local database, moving the <code>origin/master</code> pointer forward if a new commit has been added the to remote repository in the meanwhile.</p>
+<h3 id="pushing">Pushing</h3>
+<p>You local branches aren&rsquo;t automatically shared with the world, you will need to push them explicitly up to a remote. If you have a branch named <code>hotfix</code> that you want to push to a remote repository you can run the <code>git push origin hotfix</code> command, e.g.:</p>
+<pre><code>$ git push origin hotfix
+Counting objects: 19, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (20/20), 1.21 KiB | 0 bytes/s, done.
+Total 20 (delta 2), reused 0 (delta 0)
+To https://github.com/roaldnefs/roaldnefs.com
+ * [new branch]      hotfix -&gt; hotfix
+</code></pre><p>The next time someone else fetches change from the server, they will get a reference to where the server&rsquo;s version of <code>hotfix</code> is under the remote branch <code>origin/hotfix</code>:</p>
+<pre><code>$ git fetch origin
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 2 (delta 0), reused 2 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From https://github.com/roaldnefs/roaldnefs.com
+ * [new branch]      hotfix    -&gt; origin/hotfix
+</code></pre><p>To merge the changes in the <code>origin/hotfix</code> branch, you can run the following command:</p>
+<pre><code>$ git merge origin/hotfix
+</code></pre><p>If you aren&rsquo;t the author of the <code>hotfix</code> branch and you instead want your own <code>hotfix</code> branch, you can base it off the remote-tracking branch using the following command:</p>
+<pre><code>$ git branch -b hotfix origin/hotfix
+Branch hotfix set up to track remote branch hotfix from origin.
+Switched to a new branch 'hotfix'
+</code></pre><h3 id="pulling">Pulling</h3>
+<p>While the <code>git fetch</code> command fetches all the remote changes, it won&rsquo;t change you working directory at all. There is however a command called <code>git pull</code> which will execute <code>git fetch</code> and immediately followed by a <code>git merge</code> in most cases.</p>
+<p>As the <code>git pull</code> wil often be confusing it&rsquo;s better to simply use the <code>git fetch</code> and <code>git merge</code> commands explicitly. If you are uncertain about any diverged history you can run the <code>git pull --ff-only</code> command. The <code>--ff-only</code> option will resolve the merge as a fast-forward when possible. When this is impossible, it will refuse to merge and exit with an error.</p>
+
+        </div>
+    </div>
+</article>
+
+
+    </body>
+</html>

@@ -6,10 +6,19 @@
     <description>Recent content on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Apr 2020 13:46:59 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 10 May 2020 23:20:00 +0200</lastBuildDate>
     
 	<atom:link href="https://roaldnefs.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git Branching</title>
+      <link>https://roaldnefs.com/posts/2020/05/git-branching/</link>
+      <pubDate>Sun, 10 May 2020 23:20:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/05/git-branching/</guid>
+      <description>Introduction Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with that main line, it&amp;rsquo;s called branching. Unlike may other version control systems, the Git branching model is lightweight. Each Git branch is simply just a file containing the 40 character SHA-1 checksum of the commit it points to. You can nearly instantaneous create or switch branches.</description>
+    </item>
     
     <item>
       <title>Getting Started with Git</title>
