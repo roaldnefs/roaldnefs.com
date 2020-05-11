@@ -262,3 +262,105 @@ Switched to a new branch 'hotfix'
 While the `git fetch` command fetches all the remote changes, it won't change you working directory at all. There is however a command called `git pull` which will execute `git fetch` and immediately followed by a `git merge` in most cases.
 
 As the `git pull` wil often be confusing it's better to simply use the `git fetch` and `git merge` commands explicitly. If you are uncertain about any diverged history you can run the `git pull --ff-only` command. The `--ff-only` option will resolve the merge as a fast-forward when possible. When this is impossible, it will refuse to merge and exit with an error.
+
+## Rebasing
+
+Within Git there are two ways to integrate changes from one branch into another: using `merge` or `rebase`.  In the example below the history has diverged; there are commits on both the branches you would like to integrate. 
+
+![Divergent history](/images/posts/2020/05/10/git-branch-12.png)
+
+The most simple way to integrate the work of the `hotfix` would be to use the `git merge` command. This will result in a three-way merge between the two latests snapshots (`C4` and `C5`) and there common ancestor (`C3`) creating a merge-commit (`C6`). 
+
+![Using merging to integrate diverged work](/images/posts/2020/05/10/git-branch-13.png)
+
+Instead of `merge` you could've used `rebase` to integrate the changes in the `hotfix` in the `master` branch. When rebasing, Git will take all the changes that were committed on one branch and replay them on a different branch.  We could for example rebase the `hotfix` branch onto the `master` branch:
+
+```
+$ git checkout hotfix
+$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: Fix README.md file.
+```
+
+When performing the rebase, Git wil do the following actions:
+
+1. Go back to the common ancestor of the two branches (`C3`).
+2. Store the changes in temporary files of all the commits after the common ancestor on your current branch (`hotfix`).
+3. Reset the current branch to the branch you're rebasing onto (`master`).
+4. Applying each change (re-apply `C4`, now known as `C4'`).
+
+![Using rebasing to integrate diverged work](/images/posts/2020/05/10/git-branch-14.png)
+
+Because the commit `C4'` pointed to by the branch `hotfix` was directly ahead of the commit `C5`, the commit pointed to by the`master` branch, Git is able to perform a "_fast-forward_" merge:
+
+```
+$ git checkout master
+Switched to branch 'master'
+$ git merge hotfix
+Updating 8fb061c..527a84d
+Fast-forward
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+This result in both the `hotfix` and `master` branch pointing to the `C4'` commit:
+
+![Rebased branch](/images/posts/2020/05/10/git-branch-15.png)
+
+Both `C4'` (using rebase) and `C6` (using merge) resulted in the same file contents, but the Git history is different. The rebase made the history a bit cleaner, resulting in a linear history. Even though the history shows that the work happened in series, it actually happened in parallel.
+
+Unfortunately rebasing has its drawbacks; **you don not want to rebase commits that exists outside your repository and the other people my have based work on!**
+
+During a rebase you will be abandoning commits and create new ones that have the similar content but are actually different (e.g. pointer to another parent). If you (forcefully) push you work, you force other collaborators to rebase their work. Things won't become cleaner this way... 
+
+Suppose you've started working on the `master` branch locally while in the meanwhile another collaborator forcefully pushed his rebased `master` branch, resulting in some part of the history being rewritten on the remote `origin/master` branch. When you execute a `git pull`, Git will merge the rebased `origin/master` branch into your local `master` branch.
+
+![Diverged history](/images/posts/2020/05/10/git-branch-16.png)
+
+The history between the `origin/master` and `master` branch have been diverged, forcing you to rebase you local `master` branch onto `origin/master`, which might further confuse other colleborators.
+
+If for some reason someone has rebased a branch you based your work on you can simplify things by running `git pull --rebase` instead of `git pull`. Or you could do is manually using the following commands:
+
+```
+$ git fetch
+$ git rebase <remote>/<branch>
+```
+
+## Cherry Pick
+
+The `git cherry-pick` isn't directly related to Git branches, it however allows you to pick arbitrary commits by reference and append them to your current working `HEAD`. During cherry-picking you pick a commit from a branch and apply it to another. This is especially useful when you accidentally applied the a commit to the wrong branch, you can switch to the correct branch and cherry-pick the commit to where it should belong.
+
+Git `cherry-pick` will however cause duplicate commits, and in most cases a normal `merge` is perferred. Even though the changes in the cherry-picked commit are the same, the SHA-1 checksum changes. This might confuse other colleborators as the original and picked commit might look different.
+
+![The master branch before the cherry-pick](/images/posts/2020/05/10/git-branch-18.png)
+
+Let's assume we want to apply the hotfix `C4` already merged in the `develop` to the `master` branch without merging all the other changes currently in the `develop` branch. You can execute a `git cherry-pick` command to pick `C4` into the `master` branch:
+
+```
+$ git checkout master
+$ git cherry-pick C4
+```
+
+Where `C4` should be the commit SHA1-checksum of the original `C4` commit. This results in only the hotfix being picked into the `master` branch:
+
+![The master-branch after the cherry-pick](/images/posts/2020/05/10/git-branch-17.png)
+
+It's also possible to cherry-pick multiple commits. We could've have picked the commits `C4`  up to `C7` using the following command:
+
+```
+$ git checkout master
+$ git cherry-pick C4..C7
+```
+
+Where both `C4` and `C7` should be the SHA1-checksum of the original commits. This will **not** pick `C4`, to include `C4` using the following command:
+
+```
+$ git checkout master
+$ git cherry-pick C4^..C7
+```
+
+The first commit (`C4`) should be older then the second commit (`C7`), otherwise Git will silently fail.
+
+## Summary
+
+There are multiple ways to integrate changes in two (or more) branches using `merge`, `rebase` or `cherry-pick`. They all have there advantages and disadvantages. In most cases `merge` is perferred over `rebase` and `cherry-pick` for the simple reason that most people tend to understand the `merge` workflow fairly easily, and the `rebase` and `cherry-pick` workflow is considered more advantage.
