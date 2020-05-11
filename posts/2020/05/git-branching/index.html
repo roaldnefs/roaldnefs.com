@@ -152,6 +152,61 @@ Switched to a new branch 'hotfix'
 </code></pre><h3 id="pulling">Pulling</h3>
 <p>While the <code>git fetch</code> command fetches all the remote changes, it won&rsquo;t change you working directory at all. There is however a command called <code>git pull</code> which will execute <code>git fetch</code> and immediately followed by a <code>git merge</code> in most cases.</p>
 <p>As the <code>git pull</code> wil often be confusing it&rsquo;s better to simply use the <code>git fetch</code> and <code>git merge</code> commands explicitly. If you are uncertain about any diverged history you can run the <code>git pull --ff-only</code> command. The <code>--ff-only</code> option will resolve the merge as a fast-forward when possible. When this is impossible, it will refuse to merge and exit with an error.</p>
+<h2 id="rebasing">Rebasing</h2>
+<p>Within Git there are two ways to integrate changes from one branch into another: using <code>merge</code> or <code>rebase</code>.  In the example below the history has diverged; there are commits on both the branches you would like to integrate.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-12.png" alt="Divergent history"></p>
+<p>The most simple way to integrate the work of the <code>hotfix</code> would be to use the <code>git merge</code> command. This will result in a three-way merge between the two latests snapshots (<code>C4</code> and <code>C5</code>) and there common ancestor (<code>C3</code>) creating a merge-commit (<code>C6</code>).</p>
+<p><img src="/images/posts/2020/05/10/git-branch-13.png" alt="Using merging to integrate diverged work"></p>
+<p>Instead of <code>merge</code> you could&rsquo;ve used <code>rebase</code> to integrate the changes in the <code>hotfix</code> in the <code>master</code> branch. When rebasing, Git will take all the changes that were committed on one branch and replay them on a different branch.  We could for example rebase the <code>hotfix</code> branch onto the <code>master</code> branch:</p>
+<pre><code>$ git checkout hotfix
+$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: Fix README.md file.
+</code></pre><p>When performing the rebase, Git wil do the following actions:</p>
+<ol>
+<li>Go back to the common ancestor of the two branches (<code>C3</code>).</li>
+<li>Store the changes in temporary files of all the commits after the common ancestor on your current branch (<code>hotfix</code>).</li>
+<li>Reset the current branch to the branch you&rsquo;re rebasing onto (<code>master</code>).</li>
+<li>Applying each change (re-apply <code>C4</code>, now known as <code>C4'</code>).</li>
+</ol>
+<p><img src="/images/posts/2020/05/10/git-branch-14.png" alt="Using rebasing to integrate diverged work"></p>
+<p>Because the commit <code>C4'</code> pointed to by the branch <code>hotfix</code> was directly ahead of the commit <code>C5</code>, the commit pointed to by the<code>master</code> branch, Git is able to perform a &ldquo;<em>fast-forward</em>&rdquo; merge:</p>
+<pre><code>$ git checkout master
+Switched to branch 'master'
+$ git merge hotfix
+Updating 8fb061c..527a84d
+Fast-forward
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre><p>This result in both the <code>hotfix</code> and <code>master</code> branch pointing to the <code>C4'</code> commit:</p>
+<p><img src="/images/posts/2020/05/10/git-branch-15.png" alt="Rebased branch"></p>
+<p>Both <code>C4'</code> (using rebase) and <code>C6</code> (using merge) resulted in the same file contents, but the Git history is different. The rebase made the history a bit cleaner, resulting in a linear history. Even though the history shows that the work happened in series, it actually happened in parallel.</p>
+<p>Unfortunately rebasing has its drawbacks; <strong>you don not want to rebase commits that exists outside your repository and the other people my have based work on!</strong></p>
+<p>During a rebase you will be abandoning commits and create new ones that have the similar content but are actually different (e.g. pointer to another parent). If you (forcefully) push you work, you force other collaborators to rebase their work. Things won&rsquo;t become cleaner this way&hellip;</p>
+<p>Suppose you&rsquo;ve started working on the <code>master</code> branch locally while in the meanwhile another collaborator forcefully pushed his rebased <code>master</code> branch, resulting in some part of the history being rewritten on the remote <code>origin/master</code> branch. When you execute a <code>git pull</code>, Git will merge the rebased <code>origin/master</code> branch into your local <code>master</code> branch.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-16.png" alt="Diverged history"></p>
+<p>The history between the <code>origin/master</code> and <code>master</code> branch have been diverged, forcing you to rebase you local <code>master</code> branch onto <code>origin/master</code>, which might further confuse other colleborators.</p>
+<p>If for some reason someone has rebased a branch you based your work on you can simplify things by running <code>git pull --rebase</code> instead of <code>git pull</code>. Or you could do is manually using the following commands:</p>
+<pre><code>$ git fetch
+$ git rebase &lt;remote&gt;/&lt;branch&gt;
+</code></pre><h2 id="cherry-pick">Cherry Pick</h2>
+<p>The <code>git cherry-pick</code> isn&rsquo;t directly related to Git branches, it however allows you to pick arbitrary commits by reference and append them to your current working <code>HEAD</code>. During cherry-picking you pick a commit from a branch and apply it to another. This is especially useful when you accidentally applied the a commit to the wrong branch, you can switch to the correct branch and cherry-pick the commit to where it should belong.</p>
+<p>Git <code>cherry-pick</code> will however cause duplicate commits, and in most cases a normal <code>merge</code> is perferred. Even though the changes in the cherry-picked commit are the same, the SHA-1 checksum changes. This might confuse other colleborators as the original and picked commit might look different.</p>
+<p><img src="/images/posts/2020/05/10/git-branch-18.png" alt="The master branch before the cherry-pick"></p>
+<p>Let&rsquo;s assume we want to apply the hotfix <code>C4</code> already merged in the <code>develop</code> to the <code>master</code> branch without merging all the other changes currently in the <code>develop</code> branch. You can execute a <code>git cherry-pick</code> command to pick <code>C4</code> into the <code>master</code> branch:</p>
+<pre><code>$ git checkout master
+$ git cherry-pick C4
+</code></pre><p>Where <code>C4</code> should be the commit SHA1-checksum of the original <code>C4</code> commit. This results in only the hotfix being picked into the <code>master</code> branch:</p>
+<p><img src="/images/posts/2020/05/10/git-branch-17.png" alt="The master-branch after the cherry-pick"></p>
+<p>It&rsquo;s also possible to cherry-pick multiple commits. We could&rsquo;ve have picked the commits <code>C4</code>  up to <code>C7</code> using the following command:</p>
+<pre><code>$ git checkout master
+$ git cherry-pick C4..C7
+</code></pre><p>Where both <code>C4</code> and <code>C7</code> should be the SHA1-checksum of the original commits. This will <strong>not</strong> pick <code>C4</code>, to include <code>C4</code> using the following command:</p>
+<pre><code>$ git checkout master
+$ git cherry-pick C4^..C7
+</code></pre><p>The first commit (<code>C4</code>) should be older then the second commit (<code>C7</code>), otherwise Git will silently fail.</p>
+<h2 id="summary">Summary</h2>
+<p>There are multiple ways to integrate changes in two (or more) branches using <code>merge</code>, <code>rebase</code> or <code>cherry-pick</code>. They all have there advantages and disadvantages. In most cases <code>merge</code> is perferred over <code>rebase</code> and <code>cherry-pick</code> for the simple reason that most people tend to understand the <code>merge</code> workflow fairly easily, and the <code>rebase</code> and <code>cherry-pick</code> workflow is considered more advantage.</p>
 
         </div>
     </div>
