@@ -5,3 +5,9 @@ disqusShortname: roaldnefs
 
 permalinks:
   posts: /posts/:year/:month/:slug/
+
+menu:
+  main:
+    - name: Home
+      url: "/"
+      weight: 10

@@ -2,6 +2,8 @@
 <html>
     {{- partial "site-head.html" . -}}
     <body>
+        {{- partial "site-nav.html" . -}}
         {{- block "main" . }}{{ end }}
+        {{- partial "site-scripts.html" . -}}
     </body>
 </html>
