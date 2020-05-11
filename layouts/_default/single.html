@@ -12,6 +12,11 @@
             {{ .Content }}
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            {{ template "_internal/disqus.html" . }}
+        </div>
+    </div>
 </article>
 
 {{ end }}

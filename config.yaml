@@ -1,6 +1,7 @@
 baseURL: "https://roaldnefs.com/"
 languageCode: en-us
 title: Roald Nefs
+disqusShortname: roaldnefs
 
 permalinks:
   posts: /posts/:year/:month/:slug/
