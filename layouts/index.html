@@ -28,6 +28,19 @@
             </ul>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <h2>Talks</h2>
+            <ul>
+            {{ range $.Site.Data.talks }}
+                <li>
+                    <a href="{{ .URL }}">{{ .Title }}</a><br />
+                    {{ .Description }}, {{ .Location }} <span class="text-muted">({{ dateFormat "2006-01-02" .Date }})</span> - <a href="{{ .Slides | absURL }}">Slides</a>
+                </li>
+            {{ end }}
+            </ul>
+        </div>
+    </div>
 </div>
 
 {{ end }}
