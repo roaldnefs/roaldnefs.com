@@ -8,6 +8,6 @@ permalinks:
 
 menu:
   main:
-    - name: Home
-      url: "/"
+    - name: Blog
+      url: "/posts/"
       weight: 10
