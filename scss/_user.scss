@@ -6,3 +6,13 @@
 article img {
     max-width: 100%;
 }
+
+a.brand,
+a.brand:hover,
+a.brand:visited,
+a.brand:active,
+a.brand:link {
+    color: #000;
+    text-decoration: none; 
+
+}

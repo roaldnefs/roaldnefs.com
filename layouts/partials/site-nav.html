@@ -10,7 +10,7 @@
 
             {{ $currentPage := . }}
             {{ if .Site.Menus.main }}
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 {{ range .Site.Menus.main }}
                 <li class="nav-item{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}">
                 <a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}{{ if $currentPage.IsMenuCurrent "main" . }} <span class="sr-only">(current)</span>{{ end }}</a>
@@ -18,6 +18,23 @@
                 {{ end }}
             </ul>
             {{ end }}
+            <ul class="navbar-nav ml-auto flex-row">
+                <li class="nav-item">
+                    <a href="{{ .Site.BaseURL }}/posts/index.xml" class="nav-link">
+                        <svg
+                            width="1.5rem"
+                            height="1.5rem"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <use xlink:href="{{ .Site.BaseURL }}/images/icons/feather-sprite.svg#rss"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

@@ -14,6 +14,14 @@ const paths = {
         },
         js: {
             dir: './static/js'
+        },
+        icons: {
+            feather: './node_modules/feather-icons/dist/feather-sprite.svg'
+        }
+    },
+    dest: {
+        icons: {
+            dir: './static/images/icons'
         }
     }
 }
@@ -34,6 +42,12 @@ gulp.task('js', function() {
         'node_modules/bootstrap/dist/js/bootstrap.min.js'
     ])
     .pipe(gulp.dest(paths.src.js.dir));
+});
+
+gulp.task('icons', function() {
+    return gulp
+        .src(paths.src.icons.feather)
+        .pipe(gulp.dest(paths.dest.icons.dir));
 });
 
 gulp.task('default', gulp.series('scss', 'js'));
