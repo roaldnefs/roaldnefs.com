@@ -5,10 +5,6 @@
     <link>https://roaldnefs.com/tags/</link>
     <description>Recent content in Tags on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://roaldnefs.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://roaldnefs.com/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

@@ -20,14 +20,31 @@
 
             
             
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 
                 <li class="nav-item active">
-                <a class="nav-link" href="https://roaldnefs.com/posts/">Blog <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="https://roaldnefs.com/posts/">Posts <span class="sr-only">(current)</span></a>
                 </li>
                 
             </ul>
             
+            <ul class="navbar-nav ml-auto flex-row">
+                <li class="nav-item">
+                    <a href="https://roaldnefs.com//posts/index.xml" class="nav-link">
+                        <svg
+                            width="1.5rem"
+                            height="1.5rem"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <use xlink:href="https://roaldnefs.com//images/icons/feather-sprite.svg#rss"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -77,7 +94,14 @@
     </div>
 </div>
 
-<script src="https://roaldnefs.com/js/jquery.min.js"></script>
+<footer class="container py-4">
+    <div class="row">
+        <div class="col">
+            <a class="brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
+            <p class="text-muted pt-2"><small>&copy 2020-present Roald Nefs. All Rights Reserved.</small></p>
+        </div>
+    </div>
+</footer><script src="https://roaldnefs.com/js/jquery.min.js"></script>
 <script src="https://roaldnefs.com/js/bootstrap.min.js"></script>
 </body>
 </html>
