@@ -17,8 +17,8 @@
     </div>
     <div class="row">
         <div class="col">
-            <h2>Blog</h2>
-            <p>My blog is a <a href="{{ "/posts/" | absURL }}">collection of articles</a>. Here are the most recent entries:</p>
+            <h2>Posts</h2>
+            <p>My blog is a <a href="{{ "/posts/" | absURL }}">collection of articles</a>. Here are the most recent posts:</p>
             <ul>
             {{ range where .Site.Pages "Type" "post" }}
                 <li>
@@ -31,6 +31,7 @@
     <div class="row">
         <div class="col">
             <h2>Talks</h2>
+            <p>Here are the most recent talks:</p>
             <ul>
             {{ range $.Site.Data.talks }}
                 <li>
