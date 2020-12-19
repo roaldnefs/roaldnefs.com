@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://roaldnefs.com/posts/2020/05/git-branching/</loc>
-    <lastmod>2020-05-10T23:20:00+02:00</lastmod>
+    <loc>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</loc>
+    <lastmod>2020-12-19T15:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://roaldnefs.com/posts/</loc>
-    <lastmod>2020-05-10T23:20:00+02:00</lastmod>
+    <lastmod>2020-12-19T15:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://roaldnefs.com/</loc>
+    <lastmod>2020-12-19T15:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://roaldnefs.com/posts/2020/05/git-branching/</loc>
     <lastmod>2020-05-10T23:20:00+02:00</lastmod>
   </url>
   

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html><head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://roaldnefs.com/css/theme.min.css">
+
+    <title>Roald Nefs</title>
+</head><body class="bg-white text-dark"><nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#primaryMenu" aria-controls="primaryMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="primaryMenu">
+
+            
+            
+            <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item">
+                <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
+                </li>
+                
+            </ul>
+            
+            <ul class="navbar-nav ml-auto flex-row">
+                <li class="nav-item">
+                    <a href="https://roaldnefs.com/posts/index.xml" class="nav-link">
+                        <svg
+                            width="1.5rem"
+                            height="1.5rem"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <use xlink:href="https://roaldnefs.com//images/icons/feather-sprite.svg#rss"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<article class="container">
+    <div class="row">
+        <div class="col">
+            <h1>How to Automatically Generate Clients for your REST API</h1>
+
+            <p>While helping a colleague with adding some code to the <a href="https://github.com/bunq/sdk_python">bunq Python SDK</a> to allow him to retrieve some additional information from the API (<a href="https://github.com/bunq/sdk_python/issues/148">bunq/sdk_python#148</a>), we noticed that the <a href="https://github.com/bunq/sdk_python">SDK</a> was automatically generated. We&rsquo;ve eventually ended up monkey patching the <a href="https://github.com/bunq/sdk_python">SDK</a>, as we couldn&rsquo;t make a pull request to the <a href="https://github.com/bunq/sdk_python">SDK</a> and the API specification or SDK generator wasn&rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.</p>
+<p>In this post we will automatically generate a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> client based upon an <a href="https://swagger.io/specification/">OpenAPI specification</a>. The <a href="%5Bopenapi-spec%5D">OpenAPI specification</a> allows <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST APIs</a> to be described in a standard programming <a href="https://en.wikipedia.org/wiki/Language-agnostic">language-agnostic</a> way, making it possible for both humans and computers to interpret the specification.</p>
+<h2 id="write-the-openapi-specification">Write the OpenAPI specification</h2>
+<p>Even though quite a lot of REST APIs nowadays come included with an <a href="https://swagger.io/specification/">OpenAPI specification</a>, this is not the case for all of them. In this post we will be using the JSON interface on <a href="https://xkcd.com/">xkcd</a> as an example. We will start by describing the <a href="https://swagger.io/specification/">OpenAPI specification</a> for the two existing endpoints:</p>
+<pre><code>GET: http://xkcd.com/info.0.json (current comic)
+GET: http://xkcd.com/614/info.0.json (comic #614)
+</code></pre><p>Let&rsquo;s start by creating a file called <code>openapi.yaml</code>. After filling in some basic information such as the API information and available server(s), we can add the individual endpoints. The specification below only contains the endpoint for retrieving a <a href="https://xkcd.com/">xkcd</a> comic by its identifier.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">openapi</span>: <span style="color:#ae81ff">3.0.0</span>
+
+<span style="color:#f92672">info</span>:
+  <span style="color:#f92672">version</span>: <span style="color:#ae81ff">1.0.0</span>
+  <span style="color:#f92672">title</span>: <span style="color:#ae81ff">xkcd</span>
+  <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#39;A webcomic of romance, sarcasm, math, and language.&#39;</span>
+
+<span style="color:#f92672">servers</span>:
+  - <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://xkcd.com/</span>
+    <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Official xkcd JSON interface</span>
+
+<span style="color:#f92672">paths</span>:
+  <span style="color:#75715e"># Retrieve a comic by its identifier</span>
+  <span style="color:#ae81ff">/{id}/info.0.json:</span>
+    <span style="color:#f92672">get</span>:
+      <span style="color:#f92672">tags</span>:
+        - <span style="color:#ae81ff">comic</span>
+      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Returns comic based on ID</span>
+      <span style="color:#f92672">summary</span>: <span style="color:#ae81ff">Find comic by ID</span>
+      <span style="color:#f92672">operationId</span>: <span style="color:#ae81ff">getComicById</span>
+      <span style="color:#f92672">parameters</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">id</span>
+          <span style="color:#f92672">in</span>: <span style="color:#ae81ff">path</span>
+          <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+          <span style="color:#f92672">schema</span>:
+            <span style="color:#f92672">type</span>: <span style="color:#ae81ff">integer</span>
+      <span style="color:#f92672">responses</span>:
+        <span style="color:#f92672">&#39;200&#39;</span>:
+          <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Successfully returned a commmic</span>
+          <span style="color:#f92672">content</span>:
+            <span style="color:#f92672">application/json</span>:
+              <span style="color:#f92672">schema</span>:
+                <span style="color:#f92672">type</span>: <span style="color:#ae81ff">object</span>
+                <span style="color:#f92672">properties</span>:
+                  <span style="color:#f92672">link</span>:
+                    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">string</span>
+                  <span style="color:#f92672">img</span>:
+                    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">string</span>
+                  <span style="color:#f92672">title</span>:
+                    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">string</span>
+</code></pre></div><h2 id="automatically-generate-a-python-sdk">Automatically generate a Python SDK</h2>
+<p>The <a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI Generator</a> allows the generation of API client libraries and documentation for multiple languages and frameworks given an <a href="https://swagger.io/specification/">OpenAPI specification</a>. This includes generators for <em>Python</em>, <em>Go</em>, <em>Java</em> and many more.</p>
+<p>Even though the <a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI Generator</a> is written in Java, you can use the <a href="hub.docker.com/r/openapitools/openapi-generator-cli">pre-built Docker image</a> to act as a standalone executable. The command below will generate a Python SDK based upon the specification (<code>openapi.yaml</code>):</p>
+<pre><code class="language-console" data-lang="console">$ docker run --rm \
+  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+  -i /local/openapi.yaml \
+  -g python \
+  -o /local/out/python \
+  --additional-properties=packageName=xkcd_client,projectName=xkcd_client
+</code></pre><p>After execution the newly generated Python SDK is available in <code>./out/python</code> and comes included with the necessary documentation to start using it. It even comes with a <code>.openapi-generator-ignore</code> file which let you specify files to prevent them from being overwritten by the generator.</p>
+<h2 id="improve-the-openapi-specification">Improve the OpenAPI specification</h2>
+<p>Even though we can now use the newly generated SDK, it comes with some very generic class names and ill-favoured function names, e.g.:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xkcd_client
+
+
+<span style="color:#75715e"># Initialize a xkcd API client</span>
+configuration <span style="color:#f92672">=</span> xkcd_client<span style="color:#f92672">.</span>Configuration(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://xkcd.com&#34;</span>)
+client <span style="color:#f92672">=</span> xkcd_client<span style="color:#f92672">.</span>ApiClient(configuration)
+api_instance <span style="color:#f92672">=</span> xkcd_client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>default_api<span style="color:#f92672">.</span>DefaultApi(api_client)
+
+<span style="color:#75715e"># Retrieve a comic by identifier</span>
+api_response <span style="color:#f92672">=</span> api_instance<span style="color:#f92672">.</span>id_info0_json_get(<span style="color:#ae81ff">614</span>)
+</code></pre></div><p>Let&rsquo;s improve the <a href="https://swagger.io/specification/">OpenAPI specification</a> to allow the generation of some more human friendly code. To rename the <code>DefaultApi</code> class we will need to logical group endpoints by adding the <code>tags</code> option:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">...
+<span style="color:#f92672">paths</span>:
+  <span style="color:#75715e"># Retrieve the current comic</span>
+  <span style="color:#ae81ff">/{id}/info.0.json:</span>
+    <span style="color:#f92672">get</span>:
+      <span style="color:#75715e"># A list of tags to logical group operations by resources and any other</span>
+      <span style="color:#75715e"># qualifier. </span>
+      <span style="color:#f92672">tags</span>:
+        - <span style="color:#ae81ff">comic</span>
+      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Returns comic based on ID</span>
+...
+</code></pre></div><p>In order to rename the function <code>DefaultApi.id_info0_json_get</code> we can specify a unique <code>operationId</code> to allow tools and libraries to uniquely identify an operation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">...
+<span style="color:#f92672">paths</span>:
+  <span style="color:#75715e"># Retrieve the current comic</span>
+  <span style="color:#ae81ff">/{id}/info.0.json:</span>
+    <span style="color:#f92672">get</span>:
+      <span style="color:#75715e"># A list of tags to logical group operations by resources and any other</span>
+      <span style="color:#75715e"># qualifier. </span>
+      <span style="color:#f92672">tags</span>:
+        - <span style="color:#ae81ff">comic</span>
+      <span style="color:#f92672">description</span>: <span style="color:#ae81ff">Returns comic based on ID</span>
+      <span style="color:#75715e"># Unique identifier for the operation, tools and libraries may use the</span>
+      <span style="color:#75715e"># operationId to uniquely identify an operation.</span>
+      <span style="color:#f92672">operationId</span>: <span style="color:#ae81ff">getComic</span>
+...
+</code></pre></div><p>The full <a href="https://swagger.io/specification/">OpenAPI specification</a> of the <a href="https://xkcd.com/">xkcd</a> JSON interface is available on <a href="https://gist.github.com/roaldnefs/053e505b2b7a807290908fe9aa3e1f00">GitHub</a>.</p>
+<h2 id="using-the-generated-python-sdk">Using the generated Python SDK</h2>
+<p>After generation of the Python SDK we can create a Python virtual environment and install the generated <a href="https://xkcd.com/">xkcd</a> Python API client using the following commands:</p>
+<pre><code class="language-console" data-lang="console">$ python3 -m venv env
+$ source env/bin/activate
+$ pip install -e ./out/python
+</code></pre><p>After installing the generated API client, we could for example retrieve the <a href="https://xkcd.com/1481/">xkcd comic about an API</a> using the following Python snippet:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint
+
+<span style="color:#f92672">from</span> xkcd_client <span style="color:#f92672">import</span> Configuration, ApiClient, ApiException
+<span style="color:#f92672">from</span> xkcd_client.api.comic_api <span style="color:#f92672">import</span> ComicApi
+
+
+configuration <span style="color:#f92672">=</span> Configuration(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://xkcd.com&#34;</span>)
+
+<span style="color:#75715e"># Enter a context with an instance of the API client</span>
+<span style="color:#66d9ef">with</span> ApiClient(configuration) <span style="color:#66d9ef">as</span> client:
+    <span style="color:#75715e"># Create an instance of the API class</span>
+    instance <span style="color:#f92672">=</span> ComicApi(client)
+
+    <span style="color:#66d9ef">try</span>:
+        <span style="color:#75715e"># Retrieve the API comic</span>
+        api_response <span style="color:#f92672">=</span> instance<span style="color:#f92672">.</span>get_comic_by_id(<span style="color:#ae81ff">1481</span>)
+        pprint(api_response)
+    <span style="color:#66d9ef">except</span> ApiException <span style="color:#66d9ef">as</span> exc:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Exception when calling ComicApi-&gt;get_comic_by_id: {0}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(exc))
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>In general, it&rsquo;s quite possible to automatically generate a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> based upon <a href="https://swagger.io/specification/">OpenAPI specification</a>. Even for <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST APIs</a> that do not include a <a href="https://swagger.io/specification/">OpenAPI specification</a> by default you can easily describe the API in a <a href="https://swagger.io/specification/">specification</a> file to allow the API client generation. Although this post didn&rsquo;t go in depth about API authentication, cookie usage or other HTTP methods, they are all possible features of the <a href="https://swagger.io/specification/">OpenAPI specification</a> and <a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI Generator</a>. However, results and options may differ based upon the language or framework you would like to generate the SDK in.</p>
+<p>Even though the generated code may seem a bit rough, it&rsquo;s well documented and could be made more human friendly by improving the <a href="https://swagger.io/specification/">API specification</a>.</p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "roaldnefs" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+    </div>
+</article>
+
+<footer class="container py-4">
+    <div class="row">
+        <div class="col">
+            <p class="text-muted">
+              <small>Copyright &copy 2020 Roald Nefs. All Rights Reserved.</small>
+            </p>
+        </div>
+    </div>
+</footer><script src="https://roaldnefs.com/js/jquery.min.js"></script>
+<script src="https://roaldnefs.com/js/bootstrap.min.js"></script>
+</body>
+</html>

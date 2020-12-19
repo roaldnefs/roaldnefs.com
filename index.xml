@@ -6,7 +6,16 @@
     <description>Recent content on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 May 2020 23:20:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Dec 2020 15:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Automatically Generate Clients for your REST API</title>
+      <link>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</link>
+      <pubDate>Sat, 19 Dec 2020 15:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</guid>
+      <description>While helping a colleague with adding some code to the bunq Python SDK to allow him to retrieve some additional information from the API (bunq/sdk_python#148), we noticed that the SDK was automatically generated. We&amp;rsquo;ve eventually ended up monkey patching the SDK, as we couldn&amp;rsquo;t make a pull request to the SDK and the API specification or SDK generator wasn&amp;rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.</description>
+    </item>
+    
     <item>
       <title>Git Branching</title>
       <link>https://roaldnefs.com/posts/2020/05/git-branching/</link>
