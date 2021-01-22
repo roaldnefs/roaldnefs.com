@@ -30,6 +30,6 @@ jobs:
           rm /tmp/hugo.deb  
 
       - name: Publish
-        # env:
-        #   REPOSITORY: "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        env:
+          REPOSITORY: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
         run: ./publish.sh
