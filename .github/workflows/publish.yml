@@ -31,5 +31,5 @@ jobs:
 
       - name: Publish
         env:
-          REPOSITORY: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
+          REPOSITORY: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/roaldnefs/roaldnefs.com.git"
         run: ./publish.sh
