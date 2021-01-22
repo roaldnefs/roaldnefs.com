@@ -17,7 +17,6 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           submodules: true
 
       - name: Set up Hugo
@@ -32,5 +31,5 @@ jobs:
 
       - name: Publish
         env:
-          REPOSITORY: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/roaldnefs/roaldnefs.com.git"
+          REPOSITORY: "https://roaldnefs:${{ secrets.GITHUB_TOKEN }}@github.com/roaldnefs/roaldnefs.com.git"
         run: ./publish.sh
