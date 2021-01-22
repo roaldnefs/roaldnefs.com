@@ -12,29 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-
-      - name: Set up git worktree
-        run: |
-          git worktree add -B gh-pages public origin/gh-pages
+          submodules: true
 
       - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-
-      - name: Build
-        run: hugo
-
-      - name: Publish changes
-        working-directory: public
+        env:
+          HUGO_VERSION: 0.80.0
         run: |
-          timestamp=$(date -u)
+          echo "installing hugo $HUGO_VERSION"
+          curl -sL -o /tmp/hugo.deb \
+          https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb && \
+          sudo dpkg -i /tmp/hugo.deb && \
+          rm /tmp/hugo.deb  
 
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-          git add --all
-          git commit -m "Automated update: ${timestamp} ${GITHUB_SHA}" || echo "No changes to commit"
-          git push
+      - name: Publish
+        env:
+          REPOSITORY: "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        run: ./publish.sh
