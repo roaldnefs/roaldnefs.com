@@ -25,11 +25,12 @@ jobs:
 
       - name: Commit changes
         run: |
+          git worktree add -B gh-pages public origin/gh-pages
           cd public
           timestamp=$(date -u)
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
+          git add --all
           git commit -m "Automated update: ${timestamp} ${GITHUB_SHA}" || echo "No changes to commit"
 
       - name: Push changes
