@@ -14,6 +14,7 @@
       
       <guid>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</guid>
       <description>While helping a colleague with adding some code to the bunq Python SDK to allow him to retrieve some additional information from the API (bunq/sdk_python#148), we noticed that the SDK was automatically generated. We&amp;rsquo;ve eventually ended up monkey patching the SDK, as we couldn&amp;rsquo;t make a pull request to the SDK and the API specification or SDK generator wasn&amp;rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.</description>
+      <featured>yes</featured>
     </item>
     
     <item>
@@ -23,6 +24,7 @@
       
       <guid>https://roaldnefs.com/posts/2020/05/git-branching/</guid>
       <description>Introduction Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with that main line, it&amp;rsquo;s called branching. Unlike may other version control systems, the Git branching model is lightweight. Each Git branch is simply just a file containing the 40 character SHA-1 checksum of the commit it points to. You can nearly instantaneous create or switch branches.</description>
+      <featured>no</featured>
     </item>
     
     <item>
@@ -32,6 +34,7 @@
       
       <guid>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</guid>
       <description>Introduction Git is a free and opensource distributed version control system designed to handle everything from small to very large projects with speed and efficiency. While working with Git I often get asked questions about best practices or the more advanced usage of Git e.g.: a rebase, merge conflict or how to cherry pick. This post will serve as my personal Git reference as well as a getting started guide for my colleagues and friends.</description>
+      <featured>no</featured>
     </item>
     
     <item>
@@ -41,6 +44,7 @@
       
       <guid>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</guid>
       <description>Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&amp;rsquo;ll create a Extension Pack for SaltStack requested in korekontrol/vscode-saltstack#5.</description>
+      <featured>no</featured>
     </item>
     
     <item>
@@ -52,6 +56,7 @@
       <description>In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
 This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
 The video is a short demonstration of the Ding Dong Ditch device.</description>
+      <featured>yes</featured>
     </item>
     
     <item>
@@ -62,6 +67,7 @@ The video is a short demonstration of the Ding Dong Ditch device.</description>
       <guid>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</guid>
       <description>Last week I&amp;rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&amp;rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (top left in the picture). In this post we will go through the process of connecting to an unknown serial interface.
 The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out what each port was doing.</description>
+      <featured>yes</featured>
     </item>
     
     <item>
@@ -71,6 +77,7 @@ The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out wh
       
       <guid>https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/</guid>
       <description>Today I received my YARD Stick One (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle can transmit and receive digital wireless signals at frequencies below 1GHz. The YARD Stick One is not a SDR, because the I/Q samples are directly demodulated by the chipset instead of send to the host over USB. The YARD Stick One therefore isn’t compatible with any SDR software, but you can use something called rfcat.</description>
+      <featured>no</featured>
     </item>
     
     <item>
@@ -81,6 +88,7 @@ The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out wh
       <guid>https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/</guid>
       <description>In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.
 Prerequisites Start by installing the required packages for downloading and compiling the rtl-sdr package.</description>
+      <featured>no</featured>
     </item>
     
   </channel>
