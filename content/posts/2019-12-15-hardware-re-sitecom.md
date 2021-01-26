@@ -4,6 +4,7 @@ slug: Hardware Reverse a Wireless Router
 date: 2019-12-15T00:00:00+02:00
 type: post
 draft: false
+featured: true
 ---
 
 Last week I've bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I've found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (_top left in the picture_). In this post we will go through the process of connecting to an unknown serial interface.

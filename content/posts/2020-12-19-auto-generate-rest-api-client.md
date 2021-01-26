@@ -3,6 +3,7 @@ title: How to Automatically Generate Clients for your REST API
 date: 2020-12-19T15:00:00+02:00
 type: post
 draft: false
+featured: true
 ---
 
 While helping a colleague with adding some code to the [bunq Python SDK][bunq-sdk] to allow him to retrieve some additional information from the API ([bunq/sdk_python#148][bunq-issue]), we noticed that the [SDK][bunq-sdk] was automatically generated. We've eventually ended up monkey patching the [SDK][bunq-sdk], as we couldn't make a pull request to the [SDK][bunq-sdk] and the API specification or SDK generator wasn't publicly available. However, this aroused some interest about the automatic generation of API clients.

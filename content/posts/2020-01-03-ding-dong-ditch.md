@@ -3,6 +3,7 @@ title: Ding Dong Ditch using SDR and Arduino
 date: 2020-01-03T00:00:00+02:00
 type: post
 draft: false
+featured: true
 ---
 
 In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.
