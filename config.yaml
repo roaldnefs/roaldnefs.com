@@ -2,6 +2,8 @@ baseURL: "https://roaldnefs.com/"
 languageCode: en-us
 title: Roald Nefs
 disqusShortname: roaldnefs
+params:
+  slogan: Roald Nefs, SRE/DevOps engineer and open-source contributor
 
 permalinks:
   posts: /posts/:year/:month/:slug/

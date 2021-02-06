@@ -1,8 +1,9 @@
 <footer class="container py-4">
     <div class="row">
         <div class="col">
-            <p class="text-muted">
-              <small>Copyright &copy 2020 Roald Nefs. All Rights Reserved.</small>
+            <p class="meta">
+              {{ if .Site.Params.slogan }}{{ .Site.Params.slogan }}<br />{{end}}
+              Copyright &copy 2019-2021 Roald Nefs. All Rights Reserved.
             </p>
         </div>
     </div>

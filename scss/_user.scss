@@ -3,6 +3,10 @@
 // Use this to write your custom SCSS
 //
 
+body {
+    font-family: 'Lora', sans-serif !important;
+}
+
 article img {
     max-width: 100%;
 }
@@ -16,6 +20,29 @@ a.brand:link {
     text-decoration: none; 
 }
 
+.bg-gray {
+    background:#f4f4f4 !important;
+}
+
 .bg-white {
     background:#FFF !important;
+}
+
+.meta {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: .1em;
+    transform: uppercase;
+    color: #777;
+    margin: 0 auto;
+}
+
+.sideways {
+    position: absolute;
+    left: -150px;
+    top: 330px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg);
 }
