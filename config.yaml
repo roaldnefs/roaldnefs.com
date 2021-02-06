@@ -8,6 +8,20 @@ params:
 permalinks:
   posts: /posts/:year/:month/:slug/
 
+markup:
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    hl_Lines: ""
+    lineAnchors: ""
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: github
+    tabWidth: 4
+
 menu:
   main:
     - name: Posts
