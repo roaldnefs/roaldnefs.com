@@ -64,29 +64,29 @@
             <p>Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&rsquo;ll create a Extension Pack for SaltStack requested in <a href="https://github.com/korekontrol/vscode-saltstack/issues/5">korekontrol/vscode-saltstack#5</a>.</p>
 <h2 id="installing-the-required-tools">Installing the required tools</h2>
 <p>The most simple way to create an VS Code extension is using the Yeoman VS Code <a href="https://code.visualstudio.com/docs/extensions/yocode">extension generator</a>. Make sure you have <a href="https://nodejs.org/en/">Node.js</a> and <a href="https://git-scm.com/">Git</a> installed, then install <a href="http://yeoman.io/">Yeoman</a> and the <a href="https://www.npmjs.com/package/generator-code">VS Code Extension Generator</a> with the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install -g yo generator-code
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install -g yo generator-code
 </code></pre></div><h2 id="generating-a-new-extension-pack">Generating a new Extension Pack</h2>
 <p>With the required tools installed, we are able scaffold a new extension pack project. Invoke the VS Code Extension Generator using the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ yo code
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ yo code
 </code></pre></div><p>Select the <code>New Extension Pack</code> option in the dropdown list:</p>
 <p><img src="/images/posts/2020/04/17/vscode_01.png" alt="Yeoman"></p>
 <p>Fill out the prompted fields for a new extension pack:</p>
 <p><img src="/images/posts/2020/04/17/vscode_02.jpg" alt="Yeoman"></p>
 <p>After scaffolding the extenions pack you can open the project in VS Code and update the <code>package.json</code> to include the extensions you would like to add to your extension pack:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;saltstack-extension-pack&#34;</span>,
-    <span style="color:#f92672">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;saltstack-extension-pack&#34;</span>,
-    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;SaltStack Extension Pack&#34;</span>,
-    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.1&#34;</span>,
-    <span style="color:#f92672">&#34;engines&#34;</span>: {
-        <span style="color:#f92672">&#34;vscode&#34;</span>: <span style="color:#e6db74">&#34;^1.44.0&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#000080">&#34;name&#34;</span>: <span style="color:#d14">&#34;saltstack-extension-pack&#34;</span>,
+    <span style="color:#000080">&#34;displayName&#34;</span>: <span style="color:#d14">&#34;saltstack-extension-pack&#34;</span>,
+    <span style="color:#000080">&#34;description&#34;</span>: <span style="color:#d14">&#34;SaltStack Extension Pack&#34;</span>,
+    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;0.0.1&#34;</span>,
+    <span style="color:#000080">&#34;engines&#34;</span>: {
+        <span style="color:#000080">&#34;vscode&#34;</span>: <span style="color:#d14">&#34;^1.44.0&#34;</span>
     },
-    <span style="color:#f92672">&#34;categories&#34;</span>: [
-        <span style="color:#e6db74">&#34;Extension Packs&#34;</span>
+    <span style="color:#000080">&#34;categories&#34;</span>: [
+        <span style="color:#d14">&#34;Extension Packs&#34;</span>
     ],
-    <span style="color:#f92672">&#34;extensionPack&#34;</span>: [ 
-        <span style="color:#e6db74">&#34;warpnet.salt-lint&#34;</span>,
-        <span style="color:#e6db74">&#34;korekontrol.saltstack&#34;</span>
+    <span style="color:#000080">&#34;extensionPack&#34;</span>: [ 
+        <span style="color:#d14">&#34;warpnet.salt-lint&#34;</span>,
+        <span style="color:#d14">&#34;korekontrol.saltstack&#34;</span>
     ]
 }
 </code></pre></div><p>In the above example we&rsquo;ve added the following extensions to the pack in the format of <code>&lt;author&gt;.&lt;extension-name&gt;</code>:</p>
@@ -95,48 +95,48 @@
 <li><a href="https://marketplace.visualstudio.com/items?itemName=korekontrol.saltstack"><code>korekontrol.saltstack</code></a></li>
 </ul>
 <p>If your want to publish your extension to the VS Code marketplace you might want to add some additional information to the <code>package.json</code> such as the publisher name, homepage and repository URL. You will end up with a <code>package.json</code> similar to this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;saltstack-extension-pack&#34;</span>,
-    <span style="color:#f92672">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;saltstack-extension-pack&#34;</span>,
-    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;SaltStack Extension Pack&#34;</span>,
-    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.1&#34;</span>,
-    <span style="color:#f92672">&#34;publisher&#34;</span>: <span style="color:#e6db74">&#34;warpnet&#34;</span>,
-    <span style="color:#f92672">&#34;homepage&#34;</span>: <span style="color:#e6db74">&#34;https://github.com/warpnet/saltstack-extension-pack&#34;</span>,
-	<span style="color:#f92672">&#34;repository&#34;</span>: {
-		<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;git&#34;</span>,
-		<span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://github.com/warpnet/saltstack-extension-pack.git&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#000080">&#34;name&#34;</span>: <span style="color:#d14">&#34;saltstack-extension-pack&#34;</span>,
+    <span style="color:#000080">&#34;displayName&#34;</span>: <span style="color:#d14">&#34;saltstack-extension-pack&#34;</span>,
+    <span style="color:#000080">&#34;description&#34;</span>: <span style="color:#d14">&#34;SaltStack Extension Pack&#34;</span>,
+    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;0.0.1&#34;</span>,
+    <span style="color:#000080">&#34;publisher&#34;</span>: <span style="color:#d14">&#34;warpnet&#34;</span>,
+    <span style="color:#000080">&#34;homepage&#34;</span>: <span style="color:#d14">&#34;https://github.com/warpnet/saltstack-extension-pack&#34;</span>,
+	<span style="color:#000080">&#34;repository&#34;</span>: {
+		<span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;git&#34;</span>,
+		<span style="color:#000080">&#34;url&#34;</span>: <span style="color:#d14">&#34;https://github.com/warpnet/saltstack-extension-pack.git&#34;</span>
 	},
-    <span style="color:#f92672">&#34;engines&#34;</span>: {
-        <span style="color:#f92672">&#34;vscode&#34;</span>: <span style="color:#e6db74">&#34;^1.44.0&#34;</span>
+    <span style="color:#000080">&#34;engines&#34;</span>: {
+        <span style="color:#000080">&#34;vscode&#34;</span>: <span style="color:#d14">&#34;^1.44.0&#34;</span>
     },
-    <span style="color:#f92672">&#34;categories&#34;</span>: [
-        <span style="color:#e6db74">&#34;Extension Packs&#34;</span>
+    <span style="color:#000080">&#34;categories&#34;</span>: [
+        <span style="color:#d14">&#34;Extension Packs&#34;</span>
     ],
-    <span style="color:#f92672">&#34;keywords&#34;</span>: [
-		<span style="color:#e6db74">&#34;saltstack&#34;</span>,
-		<span style="color:#e6db74">&#34;salt&#34;</span>,
-		<span style="color:#e6db74">&#34;salt-lint&#34;</span>
+    <span style="color:#000080">&#34;keywords&#34;</span>: [
+		<span style="color:#d14">&#34;saltstack&#34;</span>,
+		<span style="color:#d14">&#34;salt&#34;</span>,
+		<span style="color:#d14">&#34;salt-lint&#34;</span>
 	],
-    <span style="color:#f92672">&#34;extensionPack&#34;</span>: [ 
-        <span style="color:#e6db74">&#34;warpnet.salt-lint&#34;</span>,
-        <span style="color:#e6db74">&#34;korekontrol.saltstack&#34;</span>
+    <span style="color:#000080">&#34;extensionPack&#34;</span>: [ 
+        <span style="color:#d14">&#34;warpnet.salt-lint&#34;</span>,
+        <span style="color:#d14">&#34;korekontrol.saltstack&#34;</span>
     ]
 }
 </code></pre></div><h2 id="package--publish-the-extension-pack">Package &amp; Publish the Extension Pack</h2>
 <p>We can use the <code>vsce</code> (Visual Studio Code Extensions) command-line tool to package, publish and manage VS Code extensions. Install <code>vsce</code> using the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install -g vsce
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install -g vsce
 </code></pre></div><p>Use the <code>vsce package</code> command to package the extension pack:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vsce package
- DONE  Packaged: /Users/roald/Documents/projects/saltstack-extension-pack/saltstack-extension-pack-0.0.1.vsix <span style="color:#f92672">(</span><span style="color:#ae81ff">6</span> files, 3.08KB<span style="color:#f92672">)</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vsce package
+ DONE  Packaged: /Users/roald/Documents/projects/saltstack-extension-pack/saltstack-extension-pack-0.0.1.vsix <span style="color:#000;font-weight:bold">(</span><span style="color:#099">6</span> files, 3.08KB<span style="color:#000;font-weight:bold">)</span>
 </code></pre></div><p>This will generate a <code>*.vsix</code> file that is needed to publish the extension pack to the VS Code marketplace. In addition to the <code>*.vsix</code> we&rsquo;ll also need a personal access token for Azure DevOps to publish the extension pack.</p>
 <p>First, make sure you have an Azure DevOps <a href="https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization-msa-or-work-student">organization</a>. From your organization&rsquo;s home page (e.g. <code>https://dev.azure.com/warpnet/</code>), open the user settings dropdown menu next to your profile image and select <strong>Personal access tokens</strong>. On the <strong>Personal access tokens</strong> page, click the <strong>New Token</strong> button and the give the token a name and select a <strong>custom defined</strong> scope ruleset and click <strong>Show all scopes</strong>. Scroll down the list of possible scopes until you find <strong>Marketplace</strong> and select both <strong>Acquire</strong> and <strong>Manage</strong>. Now click <strong>Create</strong> to show the newly created Personall Acces Token.</p>
 <p>Using the newly generated token we can create a <strong>publisher</strong> using the <code>vsce create-publisher &lt;publisher-name&gt;</code> command. The name of the publisher need to be the same as the one provided in the <code>package.json</code> file.</p>
 <p>If you already create a publisher before you can simply invoke the <code>vsce login &lt;publisher-name&gt;</code> command and supply your newly created token.</p>
 <p>Now simply invoke the <code>vsce publish</code> command and within a few minutes the extension pack is available on the VS Code marketplace:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vsce publish
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vsce publish
 Publishing warpnet.saltstack-extension-pack@0.0.1...
  DONE  Published warpnet.saltstack-extension-pack@0.0.1
-Your extension will live at https://marketplace.visualstudio.com/items?itemName<span style="color:#f92672">=</span>warpnet.saltstack-extension-pack <span style="color:#f92672">(</span>might take a few minutes <span style="color:#66d9ef">for</span> it to show up<span style="color:#f92672">)</span>.
+Your extension will live at https://marketplace.visualstudio.com/items?itemName<span style="color:#000;font-weight:bold">=</span>warpnet.saltstack-extension-pack <span style="color:#000;font-weight:bold">(</span>might take a few minutes <span style="color:#000;font-weight:bold">for</span> it to show up<span style="color:#000;font-weight:bold">)</span>.
 </code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Creating an extension pack for Visual Studio Code is very simple, using the provided scaffolding tools you will only need to add the extensions to the pack. Checkout the <code>warpnet.saltstack-extension-pack</code> on the <a href="https://marketplace.visualstudio.com/items?itemName=warpnet.saltstack-extension-pack">VS Code marketplace</a> and <a href="https://github.com/warpnet/saltstack-extension-pack">GitHub</a>.</p>
 
