@@ -2,39 +2,18 @@
     <div class="container">
         <a class="navbar-brand" href="{{ .Site.BaseURL }}">roald<strong>nefs</strong>.com</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#primaryMenu" aria-controls="primaryMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-between" id="primaryMenu">
+        <div class="justify-content-between">
 
             {{ $currentPage := . }}
             {{ if .Site.Menus.main }}
-            <ul class="navbar-nav mr-auto">
+            <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
                 {{ range .Site.Menus.main }}
-                <li class="nav-item{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}">
-                <a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}{{ if $currentPage.IsMenuCurrent "main" . }} <span class="sr-only">(current)</span>{{ end }}</a>
+                <li class="list-inline-item">
+                    <a class="nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" href="{{ .URL | absURL }}">{{ .Name }}{{ if $currentPage.IsMenuCurrent "main" . }} <span class="sr-only">(current)</span>{{ end }}</a>
                 </li>
                 {{ end }}
             </ul>
             {{ end }}
-            <ul class="navbar-nav ml-auto flex-row">
-                <li class="nav-item">
-                    <a href="{{ .Site.BaseURL }}posts/index.xml" class="nav-link">
-                        <svg
-                            width="1.5rem"
-                            height="1.5rem"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <use xlink:href="{{ .Site.BaseURL }}/images/icons/feather-sprite.svg#rss"/>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
         </div>
     </div>
 </nav>

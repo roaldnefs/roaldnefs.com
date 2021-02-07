@@ -1,10 +1,37 @@
 <footer class="container py-4">
     <div class="row">
-        <div class="col">
+        <div class="col-lg-4 offset-lg-1 offset-md-2 offset-sm-1 pb-2">
             <p class="meta">
               {{ if .Site.Params.slogan }}{{ .Site.Params.slogan }}<br />{{end}}
               Copyright &copy 2019-2021 Roald Nefs. All Rights Reserved.
             </p>
+        </div>
+        <div class="col-lg-2 col-sm-3 offset-md-2 offset-sm-1 pb-2 pb-sm-0">
+            <ul class="list-unstyled text-uppercase meta">
+                <li>
+                    <a href="https://github.com/roaldnefs">gh/roaldnefs</a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/roaldnefs">tw/roaldnefs</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-1 col-sm-3 pb-2 pb-sm-0">
+            <ul class="list-unstyled text-uppercase meta">
+                <li>
+                    <a href="{{ .Site.BaseURL }}posts/index.xml">RSS</a>
+                </li>
+                <li>
+                    <a href="{{ "/posts/" | absURL }}">Posts</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-1 col-sm-3">
+            <ul class="list-unstyled text-uppercase meta">
+                <li>
+                    <a href="{{ .Site.BaseURL }}"><strong>Home</strong></a>
+                </li>
+            </ul>
         </div>
     </div>
 </footer>

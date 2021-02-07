@@ -36,6 +36,24 @@ a.brand:link {
     transform: uppercase;
     color: #777;
     margin: 0 auto;
+
+    a {
+        text-decoration: none;
+        color: #777;
+
+        &:hover, &:focus {
+            text-decoration: none;
+            color: #777;
+        }
+    }
+}
+
+.meta-nav {
+    font-size: 1rem;
+
+    .active {
+        font-weight: 600 !important;
+    }
 }
 
 .sideways {

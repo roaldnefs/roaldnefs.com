@@ -24,6 +24,9 @@ markup:
 
 menu:
   main:
+    - name: Home
+      url: "/"
+      weight: 10
     - name: Posts
       url: "/posts/"
-      weight: 10
+      weight: 20
