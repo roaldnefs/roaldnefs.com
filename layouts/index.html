@@ -33,7 +33,7 @@
             <h2>Talks</h2>
             <p>Here are the most recent talks:</p>
             <ul>
-            {{ range $.Site.Data.talks }}
+            {{ range sort $.Site.Data.talks "Date" "desc" }}
                 <li>
                     <a href="{{ .URL }}">{{ .Title }}</a><br />
                     {{ .Description }}, {{ .Location }} <span class="text-muted">({{ dateFormat "2006-01-02" .Date }})</span> - <a href="{{ .Slides | absURL }}">Slides</a>
