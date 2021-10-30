@@ -9,7 +9,7 @@
             <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
                 {{ range .Site.Menus.main }}
                 <li class="list-inline-item">
-                    <a class="nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" href="{{ .URL | absURL }}">{{ .Name }}{{ if $currentPage.IsMenuCurrent "main" . }} <span class="sr-only">(current)</span>{{ end }}</a>
+                    <a class="nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" href="{{ .URL | absURL }}">{{ .Name }}</a>
                 </li>
                 {{ end }}
             </ul>
