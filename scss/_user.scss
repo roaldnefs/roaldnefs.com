@@ -55,12 +55,3 @@ a.brand:link {
         font-weight: 600 !important;
     }
 }
-
-.sideways {
-    position: absolute;
-    left: -150px;
-    top: 330px;
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-}

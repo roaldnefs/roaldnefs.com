@@ -14,14 +14,6 @@ const paths = {
         },
         js: {
             dir: './static/js'
-        },
-        icons: {
-            feather: './node_modules/feather-icons/dist/feather-sprite.svg'
-        }
-    },
-    dest: {
-        icons: {
-            dir: './static/images/icons'
         }
     }
 }
@@ -38,16 +30,10 @@ gulp.task('scss', function() {
 
 gulp.task('js', function() {
     return gulp.src([
-        'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/@popperjs/core/dist/umd/popper.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js'
     ])
     .pipe(gulp.dest(paths.src.js.dir));
-});
-
-gulp.task('icons', function() {
-    return gulp
-        .src(paths.src.icons.feather)
-        .pipe(gulp.dest(paths.dest.icons.dir));
 });
 
 gulp.task('default', gulp.series('scss', 'js'));
