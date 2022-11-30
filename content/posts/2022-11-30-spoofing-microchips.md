@@ -5,7 +5,7 @@ type: post
 draft: false
 featured: true
 ---
-A microchip implanted under the skin of an animal is can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal's owner. During animal trials and events the microchips are often used to verify the animals identity.
+A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal's owner. During animal trials and events the microchips are often used to verify the animals identity.
 
 This post will demonstrate how an attacker can create an “authentic” microchip by writing properly formatted data on blank or rewritable transponder, also known as spoofing. Unfortunately, the RFID reader devices do not differentiate between the authentic and spoofed microchips. The main intention behind this post is to encourage more secure ways of identifying animals instead of solely trusting the implanted microchip.
 
@@ -63,6 +63,6 @@ When scanning the spoofed microchip using a common RFID reader device it shows a
 The above figure shows the spoofed microchip with tag number 528140000795552 being scanned by a RFID reader device. The reader acts as if it is an authentic microchip, to make the user believe that this must actually be the dog with this particular chip number.
 
 ## Conclusion
-Although microchips might help return lost pets more quickly, they should not be solely trusted on to verify the animals identity. An attacker can create an “authentic” microchip by writing properly formatted data on blank or rewritable transponder, also known as spoofing. Unfortunately, the RFID reader devices do not differentiate between the authentic and spoofed microchips.
+Although microchips might help return lost pets more quickly, they should not be solely trusted to verify the animals identity. An attacker can create an “authentic” microchip by writing properly formatted data on blank or rewritable transponder, also known as spoofing. Unfortunately, the RFID reader devices do not differentiate between the authentic and spoofed microchips.
 
 [^1]: https://business.gov.nl/regulation/registering-dogs-and-pet-passports/
