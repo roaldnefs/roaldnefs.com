@@ -7,7 +7,7 @@
             alt="GitHub - License">
     </a>
     <a href="https://github.com/roaldnefs/roaldnefs.com/actions">
-        <img src="https://img.shields.io/github/workflow/status/roaldnefs/roaldnefs.com/Publish?style=for-the-badge&color=blue"
+        <img src="https://img.shields.io/github/actions/workflow/status/roaldnefs/roaldnefs.com/publish.yml?style=for-the-badge&color=blue"
             alt="GitHub Workflow Status">
     </a>
     <a href="https://github.com/roaldnefs/roaldnefs.com/graphs/contributors">
