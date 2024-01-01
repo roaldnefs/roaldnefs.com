@@ -2,6 +2,8 @@
 title: How to Automatically Generate Clients for your REST API
 date: 2020-12-19T15:00:00+02:00
 type: post
+authors:
+  - Roald Nefs
 draft: false
 featured: true
 ---

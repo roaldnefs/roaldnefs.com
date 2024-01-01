@@ -3,6 +3,8 @@ title: Hardware Reversing the Sitecom Wireless Router 150N X1
 slug: Hardware Reverse a Wireless Router
 date: 2019-12-15T00:00:00+02:00
 type: post
+authors:
+  - Roald Nefs
 draft: false
 featured: true
 ---

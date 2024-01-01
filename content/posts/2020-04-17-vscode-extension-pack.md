@@ -2,6 +2,8 @@
 title: How To Create a Visual Studio Code Extension Pack
 date: 2020-04-17T08:00:00+02:00
 type: post
+authors:
+  - Roald Nefs
 draft: false
 ---
 

@@ -2,6 +2,8 @@
 title: Update YARD Stick One Firmware
 date: 2019-01-17T00:00:00+02:00
 type: post
+authors:
+  - Roald Nefs
 draft: false
 ---
 

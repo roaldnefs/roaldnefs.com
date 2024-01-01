@@ -4,11 +4,22 @@
 //
 
 body {
-    font-family: 'Lora', sans-serif !important;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #FFF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
 }
 
 article img {
     max-width: 100%;
+}
+
+.img-author {
+    max-width: 100px;
+    height: auto;
+    border-radius: 50%;
 }
 
 a.brand,
@@ -20,12 +31,15 @@ a.brand:link {
     text-decoration: none; 
 }
 
-.bg-gray {
-    background:#f4f4f4 !important;
-}
+#meta {
+    p {
+        font-size: .9em;
+    }
 
-.bg-white {
-    background:#FFF !important;
+    a {
+        color: #000;
+        text-decoration: none; 
+    }
 }
 
 .meta {

@@ -2,6 +2,8 @@
 title: Spoofing Microchips used for Animal Identification
 date: 2022-11-30T15:19:00+02:00
 type: post
+authors:
+  - Roald Nefs
 draft: false
 featured: true
 ---

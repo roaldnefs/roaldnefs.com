@@ -2,6 +2,8 @@
 title: Ding Dong Ditch using SDR and Arduino
 date: 2020-01-03T00:00:00+02:00
 type: post
+authors:
+  - Roald Nefs
 draft: false
 featured: true
 ---

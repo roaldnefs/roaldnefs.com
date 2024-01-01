@@ -3,20 +3,37 @@
 {{ end }}
 
 {{ define "main" }}
-
-<article class="container bg-white p-3 p-lg-5">
+<div class="container p-3 p-lg-5">
     <div class="row">
-        <div class="col">
+        <aside id="meta" class="col col-12 col-lg-3 order-2 order-lg-1 p-3 p-lg-0">
+            {{ range .Param "authors" }}
+                {{ $name := . }}
+                {{ $path := printf "%s/%s" "authors" ($name | urlize ) }}
+                {{ with $.Site.GetPage $path }}
+                    <div class="pb-2">
+                        <img src="/images/{{ $path }}.jpg" class="img-author" alt="{{ .Params.name }}">
+                    </div>
+                    <span><a href="/{{ $path }}">{{ .Params.name }}</a></span>
+                    <p class="pt-2 pe-lg-2">{{ .Params.bio }}</p>
+                {{ end }}
+            {{ end }}
+        </aside>
+        <div class="col col-12 col-lg-9 order-1 order-lg-2">
             <h1>{{ .Title }}</h1>
+            <small><strong>{{ .Date.Format "January 2, 2006" }}</strong></small>
 
-            {{ .Content }}
+            <article id="content">
+                {{ .Content }}
+            </article>
+
+            <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col col-lg-9 offset-lg-3">
             {{ template "_internal/disqus.html" . }}
         </div>
     </div>
-</article>
+</div>
 
 {{ end }}

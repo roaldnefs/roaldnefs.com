@@ -3,7 +3,7 @@ languageCode: en-us
 title: Roald Nefs
 disqusShortname: roaldnefs
 params:
-  slogan: Roald Nefs, SRE/DevOps engineer and open-source contributor
+  slogan: Roald Nefs, security specialist and open-source contributor
 
 permalinks:
   posts: /posts/:year/:month/:slug/
@@ -24,9 +24,14 @@ markup:
 
 menu:
   main:
-    - name: Home
-      url: "/"
-      weight: 10
     - name: Posts
       url: "/posts/"
+      weight: 10
+    - name: About
+      url: "/authors/roald-nefs/"
       weight: 20
+
+taxonomies:
+  author: authors
+  tag: tags
+  category: categories
