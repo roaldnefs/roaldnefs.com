@@ -13,9 +13,11 @@
     <title>Software Defined Radio on Linux &ndash; Roald Nefs</title>
 
     
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
-</head><body class="bg-gray text-dark"><nav class="navbar navbar-expand-lg navbar-light">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+</head><body class="text-dark"><nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
 
@@ -26,11 +28,11 @@
             <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/">Home</a>
+                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
                 </li>
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
+                    <a class="nav-link" href="https://roaldnefs.com/authors/roald-nefs/">About</a>
                 </li>
                 
             </ul>
@@ -38,13 +40,28 @@
         </div>
     </div>
 </nav>
-
-<article class="container bg-white p-3 p-lg-5">
+<div class="container p-3 p-lg-5">
     <div class="row">
-        <div class="col">
+        <aside id="meta" class="col col-12 col-lg-3 order-2 order-lg-1 p-3 p-lg-0">
+            
+                
+                
+                
+                    <div class="pb-2">
+                        <img src="/images/authors/roald-nefs.jpg" class="img-author" alt="Roald Nefs">
+                    </div>
+                    <span><a href="/authors/roald-nefs">Roald Nefs</a></span>
+                    <p class="pt-2 pe-lg-2">Roald is an IT consultant at Warpnet B.V. with over five years of Security and Site Reliability Engineering (SRE) experience at various companies like DUO, KPN and CJIB. He has made several contributions to open source, to tools such as SaltStack, Prometheus, rfcat and many more. Roald enjoys tinkering with electronics, hardware hacking, software development and dogsport.
+</p>
+                
+            
+        </aside>
+        <div class="col col-12 col-lg-9 order-1 order-lg-2">
             <h1>Software Defined Radio on Linux</h1>
+            <small><strong>January 6, 2019</strong></small>
 
-            <p>In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are  instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.</p>
+            <article id="content">
+                <p>In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are  instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>Start by installing the required packages for downloading and compiling the rtl-sdr package. The <code>libusb-1.0-0-dev</code> package provides a C library used for accessing USB devices (e.g. the RTL-SDR).</p>
 <pre><code class="language-console" data-lang="console">sudo apt-get install git cmake build-essential libusb-1.0-0-dev
@@ -130,10 +147,13 @@ sudo reboot
 </code></pre><p>Using your SDR receiver you will be able to monitor the transmitted  signals. Try to send the some test signals on the 434 MHz, the rpitx  default band.</p>
 <p><img src="/images/posts/2019/01/06/sdr-05.png" alt="easytest"></p>
 
+            </article>
+
+            <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col col-lg-9 offset-lg-3">
             <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -156,17 +176,17 @@ sudo reboot
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         </div>
     </div>
-</article>
+</div>
 
 <footer class="container py-4">
     <div class="row">
-        <div class="col-lg-4 offset-lg-1 offset-md-2 offset-sm-1 pb-2">
+        <div class="col-lg-4 pb-2">
             <p class="meta">
-              Roald Nefs, SRE/DevOps engineer and open-source contributor<br />
-              Copyright &copy 2019-2022 Roald Nefs. All Rights Reserved.
+              Roald Nefs, security specialist and open-source contributor<br />
+              Copyright &copy 2019-2024. All Rights Reserved.
             </p>
         </div>
-        <div class="col-lg-2 col-sm-3 offset-md-2 offset-sm-1 pb-2 pb-sm-0">
+        <div class="col-lg-2 col-sm-3 pb-2 pb-sm-0">
             <ul class="list-unstyled text-uppercase meta">
                 <li>
                     <a href="https://github.com/roaldnefs">gh/roaldnefs</a>

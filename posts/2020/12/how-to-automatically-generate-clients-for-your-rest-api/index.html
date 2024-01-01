@@ -13,9 +13,11 @@
     <title>How to Automatically Generate Clients for your REST API &ndash; Roald Nefs</title>
 
     
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
-</head><body class="bg-gray text-dark"><nav class="navbar navbar-expand-lg navbar-light">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+</head><body class="text-dark"><nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
 
@@ -26,11 +28,11 @@
             <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/">Home</a>
+                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
                 </li>
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
+                    <a class="nav-link" href="https://roaldnefs.com/authors/roald-nefs/">About</a>
                 </li>
                 
             </ul>
@@ -38,13 +40,28 @@
         </div>
     </div>
 </nav>
-
-<article class="container bg-white p-3 p-lg-5">
+<div class="container p-3 p-lg-5">
     <div class="row">
-        <div class="col">
+        <aside id="meta" class="col col-12 col-lg-3 order-2 order-lg-1 p-3 p-lg-0">
+            
+                
+                
+                
+                    <div class="pb-2">
+                        <img src="/images/authors/roald-nefs.jpg" class="img-author" alt="Roald Nefs">
+                    </div>
+                    <span><a href="/authors/roald-nefs">Roald Nefs</a></span>
+                    <p class="pt-2 pe-lg-2">Roald is an IT consultant at Warpnet B.V. with over five years of Security and Site Reliability Engineering (SRE) experience at various companies like DUO, KPN and CJIB. He has made several contributions to open source, to tools such as SaltStack, Prometheus, rfcat and many more. Roald enjoys tinkering with electronics, hardware hacking, software development and dogsport.
+</p>
+                
+            
+        </aside>
+        <div class="col col-12 col-lg-9 order-1 order-lg-2">
             <h1>How to Automatically Generate Clients for your REST API</h1>
+            <small><strong>December 19, 2020</strong></small>
 
-            <p>While helping a colleague with adding some code to the <a href="https://github.com/bunq/sdk_python">bunq Python SDK</a> to allow him to retrieve some additional information from the API (<a href="https://github.com/bunq/sdk_python/issues/148">bunq/sdk_python#148</a>), we noticed that the <a href="https://github.com/bunq/sdk_python">SDK</a> was automatically generated. We&rsquo;ve eventually ended up monkey patching the <a href="https://github.com/bunq/sdk_python">SDK</a>, as we couldn&rsquo;t make a pull request to the <a href="https://github.com/bunq/sdk_python">SDK</a> and the API specification or SDK generator wasn&rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.</p>
+            <article id="content">
+                <p>While helping a colleague with adding some code to the <a href="https://github.com/bunq/sdk_python">bunq Python SDK</a> to allow him to retrieve some additional information from the API (<a href="https://github.com/bunq/sdk_python/issues/148">bunq/sdk_python#148</a>), we noticed that the <a href="https://github.com/bunq/sdk_python">SDK</a> was automatically generated. We&rsquo;ve eventually ended up monkey patching the <a href="https://github.com/bunq/sdk_python">SDK</a>, as we couldn&rsquo;t make a pull request to the <a href="https://github.com/bunq/sdk_python">SDK</a> and the API specification or SDK generator wasn&rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.</p>
 <p>In this post we will automatically generate a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> client based upon an <a href="https://swagger.io/specification/">OpenAPI specification</a>. The <a href="%5Bopenapi-spec%5D">OpenAPI specification</a> allows <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST APIs</a> to be described in a standard programming <a href="https://en.wikipedia.org/wiki/Language-agnostic">language-agnostic</a> way, making it possible for both humans and computers to interpret the specification.</p>
 <h2 id="write-the-openapi-specification">Write the OpenAPI specification</h2>
 <p>Even though quite a lot of REST APIs nowadays come included with an <a href="https://swagger.io/specification/">OpenAPI specification</a>, this is not the case for all of them. In this post we will be using the JSON interface on <a href="https://xkcd.com/">xkcd</a> as an example. We will start by describing the <a href="https://swagger.io/specification/">OpenAPI specification</a> for the two existing endpoints:</p>
@@ -170,10 +187,13 @@ configuration <span style="color:#000;font-weight:bold">=</span> Configuration(h
 <p>In general, it&rsquo;s quite possible to automatically generate a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> based upon <a href="https://swagger.io/specification/">OpenAPI specification</a>. Even for <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST APIs</a> that do not include a <a href="https://swagger.io/specification/">OpenAPI specification</a> by default you can easily describe the API in a <a href="https://swagger.io/specification/">specification</a> file to allow the API client generation. Although this post didn&rsquo;t go in depth about API authentication, cookie usage or other HTTP methods, they are all possible features of the <a href="https://swagger.io/specification/">OpenAPI specification</a> and <a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI Generator</a>. However, results and options may differ based upon the language or framework you would like to generate the SDK in.</p>
 <p>Even though the generated code may seem a bit rough, it&rsquo;s well documented and could be made more human friendly by improving the <a href="https://swagger.io/specification/">API specification</a>.</p>
 
+            </article>
+
+            <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col col-lg-9 offset-lg-3">
             <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -196,17 +216,17 @@ configuration <span style="color:#000;font-weight:bold">=</span> Configuration(h
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         </div>
     </div>
-</article>
+</div>
 
 <footer class="container py-4">
     <div class="row">
-        <div class="col-lg-4 offset-lg-1 offset-md-2 offset-sm-1 pb-2">
+        <div class="col-lg-4 pb-2">
             <p class="meta">
-              Roald Nefs, SRE/DevOps engineer and open-source contributor<br />
-              Copyright &copy 2019-2022 Roald Nefs. All Rights Reserved.
+              Roald Nefs, security specialist and open-source contributor<br />
+              Copyright &copy 2019-2024. All Rights Reserved.
             </p>
         </div>
-        <div class="col-lg-2 col-sm-3 offset-md-2 offset-sm-1 pb-2 pb-sm-0">
+        <div class="col-lg-2 col-sm-3 pb-2 pb-sm-0">
             <ul class="list-unstyled text-uppercase meta">
                 <li>
                     <a href="https://github.com/roaldnefs">gh/roaldnefs</a>

@@ -13,9 +13,11 @@
     <title>How To Create a Visual Studio Code Extension Pack &ndash; Roald Nefs</title>
 
     
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
-</head><body class="bg-gray text-dark"><nav class="navbar navbar-expand-lg navbar-light">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+</head><body class="text-dark"><nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
 
@@ -26,11 +28,11 @@
             <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/">Home</a>
+                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
                 </li>
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
+                    <a class="nav-link" href="https://roaldnefs.com/authors/roald-nefs/">About</a>
                 </li>
                 
             </ul>
@@ -38,13 +40,28 @@
         </div>
     </div>
 </nav>
-
-<article class="container bg-white p-3 p-lg-5">
+<div class="container p-3 p-lg-5">
     <div class="row">
-        <div class="col">
+        <aside id="meta" class="col col-12 col-lg-3 order-2 order-lg-1 p-3 p-lg-0">
+            
+                
+                
+                
+                    <div class="pb-2">
+                        <img src="/images/authors/roald-nefs.jpg" class="img-author" alt="Roald Nefs">
+                    </div>
+                    <span><a href="/authors/roald-nefs">Roald Nefs</a></span>
+                    <p class="pt-2 pe-lg-2">Roald is an IT consultant at Warpnet B.V. with over five years of Security and Site Reliability Engineering (SRE) experience at various companies like DUO, KPN and CJIB. He has made several contributions to open source, to tools such as SaltStack, Prometheus, rfcat and many more. Roald enjoys tinkering with electronics, hardware hacking, software development and dogsport.
+</p>
+                
+            
+        </aside>
+        <div class="col col-12 col-lg-9 order-1 order-lg-2">
             <h1>How To Create a Visual Studio Code Extension Pack</h1>
+            <small><strong>April 17, 2020</strong></small>
 
-            <p>Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&rsquo;ll create a Extension Pack for SaltStack requested in <a href="https://github.com/korekontrol/vscode-saltstack/issues/5">korekontrol/vscode-saltstack#5</a>.</p>
+            <article id="content">
+                <p>Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&rsquo;ll create a Extension Pack for SaltStack requested in <a href="https://github.com/korekontrol/vscode-saltstack/issues/5">korekontrol/vscode-saltstack#5</a>.</p>
 <h2 id="installing-the-required-tools">Installing the required tools</h2>
 <p>The most simple way to create an VS Code extension is using the Yeoman VS Code <a href="https://code.visualstudio.com/docs/extensions/yocode">extension generator</a>. Make sure you have <a href="https://nodejs.org/en/">Node.js</a> and <a href="https://git-scm.com/">Git</a> installed, then install <a href="http://yeoman.io/">Yeoman</a> and the <a href="https://www.npmjs.com/package/generator-code">VS Code Extension Generator</a> with the following command:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install -g yo generator-code
@@ -123,10 +140,13 @@ Your extension will live at https://marketplace.visualstudio.com/items?itemName<
 </code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Creating an extension pack for Visual Studio Code is very simple, using the provided scaffolding tools you will only need to add the extensions to the pack. Checkout the <code>warpnet.saltstack-extension-pack</code> on the <a href="https://marketplace.visualstudio.com/items?itemName=warpnet.saltstack-extension-pack">VS Code marketplace</a> and <a href="https://github.com/warpnet/saltstack-extension-pack">GitHub</a>.</p>
 
+            </article>
+
+            <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col col-lg-9 offset-lg-3">
             <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -149,17 +169,17 @@ Your extension will live at https://marketplace.visualstudio.com/items?itemName<
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         </div>
     </div>
-</article>
+</div>
 
 <footer class="container py-4">
     <div class="row">
-        <div class="col-lg-4 offset-lg-1 offset-md-2 offset-sm-1 pb-2">
+        <div class="col-lg-4 pb-2">
             <p class="meta">
-              Roald Nefs, SRE/DevOps engineer and open-source contributor<br />
-              Copyright &copy 2019-2022 Roald Nefs. All Rights Reserved.
+              Roald Nefs, security specialist and open-source contributor<br />
+              Copyright &copy 2019-2024. All Rights Reserved.
             </p>
         </div>
-        <div class="col-lg-2 col-sm-3 offset-md-2 offset-sm-1 pb-2 pb-sm-0">
+        <div class="col-lg-2 col-sm-3 pb-2 pb-sm-0">
             <ul class="list-unstyled text-uppercase meta">
                 <li>
                     <a href="https://github.com/roaldnefs">gh/roaldnefs</a>

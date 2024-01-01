@@ -13,9 +13,11 @@
     <title>Git Branching &ndash; Roald Nefs</title>
 
     
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
-</head><body class="bg-gray text-dark"><nav class="navbar navbar-expand-lg navbar-light">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+</head><body class="text-dark"><nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
 
@@ -26,11 +28,11 @@
             <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/">Home</a>
+                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
                 </li>
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
+                    <a class="nav-link" href="https://roaldnefs.com/authors/roald-nefs/">About</a>
                 </li>
                 
             </ul>
@@ -38,13 +40,28 @@
         </div>
     </div>
 </nav>
-
-<article class="container bg-white p-3 p-lg-5">
+<div class="container p-3 p-lg-5">
     <div class="row">
-        <div class="col">
+        <aside id="meta" class="col col-12 col-lg-3 order-2 order-lg-1 p-3 p-lg-0">
+            
+                
+                
+                
+                    <div class="pb-2">
+                        <img src="/images/authors/roald-nefs.jpg" class="img-author" alt="Roald Nefs">
+                    </div>
+                    <span><a href="/authors/roald-nefs">Roald Nefs</a></span>
+                    <p class="pt-2 pe-lg-2">Roald is an IT consultant at Warpnet B.V. with over five years of Security and Site Reliability Engineering (SRE) experience at various companies like DUO, KPN and CJIB. He has made several contributions to open source, to tools such as SaltStack, Prometheus, rfcat and many more. Roald enjoys tinkering with electronics, hardware hacking, software development and dogsport.
+</p>
+                
+            
+        </aside>
+        <div class="col col-12 col-lg-9 order-1 order-lg-2">
             <h1>Git Branching</h1>
+            <small><strong>May 10, 2020</strong></small>
 
-            <h2 id="introduction">Introduction</h2>
+            <article id="content">
+                <h2 id="introduction">Introduction</h2>
 <p>Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with that main line, it&rsquo;s called branching. Unlike may other version control systems, the Git branching model is lightweight. Each Git branch is simply just a file containing the 40 character SHA-1 checksum of the commit it points to. You can nearly instantaneous create or switch branches. It&rsquo;s therefore not surprising that Git users are encouraged to use workflows that branch and merge often.</p>
 <p>If you&rsquo;re new to Git make sure to read <a href="https://roaldnefs.com/posts/2020/04/getting-started-with-git/">Getting Started with Git</a> to get familiar with the basics of Git before diving into Git Branching.</p>
 <p>A brach in Git is simply a movable pointer to one of the commits in a Git repository. The default branch name in Git is <code>master</code>, it is exactly like any other branch. The only difference is the <code>master</code> branch is automatically created by the <code>git init</code> command.</p>
@@ -237,10 +254,13 @@ $ git cherry-pick C4^..C7
 <h2 id="summary">Summary</h2>
 <p>There are multiple ways to integrate changes in two (or more) branches using <code>merge</code>, <code>rebase</code> or <code>cherry-pick</code>. They all have there advantages and disadvantages. In most cases <code>merge</code> is perferred over <code>rebase</code> and <code>cherry-pick</code> for the simple reason that most people tend to understand the <code>merge</code> workflow fairly easily, and the <code>rebase</code> and <code>cherry-pick</code> workflow is considered more advantage.</p>
 
+            </article>
+
+            <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col col-lg-9 offset-lg-3">
             <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -263,17 +283,17 @@ $ git cherry-pick C4^..C7
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         </div>
     </div>
-</article>
+</div>
 
 <footer class="container py-4">
     <div class="row">
-        <div class="col-lg-4 offset-lg-1 offset-md-2 offset-sm-1 pb-2">
+        <div class="col-lg-4 pb-2">
             <p class="meta">
-              Roald Nefs, SRE/DevOps engineer and open-source contributor<br />
-              Copyright &copy 2019-2022 Roald Nefs. All Rights Reserved.
+              Roald Nefs, security specialist and open-source contributor<br />
+              Copyright &copy 2019-2024. All Rights Reserved.
             </p>
         </div>
-        <div class="col-lg-2 col-sm-3 offset-md-2 offset-sm-1 pb-2 pb-sm-0">
+        <div class="col-lg-2 col-sm-3 pb-2 pb-sm-0">
             <ul class="list-unstyled text-uppercase meta">
                 <li>
                     <a href="https://github.com/roaldnefs">gh/roaldnefs</a>

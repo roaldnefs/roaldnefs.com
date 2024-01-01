@@ -13,9 +13,11 @@
     <title>Hardware Reversing the Sitecom Wireless Router 150N X1 &ndash; Roald Nefs</title>
 
     
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
-</head><body class="bg-gray text-dark"><nav class="navbar navbar-expand-lg navbar-light">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+</head><body class="text-dark"><nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
 
@@ -26,11 +28,11 @@
             <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/">Home</a>
+                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
                 </li>
                 
                 <li class="list-inline-item">
-                    <a class="nav-link" href="https://roaldnefs.com/posts/">Posts</a>
+                    <a class="nav-link" href="https://roaldnefs.com/authors/roald-nefs/">About</a>
                 </li>
                 
             </ul>
@@ -38,13 +40,28 @@
         </div>
     </div>
 </nav>
-
-<article class="container bg-white p-3 p-lg-5">
+<div class="container p-3 p-lg-5">
     <div class="row">
-        <div class="col">
+        <aside id="meta" class="col col-12 col-lg-3 order-2 order-lg-1 p-3 p-lg-0">
+            
+                
+                
+                
+                    <div class="pb-2">
+                        <img src="/images/authors/roald-nefs.jpg" class="img-author" alt="Roald Nefs">
+                    </div>
+                    <span><a href="/authors/roald-nefs">Roald Nefs</a></span>
+                    <p class="pt-2 pe-lg-2">Roald is an IT consultant at Warpnet B.V. with over five years of Security and Site Reliability Engineering (SRE) experience at various companies like DUO, KPN and CJIB. He has made several contributions to open source, to tools such as SaltStack, Prometheus, rfcat and many more. Roald enjoys tinkering with electronics, hardware hacking, software development and dogsport.
+</p>
+                
+            
+        </aside>
+        <div class="col col-12 col-lg-9 order-1 order-lg-2">
             <h1>Hardware Reversing the Sitecom Wireless Router 150N X1</h1>
+            <small><strong>December 15, 2019</strong></small>
 
-            <p>Last week I&rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (<em>top left in the picture</em>). In this post we will go through the process of connecting to an unknown serial interface.</p>
+            <article id="content">
+                <p>Last week I&rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (<em>top left in the picture</em>). In this post we will go through the process of connecting to an unknown serial interface.</p>
 <p><img src="/images/posts/2019/12/15/sitecom_01.jpg" alt="Inside of the Sitecom Wireless Router 150N X1"></p>
 <p>The UART debugging interface wasn&rsquo;t labeled, so I had to figure out what each port was doing. The two pins on the right are directly connected to the IC, so I figured that those to are the <strong>RX</strong> and <strong>TX</strong> ports. By connecting a multi meter to the two left most pins I&rsquo;ve found that the serial port is using <strong>3.3V</strong> and the left most connector is the <strong>VCC</strong> followed by the <strong>GND</strong> pin. By connecting the ground lead of the multi meter to <strong>GND</strong> pin on the serial interface I quickly spotted <strong>RX</strong> port (<em>positive voltage</em>). From left to right the pins are: <strong>VCC</strong>, <strong>GND</strong>, <strong>TX</strong> and <strong>RX</strong>.</p>
 <p><img src="/images/posts/2019/12/15/sitecom_02.jpg" alt="Determining the pins on the serial interface using a multimeter"></p>
@@ -58,10 +75,13 @@
 <p><img src="/images/posts/2019/12/15/sitecom_06.png" alt="Serial console on the Sitecom Wireless Router 150N X1"></p>
 <p>According the the boot log the Sitecom Wireless Router 150N X1 is using Linux!</p>
 
+            </article>
+
+            <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col col-lg-9 offset-lg-3">
             <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -84,17 +104,17 @@
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         </div>
     </div>
-</article>
+</div>
 
 <footer class="container py-4">
     <div class="row">
-        <div class="col-lg-4 offset-lg-1 offset-md-2 offset-sm-1 pb-2">
+        <div class="col-lg-4 pb-2">
             <p class="meta">
-              Roald Nefs, SRE/DevOps engineer and open-source contributor<br />
-              Copyright &copy 2019-2022 Roald Nefs. All Rights Reserved.
+              Roald Nefs, security specialist and open-source contributor<br />
+              Copyright &copy 2019-2024. All Rights Reserved.
             </p>
         </div>
-        <div class="col-lg-2 col-sm-3 offset-md-2 offset-sm-1 pb-2 pb-sm-0">
+        <div class="col-lg-2 col-sm-3 pb-2 pb-sm-0">
             <ul class="list-unstyled text-uppercase meta">
                 <li>
                     <a href="https://github.com/roaldnefs">gh/roaldnefs</a>
