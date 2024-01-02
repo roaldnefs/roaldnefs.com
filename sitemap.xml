@@ -13,6 +13,21 @@
   </url>
   
   <url>
+    <loc>https://roaldnefs.com/categories/</loc>
+    <lastmod>2022-11-30T15:19:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://roaldnefs.com/categories/hardware-hacking/</loc>
+    <lastmod>2022-11-30T15:19:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://roaldnefs.com/categories/information-security/</loc>
+    <lastmod>2022-11-30T15:19:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://roaldnefs.com/posts/</loc>
     <lastmod>2022-11-30T15:19:00+02:00</lastmod>
   </url>
@@ -25,6 +40,11 @@
   <url>
     <loc>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</loc>
     <lastmod>2022-11-30T15:19:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://roaldnefs.com/categories/development/</loc>
+    <lastmod>2020-12-19T15:00:00+02:00</lastmod>
   </url>
   
   <url>
@@ -65,10 +85,6 @@
   <url>
     <loc>https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/</loc>
     <lastmod>2019-01-06T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://roaldnefs.com/categories/</loc>
   </url>
   
   <url>

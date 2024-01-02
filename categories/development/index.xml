@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Development on Roald Nefs</title>
+    <link>https://roaldnefs.com/categories/development/</link>
+    <description>Recent content in Development on Roald Nefs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 19 Dec 2020 15:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Automatically Generate Clients for your REST API</title>
+      <link>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</link>
+      <pubDate>Sat, 19 Dec 2020 15:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</guid>
+      <description>While helping a colleague with adding some code to the bunq Python SDK to allow him to retrieve some additional information from the API (bunq/sdk_python#148), we noticed that the SDK was automatically generated. We&amp;rsquo;ve eventually ended up monkey patching the SDK, as we couldn&amp;rsquo;t make a pull request to the SDK and the API specification or SDK generator wasn&amp;rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.</description>
+    </item>
+    
+    <item>
+      <title>Git Branching</title>
+      <link>https://roaldnefs.com/posts/2020/05/git-branching/</link>
+      <pubDate>Sun, 10 May 2020 23:20:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/05/git-branching/</guid>
+      <description>Introduction Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with that main line, it&amp;rsquo;s called branching. Unlike may other version control systems, the Git branching model is lightweight. Each Git branch is simply just a file containing the 40 character SHA-1 checksum of the commit it points to. You can nearly instantaneous create or switch branches.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Git</title>
+      <link>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</link>
+      <pubDate>Mon, 20 Apr 2020 13:46:59 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</guid>
+      <description>Introduction Git is a free and opensource distributed version control system designed to handle everything from small to very large projects with speed and efficiency. While working with Git I often get asked questions about best practices or the more advanced usage of Git e.g.: a rebase, merge conflict or how to cherry pick. This post will serve as my personal Git reference as well as a getting started guide for my colleagues and friends.</description>
+    </item>
+    
+    <item>
+      <title>How To Create a Visual Studio Code Extension Pack</title>
+      <link>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</link>
+      <pubDate>Fri, 17 Apr 2020 08:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</guid>
+      <description>Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&amp;rsquo;ll create a Extension Pack for SaltStack requested in korekontrol/vscode-saltstack#5.</description>
+    </item>
+    
+  </channel>
+</rss>

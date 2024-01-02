@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Information security on Roald Nefs</title>
+    <link>https://roaldnefs.com/categories/information-security/</link>
+    <description>Recent content in Information security on Roald Nefs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Nov 2022 15:19:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/categories/information-security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spoofing Microchips used for Animal Identification</title>
+      <link>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</link>
+      <pubDate>Wed, 30 Nov 2022 15:19:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</guid>
+      <description>A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal&amp;rsquo;s owner.</description>
+    </item>
+    
+    <item>
+      <title>Ding Dong Ditch using SDR and Arduino</title>
+      <link>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</guid>
+      <description>In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
+This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
+The video is a short demonstration of the Ding Dong Ditch device.</description>
+    </item>
+    
+    <item>
+      <title>Hardware Reversing the Sitecom Wireless Router 150N X1</title>
+      <link>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</guid>
+      <description>Last week I&amp;rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&amp;rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (top left in the picture). In this post we will go through the process of connecting to an unknown serial interface.
+The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out what each port was doing.</description>
+    </item>
+    
+  </channel>
+</rss>
