@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
 }
 
+.small {
+ font-size: .75rem;
+}
+
 article img {
     max-width: 100%;
 }
@@ -29,17 +33,6 @@ a.brand:active,
 a.brand:link {
     color: #000;
     text-decoration: none; 
-}
-
-#meta {
-    p {
-        font-size: .9em;
-    }
-
-    a {
-        color: #000;
-        text-decoration: none; 
-    }
 }
 
 .meta {

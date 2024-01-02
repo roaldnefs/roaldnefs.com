@@ -4,6 +4,8 @@ date: 2019-01-06T00:00:00+02:00
 type: post
 authors:
   - Roald Nefs
+categories:
+  - Hardware hacking
 draft: false
 ---
 

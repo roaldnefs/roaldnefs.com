@@ -4,6 +4,9 @@ date: 2022-11-30T15:19:00+02:00
 type: post
 authors:
   - Roald Nefs
+categories:
+  - Information security
+  - Hardware hacking
 draft: false
 featured: true
 ---

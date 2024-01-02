@@ -4,6 +4,8 @@ date: 2020-12-19T15:00:00+02:00
 type: post
 authors:
   - Roald Nefs
+categories:
+  - Development
 draft: false
 featured: true
 ---

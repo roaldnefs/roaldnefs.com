@@ -13,14 +13,14 @@
                     <div class="pb-2">
                         <img src="/images/{{ $path }}.jpg" class="img-author" alt="{{ .Params.name }}">
                     </div>
-                    <span><a href="/{{ $path }}">{{ .Params.name }}</a></span>
-                    <p class="pt-2 pe-lg-2">{{ .Params.bio }}</p>
+                    <span><a href="/{{ $path }}" class="text-decoration-none text-dark">{{ .Params.name }}</a></span>
+                    <p class="pt-2 pe-lg-2 small">{{ .Params.bio }}</p>
                 {{ end }}
             {{ end }}
         </aside>
         <div class="col col-12 col-lg-9 order-1 order-lg-2">
             <h1>{{ .Title }}</h1>
-            <small><strong>{{ .Date.Format "January 2, 2006" }}</strong></small>
+            <span class="small"><strong>{{ .Date.Format "January 2, 2006" }}</strong></span>
 
             <article id="content">
                 {{ .Content }}

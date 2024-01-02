@@ -1,0 +1,21 @@
+<article class="row py-2">
+    <div class="col-2 col-md-3">
+        <picture>
+            <img src="/images/posts/default.png" alt="">
+        </picture>
+    </div>
+    <div class="col-10 col-md-9">
+        {{ if isset .Params "categories" -}}
+        <div>
+            {{ range $index, $name := sort .Params.categories -}}
+                <span class="pe-2 small">
+                    {{ with site.GetPage (printf "/%s" ($name | urlize )) -}}
+                        <a href="{{ .RelPermalink }}" class="text-decoration-none text-dark fw-bold">{{ .Name }}</a>
+                    {{ end -}}
+                </span>
+            {{ end -}}
+        </div>
+        {{ end -}}
+        <h2 class="fs-4"><a href="{{ .Permalink }}" class="text-decoration-none text-dark">{{ .Title }}</a></h2>
+    </div>
+</article>
