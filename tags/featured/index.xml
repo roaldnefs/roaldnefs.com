@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>featured on Roald Nefs</title>
+    <link>https://roaldnefs.com/tags/featured/</link>
+    <description>Recent content in featured on Roald Nefs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/tags/featured/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Committing Changes to a Pull Request Branch Created from a Fork</title>
+      <link>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</link>
+      <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</guid>
+      <description>Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the required permissions and there aren&amp;rsquo;t any branch restrictions that will prevent committing.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://roaldnefs.com/css/theme.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://roaldnefs.com/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://roaldnefs.com/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://roaldnefs.com/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://roaldnefs.com/favicon/site.webmanifest">
+
+    <title>Committing Changes to a Pull Request Branch Created from a Fork &ndash; Roald Nefs</title>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+</head><body class="text-dark"><nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="https://roaldnefs.com/">roald<strong>nefs</strong>.com</a>
+
+        <div class="justify-content-between">
+
+            
+            
+            <ul class="list-unstyled list-inline meta meta-nav text-uppercase">
+                
+                <li class="list-inline-item">
+                    <a class="nav-link" href="https://roaldnefs.com/posts/">Articles</a>
+                </li>
+                
+                <li class="list-inline-item">
+                    <a class="nav-link" href="https://roaldnefs.com/authors/roald-nefs/">About</a>
+                </li>
+                
+            </ul>
+            
+        </div>
+    </div>
+</nav>
+<div class="container p-3 p-lg-5">
+    <div class="row">
+        <aside id="meta" class="col col-12 col-lg-3 order-2 order-lg-1 p-3 p-lg-0">
+            
+                
+                
+                
+                    <div class="pb-2">
+                        <img src="/images/authors/roald-nefs.jpg" class="img-author" alt="Roald Nefs">
+                    </div>
+                    <span><a href="/authors/roald-nefs" class="text-decoration-none text-dark">Roald Nefs</a></span>
+                    <p class="pt-2 pe-lg-2 small">Roald is an IT consultant at Warpnet B.V. with over five years of Security and Site Reliability Engineering (SRE) experience at various companies like DUO, KPN and CJIB. He has made several contributions to open source, to tools such as SaltStack, Prometheus, rfcat and many more. Roald enjoys tinkering with electronics, hardware hacking, software development and dogsport.
+</p>
+                
+            
+        </aside>
+        <div class="col col-12 col-lg-9 order-1 order-lg-2">
+            <h1>Committing Changes to a Pull Request Branch Created from a Fork</h1>
+            <span class="small"><strong>January 3, 2024</strong></span>
+
+            <article id="content">
+                <p>Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull requests original author. You&rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork">required permissions</a> and there aren&rsquo;t any branch restrictions that will prevent committing.</p>
+<ol>
+<li>
+<p>Add an additional remote for the forked project, e.g. <code>git remote add roaldnefs git@github.com:roaldnefs/salt-lint.git</code>.</p>
+</li>
+<li>
+<p>Fetch all branches using the <code>git fetch roaldnefs</code> command.</p>
+</li>
+<li>
+<p>Switch to the branch in the forked project, e.g. <code>git checkout my-branch</code>.</p>
+</li>
+<li>
+<p>You can now do anything with the branch. You can rebase it, run in locally or add new commits.</p>
+</li>
+<li>
+<p>After you&rsquo;ve made the necessary changes you simply push the changes using the <code>git push</code> command.</p>
+</li>
+</ol>
+<p>Your changes should now be reflected in the original pull request on GitHub.com.</p>
+
+            </article>
+
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-lg-9 offset-lg-3">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "roaldnefs" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+    </div>
+</div>
+
+<footer class="container py-4">
+    <div class="row">
+        <div class="col-lg-4 pb-2">
+            <p class="meta">
+              Roald Nefs, security specialist and open-source contributor<br />
+              Copyright &copy 2019-2024. All Rights Reserved.
+            </p>
+        </div>
+        <div class="col-lg-2 col-sm-3 pb-2 pb-sm-0">
+            <ul class="list-unstyled text-uppercase meta">
+                <li>
+                    <a href="https://github.com/roaldnefs">gh/roaldnefs</a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/roaldnefs">tw/roaldnefs</a>
+                </li>
+                <li>
+                    <a href="https://linkedin.com/in/roaldnefs">in/roaldnefs</a>
+                </li>
+                <li>
+                    <a href="https://www.working-dog.com/user/Roald-Nefs-537970">wd/roald-nefs-537970</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-1 col-sm-3 pb-2 pb-sm-0">
+            <ul class="list-unstyled text-uppercase meta">
+                <li>
+                    <a href="https://roaldnefs.com/posts/index.xml">RSS</a>
+                </li>
+                <li>
+                    <a href="https://roaldnefs.com/posts/">Posts</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-1 col-sm-3">
+            <ul class="list-unstyled text-uppercase meta">
+                <li>
+                    <a href="https://roaldnefs.com/"><strong>Home</strong></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer><script src="https://roaldnefs.com/js/popper.min.js"></script>
+<script src="https://roaldnefs.com/js/bootstrap.min.js"></script>
+</body>
+</html>

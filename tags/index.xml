@@ -5,6 +5,16 @@
     <link>https://roaldnefs.com/tags/</link>
     <description>Recent content in Tags on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://roaldnefs.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>featured</title>
+      <link>https://roaldnefs.com/tags/featured/</link>
+      <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/tags/featured/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
