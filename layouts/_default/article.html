@@ -1,7 +1,7 @@
 <article class="row py-2">
     <div class="col-2 col-md-3">
         <picture>
-            <img src="/images/posts/default.png" alt="">
+            <img src="{{ if isset .Params "thumbnail" }}{{ .Params.thumbnail }}{{ else }}/images/posts/default.png{{ end }}" alt="">
         </picture>
     </div>
     <div class="col-10 col-md-9">

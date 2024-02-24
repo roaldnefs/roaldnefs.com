@@ -9,6 +9,7 @@ categories:
   - Hardware hacking
 draft: false
 featured: true
+thumbnail: /images/posts/2022/11/30/thumbnail.png
 ---
 A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal's owner. During animal trials and events the microchips are often used to verify the animals identity.
 

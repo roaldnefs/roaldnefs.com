@@ -24,7 +24,7 @@
                 </div>
                 <div class="col col-6 col-md-6">
                     <picture>
-                        <img src="/images/posts/default.png" class="img-fluid" alt="">
+                        <img src="{{ if isset .Params "thumbnail" }}{{ .Params.thumbnail }}{{ else }}/images/posts/default.png{{ end }}" class="img-fluid" alt="">
                     </picture>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 {{ range first 3 (after 1 (where .Site.Pages "Type" "post")) -}}
                     <div class="col col-6 col-sm-4">
                         <picture class="">
-                            <img src="/images/posts/default.png" class="img-fluid" alt="">
+                            <img src="{{ if isset .Params "thumbnail" }}{{ .Params.thumbnail }}{{ else }}/images/posts/default.png{{ end }}" class="img-fluid" alt="">
                         </picture>
                         {{ if isset .Params "categories" -}}
                         <div>
