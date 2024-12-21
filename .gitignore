@@ -3,8 +3,4 @@ public/
 resources/_gen/
 .hugo_build.lock
 
-# NPM
-node_modules/
-package-lock.json
-
 .DS_Store
