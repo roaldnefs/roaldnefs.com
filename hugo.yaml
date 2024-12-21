@@ -8,7 +8,6 @@ module:
   imports:
   - path: github.com/imfing/hextra
 
-
 menu:
   main:
     - name: Home
@@ -30,8 +29,8 @@ params:
     displayTitle: true
     displayLogo: false
   theme:
-    default: light
-    displayToggle: false
+    default: system
+    displayToggle: true
   footer:
     displayPoweredBy: false
     displayCopyright: true
