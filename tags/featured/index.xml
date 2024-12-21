@@ -1,19 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>featured on Roald Nefs</title>
+    <title>Roald Nefs – Featured</title>
     <link>https://roaldnefs.com/tags/featured/</link>
-    <description>Recent content in featured on Roald Nefs</description>
+    <description>Recent content in Featured on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/tags/featured/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate>
+    
+	  <atom:link href="https://roaldnefs.com/tags/featured/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Committing Changes to a Pull Request Branch Created from a Fork</title>
       <link>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</link>
       <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
       
       <guid>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</guid>
-      <description>Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the required permissions and there aren&amp;rsquo;t any branch restrictions that will prevent committing.</description>
+      <description>
+        
+        
+        &lt;p&gt;Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the &lt;a href=&#34;https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;required permissions&lt;/a&gt; and there aren&amp;rsquo;t any branch restrictions that will prevent committing.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Add an additional remote for the forked project, e.g. &lt;code&gt;git remote add roaldnefs git@github.com:roaldnefs/salt-lint.git&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fetch all branches using the &lt;code&gt;git fetch roaldnefs&lt;/code&gt; command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Switch to the branch in the forked project, e.g. &lt;code&gt;git checkout my-branch&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can now do anything with the branch. You can rebase it, run in locally or add new commits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After you&amp;rsquo;ve made the necessary changes you simply push the changes using the &lt;code&gt;git push&lt;/code&gt; command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Your changes should now be reflected in the original pull request on GitHub.com.&lt;/p&gt;
+
+      </description>
     </item>
     
   </channel>

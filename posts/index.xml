@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Roald Nefs</title>
+    <title>Blog on Roald Nefs</title>
     <link>https://roaldnefs.com/posts/</link>
-    <description>Recent content in Posts on Roald Nefs</description>
+    <description>Recent content in Blog on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Committing Changes to a Pull Request Branch Created from a Fork</title>

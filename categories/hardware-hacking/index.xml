@@ -1,19 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hardware hacking on Roald Nefs</title>
+    <title>Roald Nefs – Hardware Hacking</title>
     <link>https://roaldnefs.com/categories/hardware-hacking/</link>
-    <description>Recent content in Hardware hacking on Roald Nefs</description>
+    <description>Recent content in Hardware Hacking on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/categories/hardware-hacking/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate>
+    
+	  <atom:link href="https://roaldnefs.com/categories/hardware-hacking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
     <item>
       <title>Committing Changes to a Pull Request Branch Created from a Fork</title>
       <link>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</link>
       <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
       
       <guid>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</guid>
-      <description>Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the required permissions and there aren&amp;rsquo;t any branch restrictions that will prevent committing.</description>
+      <description>
+        
+        
+        &lt;p&gt;Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the &lt;a href=&#34;https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;required permissions&lt;/a&gt; and there aren&amp;rsquo;t any branch restrictions that will prevent committing.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Add an additional remote for the forked project, e.g. &lt;code&gt;git remote add roaldnefs git@github.com:roaldnefs/salt-lint.git&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fetch all branches using the &lt;code&gt;git fetch roaldnefs&lt;/code&gt; command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Switch to the branch in the forked project, e.g. &lt;code&gt;git checkout my-branch&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can now do anything with the branch. You can rebase it, run in locally or add new commits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After you&amp;rsquo;ve made the necessary changes you simply push the changes using the &lt;code&gt;git push&lt;/code&gt; command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Your changes should now be reflected in the original pull request on GitHub.com.&lt;/p&gt;
+
+      </description>
     </item>
     
     <item>
@@ -22,7 +53,83 @@
       <pubDate>Wed, 30 Nov 2022 15:19:00 +0200</pubDate>
       
       <guid>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</guid>
-      <description>A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal&amp;rsquo;s owner.</description>
+      <description>
+        
+        
+        &lt;p&gt;A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal&amp;rsquo;s owner. During animal trials and events the microchips are often used to verify the animals identity.&lt;/p&gt;
+&lt;p&gt;This post will demonstrate how an attacker can create an “authentic” microchip by writing properly formatted data on blank or rewritable transponder, also known as spoofing. Unfortunately, the RFID reader devices do not differentiate between the authentic and spoofed microchips. The main intention behind this post is to encourage more secure ways of identifying animals instead of solely trusting the implanted microchip.&lt;/p&gt;
+&lt;h2&gt;Introduction to FDX-B&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;introduction-to-fdx-b&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#introduction-to-fdx-b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;FDX-B is a protocol used as a common format for transponders. The protocol is fully described in ISO 11784 and ISO 11785. The transponders operate in the 134.2kHz band and use a biphase encoding scheme to transmit the data.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2022/11/30/microchip-3.png&#34; alt=&#34;Example of a biphase encoded signal&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The power used for transmitting data is drawn from the electromagnetic field transmitted by the RFID reader when in close contact with the transponder. The transponders can carry up to 128 bits of data. The table below shows the example of the decoded FDX-B data in bits for the tag number 528140000795552.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2022/11/30/microchip-1.png&#34; alt=&#34;Decoded FDX-B data in bits for tag number 528140000795552&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The data is structured according to the FDX-B protocol and will be transmitted with the least significant bit first (lsb). The 11 bit header is used to indicate the beginning of the data block. A logic 1 bit is sent after every 8 bits to differentiate the data from the header. The header is followed by the 38 bit national code, which corresponds to a 12 digit decimal code to uniquely identify an animal. This is followed by the 10 bit, 3 decimal digits, country code (e.g. 528 for the Netherlands). The next application identicator bit indicates whether the 24 extra application data bits are used at the end of the block. The 14 bits followed after the application identicator bit are reserved for future use. The next bit is the animal application identicator. When the transponder is used for animal identification purposes this bit is set to 1. To be able to verify the data block, a 16 bit checksum is calculated according to the ISO 11784 &amp;amp; 11785 standards.&lt;/p&gt;
+&lt;h2&gt;Buying (re)writable FDX-B microchips and programmers&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;buying-rewritable-fdx-b-microchips-and-programmers&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#buying-rewritable-fdx-b-microchips-and-programmers&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Although some countries regulate who can buy, implant and register microchips it’s still possible to buy micropships as an individual. In the Netherlands for example, only registered microchippers and veterinarians are allowed to microchip dogs and register the microchip numbers at a designated portal&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. However it’s still possible for non-registered microchippers to find and buy (re)writable ICAR certificated FDX-B microchips online as shown by the advert in the figure below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2022/11/30/microchip-4.png&#34; alt=&#34;Online advert of rewritable FDX-B transponders&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The rewritable microchips often come with a preprogrammed tag number that still needs to be overwritten in order to spoof an authentic number, this can be done using a so called programmer. The RFID programmers often come included with the required software to write properly formatted data to the transponders. The figures below show two programmers which can be used to write valid FDX-B microchips. The Proxmark 3 device even allows the user to simulate a microchip.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2022/11/30/microchip-5.png&#34; alt=&#34;Online adverts of programmers which can be used for FDX-B transponders&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As shown by the example adverts in the figures above the total cost of spoofing a microchip including the required programmer and shipping is just around €50. The attacker will only need a single programmer to spoof additional microchips, lowering the cost per spoofed microchip even more.&lt;/p&gt;
+&lt;h2&gt;Spoofing a FDX-B microchip&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;spoofing-a-fdx-b-microchip&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#spoofing-a-fdx-b-microchip&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The examples below will show how a custom chip number can be written to a (re)writable transponder and allow it to be scanned as an authentic microchip using a RFID reader. This example uses a Proxmark 3 programmer to write the properly formatted data on the transponder. For example, the command for writing tag number 528140000795552 to the transponder:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;pm3 &amp;gt; lf fdxb clone --em --country 528 --national 140000795552 --animal&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;After writing the data to the rewritable transponder it can also be read by the Proxmark 3 to verify whether the write command was successful. The example command below shows the formatted data after writing the tag number to the transponder:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;pm3 &amp;gt; lf fdxb reader
+[&amp;#43;] FDX-B / ISO 11784/5 Animal
+[&amp;#43;] Animal ID          528-140000795552
+[&amp;#43;] National Code      140000795552 (0x2098B29BA0)
+[&amp;#43;] Country Code       528 - Kingdom of the Netherlands
+[&amp;#43;] Reserved/RFU       0 (0x0000)
+[&amp;#43;]   Animal bit set?  True
+[&amp;#43;]       Data block?  False  [value 0x0]
+[&amp;#43;]         RUDI bit?  False
+[&amp;#43;]        User Info?  0 (RFU)
+[&amp;#43;]   Replacement No?  0 (RFU)
+[&amp;#43;] CRC-16             0xF283 (ok)
+[&amp;#43;] Raw                05 D9 4D 19 04 21 00 01&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;When scanning the spoofed microchip using a common RFID reader device it shows as an authentic microchip. By writing the extended/application data using the &lt;code&gt;--extended&lt;/code&gt; flag some readers will even be showing the spoofed microchip temperature.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2022/11/30/microchip-2.jpeg&#34; alt=&#34;Spoofed microchip being scanned by a RFID reader device&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The above figure shows the spoofed microchip with tag number 528140000795552 being scanned by a RFID reader device. The reader acts as if it is an authentic microchip, to make the user believe that this must actually be the dog with this particular chip number.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;conclusion&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#conclusion&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Although microchips might help return lost pets more quickly, they should not be solely trusted to verify the animals identity. An attacker can create an “authentic” microchip by writing properly formatted data on blank or rewritable transponder, also known as spoofing. Unfortunately, the RFID reader devices do not differentiate between the authentic and spoofed microchips.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://business.gov.nl/regulation/registering-dogs-and-pet-passports/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://business.gov.nl/regulation/registering-dogs-and-pet-passports/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+      </description>
     </item>
     
     <item>
@@ -31,9 +138,83 @@
       <pubDate>Fri, 03 Jan 2020 00:00:00 +0200</pubDate>
       
       <guid>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</guid>
-      <description>In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
-This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
-The video is a short demonstration of the Ding Dong Ditch device.</description>
+      <description>
+        
+        
+        &lt;p&gt;In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.&lt;/p&gt;
+&lt;p&gt;This project is heavily based upon the &lt;a href=&#34;https://samy.pl/dingdong/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Digital Ding Dong Ditch&lt;/a&gt; by &lt;a href=&#34;https://samy.pl/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Samy Kamkar&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The video is a short demonstration of the Ding Dong Ditch device.  Once it’s powered by USB (or a battery) it will send out a RF signal  every few seconds which will ring the doorbell.&lt;/p&gt;
+&lt;h2&gt;Requirements&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;requirements&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#requirements&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;For this project you will need several tools and modules to record and send the signal.&lt;/p&gt;
+&lt;h3&gt;Hardware&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;hardware&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#hardware&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;RTL-SDR:&lt;/strong&gt; The RTL-SDR is an inexpensive software  defined radio using a Realtek chip. The dongle can be used to receive a  wide range of frequencies, including those of some wireless doorbells.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Arduino:&lt;/strong&gt; In this post I will be using an Arduino Nano clone. Arduino is a great platform for cheap and rapid creation of hardware.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;433MHz ASK RF Transmitter:&lt;/strong&gt; For sending the RF signal  I will be using a FS1000A (433MHz) RF transmitter. You might want to  locate your frequency first, before buying a transmitter for a specific  frequency.&lt;/p&gt;
+&lt;h3&gt;Software&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;software&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#software&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;RTL-SDR &amp;amp; GQRX:&lt;/strong&gt; RTL-SDR and Gqrx will be used to  locate, record and visualise the radio signal. Instruction about  installing RTL-SDR and Gqrx on Linux can be found in Software Defined Radio on Linux post.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Audacity:&lt;/strong&gt; Audacity is used for taking a closer look at the radio signal in order to demodulate it by hand.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ding Dong Ditch:&lt;/strong&gt; The Arduino sketch for this project can be found at my GitHub: &lt;a href=&#34;https://github.com/roaldnefs/ding-dong-ditch&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;github.com/roaldnefs/ding-dong-ditch&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Locate the Signal&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;locate-the-signal&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#locate-the-signal&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We will start by locating the signal send when pressing the doorbell  button. On most devices you will find the frequency on the device  itself. In my case the doorbell receiver clearly states that it uses the  433MHz frequency:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_01.png&#34; alt=&#34;Select Plus doorbell sticker&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Using Gqrx with the RTL-SDR connected to your computer, you will be able to spot signal while pressing the doorbell button.&lt;/p&gt;
+&lt;p&gt;If you aren’t able to locate the frequency of your doorbell (&lt;em&gt;or you simple cannot find the doorbell receiver&lt;/em&gt;),  you can always keep pressing the doorbell while you scroll through the  spectrum in Gqrx. You might want to check the 315MHz, 433MHz and 900MHz  bands first, because they are among the most frequently used bands.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_02.jpg&#34; alt=&#34;Doorbell signal in Gqrx&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I was able to locate my doorbell signal on &lt;strong&gt;433.879MHz&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Recording and Demodulating the Signal&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;recording-and-demodulating-the-signal&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#recording-and-demodulating-the-signal&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Modulation allow data to be transmitted via radio via radio  frequencies. After locating the signal you’ll need to determine the type  of modulation used by the doorbell. By looking at the waterfall in Gqrx  I was able to determine that the signal send by the doorbell is  amplitude modulated. The most common modulation schemes you will see in  radio are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Amplitude_modulation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Amplitude Modulation&lt;/a&gt; (AM)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Frequency_modulation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Frequency Modulation&lt;/a&gt; (FM)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Phase_modulation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Phase Modulation&lt;/a&gt; (PM)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Amplitude modulation, as the name might suggest, modulates the  amplitude while frequency modulation will modulate the frequency. If you  are listing to 100.0 FM radio, the signal is actually send between  99.995MHz and 100.005MHz.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_03.gif&#34; alt=&#34;Modulation&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By the looks of it, the signal seems to be using amplitude  modulation. Using rtl_fm and sox you can record the AM data into a wav file:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rtl_fm -M am -f 433879000 -s 2000000 - | sox -t raw -r 2000000 -e signed-integer -b 16 -c 1 -V1 - doorbell.wav
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Since we are dealing with digital information (1s and 0s) the modulation will be more discrete than just AM, common schemes are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Amplitude-shift_keying&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Amplitude Shift Keying&lt;/a&gt; (ASK)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Frequency-shift_keying&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Frequency Shift Keying&lt;/a&gt; (FSK)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Phase-shift_keying&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Phase Shift Keying&lt;/a&gt; (PSK)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When looking at the audio in Audacity it appears to be sending the same signal multiple times in a row.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_04.png&#34; alt=&#34;Recorded signal in Audacity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If we zoom in to take a closer look at the signal, we can easily see the highs (1s) and lows (0s).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_04.png&#34; alt=&#34;Closer look at the recorded signal in Audacity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The high and low signals aren’t appearing to be the same length, but the two same patterns keep reappearing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;﹍|﹉﹉|&lt;/code&gt;, the high signal seems to be twice as long as the low signal&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;﹍﹍|﹉|&lt;/code&gt;, the low signal seems to be twice as long as the high signal&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is something called &lt;a href=&#34;https://en.wikipedia.org/wiki/Pulse-width_modulation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Pulse Width Modulation&lt;/a&gt; (PWM). If we interpret the first signal as a 1 and the second signal as a 0, then we will end up with something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_06.jpg&#34; alt=&#34;Signal demodulated by hand&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;You might want to check multiple samples because the signal isn’t  very clear on some spots. Examples of a 1 and 0 signal are shown below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_07.png&#34; alt=&#34;Signal in Audacity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;You will be able to get the same result much faster using &lt;a href=&#34;https://github.com/merbanan/rtl_433&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rtl_433&lt;/a&gt;.  It might be a good idea to verify you manually demodulated signal using  rtl_433 before creating the Arduino. In my case it guesses the  modulation type to be Pulse Width Modulation, after demodulation using  rtl_433 I end up with the same 1s and 0s as I’ve found manually.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_08.png&#34; alt=&#34;Signal demodulated by rtl_433&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Creating the Arduino&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;creating-the-arduino&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#creating-the-arduino&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;For sending signal we demodulated earlier, I’m using a 433MHz ASK  transmitter hooked up to my Arduino nano clone according to the  following Fritzing sketch:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2020/01/03/ding-dong-ditch_09.png&#34; alt=&#34;Arduino schematic&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The script for the Arduino can be found on the following GitHub repository: &lt;a href=&#34;https://github.com/roaldnefs/ding-dong-ditch&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;github.com/roaldnefs/ding-dong-ditch&lt;/a&gt;. It uses the &lt;a href=&#34;https://github.com/sui77/rc-switch.git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RCSwitch&lt;/a&gt; library for sending the signal. This library is written for power outlet sockets but my doorbell uses the same protocol.&lt;/p&gt;
+&lt;p&gt;Once the Arduino is powered over USB or by battery, the doorbell should start ringing!&lt;/p&gt;
+
+      </description>
     </item>
     
     <item>
@@ -42,8 +223,24 @@ The video is a short demonstration of the Ding Dong Ditch device.</description>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0200</pubDate>
       
       <guid>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</guid>
-      <description>Last week I&amp;rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&amp;rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (top left in the picture). In this post we will go through the process of connecting to an unknown serial interface.
-The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out what each port was doing.</description>
+      <description>
+        
+        
+        &lt;p&gt;Last week I&amp;rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&amp;rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (&lt;em&gt;top left in the picture&lt;/em&gt;). In this post we will go through the process of connecting to an unknown serial interface.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_01.jpg&#34; alt=&#34;Inside of the Sitecom Wireless Router 150N X1&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out what each port was doing. The two pins on the right are directly connected to the IC, so I figured that those to are the &lt;strong&gt;RX&lt;/strong&gt; and &lt;strong&gt;TX&lt;/strong&gt; ports. By connecting a multi meter to the two left most pins I&amp;rsquo;ve found that the serial port is using &lt;strong&gt;3.3V&lt;/strong&gt; and the left most connector is the &lt;strong&gt;VCC&lt;/strong&gt; followed by the &lt;strong&gt;GND&lt;/strong&gt; pin. By connecting the ground lead of the multi meter to &lt;strong&gt;GND&lt;/strong&gt; pin on the serial interface I quickly spotted &lt;strong&gt;RX&lt;/strong&gt; port (&lt;em&gt;positive voltage&lt;/em&gt;). From left to right the pins are: &lt;strong&gt;VCC&lt;/strong&gt;, &lt;strong&gt;GND&lt;/strong&gt;, &lt;strong&gt;TX&lt;/strong&gt; and &lt;strong&gt;RX&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_02.jpg&#34; alt=&#34;Determining the pins on the serial interface using a multimeter&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We now know the operating voltage and pin layout of the serial interface but the baud rate is still unknown, so I&amp;rsquo;ve connected my new oscilloscope to the &lt;strong&gt;GND&lt;/strong&gt; and &lt;strong&gt;TX&lt;/strong&gt; pins on the serial interface and set it to trigger on a pulse. After power cycling the router is saw the following signal:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_03.jpg&#34; alt=&#34;Inspecting the serial connection using a oscilloscope&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By determining the length of the shortest pulse I was able to figure out the baud rate using the following formula: &lt;code&gt;1 / time * 106&lt;/code&gt;, in my case: &lt;code&gt;1 / (886µs / 870µs) * 106 = 62500&lt;/code&gt;. But this isn&amp;rsquo;t a usual baud rate, so I took once that was closest to 62500: &lt;strong&gt;57600&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_04.jpg&#34; alt=&#34;Inspecting length of the shortest pulse using a oscilloscope&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The USB to TTL module (&lt;em&gt;PL2303&lt;/em&gt;) I had laying around operated on &lt;strong&gt;5V&lt;/strong&gt;, because I was not willing to risk breaking the router I had to down convert to voltage to &lt;strong&gt;3.3V&lt;/strong&gt;. This can be done using a &lt;a href=&#34;https://www.sparkfun.com/products/12009&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;bi-directional logic level converter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_05.jpg&#34; alt=&#34;Connecting the serial interface to the laptop using a logic level converter&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Using the USB to serial connection we are able to connect to the router using minicom with the following command: &lt;code&gt;minicom -b 57600 -8 -D /dev/ttyUSB0&lt;/code&gt;. After power cycling the router, the following output appears:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_06.png&#34; alt=&#34;Serial console on the Sitecom Wireless Router 150N X1&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;According the the boot log the Sitecom Wireless Router 150N X1 is using Linux!&lt;/p&gt;
+
+      </description>
     </item>
     
     <item>
@@ -52,7 +249,278 @@ The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out wh
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0200</pubDate>
       
       <guid>https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/</guid>
-      <description>Today I received my YARD Stick One (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle can transmit and receive digital wireless signals at frequencies below 1GHz. The YARD Stick One is not a SDR, because the I/Q samples are directly demodulated by the chipset instead of send to the host over USB. The YARD Stick One therefore isn’t compatible with any SDR software, but you can use something called rfcat.</description>
+      <description>
+        
+        
+        &lt;p&gt;Today I received my &lt;a href=&#34;https://greatscottgadgets.com/yardstickone/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;YARD Stick One&lt;/a&gt; (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle  can transmit and receive digital wireless signals at frequencies below  1GHz. The YARD Stick One is not a SDR, because the I/Q  samples are directly demodulated by the chipset instead of send to the  host over USB. The YARD Stick One therefore isn’t compatible with any  SDR software, but you can use something called &lt;a href=&#34;https://github.com/atlas0fd00m/rfcat.git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rfcat&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Rfcat allows the user to drive the YARD Stick One using Python and abstracts a lot if complexity. The YARD Stick One has rfcat  pre-installed, with a USB bootloader to update the firmware. I’ve  received the YARD Stick One with outdated firmware, so I wanted to  update it before using it any further.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; I’m using Ubuntu 18.04 to update the firmware of my YARD Stick One!&lt;/p&gt;
+&lt;p&gt;Start by cloning the rfcat repository:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ git clone https://github.com/atlas0fd00m/rfcat.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cd rfcat
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;In order to allow non-root access to the YARD Stick One you will need to update your udev rules using the following commands:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo cp etc/udev/rules.d/20-rfcat.rules /etc/udev/rules.d
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo udevadm control --reload-rules
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;From within the rfcat directory you can install the software by running the install script:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo python setup.py install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Once I started the interactive Python shell for rfcat I was greeted by the following error message:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ rfcat -r
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Traceback (most recent call last):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  File &amp;#34;/usr/local/bin/rfcat&amp;#34;, line 8, in &amp;lt;module&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    from rflib import *
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  File &amp;#34;/usr/local/lib/python2.7/dist-packages/rflib/__init__.py&amp;#34;, line 2, in &amp;lt;module&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    from chipcon_nic import *
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  File &amp;#34;/usr/local/lib/python2.7/dist-packages/rflib/chipcon_nic.py&amp;#34;, line 4, in &amp;lt;module&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    import usb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ImportError: No module named usb
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Install the missing dependencies. Make sure you install the correct version of &lt;code&gt;sdcc&lt;/code&gt; because the newer version of &lt;code&gt;sdcc&lt;/code&gt; seems to break according to &lt;a href=&#34;https://github.com/atlas0fd00m/rfcat/issues/39#issuecomment-500005124&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#39&lt;/a&gt; and &lt;a href=&#34;https://github.com/atlas0fd00m/rfcat/issues/42#issuecomment-499832234&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#42&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt install python-usb libusb-1.0.0 sdcc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;I was now able to start the Python interactive shell for rfcat and  printed the YARD Stick One radio configuration by running the print &lt;code&gt;d.reprRadioConfig()&lt;/code&gt; command.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ rfcat -r
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error in resetup():Exception(&amp;#39;No Dongle Found.  Please insert a RFCAT dongle.&amp;#39;,)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;No module named IPython.frontend.terminal.interactiveshell
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;#39;RfCat, the greatest thing since Frequency Hopping!&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;Research Mode: enjoy the raw power of rflib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;currently your environment has an object called &amp;#34;d&amp;#34; for dongle.  this is how
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;you interact with the rfcat dongle:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;gt;&amp;gt;&amp;gt; d.ping()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;gt;&amp;gt;&amp;gt; d.setFreq(433000000)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;gt;&amp;gt;&amp;gt; d.setMdmModulation(MOD_ASK_OOK)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;gt;&amp;gt;&amp;gt; d.makePktFLEN(250)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;gt;&amp;gt;&amp;gt; d.RFxmit(&amp;#34;HALLO&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;gt;&amp;gt;&amp;gt; d.RFrecv()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;gt;&amp;gt;&amp;gt; print d.reprRadioConfig()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; print d.reprRadioConfig&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;== Hardware ==
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Dongle:              YARDSTICKONE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Firmware rev:        0348
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Compiler:            Not found! Update needed!
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Bootloader:          CC-Bootloader
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;== Software ==
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rflib rev:           65535
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Take note of the following message in de radio configuration:&lt;/p&gt;
+&lt;blockquote&gt;
+  &amp;lt;p&amp;gt;Firmware rev: 0348 Compiler: Not found! Update needed!&amp;lt;/p&amp;gt;
+
+&lt;/blockquote&gt;
+&lt;p&gt;The firmware seems to be outdated and my YARD Stick One came without  compiler installed. I wanted to update my dongle before using in any  further. In order to set in in bootloader mode I used the &lt;code&gt;d.bootloader()&lt;/code&gt; command and the LEDs on the YARD Stick One started flashing.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ rfcat -r
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; d.bootloader&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;In another terminal window I changed the directory to &lt;code&gt;rfcat/firware&lt;/code&gt; and made sure the &lt;code&gt;rfcat_bootloader&lt;/code&gt; command was in my path. This command is used to install the new firmware on the dongle.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cd rfcat/firmware
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ which rfcat_bootloader
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/usr/local/bin/rfcat_bootloader
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;I issued the &lt;code&gt;make installRfCatYS1CCBootloader&lt;/code&gt; command to update the firmware.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ make installRfCatYS1CCBootloader
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;After checking the radio configuration of my YARD Stick One, the firmware seems to be updated.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ rfcat -r
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; print&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;d.reprRadioConfig&lt;span style=&#34;color:#f92672&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;== Hardware ==
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Dongle:              YARDSTICKONE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Firmware rev:        5535
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Compiler:            SDCCv350
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Bootloader:          CC-Bootloader
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;== Software ==
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rflib rev:           65535
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;RfCat, the greatest thing since Frequency Hopping!&lt;/p&gt;
+&lt;h2&gt;Enable bootloader mode when the firmware isn’t running&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;enable-bootloader-mode-when-the-firmware-isnt-running&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#enable-bootloader-mode-when-the-firmware-isnt-running&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The bootloader mode on the YARD Stick One can be triggered by connecting pins 7 and 9 on the P1 expansion header.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;-----------------------------------------
+| YARD Stick One      2 4 6 8 10 12 14  |
+|                     1 3 5 7 9  11 13  ------
+|                                        USB |
+|                                       ------
+|                                       |
+-----------------------------------------&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;EDIT:&lt;/strong&gt; I’m currently running Ubuntu 19.04 and thus installed sdcc version 3.9.0, which results in the same errors as &lt;a href=&#34;https://github.com/atlas0fd00m/rfcat/issues/42&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#42&lt;/a&gt;. Version 3.5.0 of sdcc seems to work fine. I was able to ground pin 7 and pin 9 on the YS1 using a paperclip.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/01/17/ys1_bootloader.jpg&#34; alt=&#34;Enable bootloader mode on the YARD Stick One using a paperclip&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
     </item>
     
     <item>
@@ -61,8 +529,288 @@ The UART debugging interface wasn&amp;rsquo;t labeled, so I had to figure out wh
       <pubDate>Sun, 06 Jan 2019 00:00:00 +0200</pubDate>
       
       <guid>https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/</guid>
-      <description>In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.
-Prerequisites Start by installing the required packages for downloading and compiling the rtl-sdr package.</description>
+      <description>
+        
+        
+        &lt;p&gt;In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are  instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.&lt;/p&gt;
+&lt;h2&gt;Prerequisites&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;prerequisites&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#prerequisites&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Start by installing the required packages for downloading and compiling the rtl-sdr package. The &lt;code&gt;libusb-1.0-0-dev&lt;/code&gt; package provides a C library used for accessing USB devices (e.g. the RTL-SDR).&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install git cmake build-essential libusb-1.0-0-dev
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;After retrieving the required packages you will be able to clone, build and compile the RTL-SDR Osmocom drivers from source.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone git://git.osmocom.org/rtl-sdr.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd rtl-sdr/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir build
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd build
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cmake ../ -DINSTALL_UDEV_RULES=ON
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo make install
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo ldconfig
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo cp ../rtl-sdr.rules /etc/udev/rules.d/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;The RTL-SDR is normally used as a TV device and doesn’t work for SDR  purposes if we don’t block the default drivers. Create a file called &lt;code&gt;/etc/modprobe.d/blacklist-rtl.conf&lt;/code&gt; using root privileges with the following content:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;blacklist dvb_usb_rtl28xxu&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Save the file and reboot your system. You can test the RTL-SDR by running the following command &lt;code&gt;rtl_test -t&lt;/code&gt;. The output will look similar to this:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Found 1 device(s):
+  0:  Realtek, RTL2838UHIDIR, SN: 00000001
+
+Using device 0: Generic RTL2832U OEM
+Found Rafael Micro R820T tuner
+Supported gain values (29): 0.0 0.9 1.4 2.7 3.7 7.7 8.7 12.5 14.4 15.7 16.6 19.7 20.7 22.9 25.4 28.0 29.7 32.8 33.8 36.4 37.2 38.6 40.2 42.1 43.4 43.9 44.5 48.0 49.6 
+[R82XX] PLL not locked!
+Sampling at 2048000 S/s.
+No E4000 tuner found, aborting.&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;Gqrx SDR&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;gqrx-sdr&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#gqrx-sdr&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/01/06/sdr-01.png&#34; alt=&#34;Gqrx software&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Gqrx is an open source software defined radio receiver. The package  has been included in Ubuntu for many years, but you probably want to  install a newer version using the official personal package archive (PPA).&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo add-apt-repository -y ppa:bladerf/bladerf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo add-apt-repository -y ppa:myriadrf/drivers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo add-apt-repository -y ppa:myriadrf/gnuradio
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo add-apt-repository -y ppa:gqrx/gqrx-sdr
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install gqrx-sdr
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;It is recommended that you also install the &lt;code&gt;libvolk1-bin&lt;/code&gt; package and run &lt;code&gt;volk_profile&lt;/code&gt; tool to optimize GNU Radio performance on your own computer.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install libvolk1-bin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;volk_profile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;On the first startup of Gqrx you will need to configure your device using the following settings:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Device: Realtek RTL2838xxx
+Device string: rtl=0
+Input rate: 1800000
+Decimation: None
+Bandwidth: 0 MHz
+LNB LO: 0 MHz&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; you can always change your device configuration by clicking the circuit board icon in the menu.&lt;/p&gt;
+&lt;p&gt;Lookup the frequency of one of your local radio stations and update the frequency in the &lt;em&gt;Receiver Options&lt;/em&gt; tab on the right side of Gqrx. Don’t forget to set the mode to &lt;em&gt;WFM (mono)&lt;/em&gt; or &lt;em&gt;WFM (stereo)&lt;/em&gt;. You might need to change the gain in order to hear something.&lt;/p&gt;
+&lt;h2&gt;P2000&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;p2000&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#p2000&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/01/06/sdr-02.png&#34; alt=&#34;P2000&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;P2000&lt;/strong&gt; is a one-way communications network for pagers  based on the FLEX-protocol developed by Motorola. The P2000 network is  used by the emergency services in the Netherlands. The FLEX-protocol  does not provide encryption, so you can read the messages yourself using  an RTL-SDR.&lt;/p&gt;
+&lt;p&gt;In order to receive and decode the FLEX messages we will be using &lt;code&gt;multimon-ng&lt;/code&gt;, which can be installed from source:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/EliasOenal/multimon-ng.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd multimon-ng
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir build
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd build
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cmake ..
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo make install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Connect your RTL-SDR and run the following command to receive the FLEX messages send on the P2000 network.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rtl_fm -f 169.65M -M fm -s 22050 | multimon-ng -a FLEX -t raw /dev/stdin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; it might take several minutes before you start  receiving any message, you can always check an online P2000 feed for  messages appearing in your local region.&lt;/p&gt;
+&lt;h2&gt;Air traffic monitoring&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;air-traffic-monitoring&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#air-traffic-monitoring&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;You can monitor air traffic using an RTL SDR and the &lt;code&gt;dump1090&lt;/code&gt; package. Start by downloading and compiling the &lt;code&gt;dump1090&lt;/code&gt; package:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/MalcolmRobb/dump1090.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd dump1090
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;To run dump1090 in interactive mode, with networking support, you will need to run the following command:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./dump1090 --interactive --net
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Open your browser and open &lt;code&gt;http://localhost:8080/&lt;/code&gt; to see live air traffic:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/01/06/sdr-03.png&#34; alt=&#34;dump1090&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Raspberry Pi as a RF transmitter&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;raspberry-pi-as-a-rf-transmitter&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#raspberry-pi-as-a-rf-transmitter&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Using the &lt;code&gt;rpitx&lt;/code&gt; package you can turn your Raspberry Pi  in a simple radio frequency transmitter. It will be able to handle  frequencies between 5KHz and 1500MHz. This includes some common  frequencies (e.g. 433MHz).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; it might not be legal to transmit on all available frequencies, check your local regulations before transmitting anything!&lt;/p&gt;
+&lt;p&gt;You will need to plug a wire on GPIO 4, which will act as the antenna. I’ve used a cheap breadboard cable (&lt;em&gt;see the picture below&lt;/em&gt;). The optimal length of the wire depends on the frequency, but a few centimeters should be fine for local testing.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/01/06/sdr-04.jpg&#34; alt=&#34;Antenna on a Raspberry Pi&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;After installing Raspbian you can install the &lt;code&gt;rpitx&lt;/code&gt; package using the following commands.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/F5OEO/rpitx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd rpitx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./install.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo reboot
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;After rebooting the Raspberry Pi you can go to your &lt;code&gt;rpitx&lt;/code&gt; folder and launch &lt;code&gt;easytest.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd rpitx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./easytest.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Using your SDR receiver you will be able to monitor the transmitted  signals. Try to send the some test signals on the 434 MHz, the rpitx  default band.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/01/06/sdr-05.png&#34; alt=&#34;easytest&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
     </item>
     
   </channel>

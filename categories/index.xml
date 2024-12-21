@@ -1,38 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Roald Nefs</title>
+    <title>Roald Nefs – Categories</title>
     <link>https://roaldnefs.com/categories/</link>
     <description>Recent content in Categories on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hardware hacking</title>
-      <link>https://roaldnefs.com/categories/hardware-hacking/</link>
-      <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
-      
-      <guid>https://roaldnefs.com/categories/hardware-hacking/</guid>
-      <description></description>
-    </item>
+    <language>en</language>
+    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate>
     
-    <item>
-      <title>Information security</title>
-      <link>https://roaldnefs.com/categories/information-security/</link>
-      <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
-      
-      <guid>https://roaldnefs.com/categories/information-security/</guid>
-      <description></description>
-    </item>
+	  <atom:link href="https://roaldnefs.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
-    <item>
-      <title>Development</title>
-      <link>https://roaldnefs.com/categories/development/</link>
-      <pubDate>Sat, 19 Dec 2020 15:00:00 +0200</pubDate>
+    
       
-      <guid>https://roaldnefs.com/categories/development/</guid>
-      <description></description>
-    </item>
+        
+      
+    
     
   </channel>
 </rss>
