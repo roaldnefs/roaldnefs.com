@@ -23,6 +23,21 @@ menu:
       weight: 4
       params:
         type: search
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/roaldnefs"
+      params:
+        icon: github
+    - name: LinkedIn
+      weight: 6
+      url: "https://www.linkedin.com/in/roaldnefs/"
+      params:
+        icon: linkedin
+    - name: Mastodon
+      weight: 7
+      url: "https://fosstodon.org/@roald"
+      params:
+        icon: mastodon
 
 params:
   navbar:
