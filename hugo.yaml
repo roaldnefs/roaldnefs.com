@@ -16,25 +16,28 @@ menu:
     - name: Blog
       pageRef: /posts/
       weight: 2
+    - name: Tools
+      pageRef: /tools/
+      weight: 3
     - name: About
       pageRef: /about/
-      weight: 3
-    - name: Search
       weight: 4
+    - name: Search
+      weight: 5
       params:
         type: search
     - name: GitHub
-      weight: 5
+      weight: 6
       url: "https://github.com/roaldnefs"
       params:
         icon: github
     - name: LinkedIn
-      weight: 6
+      weight: 7
       url: "https://www.linkedin.com/in/roaldnefs/"
       params:
         icon: linkedin
     - name: Mastodon
-      weight: 7
+      weight: 8
       url: "https://fosstodon.org/@roald"
       params:
         icon: mastodon
