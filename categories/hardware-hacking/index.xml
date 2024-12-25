@@ -254,7 +254,14 @@
         
         &lt;p&gt;Today I received my &lt;a href=&#34;https://greatscottgadgets.com/yardstickone/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;YARD Stick One&lt;/a&gt; (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle  can transmit and receive digital wireless signals at frequencies below  1GHz. The YARD Stick One is not a SDR, because the I/Q  samples are directly demodulated by the chipset instead of send to the  host over USB. The YARD Stick One therefore isn’t compatible with any  SDR software, but you can use something called &lt;a href=&#34;https://github.com/atlas0fd00m/rfcat.git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rfcat&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Rfcat allows the user to drive the YARD Stick One using Python and abstracts a lot if complexity. The YARD Stick One has rfcat  pre-installed, with a USB bootloader to update the firmware. I’ve  received the YARD Stick One with outdated firmware, so I wanted to  update it before using it any further.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; I’m using Ubuntu 18.04 to update the firmware of my YARD Stick One!&lt;/p&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;⚠️&lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;This post is specifically written for &lt;strong&gt;Ubuntu 18.04&lt;/strong&gt; and may not work as intended on other versions or newer releases. Be sure to verify compatibility if you&amp;rsquo;re using a different version of Ubuntu.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Start by cloning the rfcat repository:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
   
