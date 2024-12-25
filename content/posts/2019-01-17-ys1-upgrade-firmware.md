@@ -13,7 +13,9 @@ Today I received my [YARD Stick One](https://greatscottgadgets.com/yardstickone/
 
 Rfcat allows the user to drive the YARD Stick One using Python and abstracts a lot if complexity. The YARD Stick One has rfcat  pre-installed, with a USB bootloader to update the firmware. I’ve  received the YARD Stick One with outdated firmware, so I wanted to  update it before using it any further.
 
-**Note:** I’m using Ubuntu 18.04 to update the firmware of my YARD Stick One!
+{{< callout type="warning" >}}
+  This post is specifically written for **Ubuntu 18.04** and may not work as intended on other versions or newer releases. Be sure to verify compatibility if you're using a different version of Ubuntu.
+{{< /callout >}}
 
 Start by cloning the rfcat repository:
 
