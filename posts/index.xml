@@ -6,7 +6,17 @@
     <description>Recent content in Blog on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Jan 2024 20:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Dec 2024 00:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to extract an AppImage and add it to the Ubuntu Sidebar</title>
+      <link>https://roaldnefs.com/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/</link>
+      <pubDate>Wed, 25 Dec 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/</guid>
+      <description>&lt;p&gt;In this post, we&amp;rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&amp;rsquo;ll use &lt;strong&gt;SavvyCAN&lt;/strong&gt;, a CANBus reverse engineering tool.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
     <item>
       <title>Committing Changes to a Pull Request Branch Created from a Fork</title>
       <link>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</link>
