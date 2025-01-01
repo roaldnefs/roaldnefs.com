@@ -1,7 +1,7 @@
 ---
 title: Tools
 width: full
-toc: false
+toc: true
 ---
 
 I often get questions about the specific software or hardware I use. Since my setup changes frequently, this page serves as a living document where I keep everything up to date. It’s a handy resource to share when people ask. If you notice something missing or have a suggestion, feel free to reach out, and I’ll make sure to add it.
@@ -18,11 +18,13 @@ Hardware hacking is all about exploring, testing, and interacting with physical 
 - [CANable Pro](https://canable.io/): A small low-cost open source USB to CAN adapter.
 - [CL2000](https://www.csselectronics.com/products/can-bus-logger-interface-cl2000): A CAN bus logger and USB interface with a real-time clock.
 
+### Software
+- [SavvyCAN](https://www.savvycan.com/): A cross platform CAN bus reverse engineering and capture tool.
+
 ### RF
 
 #### Hardware
 - [YARD Stick One](https://greatscottgadgets.com/yardstickone/): A versatile sub-1 GHz wireless testing tool controlled via your computer. I own multiple units and pair them with the [ANT500](https://greatscottgadgets.com/ant500/), a telescopic antenna designed to operate across 75 MHz to 1 GHz. See the related post about [updating the YARD Stick One firmware]({{< ref "/posts/2019-01-17-ys1-upgrade-firmware.md" >}}).
-
 
 ### RFID/NFC
 
@@ -35,3 +37,14 @@ Hardware hacking is all about exploring, testing, and interacting with physical 
 
 #### Hardware
 - [GreatFET One](https://greatscottgadgets.com/greatfet/one/): A powerful USB interface for hardware hacking and development.
+
+### Soldering
+
+#### Hardware
+- [KSGER T12](https://www.aliexpress.com/store/1486111): A soldering station with configurable temperature and interchangeable tips.
+
+
+### Lockpicking
+
+#### Hardware
+- [SouthOrd PXS-14](https://www.southord.com/collections/lock-pick-sets-standard/products/lock-pick-set-14-piece-pxs-14): A 14-piece lock pick set.
