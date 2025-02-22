@@ -25,6 +25,7 @@ Hardware hacking is all about exploring, testing, and interacting with physical 
 
 #### Hardware
 - [YARD Stick One](https://greatscottgadgets.com/yardstickone/): A versatile sub-1 GHz wireless testing tool controlled via your computer. I own multiple units and pair them with the [ANT500](https://greatscottgadgets.com/ant500/), a telescopic antenna designed to operate across 75 MHz to 1 GHz. See the related post about [updating the YARD Stick One firmware]({{< ref "/posts/2019-01-17-ys1-upgrade-firmware.md" >}}).
+- [HackRF One](https://greatscottgadgets.com/hackrf/): A Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz.
 
 ### RFID/NFC
 
