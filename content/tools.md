@@ -24,15 +24,15 @@ Hardware hacking is all about exploring, testing, and interacting with physical 
 ### RF
 
 #### Hardware
-- [YARD Stick One](https://greatscottgadgets.com/yardstickone/): A versatile sub-1 GHz wireless testing tool controlled via your computer. I own multiple units and pair them with the [ANT500](https://greatscottgadgets.com/ant500/), a telescopic antenna designed to operate across 75 MHz to 1 GHz. See the related post about [updating the YARD Stick One firmware]({{< ref "/posts/2019-01-17-ys1-upgrade-firmware.md" >}}).
+- [YARD Stick One](https://greatscottgadgets.com/yardstickone/): A versatile sub-1 GHz wireless testing tool controlled via your computer. I own multiple units and pair them with the [ANT500](https://greatscottgadgets.com/ant500/), a telescopic antenna designed to operate across 75 MHz to 1 GHz. See the related post about [updating the YARD Stick One firmware]({{< ref "/blog/2019-01-17-ys1-upgrade-firmware.md" >}}).
 - [HackRF One](https://greatscottgadgets.com/hackrf/): A Software Defined Radio peripheral capable of transmission or reception of radio signals from 1 MHz to 6 GHz.
 
 ### RFID/NFC
 
 #### Hardware
-- [Proxmark 3 Easy](https://proxmark.com/proxmark-3-hardware/proxmark-3-easy): An RFID swiss-army tool, allowing for both high and low level interactions with the vast majority of RFID tags and systems. I own a [clone](https://nl.aliexpress.com/item/1005005328485273.html) of the official Proxmark. See the related post about [spoofing microschips]({{< ref "/posts/2022-11-30-spoofing-microchips.md" >}}).
+- [Proxmark 3 Easy](https://proxmark.com/proxmark-3-hardware/proxmark-3-easy): An RFID swiss-army tool, allowing for both high and low level interactions with the vast majority of RFID tags and systems. I own a [clone](https://nl.aliexpress.com/item/1005005328485273.html) of the official Proxmark. See the related post about [spoofing microschips]({{< ref "/blog/2022-11-30-spoofing-microchips.md" >}}).
 - [ACR122U](http://www.acs.com.hk/en/products/3/acr122u-usb-nfc-reader/): An USB NFC Reader.
-- [Halo scanner](https://haloscanner.nl/en/): A handheld scanner used to scan the microchip numbers of animals. See the related post about [spoofing microschips]({{< ref "/posts/2022-11-30-spoofing-microchips.md" >}}).
+- [Halo scanner](https://haloscanner.nl/en/): A handheld scanner used to scan the microchip numbers of animals. See the related post about [spoofing microschips]({{< ref "/blog/2022-11-30-spoofing-microchips.md" >}}).
 
 ### USB
 

@@ -2,7 +2,7 @@ title: Roald Nefs
 baseURL: https://roaldnefs.com/
 
 permalinks:
-  posts: /posts/:year/:month/:slug/
+  blog: /posts/:year/:month/:slug/
 
 module:
   imports:
