@@ -3,4 +3,6 @@ public/
 resources/_gen/
 .hugo_build.lock
 
+node_modules/
+
 .DS_Store
