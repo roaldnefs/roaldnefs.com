@@ -38,7 +38,7 @@ menu:
         icon: linkedin
     - name: Mastodon
       weight: 8
-      url: "https://fosstodon.org/@roald"
+      url: "https://infosec.exchange/@roald"
       params:
         icon: mastodon
 
