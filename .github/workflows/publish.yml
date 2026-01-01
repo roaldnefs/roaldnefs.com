@@ -23,7 +23,7 @@ jobs:
 
       - name: Set up Hugo
         env:
-          HUGO_VERSION: 0.132.2
+          HUGO_VERSION: 0.154.0
         run: |
           echo "installing hugo $HUGO_VERSION"
           curl -sL -o /tmp/hugo.deb \
