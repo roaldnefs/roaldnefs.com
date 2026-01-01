@@ -67,6 +67,6 @@ layout: hextra-home
 
 {{< hextra/hero-container >}}
     <div class="hx:mt-6 hx:mb-6">
-    {{< hextra/hero-button text="More Posts" link="blog" >}}
+    {{< hextra/hero-button text="More Posts" link="posts" >}}
     </div>
 {{< /hextra/hero-container >}}
