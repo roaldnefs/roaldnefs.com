@@ -16,28 +16,31 @@ menu:
     - name: Blog
       pageRef: /posts/
       weight: 2
+    - name: Training
+      pageRef: /training/
+      weight: 3
     - name: Tools
       pageRef: /tools/
-      weight: 3
+      weight: 4
     - name: About
       pageRef: /about/
-      weight: 4
-    - name: Search
       weight: 5
+    - name: Search
+      weight: 6
       params:
         type: search
     - name: GitHub
-      weight: 6
+      weight: 7
       url: "https://github.com/roaldnefs"
       params:
         icon: github
     - name: LinkedIn
-      weight: 7
+      weight: 8
       url: "https://www.linkedin.com/in/roaldnefs/"
       params:
         icon: linkedin
     - name: Mastodon
-      weight: 8
+      weight: 9
       url: "https://infosec.exchange/@roald"
       params:
         icon: mastodon
