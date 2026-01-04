@@ -40,7 +40,7 @@ layout: hextra-home
     title="Building a Car Hacking Test Bench"
     subtitle="Building a Car Hacking Test Bench."
     class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
-    image="/images/posts/2026/01/03/w203.jpeg"
+    image="/images/posts/2026/01/04/w203.jpeg"
     imageClass="hx:w-[110%]"
     link="/posts/2026/01/building-a-car-hacking-test-bench/"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(39,91,225,0.25),hsla(0,0%,100%,0));"
