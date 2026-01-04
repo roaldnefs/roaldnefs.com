@@ -1,0 +1,85 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Roald Nefs – Automotive</title>
+    <link>https://roaldnefs.com/tags/automotive/</link>
+    <description>Recent content in Automotive on Roald Nefs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0200</lastBuildDate>
+    
+	  <atom:link href="https://roaldnefs.com/tags/automotive/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Building a Car Hacking Test Bench</title>
+      <link>https://roaldnefs.com/posts/2026/01/building-a-car-hacking-test-bench/</link>
+      <pubDate>Sun, 04 Jan 2026 00:00:00 +0200</pubDate>
+      
+      <guid>https://roaldnefs.com/posts/2026/01/building-a-car-hacking-test-bench/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Introduction&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;introduction&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#introduction&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Modern cars are computers on wheels: dozens of ECUs, multiple buses, wireless interfaces, and a threat model that keeps expanding. Over the past few years, I&amp;rsquo;ve dipped my toes into the automotive security scene. Now it&amp;rsquo;s time to take a deeper dive. So I bought a car.&lt;/p&gt;
+&lt;p&gt;The goal of this project is to turn that car into a &lt;strong&gt;portable car hacking test bench&lt;/strong&gt;, a self-contained platform for experimenting with CAN, LIN, diagnostics, firmware extraction, fault injection, and whatever else I end up curious about along the way.&lt;/p&gt;
+&lt;p&gt;This post marks the beginning of that journey. It&amp;rsquo;s intentionally incomplete and will be updated as the project unfolds: hardware choices, mistakes, dead ends, tooling, wiring diagrams, attack ideas that work (and many that don’t), and the lessons learned along the way. Think of it less as a tutorial and more as a research log, one I&amp;rsquo;m making public in the hope that it&amp;rsquo;s useful to others exploring automotive security.&lt;/p&gt;
+&lt;h2&gt;Mercedes-Benz W203 (C‑Class)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;mercedes-benz-w203-cclass&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#mercedes-benz-w203-cclass&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;For this project, I bought a &lt;strong&gt;Mercedes-Benz W203 (C‑Class)&lt;/strong&gt;. The W203 hits a sweet spot for a research platform: old enough to be affordable and mechanically approachable, yet modern enough to include multiple ECUs, CAN buses, and OBD diagnostics. Or at least, that&amp;rsquo;s what I&amp;rsquo;ve been told. I rescued it from the salvage yard, so it’s already a victory in itself.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2026/01/04/w203.jpeg&#34; alt=&#34;Mercedes-Benz W203 (C‑Class)&#34;  loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Information&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Brand&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;MERCEDES-BENZ&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Model&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;C 180 KOMPRESSOR&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;First registration&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;07/2002&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;It has just one problem&amp;hellip; It won&amp;rsquo;t start.&lt;/p&gt;
+&lt;h2&gt;Current State&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;current-state&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#current-state&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;At the moment, the car won&amp;rsquo;t even allow the key to turn to contact. The Electronic Ignition Switch (EIS) appears unresponsive, even though the Electronic Steering Lock (ESL) had already been removed by the garage.&lt;/p&gt;
+&lt;p&gt;The key itself is at least partially functional: it can lock and unlock the car, suggesting that the key electronics and RF communication are working. Despite this, the car never transitions into a contact or ignition state. Pointing to a likely issue with the EIS or ESL. Both known weak points on this generation of Mercedes.&lt;/p&gt;
+&lt;p&gt;Both the ESL and EIS are components of Mercedes-Benz&amp;rsquo;s electronic immobilizer system, known as the Fahrberechtigungssystem&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Starting with the 1998 model year, Mercedes introduced Fahrberechtigungssystem 3 (FBS3), which integrates key authentication, steering lock control, and ignition authorization into a single, tightly coupled security system.&lt;/p&gt;
+&lt;h2&gt;Emulating the Electronic Steering Lock (ESL)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;emulating-the-electronic-steering-lock-esl&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#emulating-the-electronic-steering-lock-esl&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;After a quick search online, I found several inexpensive Electronic Steering Lock (ESL) emulators available for around €10-€20. Given that the ESL is a critical component of the FBS3 system, emulating it seemed like a reasonable first experiment.&lt;/p&gt;
+&lt;p&gt;The garage had already tried an emulator without success, but that didn&amp;rsquo;t necessarily rule the idea out. It could have been a faulty unit, an incompatible version, or simply bad luck. At the very least, it suggested the problem was worth reproducing and understanding myself.&lt;/p&gt;
+&lt;p&gt;My first instinct was the classic one: throw parts at the car and hope something fixes the problem. I bought an ESL emulator and plugged it in, hoping it would magically unblock the ignition.&lt;/p&gt;
+&lt;p&gt;As expected, it didn&amp;rsquo;t work.&lt;/p&gt;
+&lt;p&gt;Lesson learned, early and cheaply. Blindly swapping parts without understanding the system rarely fixes anything, especially when dealing with immobilizers. Still, the failed attempt was useful: it confirmed that the issue likely runs deeper than a missing or malfunctioning ESL and pushed the project firmly toward analysis rather than guesswork.&lt;/p&gt;
+&lt;p&gt;With the ESL largely ruled out, attention now shifts to the Electronic Ignition Switch (EIS). A quick dive into YouTube and forum posts turned up multiple cases of W203s exhibiting similar symptoms. Often traced back to broken solder joints or failing connections inside the EIS itself.&lt;/p&gt;
+&lt;p&gt;That makes the next challenge clear: getting the EIS out of the car.&lt;/p&gt;
+&lt;h2&gt;To Be Continued&amp;hellip;&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;to-be-continued&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#to-be-continued&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The car hacking test bench is still under construction, and this page will be updated as the project evolves. Expect rough edges. Sections may be expanded, rewritten, or removed as assumptions change and new findings emerge.&lt;/p&gt;
+&lt;p&gt;This is not a finished guide, but a live research log published in the hope that it&amp;rsquo;s useful to others exploring automotive security.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;By examining the model year and the key, I was able to determine that this Mercedes‑Benz W203 uses FBS3. More information is available here: &lt;a href=&#34;https://ecu.de/wegfahrsperrensysteme-mercedes-benz-60.htm&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://ecu.de/wegfahrsperrensysteme-mercedes-benz-60.htm&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

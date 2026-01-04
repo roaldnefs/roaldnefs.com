@@ -8,52 +8,30 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
-<title>Ding Dong Ditch using SDR and Arduino – Roald Nefs</title>
-  <meta name="description" content="In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
-This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
-The video is a short demonstration of the Ding Dong Ditch device. Once it’s powered by USB (or a battery) it will send out a RF signal every few seconds which will ring the doorbell." /><link rel="canonical" href="https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/" itemprop="url" />
+<title>Automotive – Roald Nefs</title>
+  <meta name="description" content="" /><link rel="canonical" href="https://roaldnefs.com/tags/automotive/" itemprop="url" />
 
-<meta property="og:title" content="Ding Dong Ditch using SDR and Arduino">
+<meta property="og:title" content="Automotive">
 <meta
   property="og:description"
   content="
     
-      In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.
-This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
-The video is a short demonstration of the Ding Dong Ditch device.  Once it’s powered by USB (or a battery) it will send out a RF signal  every few seconds which will ring the doorbell.
+      
     
   ">
 <meta
   property="og:type"
   content="
-    article
+    website
   ">
-<meta property="og:url" content="https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/"><meta property="article:section" content="posts">
-
-<meta
-  property="article:published_time"
-  content="2020-01-03T00:00:00+02:00">
+<meta property="og:url" content="https://roaldnefs.com/tags/automotive/">
 
 
-<meta
-  property="article:modified_time"
-  content="2020-01-03T00:00:00+02:00">
-
-
-
-  <meta itemprop="name" content="Ding Dong Ditch using SDR and Arduino">
-  <meta itemprop="description" content="In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
-This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
-The video is a short demonstration of the Ding Dong Ditch device. Once it’s powered by USB (or a battery) it will send out a RF signal every few seconds which will ring the doorbell.">
-  <meta itemprop="datePublished" content="2020-01-03T00:00:00+02:00">
-  <meta itemprop="dateModified" content="2020-01-03T00:00:00+02:00">
-  <meta itemprop="wordCount" content="884">
-  <meta itemprop="keywords" content="Information Security,Hardware Hacking">
+  <meta itemprop="name" content="Automotive">
+  <meta itemprop="datePublished" content="2026-01-04T00:00:00+02:00">
+  <meta itemprop="dateModified" content="2026-01-04T00:00:00+02:00">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Ding Dong Ditch using SDR and Arduino">
-  <meta name="twitter:description" content="In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
-This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
-The video is a short demonstration of the Ding Dong Ditch device. Once it’s powered by USB (or a battery) it will send out a RF signal every few seconds which will ring the doorbell.">
+  <meta name="twitter:title" content="Automotive">
 
     <link rel="preload" href="/css/compiled/main.min.f70646da80d5fd86d2604ea147a4a9256cf4accb11487250b68403aa533f865f.css" as="style" integrity="sha256-9wZG2oDV/YbSYE6hR6SpJWz0rMsRSHJQtoQDqlM/hl8=" />
     <link href="/css/compiled/main.min.f70646da80d5fd86d2604ea147a4a9256cf4accb11487250b68403aa533f865f.css" rel="stylesheet" integrity="sha256-9wZG2oDV/YbSYE6hR6SpJWz0rMsRSHJQtoQDqlM/hl8=" />
@@ -114,7 +92,7 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
   title=""
   href="/posts/"
   
-  class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:font-medium"
+  class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"
 ><span class="hx:text-center">Blog</span>
 </a><a
   title=""
@@ -203,7 +181,7 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
     <ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden">
       
       
-          <li class="open"><a
+          <li class=""><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/posts/"
@@ -275,40 +253,13 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
   >How To Create a Visual Studio Code Extension Pack
     </a>
               
-            </li><li class="hx:flex hx:flex-col open"><a
+            </li><li class="hx:flex hx:flex-col "><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500"
+      hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/"
     
   >Ding Dong Ditch using SDR and Arduino
     </a>
-  
-    <ul class='hx:flex hx:flex-col hx:gap-1 hx:relative hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:pr-3 hx:rtl:before:right-0 hx:ltr:ml-3 hx:rtl:mr-3'><li>
-              <a
-                href="#requirements"
-                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Requirements</a>
-            </li>
-          <li>
-              <a
-                href="#locate-the-signal"
-                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Locate the Signal</a>
-            </li>
-          <li>
-              <a
-                href="#recording-and-demodulating-the-signal"
-                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Recording and Demodulating the Signal</a>
-            </li>
-          <li>
-              <a
-                href="#creating-the-arduino"
-                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Creating the Arduino</a>
-            </li>
-          </ul>
-  
               
             </li><li class="hx:flex hx:flex-col "><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
@@ -411,124 +362,30 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
   </ul>
 </div></div></div></aside>
     
-<nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label="table of contents">
-    <div class="hextra-scrollbar hx:sticky hx:top-16 hx:overflow-y-auto hx:pr-4 hx:pt-6 hx:text-sm [hyphens:auto] hx:max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] hx:ltr:-mr-4 hx:rtl:-ml-4"><p class="hx:mb-4 hx:font-semibold hx:tracking-tight">On this page</p><ul>
-      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#requirements">Requirements
-        </a>
-      </li>
-      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#hardware">Hardware
-        </a>
-      </li>
-      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#software">Software
-        </a>
-      </li>
-      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#locate-the-signal">Locate the Signal
-        </a>
-      </li>
-      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#recording-and-demodulating-the-signal">Recording and Demodulating the Signal
-        </a>
-      </li>
-      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#creating-the-arduino">Creating the Arduino
-        </a>
-      </li></ul>
-      <div class="hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111] hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400">
-        <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx:cursor-pointer hx:transition-all hx:duration-75 hx:opacity-0 hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">
-          <span>Scroll to top</span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx:inline hx:ltr:ml-1 hx:rtl:mr-1 hx:h-3.5 hx:w-3.5 hx:rounded-full hx:border hx:border-gray-500 hx:hover:border-gray-900 hx:dark:border-gray-400 hx:dark:hover:border-gray-100 hx:contrast-more:border-gray-800 hx:contrast-more:dark:border-gray-50">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </nav>
+<nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label="table of contents"></nav>
 
 
     <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="hx:w-full hx:min-w-0 hx:max-w-6xl hx:px-6 hx:pt-4 hx:md:px-12">
-        
         <br class="hx:mt-1.5 hx:text-sm" />
-        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Ding Dong Ditch using SDR and Arduino</h1>
+        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Automotive</h1>
         <div class="hx:mb-16"></div>
         <div class="content">
-          <p>In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.</p>
-<p>This project is heavily based upon the <a href="https://samy.pl/dingdong/"target="_blank" rel="noopener">Digital Ding Dong Ditch</a> by <a href="https://samy.pl/"target="_blank" rel="noopener">Samy Kamkar</a>.</p>
-<p>The video is a short demonstration of the Ding Dong Ditch device.  Once it’s powered by USB (or a battery) it will send out a RF signal  every few seconds which will ring the doorbell.</p>
-<h2>Requirements<span class="hx:absolute hx:-mt-20" id="requirements"></span>
-    <a href="#requirements" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>For this project you will need several tools and modules to record and send the signal.</p>
-<h3>Hardware<span class="hx:absolute hx:-mt-20" id="hardware"></span>
-    <a href="#hardware" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><strong>RTL-SDR:</strong> The RTL-SDR is an inexpensive software  defined radio using a Realtek chip. The dongle can be used to receive a  wide range of frequencies, including those of some wireless doorbells.</p>
-<p><strong>Arduino:</strong> In this post I will be using an Arduino Nano clone. Arduino is a great platform for cheap and rapid creation of hardware.</p>
-<p><strong>433MHz ASK RF Transmitter:</strong> For sending the RF signal  I will be using a FS1000A (433MHz) RF transmitter. You might want to  locate your frequency first, before buying a transmitter for a specific  frequency.</p>
-<h3>Software<span class="hx:absolute hx:-mt-20" id="software"></span>
-    <a href="#software" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><strong>RTL-SDR &amp; GQRX:</strong> RTL-SDR and Gqrx will be used to  locate, record and visualise the radio signal. Instruction about  installing RTL-SDR and Gqrx on Linux can be found in Software Defined Radio on Linux post.</p>
-<p><strong>Audacity:</strong> Audacity is used for taking a closer look at the radio signal in order to demodulate it by hand.</p>
-<p><strong>Ding Dong Ditch:</strong> The Arduino sketch for this project can be found at my GitHub: <a href="https://github.com/roaldnefs/ding-dong-ditch"target="_blank" rel="noopener">github.com/roaldnefs/ding-dong-ditch</a>.</p>
-<h2>Locate the Signal<span class="hx:absolute hx:-mt-20" id="locate-the-signal"></span>
-    <a href="#locate-the-signal" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>We will start by locating the signal send when pressing the doorbell  button. On most devices you will find the frequency on the device  itself. In my case the doorbell receiver clearly states that it uses the  433MHz frequency:</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_01.png" alt="Select Plus doorbell sticker"  loading="lazy" /></p>
-<p>Using Gqrx with the RTL-SDR connected to your computer, you will be able to spot signal while pressing the doorbell button.</p>
-<p>If you aren’t able to locate the frequency of your doorbell (<em>or you simple cannot find the doorbell receiver</em>),  you can always keep pressing the doorbell while you scroll through the  spectrum in Gqrx. You might want to check the 315MHz, 433MHz and 900MHz  bands first, because they are among the most frequently used bands.</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_02.jpg" alt="Doorbell signal in Gqrx"  loading="lazy" /></p>
-<p>I was able to locate my doorbell signal on <strong>433.879MHz</strong>.</p>
-<h2>Recording and Demodulating the Signal<span class="hx:absolute hx:-mt-20" id="recording-and-demodulating-the-signal"></span>
-    <a href="#recording-and-demodulating-the-signal" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Modulation allow data to be transmitted via radio via radio  frequencies. After locating the signal you’ll need to determine the type  of modulation used by the doorbell. By looking at the waterfall in Gqrx  I was able to determine that the signal send by the doorbell is  amplitude modulated. The most common modulation schemes you will see in  radio are:</p>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Amplitude_modulation"target="_blank" rel="noopener">Amplitude Modulation</a> (AM)</li>
-<li><a href="http://en.wikipedia.org/wiki/Frequency_modulation"target="_blank" rel="noopener">Frequency Modulation</a> (FM)</li>
-<li><a href="http://en.wikipedia.org/wiki/Phase_modulation"target="_blank" rel="noopener">Phase Modulation</a> (PM)</li>
-</ul>
-<p>Amplitude modulation, as the name might suggest, modulates the  amplitude while frequency modulation will modulate the frequency. If you  are listing to 100.0 FM radio, the signal is actually send between  99.995MHz and 100.005MHz.</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_03.gif" alt="Modulation"  loading="lazy" /></p>
-<p>By the looks of it, the signal seems to be using amplitude  modulation. Using rtl_fm and sox you can record the AM data into a wav file:</p>
-<div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>rtl_fm -M am -f 433879000 -s 2000000 - | sox -t raw -r 2000000 -e signed-integer -b 16 -c 1 -V1 - doorbell.wav
-</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
-  <button
-    class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
-    title="Copy code"
-  >
-    <div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div>
-<div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div>
-  </button>
-</div>
-</div>
-<p>Since we are dealing with digital information (1s and 0s) the modulation will be more discrete than just AM, common schemes are:</p>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Amplitude-shift_keying"target="_blank" rel="noopener">Amplitude Shift Keying</a> (ASK)</li>
-<li><a href="http://en.wikipedia.org/wiki/Frequency-shift_keying"target="_blank" rel="noopener">Frequency Shift Keying</a> (FSK)</li>
-<li><a href="http://en.wikipedia.org/wiki/Phase-shift_keying"target="_blank" rel="noopener">Phase Shift Keying</a> (PSK)</li>
-</ul>
-<p>When looking at the audio in Audacity it appears to be sending the same signal multiple times in a row.</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_04.png" alt="Recorded signal in Audacity"  loading="lazy" /></p>
-<p>If we zoom in to take a closer look at the signal, we can easily see the highs (1s) and lows (0s).</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_04.png" alt="Closer look at the recorded signal in Audacity"  loading="lazy" /></p>
-<p>The high and low signals aren’t appearing to be the same length, but the two same patterns keep reappearing:</p>
-<ul>
-<li><code>﹍|﹉﹉|</code>, the high signal seems to be twice as long as the low signal</li>
-<li><code>﹍﹍|﹉|</code>, the low signal seems to be twice as long as the high signal</li>
-</ul>
-<p>This is something called <a href="https://en.wikipedia.org/wiki/Pulse-width_modulation"target="_blank" rel="noopener">Pulse Width Modulation</a> (PWM). If we interpret the first signal as a 1 and the second signal as a 0, then we will end up with something like this:</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_06.jpg" alt="Signal demodulated by hand"  loading="lazy" /></p>
-<p>You might want to check multiple samples because the signal isn’t  very clear on some spots. Examples of a 1 and 0 signal are shown below:</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_07.png" alt="Signal in Audacity"  loading="lazy" /></p>
-<p>You will be able to get the same result much faster using <a href="https://github.com/merbanan/rtl_433"target="_blank" rel="noopener">rtl_433</a>.  It might be a good idea to verify you manually demodulated signal using  rtl_433 before creating the Arduino. In my case it guesses the  modulation type to be Pulse Width Modulation, after demodulation using  rtl_433 I end up with the same 1s and 0s as I’ve found manually.</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_08.png" alt="Signal demodulated by rtl_433"  loading="lazy" /></p>
-<h2>Creating the Arduino<span class="hx:absolute hx:-mt-20" id="creating-the-arduino"></span>
-    <a href="#creating-the-arduino" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>For sending signal we demodulated earlier, I’m using a 433MHz ASK  transmitter hooked up to my Arduino nano clone according to the  following Fritzing sketch:</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_09.png" alt="Arduino schematic"  loading="lazy" /></p>
-<p>The script for the Arduino can be found on the following GitHub repository: <a href="https://github.com/roaldnefs/ding-dong-ditch"target="_blank" rel="noopener">github.com/roaldnefs/ding-dong-ditch</a>. It uses the <a href="https://github.com/sui77/rc-switch.git"target="_blank" rel="noopener">RCSwitch</a> library for sending the signal. This library is written for power outlet sockets but my doorbell uses the same protocol.</p>
-<p>Once the Arduino is powered over USB or by battery, the doorbell should start ringing!</p>
-
+          
         </div>
-        <div class="hx:mt-16"></div>
-        
+        <div><div>
+              <h3>
+                <a
+                  style="color: inherit; text-decoration: none;"
+                  class="hx:block hx:font-semibold hx:mt-8 hx:text-2xl"
+                  href="/posts/2026/01/building-a-car-hacking-test-bench/"
+                  title="Building a Car Hacking Test Bench"
+                >
+                  Building a Car Hacking Test Bench
+                </a>
+              </h3>
+              <p class="hx:opacity-50 hx:text-sm hx:leading-7">January 4, 2026</p>
+            </div></div>
       </main>
     </article>
   </div>

@@ -2,19 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://roaldnefs.com/tags/automotive/</loc>
+    <lastmod>2026-01-04T00:00:00+02:00</lastmod>
+  </url><url>
     <loc>https://roaldnefs.com/posts/</loc>
-    <lastmod>2024-12-25T00:00:00+02:00</lastmod>
+    <lastmod>2026-01-04T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/posts/2026/01/building-a-car-hacking-test-bench/</loc>
+    <lastmod>2026-01-04T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/tags/featured/</loc>
-    <lastmod>2024-12-25T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://roaldnefs.com/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/</loc>
-    <lastmod>2024-12-25T00:00:00+02:00</lastmod>
+    <lastmod>2026-01-04T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/</loc>
-    <lastmod>2024-12-25T00:00:00+02:00</lastmod>
+    <lastmod>2026-01-04T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/tags/</loc>
+    <lastmod>2026-01-04T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/</loc>
     <lastmod>2024-12-25T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/categories/</loc>
