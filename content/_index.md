@@ -37,30 +37,30 @@ layout: hextra-home
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
+    title="Building a Car Hacking Test Bench"
+    subtitle="Building a Car Hacking Test Bench."
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
+    image="/images/posts/2026/01/03/w203.jpeg"
+    imageClass="hx:w-[110%]"
+    link="/posts/2026/01/building-a-car-hacking-test-bench/"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(39,91,225,0.25),hsla(0,0%,100%,0));"
+  >}}
+  {{< hextra/feature-card
     title="Spoofing Microchips"
     subtitle="Spoofing Microchips used for Animal Identification."
     class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/posts/2022/11/30/microchip-2.jpeg"
-    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
+    imageClass="hx:w-[110%]"
     link="/posts/2022/11/spoofing-microchips-used-for-animal-identification/"
-    style="background: radial-gradient(ellipse at 50% 80%,rgba(39,91,225,0.25),hsla(0,0%,100%,0));"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.25),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Ding Dong Ditch"
     subtitle="Ding Dong Ditch using SDR and Arduino."
     class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/posts/2020/01/03/ding-dong-ditch_09.png"
-    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
+    imageClass="hx:w-[110%]"
     link="/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/"
-    style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.25),hsla(0,0%,100%,0));"
-  >}}
-  {{< hextra/feature-card
-    title="Hardware Reversing "
-    subtitle="Hardware Reversing the Sitecom Wireless Router 150N X1."
-    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
-    image="/images/posts/2019/12/15/sitecom_03.jpg"
-    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
-    link="/posts/2019/12/hardware-reverse-a-wireless-router/"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.25),hsla(0,0%,100%,0));"
   >}}
 {{< /hextra/feature-grid >}}
@@ -79,7 +79,7 @@ layout: hextra-home
     subtitle="Talk at aiGrunn 2025."
     class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/talks/aigrunn-2025.png"
-    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
+    imageClass="hx:w-[110%]"
     link="https://www.youtube.com/watch?v=ii90UM4S5B0"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(39,91,225,0.25),hsla(0,0%,100%,0));"
   >}}
@@ -88,7 +88,7 @@ layout: hextra-home
     subtitle="Talk at pyGrunn 2025."
     class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/talks/pygrunn-2025.png"
-    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
+    imageClass="hx:w-[110%]"
     link="https://www.youtube.com/watch?v=Wnn3krHydwE"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.25),hsla(0,0%,100%,0));"
   >}}
@@ -97,7 +97,7 @@ layout: hextra-home
     subtitle="Talk at pyGrunn 2024."
     class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/talks/pygrunn-2024.png"
-    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
+    imageClass="hx:w-[110%]"
     link="https://www.youtube.com/watch?v=s22WKWZO1Eg"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.25),hsla(0,0%,100%,0));"
   >}}
