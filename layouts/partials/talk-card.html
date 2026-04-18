@@ -1,0 +1,23 @@
+{{- $talk := . -}}
+<article class="card">
+  <div class="card-kicker">Talk</div>
+  <h3 class="card-title">
+    {{ with $talk.URL }}
+      <a href="{{ . }}" rel="noopener noreferrer" target="_blank">{{ $talk.Title }}</a>
+    {{ else }}
+      {{ $talk.Title }}
+    {{ end }}
+  </h3>
+  <div class="card-meta">
+    {{ with $talk.Date }}
+      <time datetime="{{ . }}">{{ (time.AsTime .).Format "Jan 2, 2006" }}</time>
+    {{ end }}
+    {{ with $talk.Location }}<span>&middot; {{ . }}</span>{{ end }}
+  </div>
+  {{ with $talk.Description }}<p class="card-summary">{{ . }}</p>{{ end }}
+  {{ with $talk.Slides }}
+    <div class="card-footer">
+      <a href="{{ . }}">View slides &rarr;</a>
+    </div>
+  {{ end }}
+</article>

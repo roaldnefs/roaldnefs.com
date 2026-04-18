@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+
+<title>{{ block "title" . }}{{ if and .Title (ne .Title site.Title) }}{{ .Title }} — {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}{{ end }}</title>
+
+{{ with .Description | default site.Params.description }}
+<meta name="description" content="{{ . }}">
+{{ end }}
+
+{{ with site.Params.author.name }}<meta name="author" content="{{ . }}">{{ end }}
+
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ .Title | default site.Title }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with .Summary }}<meta property="og:description" content="{{ . | plainify }}">{{ end }}
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="{{ .Permalink }}">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+
+{{ range .AlternativeOutputFormats }}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ site.Title }}">
+{{ end }}
+
+{{ with resources.Get "css/main.css" }}
+  {{ $css := . | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{ end }}

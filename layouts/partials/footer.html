@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-col">
+      <div class="site-footer-sigil">// end_of_transmission</div>
+      <div>{{ i18n "copyright" | default (printf "© %d %s" now.Year site.Title) }}</div>
+    </div>
+    <div class="site-footer-col site-footer-links">
+      <a href="/posts/">Blog</a>
+      <a href="/about/">About</a>
+      <a href="/posts/index.xml" class="inline-icon">
+        {{ partial "icon.html" "rss" }}
+        <span>RSS</span>
+      </a>
+    </div>
+  </div>
+</footer>

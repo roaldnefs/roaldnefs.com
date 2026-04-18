@@ -1,0 +1,46 @@
+{{ define "main" }}
+<section>
+  <header class="article-header">
+    <div class="container">
+      <h1 class="article-title">{{ .Title }}</h1>
+      {{ with .Content }}
+        <div class="hero-subtitle">{{ . }}</div>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="container">
+    {{ $pages := .RegularPagesRecursive }}
+    {{ if .IsHome }}
+      {{ $pages = where site.RegularPages "Section" "posts" }}
+    {{ end }}
+
+    {{ if $pages }}
+      <ul class="post-list">
+        {{ range $pages.ByDate.Reverse }}
+          <li>
+            {{ $cats := slice }}
+            {{ range .Params.tags }}
+              {{ if ne . "featured" }}{{ $cats = $cats | append . }}{{ end }}
+            {{ end }}
+            {{ with $cats }}
+              <div class="post-list-kicker">{{ index . 0 }}</div>
+            {{ end }}
+            <h2 class="post-list-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+            <div class="post-list-meta">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+              <span>&middot;</span>
+              <span>{{ .ReadingTime }} min read</span>
+            </div>
+            {{ with .Summary }}
+              <p class="post-list-summary">{{ . | plainify | truncate 240 }}</p>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

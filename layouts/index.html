@@ -1,0 +1,91 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="container">
+    <div class="hero-kicker">// blog</div>
+    <h1 class="hero-title">{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="hero-subtitle">{{ . }}</div>
+    {{ end }}
+  </div>
+</section>
+
+<div class="container">
+  <div class="section-title-wrap">
+    <h2 class="section-title">Currently</h2>
+  </div>
+  <div class="card-grid">
+    <article class="card currently-card">
+      <div class="card-kicker">job</div>
+      <h3 class="card-title">CTO at <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></h3>
+      <p class="card-summary">We help organizations build and secure systems, from code and cloud infrastructure to the hardware and protocols behind it. Security research, pentesting, and platform engineering, all in one team.</p>
+      <div class="card-footer">
+        <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Visit warpnet.nl &rarr;</a>
+      </div>
+    </article>
+    <article class="card currently-card">
+      <div class="card-kicker">community</div>
+      <h3 class="card-title">Co-organizer</h3>
+      <p class="card-summary">Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
+    </article>
+  </div>
+
+  {{ $featuredPosts := where site.RegularPages "Params.featured" true }}
+  {{ $featuredPosts = $featuredPosts.ByDate.Reverse }}
+  {{ with $featuredPosts | first 3 }}
+    <div class="section-title-wrap">
+      <h2 class="section-title">Featured posts</h2>
+      <a href="/posts/">All posts &rarr;</a>
+    </div>
+    <div class="card-grid three">
+      {{ range . }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{ $talks := slice }}
+  {{ range $key, $talk := site.Data.talks }}
+    {{ $talks = $talks | append $talk }}
+  {{ end }}
+  {{ $talks = sort $talks "Date" "desc" }}
+  {{ with $talks | first 3 }}
+    <div class="section-title-wrap">
+      <h2 class="section-title">Featured talks</h2>
+    </div>
+    <div class="card-grid three">
+      {{ range . }}
+        {{ partial "talk-card.html" . }}
+      {{ end }}
+    </div>
+  {{ end }}
+
+  <div class="section-title-wrap">
+    <h2 class="section-title">Recent posts</h2>
+    <a href="/posts/">Browse archive &rarr;</a>
+  </div>
+  <ul class="post-list">
+    {{ range first 5 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+      <li>
+        {{ $cats := slice }}
+        {{ range .Params.tags }}
+          {{ if ne . "featured" }}{{ $cats = $cats | append . }}{{ end }}
+        {{ end }}
+        {{ with $cats }}
+          <div class="post-list-kicker">{{ index . 0 }}</div>
+        {{ end }}
+        <h3 class="post-list-title">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+        <div class="post-list-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+          <span>&middot;</span>
+          <span>{{ .ReadingTime }} min read</span>
+        </div>
+        {{ with .Summary }}
+          <p class="post-list-summary">{{ . | plainify | truncate 200 }}</p>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

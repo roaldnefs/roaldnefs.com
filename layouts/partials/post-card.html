@@ -1,0 +1,21 @@
+{{- $page := . -}}
+<article class="card">
+  {{ $cats := slice }}
+  {{ range $page.Params.tags }}
+    {{ if ne . "featured" }}{{ $cats = $cats | append . }}{{ end }}
+  {{ end }}
+  {{ with $cats }}
+    <div class="card-kicker">{{ index . 0 }}</div>
+  {{ end }}
+  <h3 class="card-title">
+    <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+  </h3>
+  <div class="card-meta">
+    <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
+    <span>&middot; {{ $page.ReadingTime }} min read</span>
+  </div>
+  <p class="card-summary">{{ $page.Summary | plainify | truncate 160 }}</p>
+  <div class="card-footer">
+    <a href="{{ $page.RelPermalink }}">Read more &rarr;</a>
+  </div>
+</article>

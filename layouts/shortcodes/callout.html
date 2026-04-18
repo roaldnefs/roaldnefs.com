@@ -1,0 +1,9 @@
+{{- $type := .Get "type" | default "info" -}}
+{{- $prefix := "note:" -}}
+{{- if eq $type "warning" -}}{{- $prefix = "warning:" -}}{{- end -}}
+{{- if eq $type "error" -}}{{- $prefix = "error:" -}}{{- end -}}
+{{- if eq $type "info" -}}{{- $prefix = "info:" -}}{{- end -}}
+<aside class="callout callout-{{ $type }}">
+  <span class="callout-prefix">{{ $prefix }}</span>
+  <div class="callout-body">{{ .Inner | markdownify }}</div>
+</aside>

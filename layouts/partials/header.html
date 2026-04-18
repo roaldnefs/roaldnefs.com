@@ -1,0 +1,37 @@
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-title">
+      <a href="{{ "/" | relURL }}">{{ site.Title }}</a>
+    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-cb" aria-hidden="true">
+    <label for="nav-toggle" class="nav-toggle" aria-label="Toggle menu" role="button" tabindex="0">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </label>
+    <nav class="site-nav" aria-label="Primary">
+      {{ range site.Menus.main }}
+        {{ if ne .Params.type "search" }}
+          {{ $icon := .Params.icon }}
+          {{ $url := "" }}
+          {{ with .PageRef }}{{ $url = relURL . }}{{ end }}
+          {{ with .URL }}{{ $url = . }}{{ end }}
+          {{ $current := and $.IsPage (eq $.RelPermalink .PageRef) }}
+          {{ $external := hasPrefix $url "http" }}
+          <a href="{{ $url }}"
+             {{ if $current }}aria-current="page"{{ end }}
+             {{ if $external }}rel="me noopener" target="_blank"{{ end }}
+             class="{{ with $icon }}icon-link{{ end }}"
+             aria-label="{{ .Name }}">
+            {{ if $icon }}
+              {{ partial "icon.html" $icon }}
+              <span class="sr-only">{{ .Name }}</span>
+            {{ else }}
+              {{ .Name }}
+            {{ end }}
+          </a>
+        {{ end }}
+      {{ end }}
+    </nav>
+  </div>
+</header>

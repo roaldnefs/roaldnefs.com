@@ -1,0 +1,59 @@
+{{ define "main" }}
+<article>
+  <header class="article-header">
+    <div class="container">
+      {{ if eq .Section "posts" }}
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="{{ "/" | relURL }}">Home</a>
+          <span class="breadcrumb-sep">&rsaquo;</span>
+          <a href="{{ "/posts/" | relURL }}">Blog</a>
+          {{ $cats := slice }}
+          {{ range .Params.tags }}
+            {{ if ne . "featured" }}{{ $cats = $cats | append . }}{{ end }}
+          {{ end }}
+          {{ with $cats }}
+            {{ $first := index . 0 }}
+            <span class="breadcrumb-sep">&rsaquo;</span>
+            <a href="{{ "/tags/" | relURL }}{{ $first | urlize }}/">{{ $first | title }}</a>
+          {{ end }}
+        </nav>
+      {{ end }}
+      <h1 class="article-title">{{ .Title }}</h1>
+      {{ if eq .Section "posts" }}
+        <div class="byline">
+          {{ with .Params.authors }}
+            <span>Written by <span class="author">{{ index . 0 }}</span></span>
+            <span class="dot">·</span>
+          {{ else }}
+            {{ with site.Params.author.name }}
+              <span>Written by <span class="author">{{ . }}</span></span>
+              <span class="dot">·</span>
+            {{ end }}
+          {{ end }}
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+          <span class="dot">·</span>
+          <span class="read-time">{{ .ReadingTime }} min read</span>
+        </div>
+      {{ end }}
+    </div>
+  </header>
+  <div class="container">
+    <div class="prose">
+      {{ .Content }}
+    </div>
+    {{ $visibleTags := slice }}
+    {{ range .Params.tags }}
+      {{ if ne . "featured" }}{{ $visibleTags = $visibleTags | append . }}{{ end }}
+    {{ end }}
+    {{ if and (eq .Section "posts") $visibleTags }}
+      <div class="post-footer">
+        <ul class="tag-list">
+          {{ range $visibleTags }}
+            <li><a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </div>
+</article>
+{{ end }}

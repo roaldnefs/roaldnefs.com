@@ -6,6 +6,8 @@ authors:
   - Roald Nefs
 categories:
   - Hardware hacking
+tags:
+  - hardware hacking
 draft: false
 ---
 

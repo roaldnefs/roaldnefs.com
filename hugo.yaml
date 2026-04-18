@@ -1,12 +1,21 @@
 title: Roald Nefs
 baseURL: https://roaldnefs.com/
+languageCode: en-us
+
+enableRobotsTXT: true
 
 permalinks:
   posts: /posts/:year/:month/:slug/
 
-module:
-  imports:
-  - path: github.com/imfing/hextra
+markup:
+  highlight:
+    style: monokai
+    noClasses: true
+    lineNos: false
+    tabWidth: 2
+  goldmark:
+    renderer:
+      unsafe: true
 
 menu:
   main:
@@ -25,10 +34,6 @@ menu:
     - name: About
       pageRef: /about/
       weight: 5
-    - name: Search
-      weight: 6
-      params:
-        type: search
     - name: GitHub
       weight: 7
       url: "https://github.com/roaldnefs"
@@ -46,12 +51,7 @@ menu:
         icon: mastodon
 
 params:
-  navbar:
-    displayTitle: true
-    displayLogo: false
-  theme:
-    default: system
-    displayToggle: true
-  footer:
-    displayPoweredBy: false
-    displayCopyright: true
+  description: Personal research blog on security, platform engineering, and hardware hacking.
+  author:
+    name: Roald Nefs
+    email: info@roaldnefs.com

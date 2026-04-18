@@ -7,6 +7,7 @@ authors:
 tags:
   - featured
   - automotive
+  - hardware hacking
 draft: false
 featured: true
 summary: Modern cars are computers on wheel, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I dipped my toes in the automotive security scene. It's now time to take a deep dive. So I bought a car.
