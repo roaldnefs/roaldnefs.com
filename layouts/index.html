@@ -1,11 +1,20 @@
 {{ define "main" }}
 <section class="hero">
   <div class="container">
-    <div class="hero-kicker">// blog</div>
-    <h1 class="hero-title">{{ .Title }}</h1>
-    {{ with .Content }}
-      <div class="hero-subtitle">{{ . }}</div>
-    {{ end }}
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-kicker">// blog</div>
+        <h1 class="hero-title">{{ .Title }}</h1>
+        {{ with .Content }}
+          <div class="hero-subtitle">{{ . }}</div>
+        {{ end }}
+      </div>
+      <div class="hero-portrait">
+        <img src="{{ "/images/authors/roald-nefs.png" | relURL }}"
+             alt="Roald Nefs"
+             width="240" height="240" loading="eager">
+      </div>
+    </div>
   </div>
 </section>
 
