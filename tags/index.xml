@@ -1,19 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Roald Nefs – Tags</title>
+    <title>Tags on Roald Nefs</title>
     <link>https://roaldnefs.com/tags/</link>
     <description>Recent content in Tags on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0200</lastBuildDate>
+    <language>en-us</language>
+    <managingEditor>info@roaldnefs.com (Roald Nefs)</managingEditor>
+    <webMaster>info@roaldnefs.com (Roald Nefs)</webMaster>
+    <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Automotive</title>
+      <link>https://roaldnefs.com/tags/automotive/</link>
+      <pubDate>Sun, 04 Jan 2026 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/tags/automotive/</guid>
+      <description></description>
+      <featured>no</featured>
+    </item>
     
-	  <atom:link href="https://roaldnefs.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Featured</title>
+      <link>https://roaldnefs.com/tags/featured/</link>
+      <pubDate>Sun, 04 Jan 2026 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/tags/featured/</guid>
+      <description></description>
+      <featured>no</featured>
+    </item>
     
-    
-      
-        
-      
-    
+    <item>
+      <title>Hardware Hacking</title>
+      <link>https://roaldnefs.com/tags/hardware-hacking/</link>
+      <pubDate>Sun, 04 Jan 2026 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/tags/hardware-hacking/</guid>
+      <description></description>
+      <featured>no</featured>
+    </item>
     
   </channel>
 </rss>

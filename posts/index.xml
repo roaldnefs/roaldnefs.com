@@ -1,19 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Roald Nefs – Blog</title>
+    <title>Blog on Roald Nefs</title>
     <link>https://roaldnefs.com/posts/</link>
     <description>Recent content in Blog on Roald Nefs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0200</lastBuildDate>
+    <language>en-us</language>
+    <managingEditor>info@roaldnefs.com (Roald Nefs)</managingEditor>
+    <webMaster>info@roaldnefs.com (Roald Nefs)</webMaster>
+    <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building a Car Hacking Test Bench</title>
+      <link>https://roaldnefs.com/posts/2026/01/building-a-car-hacking-test-bench/</link>
+      <pubDate>Sun, 04 Jan 2026 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2026/01/building-a-car-hacking-test-bench/</guid>
+      <description>Modern cars are computers on wheel, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I dipped my toes in the automotive security scene. It&amp;rsquo;s now time to take a deep dive. So I bought a car.</description>
+      <featured>yes</featured>
+    </item>
     
-	  <atom:link href="https://roaldnefs.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to extract an AppImage and add it to the Ubuntu Sidebar</title>
+      <link>https://roaldnefs.com/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/</link>
+      <pubDate>Wed, 25 Dec 2024 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/</guid>
+      <description>&lt;p&gt;In this post, we&amp;rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&amp;rsquo;ll use &lt;strong&gt;SavvyCAN&lt;/strong&gt;, a CANBus reverse engineering tool.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
     
+    <item>
+      <title>Committing Changes to a Pull Request Branch Created from a Fork</title>
+      <link>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</link>
+      <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</guid>
+      <description>&lt;p&gt;Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the &lt;a href=&#34;https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;required permissions&lt;/a&gt;
+ and there aren&amp;rsquo;t any branch restrictions that will prevent committing.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
     
-      
-        
-      
+    <item>
+      <title>Spoofing Microchips used for Animal Identification</title>
+      <link>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</link>
+      <pubDate>Wed, 30 Nov 2022 15:19:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</guid>
+      <description>&lt;p&gt;A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal&amp;rsquo;s owner. During animal trials and events the microchips are often used to verify the animals identity.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
     
+    <item>
+      <title>How to Automatically Generate Clients for your REST API</title>
+      <link>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</link>
+      <pubDate>Sat, 19 Dec 2020 15:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</guid>
+      <description>&lt;p&gt;While helping a colleague with adding some code to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq Python SDK&lt;/a&gt;
+ to allow him to retrieve some additional information from the API (&lt;a href=&#34;https://github.com/bunq/sdk_python/issues/148&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq/sdk_python#148&lt;/a&gt;
+), we noticed that the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;
+ was automatically generated. We&amp;rsquo;ve eventually ended up monkey patching the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;
+, as we couldn&amp;rsquo;t make a pull request to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;
+ and the API specification or SDK generator wasn&amp;rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
+    <item>
+      <title>Git Branching</title>
+      <link>https://roaldnefs.com/posts/2020/05/git-branching/</link>
+      <pubDate>Sun, 10 May 2020 23:20:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2020/05/git-branching/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with that main line, it&amp;rsquo;s called branching. Unlike may other version control systems, the Git branching model is lightweight. Each Git branch is simply just a file containing the 40 character SHA-1 checksum of the commit it points to. You can nearly instantaneous create or switch branches. It&amp;rsquo;s therefore not surprising that Git users are encouraged to use workflows that branch and merge often.&lt;/p&gt;</description>
+      <featured>no</featured>
+    </item>
+    
+    <item>
+      <title>Getting Started with Git</title>
+      <link>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</link>
+      <pubDate>Mon, 20 Apr 2020 13:46:59 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Git is a &lt;a href=&#34;https://book.git-scm.com/about/free-and-open-source&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;free and opensource&lt;/a&gt;
+ distributed version control system designed to handle everything from small to very large projects with speed and efficiency. While working with Git I often get asked questions about best practices or the more advanced usage of Git e.g.: a &lt;em&gt;rebase&lt;/em&gt;, &lt;em&gt;merge conflict&lt;/em&gt; or how to &lt;em&gt;cherry pick&lt;/em&gt;. This post will serve as my personal Git reference as well as a getting started guide for my colleagues and friends.&lt;/p&gt;</description>
+      <featured>no</featured>
+    </item>
+    
+    <item>
+      <title>How To Create a Visual Studio Code Extension Pack</title>
+      <link>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</link>
+      <pubDate>Fri, 17 Apr 2020 08:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</guid>
+      <description>&lt;p&gt;Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&amp;rsquo;ll create a Extension Pack for SaltStack requested in &lt;a href=&#34;https://github.com/korekontrol/vscode-saltstack/issues/5&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;korekontrol/vscode-saltstack#5&lt;/a&gt;
+.&lt;/p&gt;</description>
+      <featured>no</featured>
+    </item>
+    
+    <item>
+      <title>Ding Dong Ditch using SDR and Arduino</title>
+      <link>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</guid>
+      <description>&lt;p&gt;In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.&lt;/p&gt;
+&lt;p&gt;This project is heavily based upon the &lt;a href=&#34;https://samy.pl/dingdong/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Digital Ding Dong Ditch&lt;/a&gt;
+ by &lt;a href=&#34;https://samy.pl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Samy Kamkar&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;The video is a short demonstration of the Ding Dong Ditch device.  Once it’s powered by USB (or a battery) it will send out a RF signal  every few seconds which will ring the doorbell.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
+    <item>
+      <title>Hardware Reversing the Sitecom Wireless Router 150N X1</title>
+      <link>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</guid>
+      <description>&lt;p&gt;Last week I&amp;rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&amp;rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (&lt;em&gt;top left in the picture&lt;/em&gt;). In this post we will go through the process of connecting to an unknown serial interface.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_01.jpg&#34; alt=&#34;Inside of the Sitecom Wireless Router 150N X1&#34;&gt;&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
+    <item>
+      <title>Update YARD Stick One Firmware</title>
+      <link>https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/</link>
+      <pubDate>Thu, 17 Jan 2019 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/</guid>
+      <description>&lt;p&gt;Today I received my &lt;a href=&#34;https://greatscottgadgets.com/yardstickone/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;YARD Stick One&lt;/a&gt;
+ (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle  can transmit and receive digital wireless signals at frequencies below  1GHz. The YARD Stick One is not a SDR, because the I/Q  samples are directly demodulated by the chipset instead of send to the  host over USB. The YARD Stick One therefore isn’t compatible with any  SDR software, but you can use something called &lt;a href=&#34;https://github.com/atlas0fd00m/rfcat.git&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;rfcat&lt;/a&gt;
+.&lt;/p&gt;</description>
+      <featured>no</featured>
+    </item>
+    
+    <item>
+      <title>Software Defined Radio on Linux</title>
+      <link>https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/</link>
+      <pubDate>Sun, 06 Jan 2019 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/</guid>
+      <description>&lt;p&gt;In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are  instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;Start by installing the required packages for downloading and compiling the rtl-sdr package. The &lt;code&gt;libusb-1.0-0-dev&lt;/code&gt; package provides a C library used for accessing USB devices (e.g. the RTL-SDR).&lt;/p&gt;</description>
+      <featured>no</featured>
+    </item>
     
   </channel>
 </rss>
