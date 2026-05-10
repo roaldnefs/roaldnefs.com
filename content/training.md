@@ -4,31 +4,64 @@ type: about
 width: full
 toc: false
 ---
-Whether you're a seasoned engineer, a curious developer, or a security-minded hobbyist ready to explore new territory, my workshops are designed to empower hands-on learning.
+I run hands-on workshops on **automotive security** and **hardware hacking**. They're the kind of sessions I'd want to attend myself: short on slideware, long on probes, packets, and breaking things you actually own. Sessions are tailored to the audience, from a one-hour primer to a full day in the lab.
 
-## 🚗 Hands-on Hacking Automotive Systems
-Today's vehicles are computers on wheels, and just like any other connected system, they require strong security. This foundational workshop teaches participants how vehicles communicate, and where vulnerabilities may exist.
+<figure class="home-feature">
+  <div class="home-feature-images">
+    <img src="/images/training/car-hacking-village-bsides-luxembourg-2026.jpeg"
+         alt="Attendees at the Car Hacking Village booth at BSides Luxembourg 2026, with instrument clusters and laptops on a workshop table."
+         loading="lazy">
+    <img src="/images/training/car-hacking-village-cluster.jpeg"
+         alt="A powered Škoda Fabia instrument cluster on a workshop bench beside a laptop running the WebUSB CAN console."
+         loading="lazy">
+  </div>
+  <figcaption><em>Photos: DLH, BSides Luxembourg 2026.</em></figcaption>
+</figure>
 
-### What You'll Learn
-- How modern vehicle networks work.
-- Guided, hands-on interaction with CAN bus tooling in a **controlled lab environment**, including:
-  - Reading and interpreting CAN traffic.
-  - Sending CAN traffic.
-  - Executing attacks on the CAN bus.
+## Hands-on Hacking Automotive Systems
+Modern vehicles are computers on wheels. Dozens of ECUs talk over CAN, LIN, and increasingly automotive Ethernet. Yet most engineers, and most security teams, have never put a probe on one. This workshop closes that gap.
 
-### Who This Is For
-- IT Engineers
-- Cybersecurity Researchers
-- Students & Professionals entering cybersecurity
+Participants leave able to read live CAN traffic, craft and replay frames, and reason about where the real attack surface lives in a connected vehicle.
 
-### Format Options
-Choose the learning experience that best fits your audience, time, and depth of exploration.
+### What you'll learn
+- How modern vehicle networks work, and where the trust boundaries are (or aren't).
+- Reading and decoding live CAN traffic from a controlled lab bench.
+- Crafting, injecting, and replaying frames using open-source tooling like [WebUSB CAN](https://roaldnefs.github.io/webusb-can/).
+- Walking through realistic attacks on the CAN bus, end to end.
+- Where to go next: tools, references, and how to build your own bench.
 
-| Duration | Style | Description |
+### Who it's for
+- Security engineers and researchers branching into vehicle systems.
+- Platform and embedded engineers working with CAN-connected hardware.
+- Students and professionals moving into automotive cybersecurity.
+
+No prior automotive experience required. Comfort with a Linux terminal helps.
+
+### Format options
+Pick the format that fits your audience, time, and how deep you want to go.
+
+| Duration | Style | What's included |
 |:----------|:--------|:-------------|
-| **1-Hour Talk** | Lecture | High-level introduction and live demonstrations |
-| **Half-Day Workshop** | Hands-on Lab | Guided CAN bus sniffing + ECU communication exercises |
-| **Full-Day Technical Training** | Deep Dive | Reverse engineering demos, tool setup, practice lab kits |
+| **1-hour talk** | Lecture + live demo | High-level introduction with live CAN demonstrations |
+| **Half-day workshop** | Hands-on lab | Guided CAN sniffing, decoding, and injection on a lab bench |
+| **Full-day technical training** | Deep dive | Reverse engineering, attack labs, and a take-home tooling setup |
+| **[Car Hacking Village](https://roaldnefs.github.io/car-hacking-village/)** | Drop-in conference booth | Multi-day village with rotating demos and try-it-yourself stations |
 
-## Book a Session
-Interested in hosting a workshop for your company, school, or event? Contact me at [info@roaldnefs.com](mailto:info@roaldnefs).
+All formats are delivered on a controlled lab setup. No production vehicles or shared infrastructure are touched.
+
+## Past sessions
+- **BSides Luxembourg 2026**: automotive hacking workshop and Car Hacking Village. [View slides](/bsidesluxembourg.pdf).
+- **BSides Groningen 2026**: Car Hacking Village.
+- **BSides Kraków 2025**: automotive hacking talk.
+- **PyGrunn 2025**: automotive hacking talk, Python edition.
+- **J-Fall 2025**: automotive hacking talk, Java edition.
+- **Cyberbootcamp 2025**: automotive hacking workshop for Challenge the Cyber.
+- **CJIB 2025**: automotive hacking workshop.
+- Hardware hacking sessions for the [Warpnet](https://warpnet.nl) team and at community meetups.
+
+## Book a session
+Hosting a meetup, internal training day, or a track at your conference? Reach out at [info@roaldnefs.com](mailto:info@roaldnefs.com) and include:
+
+- Audience size and background.
+- Preferred format (talk, half-day, or full day).
+- Tentative date and location. On-site in NL/EU is easiest; remote works for the talk format.

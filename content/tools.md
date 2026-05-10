@@ -15,11 +15,12 @@ Hardware hacking is all about exploring, testing, and interacting with physical 
 ### Automotive
 
 #### Hardware
-- [CANable Pro](https://canable.io/): A small low-cost open source USB to CAN adapter.
+- [CANable Pro](https://canable.io/): A small low-cost open source USB to CAN adapter. We also have a custom [BSides Groningen](https://bsidesgrunn.org/) badge variant based on it.
 - [CL2000](https://www.csselectronics.com/products/can-bus-logger-interface-cl2000): A CAN bus logger and USB interface with a real-time clock.
 
-### Software
+#### Software
 - [SavvyCAN](https://www.savvycan.com/): A cross platform CAN bus reverse engineering and capture tool.
+- [WebUSB CAN](https://roaldnefs.github.io/webusb-can/): A browser-based CAN bus console that talks to USB CAN adapters over WebUSB ([source](https://github.com/roaldnefs/webusb-can)).
 
 ### RF
 

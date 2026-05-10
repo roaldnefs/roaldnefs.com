@@ -3,10 +3,19 @@
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
-        <div class="hero-kicker">// blog</div>
+        <div class="hero-kicker">// HOME</div>
         <h1 class="hero-title">{{ .Title }}</h1>
         {{ with .Content }}
           <div class="hero-subtitle">{{ . }}</div>
+        {{ end }}
+        {{ with (where site.RegularPages "Section" "posts").ByDate.Reverse | first 1 }}
+          {{ range . }}
+            <div class="hero-latest">
+              <span class="hero-latest-label">// latest</span>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              <span class="hero-latest-date">— {{ .Date.Format "Jan 2006" }}</span>
+            </div>
+          {{ end }}
         {{ end }}
       </div>
       <div class="hero-portrait">
@@ -22,7 +31,7 @@
   <div class="section-title-wrap">
     <h2 class="section-title">Currently</h2>
   </div>
-  <div class="card-grid">
+  <div class="card-grid three">
     <article class="card currently-card">
       <div class="card-kicker">job</div>
       <h3 class="card-title">CTO at <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></h3>
@@ -36,7 +45,31 @@
       <h3 class="card-title">Co-organizer</h3>
       <p class="card-summary">Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
     </article>
+    <article class="card currently-card">
+      <div class="card-kicker">training</div>
+      <h3 class="card-title">Workshops &amp; talks</h3>
+      <p class="card-summary">Hands-on automotive security and hardware hacking sessions for conferences, meetups, and internal training days. From a one-hour talk to a full day in the lab.</p>
+      <div class="card-footer">
+        <a href="{{ "/training/" | relURL }}">Book a session &rarr;</a>
+      </div>
+    </article>
   </div>
+
+  <figure class="home-feature">
+    <div class="home-feature-images">
+      <img src="{{ "/images/training/car-hacking-village-bsides-luxembourg-2026.jpeg" | relURL }}"
+           alt="Attendees at the Car Hacking Village booth at BSides Luxembourg 2026, with instrument clusters and laptops on a workshop table."
+           loading="lazy">
+      <img src="{{ "/images/training/car-hacking-village-cluster.jpeg" | relURL }}"
+           alt="A powered Škoda Fabia instrument cluster on a workshop bench beside a laptop running the WebUSB CAN console."
+           loading="lazy">
+    </div>
+    <figcaption>
+      Car Hacking Village at BSides Luxembourg 2026 ·
+      Photos: DLH ·
+      <a href="{{ "/training/" | relURL }}">See past sessions &rarr;</a>
+    </figcaption>
+  </figure>
 
   {{ $featuredPosts := where site.RegularPages "Params.featured" true }}
   {{ $featuredPosts = $featuredPosts.ByDate.Reverse }}
@@ -48,22 +81,6 @@
     <div class="card-grid three">
       {{ range . }}
         {{ partial "post-card.html" . }}
-      {{ end }}
-    </div>
-  {{ end }}
-
-  {{ $talks := slice }}
-  {{ range $key, $talk := site.Data.talks }}
-    {{ $talks = $talks | append $talk }}
-  {{ end }}
-  {{ $talks = sort $talks "Date" "desc" }}
-  {{ with $talks | first 3 }}
-    <div class="section-title-wrap">
-      <h2 class="section-title">Featured talks</h2>
-    </div>
-    <div class="card-grid three">
-      {{ range . }}
-        {{ partial "talk-card.html" . }}
       {{ end }}
     </div>
   {{ end }}
