@@ -15,12 +15,7 @@
       <pubDate>Sat, 19 Dec 2020 15:00:00 +0200</pubDate>
       <author>info@roaldnefs.com (Roald Nefs)</author>
       <guid>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</guid>
-      <description>&lt;p&gt;While helping a colleague with adding some code to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq Python SDK&lt;/a&gt;
- to allow him to retrieve some additional information from the API (&lt;a href=&#34;https://github.com/bunq/sdk_python/issues/148&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq/sdk_python#148&lt;/a&gt;
-), we noticed that the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;
- was automatically generated. We&amp;rsquo;ve eventually ended up monkey patching the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;
-, as we couldn&amp;rsquo;t make a pull request to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;
- and the API specification or SDK generator wasn&amp;rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.&lt;/p&gt;</description>
+      <description>&lt;p&gt;While helping a colleague with adding some code to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq Python SDK&lt;/a&gt; to allow him to retrieve some additional information from the API (&lt;a href=&#34;https://github.com/bunq/sdk_python/issues/148&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq/sdk_python#148&lt;/a&gt;), we noticed that the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt; was automatically generated. We&amp;rsquo;ve eventually ended up monkey patching the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;, as we couldn&amp;rsquo;t make a pull request to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt; and the API specification or SDK generator wasn&amp;rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.&lt;/p&gt;</description>
       <featured>yes</featured>
     </item>
     
@@ -42,8 +37,7 @@
       <author>info@roaldnefs.com (Roald Nefs)</author>
       <guid>https://roaldnefs.com/posts/2020/04/getting-started-with-git/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Git is a &lt;a href=&#34;https://book.git-scm.com/about/free-and-open-source&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;free and opensource&lt;/a&gt;
- distributed version control system designed to handle everything from small to very large projects with speed and efficiency. While working with Git I often get asked questions about best practices or the more advanced usage of Git e.g.: a &lt;em&gt;rebase&lt;/em&gt;, &lt;em&gt;merge conflict&lt;/em&gt; or how to &lt;em&gt;cherry pick&lt;/em&gt;. This post will serve as my personal Git reference as well as a getting started guide for my colleagues and friends.&lt;/p&gt;</description>
+&lt;p&gt;Git is a &lt;a href=&#34;https://book.git-scm.com/about/free-and-open-source&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;free and opensource&lt;/a&gt; distributed version control system designed to handle everything from small to very large projects with speed and efficiency. While working with Git I often get asked questions about best practices or the more advanced usage of Git e.g.: a &lt;em&gt;rebase&lt;/em&gt;, &lt;em&gt;merge conflict&lt;/em&gt; or how to &lt;em&gt;cherry pick&lt;/em&gt;. This post will serve as my personal Git reference as well as a getting started guide for my colleagues and friends.&lt;/p&gt;</description>
       <featured>no</featured>
     </item>
     
@@ -53,8 +47,7 @@
       <pubDate>Fri, 17 Apr 2020 08:00:00 +0200</pubDate>
       <author>info@roaldnefs.com (Roald Nefs)</author>
       <guid>https://roaldnefs.com/posts/2020/04/how-to-create-a-visual-studio-code-extension-pack/</guid>
-      <description>&lt;p&gt;Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&amp;rsquo;ll create a Extension Pack for SaltStack requested in &lt;a href=&#34;https://github.com/korekontrol/vscode-saltstack/issues/5&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;korekontrol/vscode-saltstack#5&lt;/a&gt;
-.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we&amp;rsquo;ll create a Extension Pack for SaltStack requested in &lt;a href=&#34;https://github.com/korekontrol/vscode-saltstack/issues/5&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;korekontrol/vscode-saltstack#5&lt;/a&gt;.&lt;/p&gt;</description>
       <featured>no</featured>
     </item>
     

@@ -18,9 +18,8 @@
 <meta property="og:title" content="Training &amp; Workshops">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://roaldnefs.com/training/">
-<meta property="og:description" content="Whether you&rsquo;re a seasoned engineer, a curious developer, or a security-minded hobbyist ready to explore new territory, my workshops are designed to empower hands-on learning.
-🚗 Hands-on Hacking Automotive Systems Today&rsquo;s vehicles are computers on wheels, and just like any other connected system, they require strong security. This foundational workshop teaches participants how vehicles communicate, and where vulnerabilities may exist.
-What You&rsquo;ll Learn How modern vehicle networks work. Guided, hands-on interaction with CAN bus tooling in a controlled lab environment, including: Reading and interpreting CAN traffic. Sending CAN traffic. Executing attacks on the CAN bus. Who This Is For IT Engineers Cybersecurity Researchers Students &amp; Professionals entering cybersecurity Format Options Choose the learning experience that best fits your audience, time, and depth of exploration.
+<meta property="og:description" content="I run hands-on workshops on automotive security and hardware hacking. They&rsquo;re the kind of sessions I&rsquo;d want to attend myself: short on slideware, long on probes, packets, and breaking things you actually own. Sessions are tailored to the audience, from a one-hour primer to a full day in the lab.
+Photos: DLH, BSides Luxembourg 2026. Hands-on Hacking Automotive Systems Modern vehicles are computers on wheels. Dozens of ECUs talk over CAN, LIN, and increasingly automotive Ethernet. Yet most engineers, and most security teams, have never put a probe on one. This workshop closes that gap.
 ">
 <meta name="twitter:card" content="summary">
 
@@ -35,7 +34,7 @@ What You&rsquo;ll Learn How modern vehicle networks work. Guided, hands-on inter
 
 
   
-  <link rel="stylesheet" href="/css/main.min.c7974219fe7c653354922e454d0b98e3dd9a6038e35deab5c23ab215064dd237.css" integrity="sha256-x5dCGf58ZTNUki5FTQuY492aYDjjXeq1wjqyFQZN0jc=">
+  <link rel="stylesheet" href="/css/main.min.a7b9c35c6e44cf22d337000532014393f541ee7faa24181c91c5e6316ada9181.css" integrity="sha256-p7nDXG5EzyLTNwAFMgFDk/VB7n&#43;qJBgckcXmMWrakYE=">
 
 
 </head>
@@ -215,57 +214,88 @@ What You&rsquo;ll Learn How modern vehicle networks work. Guided, hands-on inter
   </header>
   <div class="container">
     <div class="prose">
-      <p>Whether you&rsquo;re a seasoned engineer, a curious developer, or a security-minded hobbyist ready to explore new territory, my workshops are designed to empower hands-on learning.</p>
-<h2 id="-hands-on-hacking-automotive-systems">🚗 Hands-on Hacking Automotive Systems</h2>
-<p>Today&rsquo;s vehicles are computers on wheels, and just like any other connected system, they require strong security. This foundational workshop teaches participants how vehicles communicate, and where vulnerabilities may exist.</p>
-<h3 id="what-youll-learn">What You&rsquo;ll Learn</h3>
+      <p>I run hands-on workshops on <strong>automotive security</strong> and <strong>hardware hacking</strong>. They&rsquo;re the kind of sessions I&rsquo;d want to attend myself: short on slideware, long on probes, packets, and breaking things you actually own. Sessions are tailored to the audience, from a one-hour primer to a full day in the lab.</p>
+<figure class="home-feature">
+  <div class="home-feature-images">
+    <img src="/images/training/car-hacking-village-bsides-luxembourg-2026.jpeg"
+         alt="Attendees at the Car Hacking Village booth at BSides Luxembourg 2026, with instrument clusters and laptops on a workshop table."
+         loading="lazy">
+    <img src="/images/training/car-hacking-village-cluster.jpeg"
+         alt="A powered Škoda Fabia instrument cluster on a workshop bench beside a laptop running the WebUSB CAN console."
+         loading="lazy">
+  </div>
+  <figcaption><em>Photos: DLH, BSides Luxembourg 2026.</em></figcaption>
+</figure>
+<h2 id="hands-on-hacking-automotive-systems">Hands-on Hacking Automotive Systems</h2>
+<p>Modern vehicles are computers on wheels. Dozens of ECUs talk over CAN, LIN, and increasingly automotive Ethernet. Yet most engineers, and most security teams, have never put a probe on one. This workshop closes that gap.</p>
+<p>Participants leave able to read live CAN traffic, craft and replay frames, and reason about where the real attack surface lives in a connected vehicle.</p>
+<h3 id="what-youll-learn">What you&rsquo;ll learn</h3>
 <ul>
-<li>How modern vehicle networks work.</li>
-<li>Guided, hands-on interaction with CAN bus tooling in a <strong>controlled lab environment</strong>, including:
+<li>How modern vehicle networks work, and where the trust boundaries are (or aren&rsquo;t).</li>
+<li>Reading and decoding live CAN traffic from a controlled lab bench.</li>
+<li>Crafting, injecting, and replaying frames using open-source tooling like <a href="https://roaldnefs.github.io/webusb-can/" rel="noopener noreferrer" target="_blank">WebUSB CAN</a>.</li>
+<li>Walking through realistic attacks on the CAN bus, end to end.</li>
+<li>Where to go next: tools, references, and how to build your own bench.</li>
+</ul>
+<h3 id="who-its-for">Who it&rsquo;s for</h3>
 <ul>
-<li>Reading and interpreting CAN traffic.</li>
-<li>Sending CAN traffic.</li>
-<li>Executing attacks on the CAN bus.</li>
+<li>Security engineers and researchers branching into vehicle systems.</li>
+<li>Platform and embedded engineers working with CAN-connected hardware.</li>
+<li>Students and professionals moving into automotive cybersecurity.</li>
 </ul>
-</li>
-</ul>
-<h3 id="who-this-is-for">Who This Is For</h3>
-<ul>
-<li>IT Engineers</li>
-<li>Cybersecurity Researchers</li>
-<li>Students &amp; Professionals entering cybersecurity</li>
-</ul>
-<h3 id="format-options">Format Options</h3>
-<p>Choose the learning experience that best fits your audience, time, and depth of exploration.</p>
+<p>No prior automotive experience required. Comfort with a Linux terminal helps.</p>
+<h3 id="format-options">Format options</h3>
+<p>Pick the format that fits your audience, time, and how deep you want to go.</p>
 <table>
   <thead>
       <tr>
           <th style="text-align: left">Duration</th>
           <th style="text-align: left">Style</th>
-          <th style="text-align: left">Description</th>
+          <th style="text-align: left">What&rsquo;s included</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><strong>1-Hour Talk</strong></td>
-          <td style="text-align: left">Lecture</td>
-          <td style="text-align: left">High-level introduction and live demonstrations</td>
+          <td style="text-align: left"><strong>1-hour talk</strong></td>
+          <td style="text-align: left">Lecture + live demo</td>
+          <td style="text-align: left">High-level introduction with live CAN demonstrations</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>Half-Day Workshop</strong></td>
-          <td style="text-align: left">Hands-on Lab</td>
-          <td style="text-align: left">Guided CAN bus sniffing + ECU communication exercises</td>
+          <td style="text-align: left"><strong>Half-day workshop</strong></td>
+          <td style="text-align: left">Hands-on lab</td>
+          <td style="text-align: left">Guided CAN sniffing, decoding, and injection on a lab bench</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>Full-Day Technical Training</strong></td>
-          <td style="text-align: left">Deep Dive</td>
-          <td style="text-align: left">Reverse engineering demos, tool setup, practice lab kits</td>
+          <td style="text-align: left"><strong>Full-day technical training</strong></td>
+          <td style="text-align: left">Deep dive</td>
+          <td style="text-align: left">Reverse engineering, attack labs, and a take-home tooling setup</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong><a href="https://roaldnefs.github.io/car-hacking-village/" rel="noopener noreferrer" target="_blank">Car Hacking Village</a></strong></td>
+          <td style="text-align: left">Drop-in conference booth</td>
+          <td style="text-align: left">Multi-day village with rotating demos and try-it-yourself stations</td>
       </tr>
   </tbody>
 </table>
-<h2 id="book-a-session">Book a Session</h2>
-<p>Interested in hosting a workshop for your company, school, or event? Contact me at <a href="mailto:info@roaldnefs">info@roaldnefs.com</a>
-.</p>
+<p>All formats are delivered on a controlled lab setup. No production vehicles or shared infrastructure are touched.</p>
+<h2 id="past-sessions">Past sessions</h2>
+<ul>
+<li><strong>BSides Luxembourg 2026</strong>: automotive hacking workshop and Car Hacking Village. <a href="/bsidesluxembourg.pdf">View slides</a>.</li>
+<li><strong>BSides Groningen 2026</strong>: Car Hacking Village.</li>
+<li><strong>BSides Kraków 2025</strong>: automotive hacking talk.</li>
+<li><strong>PyGrunn 2025</strong>: automotive hacking talk, Python edition.</li>
+<li><strong>J-Fall 2025</strong>: automotive hacking talk, Java edition.</li>
+<li><strong>Cyberbootcamp 2025</strong>: automotive hacking workshop for Challenge the Cyber.</li>
+<li><strong>CJIB 2025</strong>: automotive hacking workshop.</li>
+<li>Hardware hacking sessions for the <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a> team and at community meetups.</li>
+</ul>
+<h2 id="book-a-session">Book a session</h2>
+<p>Hosting a meetup, internal training day, or a track at your conference? Reach out at <a href="mailto:info@roaldnefs.com">info@roaldnefs.com</a> and include:</p>
+<ul>
+<li>Audience size and background.</li>
+<li>Preferred format (talk, half-day, or full day).</li>
+<li>Tentative date and location. On-site in NL/EU is easiest; remote works for the talk format.</li>
+</ul>
 
     </div>
   </div>

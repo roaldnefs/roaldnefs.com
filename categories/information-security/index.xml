@@ -15,8 +15,7 @@
       <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
       <author>info@roaldnefs.com (Roald Nefs)</author>
       <guid>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</guid>
-      <description>&lt;p&gt;Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the &lt;a href=&#34;https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;required permissions&lt;/a&gt;
- and there aren&amp;rsquo;t any branch restrictions that will prevent committing.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&amp;rsquo;t want to force the required work on the pull requests original author. You&amp;rsquo;re allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the &lt;a href=&#34;https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;required permissions&lt;/a&gt; and there aren&amp;rsquo;t any branch restrictions that will prevent committing.&lt;/p&gt;</description>
       <featured>yes</featured>
     </item>
     
@@ -37,9 +36,7 @@
       <author>info@roaldnefs.com (Roald Nefs)</author>
       <guid>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</guid>
       <description>&lt;p&gt;In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.&lt;/p&gt;
-&lt;p&gt;This project is heavily based upon the &lt;a href=&#34;https://samy.pl/dingdong/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Digital Ding Dong Ditch&lt;/a&gt;
- by &lt;a href=&#34;https://samy.pl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Samy Kamkar&lt;/a&gt;
-.&lt;/p&gt;
+&lt;p&gt;This project is heavily based upon the &lt;a href=&#34;https://samy.pl/dingdong/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Digital Ding Dong Ditch&lt;/a&gt; by &lt;a href=&#34;https://samy.pl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Samy Kamkar&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The video is a short demonstration of the Ding Dong Ditch device.  Once it’s powered by USB (or a battery) it will send out a RF signal  every few seconds which will ring the doorbell.&lt;/p&gt;</description>
       <featured>yes</featured>
     </item>

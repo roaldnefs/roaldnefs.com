@@ -19,7 +19,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/">
 <meta property="og:description" content="In this post we will be building a device to play Ding Dong Ditch digitally. The device will ring the doorbell every several seconds without pressing the button. This project is all about reverse engineering radio frequencies using a RLT-SDR and creating hardware using an Arduino.
-This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar .
+This project is heavily based upon the Digital Ding Dong Ditch by Samy Kamkar.
 The video is a short demonstration of the Ding Dong Ditch device. Once it’s powered by USB (or a battery) it will send out a RF signal every few seconds which will ring the doorbell.
 ">
 <meta name="twitter:card" content="summary">
@@ -35,7 +35,7 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
 
 
   
-  <link rel="stylesheet" href="/css/main.min.c7974219fe7c653354922e454d0b98e3dd9a6038e35deab5c23ab215064dd237.css" integrity="sha256-x5dCGf58ZTNUki5FTQuY492aYDjjXeq1wjqyFQZN0jc=">
+  <link rel="stylesheet" href="/css/main.min.a7b9c35c6e44cf22d337000532014393f541ee7faa24181c91c5e6316ada9181.css" integrity="sha256-p7nDXG5EzyLTNwAFMgFDk/VB7n&#43;qJBgckcXmMWrakYE=">
 
 
 </head>
@@ -237,9 +237,7 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
   <div class="container">
     <div class="prose">
       <p>In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.</p>
-<p>This project is heavily based upon the <a href="https://samy.pl/dingdong/" rel="noopener noreferrer" target="_blank">Digital Ding Dong Ditch</a>
- by <a href="https://samy.pl/" rel="noopener noreferrer" target="_blank">Samy Kamkar</a>
-.</p>
+<p>This project is heavily based upon the <a href="https://samy.pl/dingdong/" rel="noopener noreferrer" target="_blank">Digital Ding Dong Ditch</a> by <a href="https://samy.pl/" rel="noopener noreferrer" target="_blank">Samy Kamkar</a>.</p>
 <p>The video is a short demonstration of the Ding Dong Ditch device.  Once it’s powered by USB (or a battery) it will send out a RF signal  every few seconds which will ring the doorbell.</p>
 <h2 id="requirements">Requirements</h2>
 <p>For this project you will need several tools and modules to record and send the signal.</p>
@@ -250,8 +248,7 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
 <h3 id="software">Software</h3>
 <p><strong>RTL-SDR &amp; GQRX:</strong> RTL-SDR and Gqrx will be used to  locate, record and visualise the radio signal. Instruction about  installing RTL-SDR and Gqrx on Linux can be found in Software Defined Radio on Linux post.</p>
 <p><strong>Audacity:</strong> Audacity is used for taking a closer look at the radio signal in order to demodulate it by hand.</p>
-<p><strong>Ding Dong Ditch:</strong> The Arduino sketch for this project can be found at my GitHub: <a href="https://github.com/roaldnefs/ding-dong-ditch" rel="noopener noreferrer" target="_blank">github.com/roaldnefs/ding-dong-ditch</a>
-.</p>
+<p><strong>Ding Dong Ditch:</strong> The Arduino sketch for this project can be found at my GitHub: <a href="https://github.com/roaldnefs/ding-dong-ditch" rel="noopener noreferrer" target="_blank">github.com/roaldnefs/ding-dong-ditch</a>.</p>
 <h2 id="locate-the-signal">Locate the Signal</h2>
 <p>We will start by locating the signal send when pressing the doorbell  button. On most devices you will find the frequency on the device  itself. In my case the doorbell receiver clearly states that it uses the  433MHz frequency:</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_01.png" alt="Select Plus doorbell sticker"></p>
@@ -262,12 +259,9 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
 <h2 id="recording-and-demodulating-the-signal">Recording and Demodulating the Signal</h2>
 <p>Modulation allow data to be transmitted via radio via radio  frequencies. After locating the signal you’ll need to determine the type  of modulation used by the doorbell. By looking at the waterfall in Gqrx  I was able to determine that the signal send by the doorbell is  amplitude modulated. The most common modulation schemes you will see in  radio are:</p>
 <ul>
-<li><a href="http://en.wikipedia.org/wiki/Amplitude_modulation" rel="noopener noreferrer" target="_blank">Amplitude Modulation</a>
- (AM)</li>
-<li><a href="http://en.wikipedia.org/wiki/Frequency_modulation" rel="noopener noreferrer" target="_blank">Frequency Modulation</a>
- (FM)</li>
-<li><a href="http://en.wikipedia.org/wiki/Phase_modulation" rel="noopener noreferrer" target="_blank">Phase Modulation</a>
- (PM)</li>
+<li><a href="http://en.wikipedia.org/wiki/Amplitude_modulation" rel="noopener noreferrer" target="_blank">Amplitude Modulation</a> (AM)</li>
+<li><a href="http://en.wikipedia.org/wiki/Frequency_modulation" rel="noopener noreferrer" target="_blank">Frequency Modulation</a> (FM)</li>
+<li><a href="http://en.wikipedia.org/wiki/Phase_modulation" rel="noopener noreferrer" target="_blank">Phase Modulation</a> (PM)</li>
 </ul>
 <p>Amplitude modulation, as the name might suggest, modulates the  amplitude while frequency modulation will modulate the frequency. If you  are listing to 100.0 FM radio, the signal is actually send between  99.995MHz and 100.005MHz.</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_03.gif" alt="Modulation"></p>
@@ -275,12 +269,9 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>rtl_fm -M am -f 433879000 -s 2000000 - | sox -t raw -r 2000000 -e signed-integer -b 16 -c 1 -V1 - doorbell.wav
 </span></span></code></pre></div><p>Since we are dealing with digital information (1s and 0s) the modulation will be more discrete than just AM, common schemes are:</p>
 <ul>
-<li><a href="http://en.wikipedia.org/wiki/Amplitude-shift_keying" rel="noopener noreferrer" target="_blank">Amplitude Shift Keying</a>
- (ASK)</li>
-<li><a href="http://en.wikipedia.org/wiki/Frequency-shift_keying" rel="noopener noreferrer" target="_blank">Frequency Shift Keying</a>
- (FSK)</li>
-<li><a href="http://en.wikipedia.org/wiki/Phase-shift_keying" rel="noopener noreferrer" target="_blank">Phase Shift Keying</a>
- (PSK)</li>
+<li><a href="http://en.wikipedia.org/wiki/Amplitude-shift_keying" rel="noopener noreferrer" target="_blank">Amplitude Shift Keying</a> (ASK)</li>
+<li><a href="http://en.wikipedia.org/wiki/Frequency-shift_keying" rel="noopener noreferrer" target="_blank">Frequency Shift Keying</a> (FSK)</li>
+<li><a href="http://en.wikipedia.org/wiki/Phase-shift_keying" rel="noopener noreferrer" target="_blank">Phase Shift Keying</a> (PSK)</li>
 </ul>
 <p>When looking at the audio in Audacity it appears to be sending the same signal multiple times in a row.</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_04.png" alt="Recorded signal in Audacity"></p>
@@ -291,20 +282,16 @@ The video is a short demonstration of the Ding Dong Ditch device. Once it’s po
 <li><code>﹍|﹉﹉|</code>, the high signal seems to be twice as long as the low signal</li>
 <li><code>﹍﹍|﹉|</code>, the low signal seems to be twice as long as the high signal</li>
 </ul>
-<p>This is something called <a href="https://en.wikipedia.org/wiki/Pulse-width_modulation" rel="noopener noreferrer" target="_blank">Pulse Width Modulation</a>
- (PWM). If we interpret the first signal as a 1 and the second signal as a 0, then we will end up with something like this:</p>
+<p>This is something called <a href="https://en.wikipedia.org/wiki/Pulse-width_modulation" rel="noopener noreferrer" target="_blank">Pulse Width Modulation</a> (PWM). If we interpret the first signal as a 1 and the second signal as a 0, then we will end up with something like this:</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_06.jpg" alt="Signal demodulated by hand"></p>
 <p>You might want to check multiple samples because the signal isn’t  very clear on some spots. Examples of a 1 and 0 signal are shown below:</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_07.png" alt="Signal in Audacity"></p>
-<p>You will be able to get the same result much faster using <a href="https://github.com/merbanan/rtl_433" rel="noopener noreferrer" target="_blank">rtl_433</a>
-.  It might be a good idea to verify you manually demodulated signal using  rtl_433 before creating the Arduino. In my case it guesses the  modulation type to be Pulse Width Modulation, after demodulation using  rtl_433 I end up with the same 1s and 0s as I’ve found manually.</p>
+<p>You will be able to get the same result much faster using <a href="https://github.com/merbanan/rtl_433" rel="noopener noreferrer" target="_blank">rtl_433</a>.  It might be a good idea to verify you manually demodulated signal using  rtl_433 before creating the Arduino. In my case it guesses the  modulation type to be Pulse Width Modulation, after demodulation using  rtl_433 I end up with the same 1s and 0s as I’ve found manually.</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_08.png" alt="Signal demodulated by rtl_433"></p>
 <h2 id="creating-the-arduino">Creating the Arduino</h2>
 <p>For sending signal we demodulated earlier, I’m using a 433MHz ASK  transmitter hooked up to my Arduino nano clone according to the  following Fritzing sketch:</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_09.png" alt="Arduino schematic"></p>
-<p>The script for the Arduino can be found on the following GitHub repository: <a href="https://github.com/roaldnefs/ding-dong-ditch" rel="noopener noreferrer" target="_blank">github.com/roaldnefs/ding-dong-ditch</a>
-. It uses the <a href="https://github.com/sui77/rc-switch.git" rel="noopener noreferrer" target="_blank">RCSwitch</a>
- library for sending the signal. This library is written for power outlet sockets but my doorbell uses the same protocol.</p>
+<p>The script for the Arduino can be found on the following GitHub repository: <a href="https://github.com/roaldnefs/ding-dong-ditch" rel="noopener noreferrer" target="_blank">github.com/roaldnefs/ding-dong-ditch</a>. It uses the <a href="https://github.com/sui77/rc-switch.git" rel="noopener noreferrer" target="_blank">RCSwitch</a> library for sending the signal. This library is written for power outlet sockets but my doorbell uses the same protocol.</p>
 <p>Once the Arduino is powered over USB or by battery, the doorbell should start ringing!</p>
 
     </div>
