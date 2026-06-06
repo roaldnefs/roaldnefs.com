@@ -50,11 +50,13 @@ Pick the format that fits your audience, time, and how deep you want to go.
 All formats are delivered on a controlled lab setup. No production vehicles or shared infrastructure are touched.
 
 ## Past sessions
+- **OrangeCon 2026**: Car Hacking Village.
 - **BSides Luxembourg 2026**: automotive hacking workshop and Car Hacking Village. [View slides](/bsidesluxembourg.pdf).
 - **BSides Groningen 2026**: Car Hacking Village.
 - **BSides Kraków 2025**: automotive hacking talk.
 - **PyGrunn 2025**: automotive hacking talk, Python edition.
 - **J-Fall 2025**: automotive hacking talk, Java edition.
+- **OrangeCon 2025**: automotive hacking workshop.
 - **Cyberbootcamp 2025**: automotive hacking workshop for Challenge the Cyber.
 - **CJIB 2025**: automotive hacking workshop.
 - Hardware hacking sessions for the [Warpnet](https://warpnet.nl) team and at community meetups.
