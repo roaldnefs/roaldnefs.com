@@ -40,6 +40,13 @@ Hardware hacking is all about exploring, testing, and interacting with physical 
 #### Hardware
 - [GreatFET One](https://greatscottgadgets.com/greatfet/one/): A powerful USB interface for hardware hacking and development.
 
+### Embedded
+
+#### Hardware
+- CH341A: A low-cost USB programmer for SPI flash and I2C EEPROM chips, used to dump and write firmware directly from the chip.
+- Logic Analyzer 24MHz 8CH: A cheap 8-channel logic analyzer clone, useful for sniffing UART, SPI, I2C, and other digital protocols. Works well with [PulseView](https://sigrok.org/wiki/PulseView).
+- USB to UART (FTDI FT232 / CP2102): USB serial adapters for connecting to UART debug ports on embedded hardware. The CP2102 operates at 3.3 V; use a logic level converter when the target runs at a different voltage.
+
 ### Soldering
 
 #### Hardware
