@@ -176,6 +176,29 @@
   &lt;/div&gt;
   &lt;figcaption&gt;&lt;em&gt;Photos: DLH, BSides Luxembourg 2026.&lt;/em&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
+&lt;nav class=&#34;toc&#34;&gt;
+  &lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#hands-on-hacking-automotive-systems&#34;&gt;Hands-on Hacking Automotive Systems&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#what-youll-learn&#34;&gt;What you&amp;rsquo;ll learn&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#who-its-for&#34;&gt;Who it&amp;rsquo;s for&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#format-options&#34;&gt;Format options&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#hands-on-hardware-hacking&#34;&gt;Hands-on Hardware Hacking&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#what-youll-learn-1&#34;&gt;What you&amp;rsquo;ll learn&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#who-its-for-1&#34;&gt;Who it&amp;rsquo;s for&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#format-options-1&#34;&gt;Format options&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#past-sessions&#34;&gt;Past sessions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#book-a-session&#34;&gt;Book a session&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/nav&gt;
+
 &lt;h2 id=&#34;hands-on-hacking-automotive-systems&#34;&gt;Hands-on Hacking Automotive Systems&lt;/h2&gt;
 &lt;p&gt;Modern vehicles are computers on wheels. Dozens of ECUs talk over CAN, LIN, and increasingly automotive Ethernet. Yet most engineers, and most security teams, have never put a probe on one. This workshop closes that gap.&lt;/p&gt;</description>
       <featured>no</featured>
