@@ -4,13 +4,20 @@
 	<meta name="generator" content="Hugo 0.154.0">
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
+<script>
+  try {
+    var theme = localStorage.getItem("theme");
+    if (theme) document.documentElement.dataset.theme = theme;
+  } catch (e) {}
+</script>
 
 <title>Roald Nefs</title>
 
 
-<meta name="description" content="Notes, workshops, and hardware hacking — a personal site by Roald Nefs.">
+<meta name="description" content="Notes on software engineering, security, and AI, plus workshops and hardware hacking — a personal site by Roald Nefs.">
 
 
 <meta name="author" content="Roald Nefs">
@@ -19,13 +26,14 @@
 <meta property="og:title" content="Roald Nefs">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://roaldnefs.com/">
-<meta property="og:description" content="Notes, experiments, and write-ups on security, platform engineering, and whatever hardware I&rsquo;ve taken apart lately. Also home to the hands-on workshops that come out of those weekend rabbit holes.
+<meta property="og:description" content="Notes, experiments, and write-ups on software engineering, security, AI, platform engineering, and whatever hardware I&rsquo;ve taken apart lately. Also home to the hands-on workshops that come out of those weekend rabbit holes.
 ">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://roaldnefs.com/">
 
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
@@ -34,237 +42,183 @@
   <link rel="alternate" type="application/rss&#43;xml" href="https://roaldnefs.com/index.xml" title="Roald Nefs">
 
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap">
+
 
   
-  <link rel="stylesheet" href="/css/main.min.a7b9c35c6e44cf22d337000532014393f541ee7faa24181c91c5e6316ada9181.css" integrity="sha256-p7nDXG5EzyLTNwAFMgFDk/VB7n&#43;qJBgckcXmMWrakYE=">
+  <link rel="stylesheet" href="/css/main.min.e359a6f124050bf88d8e0eb0c218b6c7676165dddd478883755365ab7b23b054.css" integrity="sha256-41mm8SQFC/iNjg6wwhi2x2dhZd3dR4iDdVNlq3sjsFQ=">
 
 
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
-  <header class="site-header">
+  <div class="frame">
+    <header class="site-header">
   <div class="site-header-inner">
-    <div class="site-title">
-      <a href="/">Roald Nefs</a>
-    </div>
+    <a class="site-title" href="/">
+      <img class="site-title-cutout" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180">
+      <span>Roald Nefs</span>
+    </a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle-cb" aria-hidden="true">
+    <nav class="site-nav" aria-label="Primary">
+      <div class="site-nav-links">
+        
+          
+            
+            
+            <a href="/" class="nav-link" aria-current="page">
+              <span>Home</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/posts/" class="nav-link">
+              <span>Blog</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/training/" class="nav-link">
+              <span>Training</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/tools/" class="nav-link">
+              <span>Tools</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/about/" class="nav-link">
+              <span>About</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
     <label for="nav-toggle" class="nav-toggle" aria-label="Toggle menu" role="button" tabindex="0">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </label>
-    <nav class="site-nav" aria-label="Primary">
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/"
-             
-             
-             class=""
-             aria-label="Home">
-            
-              Home
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/posts/"
-             
-             
-             class=""
-             aria-label="Blog">
-            
-              Blog
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/training/"
-             
-             
-             class=""
-             aria-label="Training">
-            
-              Training
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/tools/"
-             
-             
-             class=""
-             aria-label="Tools">
-            
-              Tools
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/about/"
-             
-             
-             class=""
-             aria-label="About">
-            
-              About
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/roaldnefs"
-             
-             rel="me noopener" target="_blank"
-             class="icon-link"
-             aria-label="GitHub">
-            
-              <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg>
-              <span class="sr-only">GitHub</span>
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/in/roaldnefs/"
-             
-             rel="me noopener" target="_blank"
-             class="icon-link"
-             aria-label="LinkedIn">
-            
-              <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-              <span class="sr-only">LinkedIn</span>
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="https://infosec.exchange/@roald"
-             
-             rel="me noopener" target="_blank"
-             class="icon-link"
-             aria-label="Mastodon">
-            
-              <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg>
-              <span class="sr-only">Mastodon</span>
-            
-          </a>
-        
-      
-    </nav>
   </div>
 </header>
 
-  <main id="main">
+    <main id="main">
+      
+<section class="band hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Roald Nefs</h1>
     
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-kicker">// HOME</div>
-        <h1 class="hero-title">Roald Nefs</h1>
+      <p class="hero-byline">
+        <span>CTO at</span>
         
-          <div class="hero-subtitle"><p>Notes, experiments, and write-ups on security, platform engineering, and whatever hardware I&rsquo;ve taken apart lately. Also home to the <a href="/training/">hands-on workshops</a> that come out of those weekend rabbit holes.</p>
+          
+          <a class="chip chip--warpnet" href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">
+            <span class="company-logo"><svg fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148.82 148.82"><path d="M0 0v148.82h148.82V0zm52.14 42.3h1.88L66.9 16.54l5.15 25.76h-1.88l.98 4.92h1.88l1.55 7.73 1.55-7.73h-1.88l.98-4.92h1.88l5.15-25.76L95.14 42.3h-1.88l2.46 4.92h1.88l.03.05-5.88 17.65h-1.52l-1.8 5.4-5.4-5.4h1.52l-9.97-9.97-9.97 9.97h-1.52l-5.4 5.4-1.8-5.4h1.52l-5.88-17.65.03-.05h-1.88zM20.8 62.63l7.71-15.41h-1.88l2.46-4.92h1.88l5.2-10.4 3.49 10.4h-1.88l1.65 4.92h1.88l5.93 17.7h-1.52l.51 1.51L36.16 76.5h1.52L25.9 88.28 23.56 76.5h-1.52l-2.29-11.58h1.52l-.45-2.29Zm95.05 43.59-3.35 3.4h-2.7L98.41 121.2h2.7L90.2 132.28 79.12 121.2h-2.7l-4.53-4.53-4.53 4.53h2.7l-10.65 10.65-10.78-10.65h-2.7l-11.72-11.58h2.7l-3.45-3.4h-7.68l-4.97-4.92h7.68l23.05-23.05 7.68 23.05 15.37-15.37 15.37 15.37 7.68-23.05 23.05 23.05h-7.68l-4.84 4.92zm12.04-41.31h-1.52l-2.31 11.58h1.52l-2.35 11.78-11.78-11.78h-1.52l-9.84-9.84.57-1.74h1.52l5.79-17.7h-1.88l1.61-4.92h1.88l3.4-10.38 5.19 10.38h-1.88l2.46 4.92h1.88l7.72 15.44-.45 2.26Z" data-name="Layer 1" style="fill:#fff"/></svg>
+</span>
+            <span>Warpnet</span>
+          </a>
+        
+          <span>&amp;</span>
+          <a class="chip chip--enlite" href="https://enlite.nl" rel="noopener noreferrer" target="_blank">
+            <img class="company-logo" src="/images/companies/enlite.png" alt="" width="1536" height="356" loading="lazy">
+            <span class="sr-only">Enlite</span>
+          </a>
+        
+      </p>
+    
+    
+      <div class="hero-subtitle"><p>Notes, experiments, and write-ups on software engineering, security, AI, platform engineering, and whatever hardware I&rsquo;ve taken apart lately. Also home to the <a href="/training/">hands-on workshops</a> that come out of those weekend rabbit holes.</p>
 </div>
-        
-        
-          
-            <div class="hero-latest">
-              <span class="hero-latest-label">// latest</span>
-              <a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a>
-              <span class="hero-latest-date">— Jan 2026</span>
-            </div>
-          
-        
-      </div>
-      <div class="hero-portrait">
-        <img src="/images/authors/roald-nefs.png"
-             alt="Roald Nefs"
-             width="240" height="240" loading="eager">
-      </div>
+    
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/posts/">Read the blog</a>
+      <a class="btn btn-secondary" href="/training/">Hands-on workshops</a>
     </div>
+  </div>
+  <div class="hero-visual">
+    <canvas class="hero-field" aria-hidden="true"></canvas>
+    <img class="hero-cutout"
+         src="/images/authors/roald-nefs-cutout.webp"
+         alt="Roald Nefs"
+         width="584" height="776" loading="eager" fetchpriority="high">
   </div>
 </section>
 
-<div class="container">
-  <div class="section-title-wrap">
-    <h2 class="section-title">Currently</h2>
+<section class="band">
+  <div class="band-head">
+    <h2 class="band-title">Companies</h2>
   </div>
-  <div class="card-grid three">
-    <article class="card currently-card">
-      <div class="card-kicker">job</div>
-      <h3 class="card-title">CTO at <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></h3>
-      <p class="card-summary">We help organizations build and secure systems, from code and cloud infrastructure to the hardware and protocols behind it. Security research, pentesting, and platform engineering, all in one team.</p>
-      <div class="card-footer">
-        <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Visit warpnet.nl &rarr;</a>
+  <div class="companies">
+  
+    <a class="company company--warpnet" href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">
+      <div class="company-head">
+        <span class="company-logo"><svg fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148.82 148.82"><path d="M0 0v148.82h148.82V0zm52.14 42.3h1.88L66.9 16.54l5.15 25.76h-1.88l.98 4.92h1.88l1.55 7.73 1.55-7.73h-1.88l.98-4.92h1.88l5.15-25.76L95.14 42.3h-1.88l2.46 4.92h1.88l.03.05-5.88 17.65h-1.52l-1.8 5.4-5.4-5.4h1.52l-9.97-9.97-9.97 9.97h-1.52l-5.4 5.4-1.8-5.4h1.52l-5.88-17.65.03-.05h-1.88zM20.8 62.63l7.71-15.41h-1.88l2.46-4.92h1.88l5.2-10.4 3.49 10.4h-1.88l1.65 4.92h1.88l5.93 17.7h-1.52l.51 1.51L36.16 76.5h1.52L25.9 88.28 23.56 76.5h-1.52l-2.29-11.58h1.52l-.45-2.29Zm95.05 43.59-3.35 3.4h-2.7L98.41 121.2h2.7L90.2 132.28 79.12 121.2h-2.7l-4.53-4.53-4.53 4.53h2.7l-10.65 10.65-10.78-10.65h-2.7l-11.72-11.58h2.7l-3.45-3.4h-7.68l-4.97-4.92h7.68l23.05-23.05 7.68 23.05 15.37-15.37 15.37 15.37 7.68-23.05 23.05 23.05h-7.68l-4.84 4.92zm12.04-41.31h-1.52l-2.31 11.58h1.52l-2.35 11.78-11.78-11.78h-1.52l-9.84-9.84.57-1.74h1.52l5.79-17.7h-1.88l1.61-4.92h1.88l3.4-10.38 5.19 10.38h-1.88l2.46 4.92h1.88l7.72 15.44-.45 2.26Z" data-name="Layer 1" style="fill:#fff"/></svg>
+</span>
       </div>
-    </article>
-    <article class="card currently-card">
-      <div class="card-kicker">community</div>
-      <h3 class="card-title">Co-organizer</h3>
-      <p class="card-summary">Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
-    </article>
-    <article class="card currently-card">
-      <div class="card-kicker">training</div>
-      <h3 class="card-title">Workshops &amp; talks</h3>
-      <p class="card-summary">Hands-on automotive security and hardware hacking sessions for conferences, meetups, and internal training days. From a one-hour talk to a full day in the lab.</p>
-      <div class="card-footer">
-        <a href="/training/">Book a session &rarr;</a>
+      <h3 class="company-name">Warpnet</h3>
+      <p class="company-tagline">Securing technology</p>
+      <p class="company-description">We help organizations build and secure systems, from code and cloud infrastructure to the hardware and protocols behind it. Security research, pentesting, and platform engineering, all in one team.</p>
+      <span class="company-link">warpnet.nl &rarr;</span>
+    </a>
+  
+    <a class="company company--enlite" href="https://enlite.nl" rel="noopener noreferrer" target="_blank">
+      <div class="company-head">
+        <img class="company-logo" src="/images/companies/enlite.png" alt="" width="1536" height="356" loading="lazy">
       </div>
-    </article>
-  </div>
+      <h3 class="company-name">Enlite</h3>
+      <p class="company-tagline">Secure &amp; effective software development</p>
+      <p class="company-description">We build software that is effective and secure, and that fits the way each organization works. From custom web applications to products like Secure Dropzone, Logspect, and Datamasker.</p>
+      <span class="company-link">enlite.nl &rarr;</span>
+    </a>
+  
+</div>
 
+</section>
+
+<section class="band">
+  <div class="band-head">
+    <h2 class="band-title">Community &amp; training</h2>
+    <a href="/training/">See past sessions &rarr;</a>
+  </div>
+  <div class="grid two">
+    <article class="cell">
+      <div class="kicker">community</div>
+      <h3 class="cell-title">Co-organizer</h3>
+      <p class="cell-summary">Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
+    </article>
+    <article class="cell">
+      <div class="kicker">training</div>
+      <h3 class="cell-title">Workshops &amp; talks</h3>
+      <p class="cell-summary">Hands-on automotive security and hardware hacking sessions for conferences, meetups, and internal training days. From a one-hour talk to a full day in the lab.</p>
+      <div class="cell-actions">
+        <a class="btn btn-primary" href="/training/#book-a-session">Book a session &rarr;</a>
+      </div>
+    </article>
+  </div>
   <figure class="home-feature">
     <div class="home-feature-images">
       <img src="/images/training/car-hacking-village-bsides-luxembourg-2026.jpeg"
@@ -276,212 +230,319 @@
     </div>
     <figcaption>
       Car Hacking Village at BSides Luxembourg 2026 ·
-      Photos: DLH ·
-      <a href="/training/">See past sessions &rarr;</a>
+      Photos: DLH
     </figcaption>
   </figure>
+</section>
 
-  
-  
-  
-    <div class="section-title-wrap">
-      <h2 class="section-title">Featured posts</h2>
+
+
+
+  <section class="band">
+    <div class="band-head">
+      <h2 class="band-title">Featured posts</h2>
       <a href="/posts/">All posts &rarr;</a>
     </div>
-    <div class="card-grid three">
+    <div class="grid three">
       
-        <article class="card">
+        <article class="cell card">
   
+    <div class="kicker">automotive</div>
   
-    
-  
-    
-  
-    
-  
-  
-    <div class="card-kicker">automotive</div>
-  
-  <h3 class="card-title">
+  <h3 class="cell-title">
     <a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a>
   </h3>
-  <div class="card-meta">
+  <p class="cell-summary">Modern cars are computers on wheel, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</p>
+  <div class="cell-meta">
     <time datetime="2026-01-04">Jan 4, 2026</time>
     <span>&middot; 4 min read</span>
   </div>
-  <p class="card-summary">Modern cars are computers on wheel, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</p>
-  <div class="card-footer">
-    <a href="/posts/2026/01/building-a-car-hacking-test-bench/">Read more &rarr;</a>
-  </div>
 </article>
 
       
-        <article class="card">
+        <article class="cell card">
   
-  
-    
-  
-  
-  <h3 class="card-title">
+  <h3 class="cell-title">
     <a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">How to extract an AppImage and add it to the Ubuntu Sidebar</a>
   </h3>
-  <div class="card-meta">
+  <p class="cell-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</p>
+  <div class="cell-meta">
     <time datetime="2024-12-25">Dec 25, 2024</time>
     <span>&middot; 2 min read</span>
   </div>
-  <p class="card-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</p>
-  <div class="card-footer">
-    <a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">Read more &rarr;</a>
-  </div>
 </article>
 
       
-        <article class="card">
+        <article class="cell card">
   
-  
-    
-  
-  
-  <h3 class="card-title">
+  <h3 class="cell-title">
     <a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Committing Changes to a Pull Request Branch Created from a Fork</a>
   </h3>
-  <div class="card-meta">
+  <p class="cell-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</p>
+  <div class="cell-meta">
     <time datetime="2024-01-03">Jan 3, 2024</time>
     <span>&middot; 1 min read</span>
   </div>
-  <p class="card-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</p>
-  <div class="card-footer">
-    <a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Read more &rarr;</a>
-  </div>
 </article>
 
       
     </div>
-  
+  </section>
 
-  <div class="section-title-wrap">
-    <h2 class="section-title">Recent posts</h2>
+
+<section class="band">
+  <div class="band-head">
+    <h2 class="band-title">Recent posts</h2>
     <a href="/posts/">Browse archive &rarr;</a>
   </div>
   <ul class="post-list">
-    
-      <li>
-        
-        
-          
-        
-          
-        
-          
-        
-        
-          <div class="post-list-kicker">automotive</div>
-        
-        <h3 class="post-list-title">
-          <a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a>
-        </h3>
-        <div class="post-list-meta">
-          <time datetime="2026-01-04">Jan 4, 2026</time>
-          <span>&middot;</span>
-          <span>4 min read</span>
-        </div>
+  
+    <li>
+      <div class="post-list-meta">
+        <time datetime="2026-01-04">Jan 4, 2026</time>
+        <span class="post-list-kicker">automotive</span>
+      </div>
+      <div class="post-list-body">
+        <h3 class="post-list-title"><a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a></h3>
         
           <p class="post-list-summary">Modern cars are computers on wheel, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I dipped my toes in the automotive security …</p>
         
-      </li>
-    
-      <li>
+        <span class="post-list-reading">4 min read</span>
+      </div>
+    </li>
+  
+    <li>
+      <div class="post-list-meta">
+        <time datetime="2024-12-25">Dec 25, 2024</time>
         
-        
-          
-        
-        
-        <h3 class="post-list-title">
-          <a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">How to extract an AppImage and add it to the Ubuntu Sidebar</a>
-        </h3>
-        <div class="post-list-meta">
-          <time datetime="2024-12-25">Dec 25, 2024</time>
-          <span>&middot;</span>
-          <span>2 min read</span>
-        </div>
+      </div>
+      <div class="post-list-body">
+        <h3 class="post-list-title"><a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">How to extract an AppImage and add it to the Ubuntu Sidebar</a></h3>
         
           <p class="post-list-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use SavvyCAN, a CANBus reverse engineering …</p>
         
-      </li>
-    
-      <li>
+        <span class="post-list-reading">2 min read</span>
+      </div>
+    </li>
+  
+    <li>
+      <div class="post-list-meta">
+        <time datetime="2024-01-03">Jan 3, 2024</time>
         
-        
-          
-        
-        
-        <h3 class="post-list-title">
-          <a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Committing Changes to a Pull Request Branch Created from a Fork</a>
-        </h3>
-        <div class="post-list-meta">
-          <time datetime="2024-01-03">Jan 3, 2024</time>
-          <span>&middot;</span>
-          <span>1 min read</span>
-        </div>
+      </div>
+      <div class="post-list-body">
+        <h3 class="post-list-title"><a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Committing Changes to a Pull Request Branch Created from a Fork</a></h3>
         
           <p class="post-list-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull requests original author. You&rsquo;re …</p>
         
-      </li>
-    
-      <li>
+        <span class="post-list-reading">1 min read</span>
+      </div>
+    </li>
+  
+    <li>
+      <div class="post-list-meta">
+        <time datetime="2022-11-30">Nov 30, 2022</time>
         
-        
-        
-        <h3 class="post-list-title">
-          <a href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">Spoofing Microchips used for Animal Identification</a>
-        </h3>
-        <div class="post-list-meta">
-          <time datetime="2022-11-30">Nov 30, 2022</time>
-          <span>&middot;</span>
-          <span>5 min read</span>
-        </div>
+      </div>
+      <div class="post-list-body">
+        <h3 class="post-list-title"><a href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">Spoofing Microchips used for Animal Identification</a></h3>
         
           <p class="post-list-summary">A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number …</p>
         
-      </li>
-    
-      <li>
+        <span class="post-list-reading">5 min read</span>
+      </div>
+    </li>
+  
+    <li>
+      <div class="post-list-meta">
+        <time datetime="2020-12-19">Dec 19, 2020</time>
         
-        
-        
-        <h3 class="post-list-title">
-          <a href="/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/">How to Automatically Generate Clients for your REST API</a>
-        </h3>
-        <div class="post-list-meta">
-          <time datetime="2020-12-19">Dec 19, 2020</time>
-          <span>&middot;</span>
-          <span>5 min read</span>
-        </div>
+      </div>
+      <div class="post-list-body">
+        <h3 class="post-list-title"><a href="/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/">How to Automatically Generate Clients for your REST API</a></h3>
         
           <p class="post-list-summary">While helping a colleague with adding some code to the bunq Python SDK to allow him to retrieve some additional information from the API (bunq/sdk_python#148), we noticed that the SDK was …</p>
         
-      </li>
-    
-  </ul>
-</div>
+        <span class="post-list-reading">5 min read</span>
+      </div>
+    </li>
+  
+</ul>
 
-  </main>
-  <footer class="site-footer">
-  <div class="site-footer-inner">
-    <div class="site-footer-col">
-      <div class="site-footer-sigil">// end_of_transmission</div>
-      <div>© 2026 Roald Nefs</div>
-    </div>
-    <div class="site-footer-col site-footer-links">
-      <a href="/posts/">Blog</a>
-      <a href="/about/">About</a>
-      <a href="/posts/index.xml" class="inline-icon">
-        <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg>
-        <span>RSS</span>
+</section>
+<script>
+  (function () {
+    var canvas = document.querySelector(".hero-field");
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext("2d");
+    var gap = 18, radius = 110, push = 10;
+    var w = 0, h = 0, dots = [], visible = true, pointerAt = 0;
+    var target = { x: 0.6, y: 0.45 }, pos = { x: 0.6, y: 0.45 };
+    var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dots = [];
+      for (var y = gap / 2; y < h; y += gap)
+        for (var x = gap / 2; x < w; x += gap) dots.push(x, y);
+    }
+
+    function draw(t) {
+      var px = pos.x * w, py = pos.y * h;
+      ctx.clearRect(0, 0, w, h);
+
+      
+      ctx.fillStyle = getComputedStyle(canvas).color;
+      for (var i = 0; i < dots.length; i += 2) {
+        var dx = dots[i] - px, dy = dots[i + 1] - py;
+        var d = Math.sqrt(dx * dx + dy * dy) || 1;
+        var f = Math.exp(-(d * d) / (2 * radius * radius));
+        var wave = Math.sin(t / 1400 + dots[i] * 0.02 + dots[i + 1] * 0.03) * 0.04;
+        var x = dots[i] + (dx / d) * f * push, y = dots[i + 1] + (dy / d) * f * push;
+        var s = 1.2 + f * 1.4;
+        ctx.globalAlpha = Math.min(1, 0.14 + wave + f * 0.45);
+        ctx.fillRect(x - s / 2, y - s / 2, s, s);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function loop(t) {
+      if (visible && !document.hidden) {
+        
+        if (t - pointerAt > 3000) {
+          target.x = 0.55 + Math.sin(t / 3100) * 0.25;
+          target.y = 0.5 + Math.cos(t / 2300) * 0.25;
+        }
+        pos.x += (target.x - pos.x) * 0.08;
+        pos.y += (target.y - pos.y) * 0.08;
+        draw(t);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener("pointermove", function (e) {
+      var r = canvas.getBoundingClientRect();
+      if (!r.width) return;
+      
+      target.x = Math.min(0.95, Math.max(0.1, (e.clientX - r.left) / r.width));
+      target.y = Math.min(0.95, Math.max(0.05, (e.clientY - r.top) / r.height));
+      pointerAt = performance.now();
+    }, { passive: true });
+
+    new ResizeObserver(function () { resize(); draw(0); }).observe(canvas);
+    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }).observe(canvas);
+    if (!still) requestAnimationFrame(loop);
+  })();
+</script>
+
+    </main>
+    <footer class="site-footer">
+  <div class="site-footer-main">
+    <div class="footer-brand">
+      <a class="site-title" href="/">
+        <img class="site-title-cutout" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180">
+        <span>Roald Nefs</span>
       </a>
+      <p>Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.</p>
+    </div>
+    <nav class="footer-col" aria-label="Pages">
+      <h2 class="footer-heading">Pages</h2>
+      <ul class="footer-links">
+        
+          
+        
+          
+            <li><a href="/posts/">Blog</a></li>
+          
+        
+          
+            <li><a href="/training/">Training</a></li>
+          
+        
+          
+            <li><a href="/tools/">Tools</a></li>
+          
+        
+          
+            <li><a href="/about/">About</a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+    <div class="footer-col">
+      <h2 class="footer-heading">Companies</h2>
+      <ul class="footer-links">
+        
+          <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
+        
+          <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
+        
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2 class="footer-heading">Follow</h2>
+      <ul class="footer-links">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a class="inline-icon" href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+          
+        
+          
+            <li><a class="inline-icon" href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+          
+        
+          
+            <li><a class="inline-icon" href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
+          
+        
+        <li><a class="inline-icon" href="/posts/index.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
+      </ul>
     </div>
   </div>
+  <div class="site-footer-bottom">
+    <div>© 2026 Roald Nefs</div>
+    <div class="site-footer-legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/cookies/">Cookies</a>
+      <button type="button" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+  <script>
+    document.querySelector(".theme-toggle").addEventListener("click", function () {
+      var root = document.documentElement;
+      var dark = root.dataset.theme
+        ? root.dataset.theme === "dark"
+        : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+    });
+  </script>
 </footer>
 
+  </div>
 </body>
 </html>

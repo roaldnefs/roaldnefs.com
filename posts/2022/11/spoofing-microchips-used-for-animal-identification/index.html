@@ -3,13 +3,20 @@
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
+<script>
+  try {
+    var theme = localStorage.getItem("theme");
+    if (theme) document.documentElement.dataset.theme = theme;
+  } catch (e) {}
+</script>
 
 <title>Spoofing Microchips used for Animal Identification — Roald Nefs</title>
 
 
-<meta name="description" content="Personal research blog on security, platform engineering, and hardware hacking.">
+<meta name="description" content="Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.">
 
 
 <meta name="author" content="Roald Nefs">
@@ -24,215 +31,124 @@
 
 <link rel="canonical" href="https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/">
 
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
 
 
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap">
+
 
   
-  <link rel="stylesheet" href="/css/main.min.a7b9c35c6e44cf22d337000532014393f541ee7faa24181c91c5e6316ada9181.css" integrity="sha256-p7nDXG5EzyLTNwAFMgFDk/VB7n&#43;qJBgckcXmMWrakYE=">
+  <link rel="stylesheet" href="/css/main.min.e359a6f124050bf88d8e0eb0c218b6c7676165dddd478883755365ab7b23b054.css" integrity="sha256-41mm8SQFC/iNjg6wwhi2x2dhZd3dR4iDdVNlq3sjsFQ=">
 
 
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
-  <header class="site-header">
+  <div class="frame">
+    <header class="site-header">
   <div class="site-header-inner">
-    <div class="site-title">
-      <a href="/">Roald Nefs</a>
-    </div>
+    <a class="site-title" href="/">
+      <img class="site-title-cutout" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180">
+      <span>Roald Nefs</span>
+    </a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle-cb" aria-hidden="true">
+    <nav class="site-nav" aria-label="Primary">
+      <div class="site-nav-links">
+        
+          
+            
+            
+            <a href="/" class="nav-link">
+              <span>Home</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/posts/" class="nav-link" aria-current="page">
+              <span>Blog</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/training/" class="nav-link">
+              <span>Training</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/tools/" class="nav-link">
+              <span>Tools</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+            
+            
+            <a href="/about/" class="nav-link">
+              <span>About</span>
+              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
     <label for="nav-toggle" class="nav-toggle" aria-label="Toggle menu" role="button" tabindex="0">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </label>
-    <nav class="site-nav" aria-label="Primary">
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/"
-             
-             
-             class=""
-             aria-label="Home">
-            
-              Home
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/posts/"
-             
-             
-             class=""
-             aria-label="Blog">
-            
-              Blog
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/training/"
-             
-             
-             class=""
-             aria-label="Training">
-            
-              Training
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/tools/"
-             
-             
-             class=""
-             aria-label="Tools">
-            
-              Tools
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="/about/"
-             
-             
-             class=""
-             aria-label="About">
-            
-              About
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/roaldnefs"
-             
-             rel="me noopener" target="_blank"
-             class="icon-link"
-             aria-label="GitHub">
-            
-              <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg>
-              <span class="sr-only">GitHub</span>
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/in/roaldnefs/"
-             
-             rel="me noopener" target="_blank"
-             class="icon-link"
-             aria-label="LinkedIn">
-            
-              <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-              <span class="sr-only">LinkedIn</span>
-            
-          </a>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-          <a href="https://infosec.exchange/@roald"
-             
-             rel="me noopener" target="_blank"
-             class="icon-link"
-             aria-label="Mastodon">
-            
-              <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg>
-              <span class="sr-only">Mastodon</span>
-            
-          </a>
-        
-      
-    </nav>
   </div>
 </header>
 
-  <main id="main">
-    
+    <main id="main">
+      
 <article>
-  <header class="article-header">
-    <div class="container">
-      
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a>
-          <span class="breadcrumb-sep">&rsaquo;</span>
-          <a href="/posts/">Blog</a>
-          
-          
-          
-        </nav>
-      
-      <h1 class="article-title">Spoofing Microchips used for Animal Identification</h1>
-      
-        <div class="byline">
-          
-            <span>Written by <span class="author">Roald Nefs</span></span>
-            <span class="dot">·</span>
-          
-          <time datetime="2022-11-30">Nov 30, 2022</time>
+  <header class="band page-header">
+    
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="/posts/">Blog</a>
+        
+      </nav>
+    
+    <h1 class="page-title">Spoofing Microchips used for Animal Identification</h1>
+    
+      <div class="byline">
+        
+          <span>Written by <span class="author">Roald Nefs</span></span>
           <span class="dot">·</span>
-          <span class="read-time">5 min read</span>
-        </div>
-      
-    </div>
+        
+        <time datetime="2022-11-30">Nov 30, 2022</time>
+        <span class="dot">·</span>
+        <span class="read-time">5 min read</span>
+      </div>
+    
   </header>
-  <div class="container">
+  <div class="band">
     <div class="prose">
       <p>A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal&rsquo;s owner. During animal trials and events the microchips are often used to verify the animals identity.</p>
 <p>This post will demonstrate how an attacker can create an “authentic” microchip by writing properly formatted data on blank or rewritable transponder, also known as spoofing. Unfortunately, the RFID reader devices do not differentiate between the authentic and spoofed microchips. The main intention behind this post is to encourage more secure ways of identifying animals instead of solely trusting the implanted microchip.</p>
@@ -282,27 +198,147 @@
     </div>
     
     
-    
   </div>
+  
+    <section class="band hero author-hero" aria-label="About the author">
+  <div class="hero-content">
+    <div class="kicker">Written by</div>
+    <h2 class="hero-title author-title">Roald Nefs</h2>
+    <p class="hero-byline">
+      <span>CTO at</span>
+      
+        
+        <a class="chip chip--warpnet" href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">
+          <span class="company-logo"><svg fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148.82 148.82"><path d="M0 0v148.82h148.82V0zm52.14 42.3h1.88L66.9 16.54l5.15 25.76h-1.88l.98 4.92h1.88l1.55 7.73 1.55-7.73h-1.88l.98-4.92h1.88l5.15-25.76L95.14 42.3h-1.88l2.46 4.92h1.88l.03.05-5.88 17.65h-1.52l-1.8 5.4-5.4-5.4h1.52l-9.97-9.97-9.97 9.97h-1.52l-5.4 5.4-1.8-5.4h1.52l-5.88-17.65.03-.05h-1.88zM20.8 62.63l7.71-15.41h-1.88l2.46-4.92h1.88l5.2-10.4 3.49 10.4h-1.88l1.65 4.92h1.88l5.93 17.7h-1.52l.51 1.51L36.16 76.5h1.52L25.9 88.28 23.56 76.5h-1.52l-2.29-11.58h1.52l-.45-2.29Zm95.05 43.59-3.35 3.4h-2.7L98.41 121.2h2.7L90.2 132.28 79.12 121.2h-2.7l-4.53-4.53-4.53 4.53h2.7l-10.65 10.65-10.78-10.65h-2.7l-11.72-11.58h2.7l-3.45-3.4h-7.68l-4.97-4.92h7.68l23.05-23.05 7.68 23.05 15.37-15.37 15.37 15.37 7.68-23.05 23.05 23.05h-7.68l-4.84 4.92zm12.04-41.31h-1.52l-2.31 11.58h1.52l-2.35 11.78-11.78-11.78h-1.52l-9.84-9.84.57-1.74h1.52l5.79-17.7h-1.88l1.61-4.92h1.88l3.4-10.38 5.19 10.38h-1.88l2.46 4.92h1.88l7.72 15.44-.45 2.26Z" data-name="Layer 1" style="fill:#fff"/></svg>
+</span>
+          <span>Warpnet</span>
+        </a>
+      
+        <span>&amp;</span>
+        <a class="chip chip--enlite" href="https://enlite.nl" rel="noopener noreferrer" target="_blank">
+          <img class="company-logo" src="/images/companies/enlite.png" alt="" width="1536" height="356" loading="lazy">
+          <span class="sr-only">Enlite</span>
+        </a>
+      
+    </p>
+    <p class="hero-subtitle">Software engineer based in the Netherlands, working across security, platform engineering, and AI. I run hands-on workshops on automotive security and hardware hacking, from a one-hour talk to a full day in the lab.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/training/#book-a-session">Book a workshop &rarr;</a>
+      <a class="btn btn-secondary" href="/about/">About me</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-dots" aria-hidden="true"></div>
+    <img class="hero-cutout" src="/images/authors/roald-nefs-cutout.webp" alt="" width="584" height="776" loading="lazy">
+  </div>
+</section>
+
+  
 </article>
 
-  </main>
-  <footer class="site-footer">
-  <div class="site-footer-inner">
-    <div class="site-footer-col">
-      <div class="site-footer-sigil">// end_of_transmission</div>
-      <div>© 2026 Roald Nefs</div>
-    </div>
-    <div class="site-footer-col site-footer-links">
-      <a href="/posts/">Blog</a>
-      <a href="/about/">About</a>
-      <a href="/posts/index.xml" class="inline-icon">
-        <svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg>
-        <span>RSS</span>
+    </main>
+    <footer class="site-footer">
+  <div class="site-footer-main">
+    <div class="footer-brand">
+      <a class="site-title" href="/">
+        <img class="site-title-cutout" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180">
+        <span>Roald Nefs</span>
       </a>
+      <p>Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.</p>
+    </div>
+    <nav class="footer-col" aria-label="Pages">
+      <h2 class="footer-heading">Pages</h2>
+      <ul class="footer-links">
+        
+          
+        
+          
+            <li><a href="/posts/">Blog</a></li>
+          
+        
+          
+            <li><a href="/training/">Training</a></li>
+          
+        
+          
+            <li><a href="/tools/">Tools</a></li>
+          
+        
+          
+            <li><a href="/about/">About</a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+    <div class="footer-col">
+      <h2 class="footer-heading">Companies</h2>
+      <ul class="footer-links">
+        
+          <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
+        
+          <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
+        
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2 class="footer-heading">Follow</h2>
+      <ul class="footer-links">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a class="inline-icon" href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+          
+        
+          
+            <li><a class="inline-icon" href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+          
+        
+          
+            <li><a class="inline-icon" href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
+          
+        
+        <li><a class="inline-icon" href="/posts/index.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
+      </ul>
     </div>
   </div>
+  <div class="site-footer-bottom">
+    <div>© 2026 Roald Nefs</div>
+    <div class="site-footer-legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/cookies/">Cookies</a>
+      <button type="button" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+  <script>
+    document.querySelector(".theme-toggle").addEventListener("click", function () {
+      var root = document.documentElement;
+      var dark = root.dataset.theme
+        ? root.dataset.theme === "dark"
+        : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+    });
+  </script>
 </footer>
 
+  </div>
 </body>
 </html>

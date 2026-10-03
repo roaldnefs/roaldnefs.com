@@ -142,9 +142,60 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>info@roaldnefs.com (Roald Nefs)</author>
       <guid>https://roaldnefs.com/about/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m a security and platform engineer based in the Netherlands, currently &lt;strong&gt;CTO at &lt;a href=&#34;https://warpnet.nl&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Warpnet&lt;/a&gt;&lt;/strong&gt;. Over the past decade I&amp;rsquo;ve worked on security and platform engineering at organizations like &lt;a href=&#34;https://duo.nl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;DUO&lt;/a&gt;, &lt;a href=&#34;https://www.kpn.com/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;KPN&lt;/a&gt;, and &lt;a href=&#34;https://www.cjib.nl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;CJIB&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;community&#34;&gt;Community&lt;/h2&gt;
-&lt;p&gt;I co-organize &lt;a href=&#34;https://bsidesgrunn.org/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;BSides Groningen&lt;/a&gt;, &lt;a href=&#34;https://www.bsidesams.org/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;BSides Amsterdam&lt;/a&gt;, and &lt;a href=&#34;https://cloudnativegroningen.nl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Cloud Native Groningen&lt;/a&gt;: grassroots events for the curious, the technical, and the occasionally reckless. I also run &lt;a href=&#34;https://roaldnefs.com/training/&#34;&gt;hands-on workshops&lt;/a&gt; on automotive security and hardware hacking, and operate a Car Hacking Village at conferences across Europe.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;m &lt;strong&gt;CTO at &lt;a href=&#34;https://warpnet.nl&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Warpnet&lt;/a&gt; and &lt;a href=&#34;https://enlite.nl&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Enlite&lt;/a&gt;&lt;/strong&gt;, a software engineer based in the Netherlands working across security, platform engineering, and AI. Over the past decade I&amp;rsquo;ve worked on software engineering, security, and platform engineering at organizations like &lt;a href=&#34;https://duo.nl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;DUO&lt;/a&gt;, &lt;a href=&#34;https://www.kpn.com/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;KPN&lt;/a&gt;, &lt;a href=&#34;https://www.cjib.nl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;CJIB&lt;/a&gt;, and &lt;a href=&#34;https://www.dictu.nl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;DICTU&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;companies&#34;&gt;
+  
+    &lt;a class=&#34;company company--warpnet&#34; href=&#34;https://warpnet.nl&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;div class=&#34;company-head&#34;&gt;
+        &lt;span class=&#34;company-logo&#34;&gt;&lt;svg fill=&#34;currentColor&#34; aria-hidden=&#34;true&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 148.82 148.82&#34;&gt;&lt;path d=&#34;M0 0v148.82h148.82V0zm52.14 42.3h1.88L66.9 16.54l5.15 25.76h-1.88l.98 4.92h1.88l1.55 7.73 1.55-7.73h-1.88l.98-4.92h1.88l5.15-25.76L95.14 42.3h-1.88l2.46 4.92h1.88l.03.05-5.88 17.65h-1.52l-1.8 5.4-5.4-5.4h1.52l-9.97-9.97-9.97 9.97h-1.52l-5.4 5.4-1.8-5.4h1.52l-5.88-17.65.03-.05h-1.88zM20.8 62.63l7.71-15.41h-1.88l2.46-4.92h1.88l5.2-10.4 3.49 10.4h-1.88l1.65 4.92h1.88l5.93 17.7h-1.52l.51 1.51L36.16 76.5h1.52L25.9 88.28 23.56 76.5h-1.52l-2.29-11.58h1.52l-.45-2.29Zm95.05 43.59-3.35 3.4h-2.7L98.41 121.2h2.7L90.2 132.28 79.12 121.2h-2.7l-4.53-4.53-4.53 4.53h2.7l-10.65 10.65-10.78-10.65h-2.7l-11.72-11.58h2.7l-3.45-3.4h-7.68l-4.97-4.92h7.68l23.05-23.05 7.68 23.05 15.37-15.37 15.37 15.37 7.68-23.05 23.05 23.05h-7.68l-4.84 4.92zm12.04-41.31h-1.52l-2.31 11.58h1.52l-2.35 11.78-11.78-11.78h-1.52l-9.84-9.84.57-1.74h1.52l5.79-17.7h-1.88l1.61-4.92h1.88l3.4-10.38 5.19 10.38h-1.88l2.46 4.92h1.88l7.72 15.44-.45 2.26Z&#34; data-name=&#34;Layer 1&#34; style=&#34;fill:#fff&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;h3 class=&#34;company-name&#34;&gt;Warpnet&lt;/h3&gt;
+      &lt;p class=&#34;company-tagline&#34;&gt;Securing technology&lt;/p&gt;</description>
+      <featured>no</featured>
+    </item>
+    
+    <item>
+      <title>Cookie Statement</title>
+      <link>https://roaldnefs.com/cookies/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/cookies/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Last updated: October 3, 2026&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cookies&#34;&gt;Cookies&lt;/h2&gt;
+&lt;p&gt;This website doesn&amp;rsquo;t use cookies. There are no analytics, tracking, advertising, or social media cookies, which is why you won&amp;rsquo;t see a cookie banner here.&lt;/p&gt;
+&lt;h2 id=&#34;browser-storage&#34;&gt;Browser storage&lt;/h2&gt;
+&lt;p&gt;The site stores a single value in your browser&amp;rsquo;s local storage, and only if you use the light/dark mode toggle in the header:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Name&lt;/th&gt;
+          &lt;th&gt;Purpose&lt;/th&gt;
+          &lt;th&gt;Retention&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;theme&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Remembers whether you chose light or dark mode&lt;/td&gt;
+          &lt;td&gt;Until you clear your browser&amp;rsquo;s site data&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This value is strictly necessary to provide the feature you asked for. It never leaves your device and isn&amp;rsquo;t readable by anyone else. If you never use the toggle, nothing is stored and the site follows your system&amp;rsquo;s light or dark setting.&lt;/p&gt;</description>
+      <featured>no</featured>
+    </item>
+    
+    <item>
+      <title>Privacy Statement</title>
+      <link>https://roaldnefs.com/privacy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/privacy/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Last updated: October 3, 2026&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This privacy statement explains what personal data is processed when you visit roaldnefs.com, why, and what your rights are. The short version: this site doesn&amp;rsquo;t use analytics, tracking, or advertising, and I don&amp;rsquo;t collect personal data myself.&lt;/p&gt;
+&lt;h2 id=&#34;who-is-responsible&#34;&gt;Who is responsible&lt;/h2&gt;
+&lt;p&gt;This website is run by Roald Nefs, based in the Netherlands, who is the controller for the processing described here. You can reach me at &lt;a href=&#34;mailto:info@roaldnefs.com&#34;&gt;info@roaldnefs.com&lt;/a&gt;. If you&amp;rsquo;d like to encrypt your message, my &lt;a href=&#34;https://roaldnefs.com/key.asc&#34;&gt;PGP key&lt;/a&gt; is available.&lt;/p&gt;</description>
       <featured>no</featured>
     </item>
     
