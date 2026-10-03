@@ -5,7 +5,9 @@ width: full
 toc: false
 ---
 
-I'm a security and platform engineer based in the Netherlands, currently **CTO at [Warpnet](https://warpnet.nl)**. Over the past decade I've worked on security and platform engineering at organizations like [DUO](https://duo.nl/), [KPN](https://www.kpn.com/), and [CJIB](https://www.cjib.nl/).
+I'm **CTO at [Warpnet](https://warpnet.nl) and [Enlite](https://enlite.nl)**, a software engineer based in the Netherlands working across security, platform engineering, and AI. Over the past decade I've worked on software engineering, security, and platform engineering at organizations like [DUO](https://duo.nl/), [KPN](https://www.kpn.com/), [CJIB](https://www.cjib.nl/), and [DICTU](https://www.dictu.nl/).
+
+{{< companies >}}
 
 ## Community
 

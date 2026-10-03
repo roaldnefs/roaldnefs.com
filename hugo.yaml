@@ -51,7 +51,7 @@ menu:
         icon: mastodon
 
 params:
-  description: Personal research blog on security, platform engineering, and hardware hacking.
+  description: Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.
   author:
     name: Roald Nefs
     email: info@roaldnefs.com

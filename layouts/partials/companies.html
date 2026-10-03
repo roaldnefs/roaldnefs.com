@@ -1,0 +1,13 @@
+<div class="companies">
+  {{ range site.Data.companies }}
+    <a class="company company--{{ .theme }}" href="{{ .url }}" rel="noopener noreferrer" target="_blank">
+      <div class="company-head">
+        {{ partial "company-logo.html" . }}
+      </div>
+      <h3 class="company-name">{{ .name }}</h3>
+      <p class="company-tagline">{{ .tagline }}</p>
+      <p class="company-description">{{ .description }}</p>
+      <span class="company-link">{{ strings.TrimPrefix "https://" .url }} &rarr;</span>
+    </a>
+  {{ end }}
+</div>

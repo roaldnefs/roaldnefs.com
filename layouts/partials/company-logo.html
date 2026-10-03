@@ -1,0 +1,7 @@
+{{- with resources.Get .logo -}}
+  {{- if eq .MediaType.SubType "svg" -}}
+    <span class="company-logo">{{ .Content | safeHTML }}</span>
+  {{- else -}}
+    <img class="company-logo" src="{{ .RelPermalink }}" alt="" width="{{ .Width }}" height="{{ .Height }}" loading="lazy">
+  {{- end -}}
+{{- end -}}

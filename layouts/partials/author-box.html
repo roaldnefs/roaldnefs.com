@@ -1,0 +1,25 @@
+<section class="band hero author-hero" aria-label="About the author">
+  <div class="hero-content">
+    <div class="kicker">Written by</div>
+    <h2 class="hero-title author-title">{{ site.Params.author.name }}</h2>
+    <p class="hero-byline">
+      <span>CTO at</span>
+      {{ range $i, $c := site.Data.companies }}
+        {{ if $i }}<span>&amp;</span>{{ end }}
+        <a class="chip chip--{{ $c.theme }}" href="{{ $c.url }}" rel="noopener noreferrer" target="_blank">
+          {{ partial "company-logo.html" $c }}
+          {{ if eq $c.theme "warpnet" }}<span>{{ $c.name }}</span>{{ else }}<span class="sr-only">{{ $c.name }}</span>{{ end }}
+        </a>
+      {{ end }}
+    </p>
+    <p class="hero-subtitle">Software engineer based in the Netherlands, working across security, platform engineering, and AI. I run hands-on workshops on automotive security and hardware hacking, from a one-hour talk to a full day in the lab.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ "/training/#book-a-session" | relURL }}">Book a workshop &rarr;</a>
+      <a class="btn btn-secondary" href="{{ "/about/" | relURL }}">About me</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-dots" aria-hidden="true"></div>
+    <img class="hero-cutout" src="{{ "/images/authors/roald-nefs-cutout.webp" | relURL }}" alt="" width="584" height="776" loading="lazy">
+  </div>
+</section>

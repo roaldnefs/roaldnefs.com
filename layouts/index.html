@@ -1,60 +1,63 @@
 {{ define "main" }}
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-kicker">// HOME</div>
-        <h1 class="hero-title">{{ .Title }}</h1>
-        {{ with .Content }}
-          <div class="hero-subtitle">{{ . }}</div>
+<section class="band hero">
+  <div class="hero-content">
+    <h1 class="hero-title">{{ .Title }}</h1>
+    {{ with site.Data.companies }}
+      <p class="hero-byline">
+        <span>CTO at</span>
+        {{ range $i, $c := . }}
+          {{ if $i }}<span>&amp;</span>{{ end }}
+          <a class="chip chip--{{ $c.theme }}" href="{{ $c.url }}" rel="noopener noreferrer" target="_blank">
+            {{ partial "company-logo.html" $c }}
+            {{ if eq $c.theme "warpnet" }}<span>{{ $c.name }}</span>{{ else }}<span class="sr-only">{{ $c.name }}</span>{{ end }}
+          </a>
         {{ end }}
-        {{ with (where site.RegularPages "Section" "posts").ByDate.Reverse | first 1 }}
-          {{ range . }}
-            <div class="hero-latest">
-              <span class="hero-latest-label">// latest</span>
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-              <span class="hero-latest-date">— {{ .Date.Format "Jan 2006" }}</span>
-            </div>
-          {{ end }}
-        {{ end }}
-      </div>
-      <div class="hero-portrait">
-        <img src="{{ "/images/authors/roald-nefs.png" | relURL }}"
-             alt="Roald Nefs"
-             width="240" height="240" loading="eager">
-      </div>
+      </p>
+    {{ end }}
+    {{ with .Content }}
+      <div class="hero-subtitle">{{ . }}</div>
+    {{ end }}
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ "/posts/" | relURL }}">Read the blog</a>
+      <a class="btn btn-secondary" href="{{ "/training/" | relURL }}">Hands-on workshops</a>
     </div>
+  </div>
+  <div class="hero-visual">
+    <canvas class="hero-field" aria-hidden="true"></canvas>
+    <img class="hero-cutout"
+         src="{{ "/images/authors/roald-nefs-cutout.webp" | relURL }}"
+         alt="Roald Nefs"
+         width="584" height="776" loading="eager" fetchpriority="high">
   </div>
 </section>
 
-<div class="container">
-  <div class="section-title-wrap">
-    <h2 class="section-title">Currently</h2>
+<section class="band">
+  <div class="band-head">
+    <h2 class="band-title">Companies</h2>
   </div>
-  <div class="card-grid three">
-    <article class="card currently-card">
-      <div class="card-kicker">job</div>
-      <h3 class="card-title">CTO at <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></h3>
-      <p class="card-summary">We help organizations build and secure systems, from code and cloud infrastructure to the hardware and protocols behind it. Security research, pentesting, and platform engineering, all in one team.</p>
-      <div class="card-footer">
-        <a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Visit warpnet.nl &rarr;</a>
-      </div>
-    </article>
-    <article class="card currently-card">
-      <div class="card-kicker">community</div>
-      <h3 class="card-title">Co-organizer</h3>
-      <p class="card-summary">Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
-    </article>
-    <article class="card currently-card">
-      <div class="card-kicker">training</div>
-      <h3 class="card-title">Workshops &amp; talks</h3>
-      <p class="card-summary">Hands-on automotive security and hardware hacking sessions for conferences, meetups, and internal training days. From a one-hour talk to a full day in the lab.</p>
-      <div class="card-footer">
-        <a href="{{ "/training/" | relURL }}">Book a session &rarr;</a>
-      </div>
-    </article>
-  </div>
+  {{ partial "companies.html" . }}
+</section>
 
+<section class="band">
+  <div class="band-head">
+    <h2 class="band-title">Community &amp; training</h2>
+    <a href="{{ "/training/" | relURL }}">See past sessions &rarr;</a>
+  </div>
+  <div class="grid two">
+    <article class="cell">
+      <div class="kicker">community</div>
+      <h3 class="cell-title">Co-organizer</h3>
+      <p class="cell-summary">Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
+    </article>
+    <article class="cell">
+      <div class="kicker">training</div>
+      <h3 class="cell-title">Workshops &amp; talks</h3>
+      <p class="cell-summary">Hands-on automotive security and hardware hacking sessions for conferences, meetups, and internal training days. From a one-hour talk to a full day in the lab.</p>
+      <div class="cell-actions">
+        <a class="btn btn-primary" href="{{ "/training/#book-a-session" | relURL }}">Book a session &rarr;</a>
+      </div>
+    </article>
+  </div>
   <figure class="home-feature">
     <div class="home-feature-images">
       <img src="{{ "/images/training/car-hacking-village-bsides-luxembourg-2026.jpeg" | relURL }}"
@@ -66,52 +69,101 @@
     </div>
     <figcaption>
       Car Hacking Village at BSides Luxembourg 2026 ·
-      Photos: DLH ·
-      <a href="{{ "/training/" | relURL }}">See past sessions &rarr;</a>
+      Photos: DLH
     </figcaption>
   </figure>
+</section>
 
-  {{ $featuredPosts := where site.RegularPages "Params.featured" true }}
-  {{ $featuredPosts = $featuredPosts.ByDate.Reverse }}
-  {{ with $featuredPosts | first 3 }}
-    <div class="section-title-wrap">
-      <h2 class="section-title">Featured posts</h2>
+{{ $featuredPosts := where site.RegularPages "Params.featured" true }}
+{{ $featuredPosts = $featuredPosts.ByDate.Reverse }}
+{{ with $featuredPosts | first 3 }}
+  <section class="band">
+    <div class="band-head">
+      <h2 class="band-title">Featured posts</h2>
       <a href="/posts/">All posts &rarr;</a>
     </div>
-    <div class="card-grid three">
+    <div class="grid three">
       {{ range . }}
         {{ partial "post-card.html" . }}
       {{ end }}
     </div>
-  {{ end }}
+  </section>
+{{ end }}
 
-  <div class="section-title-wrap">
-    <h2 class="section-title">Recent posts</h2>
+<section class="band">
+  <div class="band-head">
+    <h2 class="band-title">Recent posts</h2>
     <a href="/posts/">Browse archive &rarr;</a>
   </div>
-  <ul class="post-list">
-    {{ range first 5 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
-      <li>
-        {{ $cats := slice }}
-        {{ range .Params.tags }}
-          {{ if ne . "featured" }}{{ $cats = $cats | append . }}{{ end }}
-        {{ end }}
-        {{ with $cats }}
-          <div class="post-list-kicker">{{ index . 0 }}</div>
-        {{ end }}
-        <h3 class="post-list-title">
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </h3>
-        <div class="post-list-meta">
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-          <span>&middot;</span>
-          <span>{{ .ReadingTime }} min read</span>
-        </div>
-        {{ with .Summary }}
-          <p class="post-list-summary">{{ . | plainify | truncate 200 }}</p>
-        {{ end }}
-      </li>
-    {{ end }}
-  </ul>
-</div>
+  {{ partial "post-list.html" (dict "pages" (first 5 (where site.RegularPages "Section" "posts").ByDate.Reverse) "heading" "h3" "truncate" 200) }}
+</section>
+<script>
+  (function () {
+    var canvas = document.querySelector(".hero-field");
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext("2d");
+    var gap = 18, radius = 110, push = 10;
+    var w = 0, h = 0, dots = [], visible = true, pointerAt = 0;
+    var target = { x: 0.6, y: 0.45 }, pos = { x: 0.6, y: 0.45 };
+    var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dots = [];
+      for (var y = gap / 2; y < h; y += gap)
+        for (var x = gap / 2; x < w; x += gap) dots.push(x, y);
+    }
+
+    function draw(t) {
+      var px = pos.x * w, py = pos.y * h;
+      ctx.clearRect(0, 0, w, h);
+
+      // Dots bend away from the cursor and light up near it
+      ctx.fillStyle = getComputedStyle(canvas).color;
+      for (var i = 0; i < dots.length; i += 2) {
+        var dx = dots[i] - px, dy = dots[i + 1] - py;
+        var d = Math.sqrt(dx * dx + dy * dy) || 1;
+        var f = Math.exp(-(d * d) / (2 * radius * radius));
+        var wave = Math.sin(t / 1400 + dots[i] * 0.02 + dots[i + 1] * 0.03) * 0.04;
+        var x = dots[i] + (dx / d) * f * push, y = dots[i + 1] + (dy / d) * f * push;
+        var s = 1.2 + f * 1.4;
+        ctx.globalAlpha = Math.min(1, 0.14 + wave + f * 0.45);
+        ctx.fillRect(x - s / 2, y - s / 2, s, s);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function loop(t) {
+      if (visible && !document.hidden) {
+        // Drift on a slow loop when the cursor hasn't moved for a while
+        if (t - pointerAt > 3000) {
+          target.x = 0.55 + Math.sin(t / 3100) * 0.25;
+          target.y = 0.5 + Math.cos(t / 2300) * 0.25;
+        }
+        pos.x += (target.x - pos.x) * 0.08;
+        pos.y += (target.y - pos.y) * 0.08;
+        draw(t);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener("pointermove", function (e) {
+      var r = canvas.getBoundingClientRect();
+      if (!r.width) return;
+      // Keep the effect inside the visible area, leaning towards the cursor
+      target.x = Math.min(0.95, Math.max(0.1, (e.clientX - r.left) / r.width));
+      target.y = Math.min(0.95, Math.max(0.05, (e.clientY - r.top) / r.height));
+      pointerAt = performance.now();
+    }, { passive: true });
+
+    new ResizeObserver(function () { resize(); draw(0); }).observe(canvas);
+    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }).observe(canvas);
+    if (!still) requestAnimationFrame(loop);
+  })();
+</script>
 {{ end }}

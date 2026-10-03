@@ -1,0 +1,12 @@
+- name: Warpnet
+  url: https://warpnet.nl
+  tagline: Securing technology
+  description: We help organizations build and secure systems, from code and cloud infrastructure to the hardware and protocols behind it. Security research, pentesting, and platform engineering, all in one team.
+  logo: images/companies/warpnet.svg
+  theme: warpnet
+- name: Enlite
+  url: https://enlite.nl
+  tagline: Secure & effective software development
+  description: We build software that is effective and secure, and that fits the way each organization works. From custom web applications to products like Secure Dropzone, Logspect, and Datamasker.
+  logo: images/companies/enlite.png
+  theme: enlite

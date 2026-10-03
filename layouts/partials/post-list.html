@@ -1,0 +1,17 @@
+<ul class="post-list">
+  {{ range .pages }}
+    <li>
+      <div class="post-list-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        {{ with partial "tags.html" . }}<span class="post-list-kicker">{{ index . 0 }}</span>{{ end }}
+      </div>
+      <div class="post-list-body">
+        {{ printf "<%s class=\"post-list-title\">" $.heading | safeHTML }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ printf "</%s>" $.heading | safeHTML }}
+        {{ with .Summary }}
+          <p class="post-list-summary">{{ . | plainify | truncate $.truncate }}</p>
+        {{ end }}
+        <span class="post-list-reading">{{ .ReadingTime }} min read</span>
+      </div>
+    </li>
+  {{ end }}
+</ul>

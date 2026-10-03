@@ -1,16 +1,61 @@
 <footer class="site-footer">
-  <div class="site-footer-inner">
-    <div class="site-footer-col">
-      <div class="site-footer-sigil">// end_of_transmission</div>
-      <div>{{ i18n "copyright" | default (printf "© %d %s" now.Year site.Title) }}</div>
-    </div>
-    <div class="site-footer-col site-footer-links">
-      <a href="/posts/">Blog</a>
-      <a href="/about/">About</a>
-      <a href="/posts/index.xml" class="inline-icon">
-        {{ partial "icon.html" "rss" }}
-        <span>RSS</span>
+  <div class="site-footer-main">
+    <div class="footer-brand">
+      <a class="site-title" href="{{ "/" | relURL }}">
+        <img class="site-title-cutout" src="{{ "/images/authors/roald-nefs-avatar.webp" | relURL }}" alt="" width="135" height="180">
+        <span>{{ site.Title }}</span>
       </a>
+      <p>{{ site.Params.description }}</p>
+    </div>
+    <nav class="footer-col" aria-label="Pages">
+      <h2 class="footer-heading">Pages</h2>
+      <ul class="footer-links">
+        {{ range site.Menus.main }}
+          {{ if and (not .Params.icon) (ne .PageRef "/") }}
+            <li><a href="{{ relURL .PageRef }}">{{ .Name }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </nav>
+    <div class="footer-col">
+      <h2 class="footer-heading">Companies</h2>
+      <ul class="footer-links">
+        {{ range site.Data.companies }}
+          <li><a href="{{ .url }}" rel="noopener noreferrer" target="_blank">{{ .name }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2 class="footer-heading">Follow</h2>
+      <ul class="footer-links">
+        {{ range $entry := site.Menus.main }}
+          {{ with $entry.Params.icon }}
+            <li><a class="inline-icon" href="{{ $entry.URL }}" rel="me noopener" target="_blank">{{ partial "icon.html" . }}<span>{{ $entry.Name }}</span></a></li>
+          {{ end }}
+        {{ end }}
+        <li><a class="inline-icon" href="/posts/index.xml">{{ partial "icon.html" "rss" }}<span>RSS</span></a></li>
+      </ul>
     </div>
   </div>
+  <div class="site-footer-bottom">
+    <div>{{ i18n "copyright" | default (printf "© %d %s" now.Year site.Title) }}</div>
+    <div class="site-footer-legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/cookies/">Cookies</a>
+      <button type="button" class="theme-toggle" aria-label="Toggle dark mode">
+        {{ partial "icon.html" "sun" }}
+        {{ partial "icon.html" "moon" }}
+      </button>
+    </div>
+  </div>
+  <script>
+    document.querySelector(".theme-toggle").addEventListener("click", function () {
+      var root = document.documentElement;
+      var dark = root.dataset.theme
+        ? root.dataset.theme === "dark"
+        : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+    });
+  </script>
 </footer>
