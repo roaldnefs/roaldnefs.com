@@ -102,7 +102,7 @@
     var canvas = document.querySelector(".hero-field");
     if (!canvas || !canvas.getContext) return;
     var ctx = canvas.getContext("2d");
-    var gap = 18, radius = 110, push = 10;
+    var gap = 18, radius = 110, push = 6;
     var w = 0, h = 0, dots = [], visible = true, pointerAt = 0;
     var target = { x: 0.6, y: 0.45 }, pos = { x: 0.6, y: 0.45 };
     var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -129,10 +129,10 @@
         var dx = dots[i] - px, dy = dots[i + 1] - py;
         var d = Math.sqrt(dx * dx + dy * dy) || 1;
         var f = Math.exp(-(d * d) / (2 * radius * radius));
-        var wave = Math.sin(t / 1400 + dots[i] * 0.02 + dots[i + 1] * 0.03) * 0.04;
+        var wave = Math.sin(t / 1400 + dots[i] * 0.02 + dots[i + 1] * 0.03) * 0.025;
         var x = dots[i] + (dx / d) * f * push, y = dots[i + 1] + (dy / d) * f * push;
-        var s = 1.2 + f * 1.4;
-        ctx.globalAlpha = Math.min(1, 0.14 + wave + f * 0.45);
+        var s = 1.2 + f * 0.8;
+        ctx.globalAlpha = Math.min(1, 0.14 + wave + f * 0.25);
         ctx.fillRect(x - s / 2, y - s / 2, s, s);
       }
       ctx.globalAlpha = 1;
