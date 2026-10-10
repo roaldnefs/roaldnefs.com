@@ -41,20 +41,79 @@
     <div class="site-footer-legal">
       <a href="/privacy/">Privacy</a>
       <a href="/cookies/">Cookies</a>
-      <button type="button" class="theme-toggle" aria-label="Toggle dark mode">
-        {{ partial "icon.html" "sun" }}
-        {{ partial "icon.html" "moon" }}
-      </button>
+      <div class="theme-menu">
+        <button type="button" class="theme-toggle" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu-list">
+          {{ partial "icon.html" "sun" }}
+          {{ partial "icon.html" "moon" }}
+          <span class="theme-toggle-label">System Theme</span>
+        </button>
+        <div class="theme-menu-list" id="theme-menu-list" role="menu" aria-label="Theme" hidden>
+          <div class="theme-menu-heading">Theme</div>
+          {{ range slice "light" "dark" "system" }}
+            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="{{ . }}">
+              <span>{{ title . }}</span>
+              {{ partial "icon.html" "check" }}
+            </button>
+          {{ end }}
+        </div>
+      </div>
     </div>
   </div>
   <script>
-    document.querySelector(".theme-toggle").addEventListener("click", function () {
+    (function () {
       var root = document.documentElement;
-      var dark = root.dataset.theme
-        ? root.dataset.theme === "dark"
-        : matchMedia("(prefers-color-scheme: dark)").matches;
-      root.dataset.theme = dark ? "light" : "dark";
-      try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
-    });
+      var toggle = document.querySelector(".theme-toggle");
+      var label = toggle.querySelector(".theme-toggle-label");
+      var list = document.getElementById("theme-menu-list");
+      var items = list.querySelectorAll(".theme-menu-item");
+
+      function sync() {
+        var theme = root.dataset.theme || "system";
+        label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1) + " Theme";
+        items.forEach(function (item) {
+          item.setAttribute("aria-checked", item.dataset.themeValue === theme);
+        });
+      }
+
+      function setOpen(open) {
+        list.hidden = !open;
+        toggle.setAttribute("aria-expanded", open);
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(list.hidden);
+      });
+
+      items.forEach(function (item) {
+        item.addEventListener("click", function () {
+          var theme = item.dataset.themeValue;
+          try {
+            if (theme === "system") {
+              delete root.dataset.theme;
+              localStorage.removeItem("theme");
+            } else {
+              root.dataset.theme = theme;
+              localStorage.setItem("theme", theme);
+            }
+          } catch (e) {}
+          sync();
+          setOpen(false);
+          toggle.focus();
+        });
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".theme-menu")) setOpen(false);
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !list.hidden) {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+
+      sync();
+    })();
   </script>
 </footer>
