@@ -46,7 +46,7 @@ Warpnet Securing technology
 
 
   
-  <link rel="stylesheet" href="/css/main.min.e359a6f124050bf88d8e0eb0c218b6c7676165dddd478883755365ab7b23b054.css" integrity="sha256-41mm8SQFC/iNjg6wwhi2x2dhZd3dR4iDdVNlq3sjsFQ=">
+  <link rel="stylesheet" href="/css/main.min.d7687073a88cdce89a80d61b6c1457535275ae58fc521bc7453c37dc5a772239.css" integrity="sha256-12hwc6iM3OiagNYbbBRXU1J1rlj8UhvHRTw33Fp3Ijk=">
 
 
 </head>
@@ -56,7 +56,6 @@ Warpnet Securing technology
     <header class="site-header">
   <div class="site-header-inner">
     <a class="site-title" href="/">
-      <img class="site-title-cutout" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180">
       <span>Roald Nefs</span>
     </a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle-cb" aria-hidden="true">
@@ -182,7 +181,6 @@ Warpnet Securing technology
   <div class="site-footer-main">
     <div class="footer-brand">
       <a class="site-title" href="/">
-        <img class="site-title-cutout" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180">
         <span>Roald Nefs</span>
       </a>
       <p>Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.</p>
@@ -262,21 +260,90 @@ Warpnet Securing technology
     <div class="site-footer-legal">
       <a href="/privacy/">Privacy</a>
       <a href="/cookies/">Cookies</a>
-      <button type="button" class="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
+      <div class="theme-menu">
+        <button type="button" class="theme-toggle" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu-list">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <span class="theme-toggle-label">System Theme</span>
+        </button>
+        <div class="theme-menu-list" id="theme-menu-list" role="menu" aria-label="Theme" hidden>
+          <div class="theme-menu-heading">Theme</div>
+          
+            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="light">
+              <span>Light</span>
+              <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+          
+            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="dark">
+              <span>Dark</span>
+              <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+          
+            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="system">
+              <span>System</span>
+              <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+          
+        </div>
+      </div>
     </div>
   </div>
   <script>
-    document.querySelector(".theme-toggle").addEventListener("click", function () {
+    (function () {
       var root = document.documentElement;
-      var dark = root.dataset.theme
-        ? root.dataset.theme === "dark"
-        : matchMedia("(prefers-color-scheme: dark)").matches;
-      root.dataset.theme = dark ? "light" : "dark";
-      try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
-    });
+      var toggle = document.querySelector(".theme-toggle");
+      var label = toggle.querySelector(".theme-toggle-label");
+      var list = document.getElementById("theme-menu-list");
+      var items = list.querySelectorAll(".theme-menu-item");
+
+      function sync() {
+        var theme = root.dataset.theme || "system";
+        label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1) + " Theme";
+        items.forEach(function (item) {
+          item.setAttribute("aria-checked", item.dataset.themeValue === theme);
+        });
+      }
+
+      function setOpen(open) {
+        list.hidden = !open;
+        toggle.setAttribute("aria-expanded", open);
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(list.hidden);
+      });
+
+      items.forEach(function (item) {
+        item.addEventListener("click", function () {
+          var theme = item.dataset.themeValue;
+          try {
+            if (theme === "system") {
+              delete root.dataset.theme;
+              localStorage.removeItem("theme");
+            } else {
+              root.dataset.theme = theme;
+              localStorage.setItem("theme", theme);
+            }
+          } catch (e) {}
+          sync();
+          setOpen(false);
+          toggle.focus();
+        });
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".theme-menu")) setOpen(false);
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !list.hidden) {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+
+      sync();
+    })();
   </script>
 </footer>
 
