@@ -189,14 +189,6 @@ main { flex: 1; }
   color: var(--fg);
 }
 
-.site-header .site-title { align-self: stretch; }
-
-.site-title-cutout {
-  align-self: flex-end;
-  height: calc(var(--header-height) - 12px);
-  width: auto;
-}
-
 .site-nav,
 .site-nav-links {
   display: flex;
