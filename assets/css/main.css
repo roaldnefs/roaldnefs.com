@@ -939,7 +939,7 @@ main { flex: 1; }
 
 .site-footer-main {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 2fr) repeat(4, minmax(0, 1fr));
   gap: 40px;
   padding: 56px var(--gutter) 48px;
   border-bottom: 1px solid var(--border);
@@ -975,6 +975,8 @@ main { flex: 1; }
 }
 
 .footer-links a:hover { color: var(--fg); }
+
+.footer-links--mono { font-family: var(--mono); font-size: 0.82rem; line-height: calc(0.9rem * 1.65); }
 
 .footer-links .inline-icon { gap: 10px; }
 .footer-links .inline-icon svg { width: 15px; height: 15px; }
@@ -1069,7 +1071,7 @@ main { flex: 1; }
   .hero-content { padding: 56px var(--gutter) 48px; }
   .hero-visual { display: none; }
 
-  .site-footer-main { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .site-footer-main { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .footer-brand { grid-column: 1 / -1; }
 
   .companies,

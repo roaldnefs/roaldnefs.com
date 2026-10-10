@@ -32,7 +32,14 @@
             <li><a class="inline-icon" href="{{ $entry.URL }}" rel="me noopener" target="_blank">{{ partial "icon.html" . }}<span>{{ $entry.Name }}</span></a></li>
           {{ end }}
         {{ end }}
-        <li><a class="inline-icon" href="/posts/index.xml">{{ partial "icon.html" "rss" }}<span>RSS</span></a></li>
+        <li><a class="inline-icon" href="/rss.xml">{{ partial "icon.html" "rss" }}<span>RSS</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2 class="footer-heading">Agents</h2>
+      <ul class="footer-links footer-links--mono">
+        <li><a href="/rss.xml">rss.xml</a></li>
+        <li><a href="/sitemap.md">sitemap.md</a></li>
       </ul>
     </div>
   </div>

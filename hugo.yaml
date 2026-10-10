@@ -4,6 +4,17 @@ languageCode: en-us
 
 enableRobotsTXT: true
 
+outputFormats:
+  RSS:
+    baseName: rss
+  SitemapMD:
+    mediaType: text/markdown
+    baseName: sitemap
+    isPlainText: true
+
+outputs:
+  home: [html, rss, sitemapmd]
+
 permalinks:
   posts: /posts/:year/:month/:slug/
 

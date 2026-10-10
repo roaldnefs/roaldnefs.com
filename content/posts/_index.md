@@ -3,4 +3,4 @@ title: Blog
 type: blog
 ---
 
-[RSS feed](index.xml)
+[RSS feed](/rss.xml)
