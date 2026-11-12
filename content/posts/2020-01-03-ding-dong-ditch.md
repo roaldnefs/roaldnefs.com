@@ -7,8 +7,9 @@ authors:
 categories:
   - Information security
   - Hardware hacking
+tags:
+  - featured
 draft: false
-featured: true
 ---
 
 In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.
