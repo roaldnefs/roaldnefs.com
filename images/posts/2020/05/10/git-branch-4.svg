@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 238" role="img" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace">
+<title>HEAD moves when a checkout is performed</title>
+<rect width="800" height="238" fill="#04090f"/>
+<path d="M255.0 144H325.0" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.5"/>
+<path d="M365.0 144H435.0" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.5"/>
+<path d="M475.0 144H545.0" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.5"/>
+<circle cx="235.0" cy="144" r="20" fill="#7aa2ff" fill-opacity=".07" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+<circle cx="345.0" cy="144" r="20" fill="#7aa2ff" fill-opacity=".07" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+<circle cx="455.0" cy="144" r="20" fill="#7aa2ff" fill-opacity=".07" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+<circle cx="565.0" cy="144" r="20" fill="#7aa2ff" fill-opacity=".07" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+<path d="M455.0 94V113" stroke="#7aa2ff" stroke-width="1.5"/><path d="M455.0 121l-5 -9h10z" fill="#7aa2ff"/>
+<rect x="417.8" y="64.5" width="74.4" height="29" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.3)"/><text x="455.0" y="83.5" text-anchor="middle" font-size="13" fill="#f7f8f8">master</text>
+<path d="M455.0 64V44" stroke="#7aa2ff" stroke-width="1.5"/>
+<rect x="425.2" y="14" width="59.6" height="30" fill="#7aa2ff"/><text x="455.0" y="33.5" text-anchor="middle" font-size="12.5" font-weight="700" letter-spacing=".12em" fill="#04090f">HEAD</text>
+<path d="M565.0 194V175" stroke="#7aa2ff" stroke-width="1.5"/><path d="M565.0 167l-5 9h10z" fill="#7aa2ff"/>
+<rect x="523.85" y="194.5" width="82.30000000000001" height="29" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.3)"/><text x="565.0" y="213.5" text-anchor="middle" font-size="13" fill="#f7f8f8">develop</text>
+</svg>

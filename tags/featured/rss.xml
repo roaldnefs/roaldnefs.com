@@ -39,5 +39,48 @@
       <featured>yes</featured>
     </item>
     
+    <item>
+      <title>Spoofing Microchips used for Animal Identification</title>
+      <link>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</link>
+      <pubDate>Wed, 30 Nov 2022 15:19:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</guid>
+      <description>&lt;p&gt;A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) technology to transmit an unique tag number using an electromagnetic field when in close contact with an nearby RFID reader device. The microchips are often used to help return lost pets quickly. The unique chip numbers are registered in a designated portal to let animal shelters, animal control officers and veterinarians to look up contact information of the animal&amp;rsquo;s owner. During animal trials and events the microchips are often used to verify the animals identity.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
+    <item>
+      <title>How to Automatically Generate Clients for your REST API</title>
+      <link>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</link>
+      <pubDate>Sat, 19 Dec 2020 15:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</guid>
+      <description>&lt;p&gt;While helping a colleague with adding some code to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq Python SDK&lt;/a&gt; to allow him to retrieve some additional information from the API (&lt;a href=&#34;https://github.com/bunq/sdk_python/issues/148&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;bunq/sdk_python#148&lt;/a&gt;), we noticed that the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt; was automatically generated. We&amp;rsquo;ve eventually ended up monkey patching the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt;, as we couldn&amp;rsquo;t make a pull request to the &lt;a href=&#34;https://github.com/bunq/sdk_python&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;SDK&lt;/a&gt; and the API specification or SDK generator wasn&amp;rsquo;t publicly available. However, this aroused some interest about the automatic generation of API clients.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
+    <item>
+      <title>Ding Dong Ditch using SDR and Arduino</title>
+      <link>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/</guid>
+      <description>&lt;p&gt;In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.&lt;/p&gt;
+&lt;p&gt;This project is heavily based upon the &lt;a href=&#34;https://samy.pl/dingdong/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Digital Ding Dong Ditch&lt;/a&gt; by &lt;a href=&#34;https://samy.pl/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Samy Kamkar&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The video is a short demonstration of the Ding Dong Ditch device.  Once it’s powered by USB (or a battery) it will send out a RF signal  every few seconds which will ring the doorbell.&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
+    <item>
+      <title>Hardware Reversing the Sitecom Wireless Router 150N X1</title>
+      <link>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0200</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2019/12/hardware-reverse-a-wireless-router/</guid>
+      <description>&lt;p&gt;Last week I&amp;rsquo;ve bought a Rigol DS1102E digital oscilloscope and was very eager to test it out. When going to my bin of old hardware I&amp;rsquo;ve found a Sitecom Wireless Router 150N X1. After opening up the router I immediately spotted the UART debugging interface (&lt;em&gt;top left in the picture&lt;/em&gt;). In this post we will go through the process of connecting to an unknown serial interface.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://roaldnefs.com/images/posts/2019/12/15/sitecom_01.jpg&#34; alt=&#34;Inside of the Sitecom Wireless Router 150N X1&#34;&gt;&lt;/p&gt;</description>
+      <featured>yes</featured>
+    </item>
+    
   </channel>
 </rss>

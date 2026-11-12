@@ -169,7 +169,7 @@
           
           
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            <a href="/categories/development/">Development</a>
+            <a href="/categories/software-engineering/">Software Engineering</a>
           
         </nav>
         <h1 class="post-title reveal">Git Branching</h1>
@@ -240,7 +240,7 @@
   <pre tabindex="0"><code>$ git branch develop</code></pre>
 </div>
 <p>In the image below you also see a special pointer called <code>HEAD</code>, pointing to the <code>master</code> branch. Even though we&rsquo;ve created a new branch called <code>develop</code>, <code>HEAD</code> is stil pointing to the <code>master</code> branch.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-1.png" alt="Creating a new branch"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-1.svg" alt="Creating a new branch"></p>
 <p>Using the <code>git log</code> with the <code>--decorate</code> option shows you where the branch pointers are pointing. In the example below <code>HEAD</code> is pointing to <code>master</code>, while both <code>master</code> and <code>develop</code> are pointing to the same commit.</p>
 <div class="code">
   <div class="code-head">
@@ -261,9 +261,9 @@
   <pre tabindex="0"><code>$ git checkout develop</code></pre>
 </div>
 <p>This results in <code>HEAD</code> pointing to the <code>develop</code> branch:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-2.png" alt="HEAD points to the develop branch"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-2.svg" alt="HEAD points to the develop branch"></p>
 <p>After creating a new commit the <code>master</code> branch is still pointing to the same commit, while the <code>develop</code> branch has moved forward.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-3.png" alt="HEAD branch moves forward when a commit is made"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-3.svg" alt="HEAD branch moves forward when a commit is made"></p>
 <p>Using the following command we can switch back to the <code>master</code> branch. This will move the <code>HEAD</code> pointer back to <code>master</code>.</p>
 <div class="code">
   <div class="code-head">
@@ -272,9 +272,9 @@
   </div>
   <pre tabindex="0"><code>$ git checkout master</code></pre>
 </div>
-<p><img src="/images/posts/2020/05/10/git-branch-4.png" alt="HEAD moves when a checkout is performed"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-4.svg" alt="HEAD moves when a checkout is performed"></p>
 <p>Creating a new commit at this point will result in diverged history. Both commits are isolated in separate branches, and can be merged together when you&rsquo;re ready.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-5.png" alt="Divergent history"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-5.svg" alt="Divergent history"></p>
 <p>This can also be shown using the <code>git log --oneline --decorate --graph --all</code> command. By default the <code>git log</code> command will not show all of the branch, this the <code>--all</code> options is required.</p>
 <div class="code">
   <div class="code-head">
@@ -299,7 +299,7 @@
 <h2 id="basic-branching-and-merging">Basic Branching and Merging</h2>
 <h3 id="basic-merging">Basic Merging</h3>
 <p>What if instead of creating a commit directory on the <code>master</code> branch we would have created branch called <code>hotfix</code>, made a single commit, and wanted to merge it back into <code>master</code>?</p>
-<p><img src="/images/posts/2020/05/10/git-branch-8.png" alt="Hotfix branch containg a single commit"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-8.svg" alt="Hotfix branch containg a single commit"></p>
 <p>You can do that using the <code>git merge</code> command. This example below will merge the <code>hotfix</code> branch back into <code>master</code>.</p>
 <div class="code">
   <div class="code-head">
@@ -315,9 +315,9 @@ Fast-forward
  1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
 </div>
 <p>Because the commit <code>C4</code> pointed to by the branch <code>hotfix</code> was directly ahead of the commit <code>C3</code>, the commit previously pointed to by the<code>master</code> branch, Git was able to perform a &ldquo;<em>fast-forward</em>&rdquo; merge. During a fast-forward merge the pointer is moved forward. This only happens when you try to merge one commit that can be reached by following the firs commit&rsquo;s history. After merging the <code>master</code> and <code>hotfix</code> branch point to the same commit.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-9.png" alt="The master branch is fast-forwarded"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-9.svg" alt="The master branch is fast-forwarded"></p>
 <p>While the <code>hotfix</code> branch was merged into <code>master</code> the <code>develop</code> branch diverged from master, containing two extra commits. If we wanted to merge <code>develop</code> into <code>master</code> the situation would look similar to this:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-7.png" alt="Merging"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-7.svg" alt="Merging"></p>
 <p>Using the <code>git merge</code> command we can merge <code>develop</code> into <code>master</code>:</p>
 <div class="code">
   <div class="code-head">
@@ -332,7 +332,7 @@ Merge made by the &#39;recursive&#39; strategy.
  create mode 100644 LICENSE</code></pre>
 </div>
 <p>Instead of the &ldquo;<em>fast-forward</em>&rdquo; stategy it now used a &ldquo;<em>recursive</em>&rdquo; strategy. This is because the commit on the <code>develop</code> branch isn&rsquo;t a clear ancestor of the <code>master</code> branch. Git simply does a three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two, this results in a merge commit (<code>C7</code>). Compared to a normal commit, a merge commits has more than one parent.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-6.png" alt="Merging"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-6.svg" alt="Merging"></p>
 <p>After merging <code>develop</code>, the branch can be removed using the <code>git branch</code> command combined with the <code>-b</code> option:</p>
 <div class="code">
   <div class="code-head">
@@ -417,7 +417,7 @@ On branch master
 Your branch is up to date with &#39;origin/master&#39;.</code></pre>
 </div>
 <p>If the <code>master</code> branch contains a few commits, this results in the following situation:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-10.png" alt="Remote and local master branch"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-10.svg" alt="Remote and local master branch"></p>
 <p>The <code>origin</code> remote isn&rsquo;t different from other remotes it&rsquo;s, just the default alias for the remote after running <code>git clone</code>. You can show all the remotes using the <code>git remote -v</code> command:</p>
 <div class="code">
   <div class="code-head">
@@ -430,7 +430,7 @@ origin	https://github.com/roaldnefs/roaldnefs.com.git (push)</code></pre>
 </div>
 <h3 id="fetching">Fetching</h3>
 <p>Just like normal branches, local and remote work can diverge. In the example below the local <code>master</code> branch in one commit forward of the remote-tracking <code>origin/master</code> branch:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-11.png" alt="Commit on the local master branch"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-11.svg" alt="Commit on the local master branch"></p>
 <p>To synchronize your work you can run the <code>git fetch &lt;remote&gt;</code> command, e.g. <code>git fetch origin</code>. In the above example this will lookup the alias <code>alias</code> (in this case <em><a href="https://github.com/roaldnefs/roaldnefs.com.git" rel="noopener noreferrer" target="_blank">https://github.com/roaldnefs/roaldnefs.com.git</a></em>), and fetch any data from it, and update your local database, moving the <code>origin/master</code> pointer forward if a new commit has been added the to remote repository in the meanwhile.</p>
 <h3 id="pushing">Pushing</h3>
 <p>You local branches aren&rsquo;t automatically shared with the world, you will need to push them explicitly up to a remote. If you have a branch named <code>hotfix</code> that you want to push to a remote repository you can run the <code>git push origin hotfix</code> command, e.g.:</p>
@@ -485,9 +485,9 @@ Switched to a new branch &#39;hotfix&#39;</code></pre>
 <p>As the <code>git pull</code> wil often be confusing it&rsquo;s better to simply use the <code>git fetch</code> and <code>git merge</code> commands explicitly. If you are uncertain about any diverged history you can run the <code>git pull --ff-only</code> command. The <code>--ff-only</code> option will resolve the merge as a fast-forward when possible. When this is impossible, it will refuse to merge and exit with an error.</p>
 <h2 id="rebasing">Rebasing</h2>
 <p>Within Git there are two ways to integrate changes from one branch into another: using <code>merge</code> or <code>rebase</code>.  In the example below the history has diverged; there are commits on both the branches you would like to integrate.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-12.png" alt="Divergent history"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-12.svg" alt="Divergent history"></p>
 <p>The most simple way to integrate the work of the <code>hotfix</code> would be to use the <code>git merge</code> command. This will result in a three-way merge between the two latests snapshots (<code>C4</code> and <code>C5</code>) and there common ancestor (<code>C3</code>) creating a merge-commit (<code>C6</code>).</p>
-<p><img src="/images/posts/2020/05/10/git-branch-13.png" alt="Using merging to integrate diverged work"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-13.svg" alt="Using merging to integrate diverged work"></p>
 <p>Instead of <code>merge</code> you could&rsquo;ve used <code>rebase</code> to integrate the changes in the <code>hotfix</code> in the <code>master</code> branch. When rebasing, Git will take all the changes that were committed on one branch and replay them on a different branch.  We could for example rebase the <code>hotfix</code> branch onto the <code>master</code> branch:</p>
 <div class="code">
   <div class="code-head">
@@ -506,7 +506,7 @@ Applying: Fix README.md file.</code></pre>
 <li>Reset the current branch to the branch you&rsquo;re rebasing onto (<code>master</code>).</li>
 <li>Applying each change (re-apply <code>C4</code>, now known as <code>C4'</code>).</li>
 </ol>
-<p><img src="/images/posts/2020/05/10/git-branch-14.png" alt="Using rebasing to integrate diverged work"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-14.svg" alt="Using rebasing to integrate diverged work"></p>
 <p>Because the commit <code>C4'</code> pointed to by the branch <code>hotfix</code> was directly ahead of the commit <code>C5</code>, the commit pointed to by the<code>master</code> branch, Git is able to perform a &ldquo;<em>fast-forward</em>&rdquo; merge:</p>
 <div class="code">
   <div class="code-head">
@@ -522,12 +522,12 @@ Fast-forward
  1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
 </div>
 <p>This result in both the <code>hotfix</code> and <code>master</code> branch pointing to the <code>C4'</code> commit:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-15.png" alt="Rebased branch"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-15.svg" alt="Rebased branch"></p>
 <p>Both <code>C4'</code> (using rebase) and <code>C6</code> (using merge) resulted in the same file contents, but the Git history is different. The rebase made the history a bit cleaner, resulting in a linear history. Even though the history shows that the work happened in series, it actually happened in parallel.</p>
 <p>Unfortunately rebasing has its drawbacks; <strong>you don not want to rebase commits that exists outside your repository and the other people my have based work on!</strong></p>
 <p>During a rebase you will be abandoning commits and create new ones that have the similar content but are actually different (e.g. pointer to another parent). If you (forcefully) push you work, you force other collaborators to rebase their work. Things won&rsquo;t become cleaner this way&hellip;</p>
 <p>Suppose you&rsquo;ve started working on the <code>master</code> branch locally while in the meanwhile another collaborator forcefully pushed his rebased <code>master</code> branch, resulting in some part of the history being rewritten on the remote <code>origin/master</code> branch. When you execute a <code>git pull</code>, Git will merge the rebased <code>origin/master</code> branch into your local <code>master</code> branch.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-16.png" alt="Diverged history"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-16.svg" alt="Diverged history"></p>
 <p>The history between the <code>origin/master</code> and <code>master</code> branch have been diverged, forcing you to rebase you local <code>master</code> branch onto <code>origin/master</code>, which might further confuse other colleborators.</p>
 <p>If for some reason someone has rebased a branch you based your work on you can simplify things by running <code>git pull --rebase</code> instead of <code>git pull</code>. Or you could do is manually using the following commands:</p>
 <div class="code">
@@ -541,7 +541,7 @@ $ git rebase &lt;remote&gt;/&lt;branch&gt;</code></pre>
 <h2 id="cherry-pick">Cherry Pick</h2>
 <p>The <code>git cherry-pick</code> isn&rsquo;t directly related to Git branches, it however allows you to pick arbitrary commits by reference and append them to your current working <code>HEAD</code>. During cherry-picking you pick a commit from a branch and apply it to another. This is especially useful when you accidentally applied the a commit to the wrong branch, you can switch to the correct branch and cherry-pick the commit to where it should belong.</p>
 <p>Git <code>cherry-pick</code> will however cause duplicate commits, and in most cases a normal <code>merge</code> is perferred. Even though the changes in the cherry-picked commit are the same, the SHA-1 checksum changes. This might confuse other colleborators as the original and picked commit might look different.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-18.png" alt="The master branch before the cherry-pick"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-18.svg" alt="The master branch before the cherry-pick"></p>
 <p>Let&rsquo;s assume we want to apply the hotfix <code>C4</code> already merged in the <code>develop</code> to the <code>master</code> branch without merging all the other changes currently in the <code>develop</code> branch. You can execute a <code>git cherry-pick</code> command to pick <code>C4</code> into the <code>master</code> branch:</p>
 <div class="code">
   <div class="code-head">
@@ -552,7 +552,7 @@ $ git rebase &lt;remote&gt;/&lt;branch&gt;</code></pre>
 $ git cherry-pick C4</code></pre>
 </div>
 <p>Where <code>C4</code> should be the commit SHA1-checksum of the original <code>C4</code> commit. This results in only the hotfix being picked into the <code>master</code> branch:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-17.png" alt="The master-branch after the cherry-pick"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-17.svg" alt="The master-branch after the cherry-pick"></p>
 <p>It&rsquo;s also possible to cherry-pick multiple commits. We could&rsquo;ve have picked the commits <code>C4</code>  up to <code>C7</code> using the following command:</p>
 <div class="code">
   <div class="code-head">
@@ -618,7 +618,7 @@ $ git cherry-pick C4^..C7</code></pre>
               <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
               <span>Written by Roald Nefs</span>
             </p>
-            <p>I run hands-on workshops on automotive security and hardware hacking.</p>
+            <p>CTO at Warpnet and Enlite, working across security, platform engineering and AI. I co-organize BSides Groningen and run hands-on workshops on automotive security and hardware hacking.</p>
             <a class="btn btn--sm" href="/training/#book-a-session">Book a workshop</a>
           </div>
         
@@ -750,7 +750,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
       <span class="card-tags">
         <span class="label label--primary">Featured</span>
-        <span class="label">Development</span>
+        <span class="label">Software engineering</span>
       </span>
     
   </span>
@@ -775,7 +775,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
       <span class="card-tags">
         
-        <span class="label">Development</span>
+        <span class="label">Software engineering</span>
       </span>
     
   </span>
