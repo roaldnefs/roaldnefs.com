@@ -8,7 +8,17 @@
     <language>en-us</language>
     <managingEditor>info@roaldnefs.com (Roald Nefs)</managingEditor>
     <webMaster>info@roaldnefs.com (Roald Nefs)</webMaster>
-    <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/posts/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Nov 2026 22:45:00 +0100</lastBuildDate><atom:link href="https://roaldnefs.com/posts/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Your Coding Agent Runs as You</title>
+      <link>https://roaldnefs.com/posts/2026/11/your-coding-agent-runs-as-you/</link>
+      <pubDate>Thu, 12 Nov 2026 22:45:00 +0100</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2026/11/your-coding-agent-runs-as-you/</guid>
+      <description>A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a sandbox has to limit, and five places to run an agent instead.</description>
+      <featured>yes</featured>
+    </item>
+    
     <item>
       <title>Building a Car Hacking Test Bench</title>
       <link>https://roaldnefs.com/posts/2026/01/building-a-car-hacking-test-bench/</link>

