@@ -1,0 +1,2 @@
+{{- /* Returns the cover picture for a post: the one named in its front matter (`cover`), or else a generated one. */ -}}
+{{- return (.Params.cover | default (partial "cover.html" .Title)) -}}

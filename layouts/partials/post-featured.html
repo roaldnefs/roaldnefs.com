@@ -2,7 +2,7 @@
 {{- $page := .page -}}
 <a class="card card--wide" href="{{ $page.RelPermalink }}">
   <span class="card-media">
-    <img src="{{ partial "cover.html" $page.Title }}" alt="" width="1600" height="900">
+    <img src="{{ partial "post-cover.html" $page }}" alt="" width="1600" height="900">
   </span>
   <span class="card-body">
     <span class="card-flag">Featured</span>
