@@ -19,7 +19,7 @@
 </div>
 
 {{ if ne .Kind "term" }}
-  {{ with index (where $pages "Params.featured" true) 0 }}
+  {{ with index (where $pages "Params.tags" "intersect" (slice "featured")) 0 }}
     <div class="container featured">
       {{ partial "post-featured.html" (dict "page" . "heading" "h2") }}
     </div>

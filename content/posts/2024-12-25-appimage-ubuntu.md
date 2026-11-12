@@ -7,7 +7,6 @@ authors:
 tags:
   - featured
 draft: false
-featured: true
 ---
 
 In this post, we'll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we'll use **SavvyCAN**, a CANBus reverse engineering tool.

@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
-{{ $featured := index (where $posts "Params.featured" true) 0 }}
+{{ $featured := index (where $posts "Params.tags" "intersect" (slice "featured")) 0 }}
 
 <section class="hero">
   <img class="hero-art" src="{{ partial "cover.html" "overcast" }}" alt="" width="1600" height="900" fetchpriority="high">
@@ -73,7 +73,7 @@
     <dl class="stats">
       <div>
         <dt>{{ len $posts }}</dt>
-        <dd><strong>Posts</strong> on hardware hacking, security, and development.</dd>
+        <dd><strong>Posts</strong> on hardware hacking, security, AI, and software engineering.</dd>
       </div>
       <div>
         <dt>{{ (index (last 1 $posts) 0).Date.Year }}</dt>

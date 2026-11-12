@@ -5,7 +5,7 @@ type: post
 authors:
   - Roald Nefs
 categories:
-  - Development
+  - Software engineering
 draft: false
 ---
 
@@ -29,7 +29,7 @@ $ git branch develop
 
 In the image below you also see a special pointer called `HEAD`, pointing to the `master` branch. Even though we've created a new branch called `develop`, `HEAD` is stil pointing to the `master` branch.
 
-![Creating a new branch](/images/posts/2020/05/10/git-branch-1.png)
+![Creating a new branch](/images/posts/2020/05/10/git-branch-1.svg)
 
 Using the `git log` with the `--decorate` option shows you where the branch pointers are pointing. In the example below `HEAD` is pointing to `master`, while both `master` and `develop` are pointing to the same commit.
 
@@ -49,11 +49,11 @@ $ git checkout develop
 
 This results in `HEAD` pointing to the `develop` branch:
 
-![HEAD points to the develop branch](/images/posts/2020/05/10/git-branch-2.png)
+![HEAD points to the develop branch](/images/posts/2020/05/10/git-branch-2.svg)
 
 After creating a new commit the `master` branch is still pointing to the same commit, while the `develop` branch has moved forward.
 
-![HEAD branch moves forward when a commit is made](/images/posts/2020/05/10/git-branch-3.png)
+![HEAD branch moves forward when a commit is made](/images/posts/2020/05/10/git-branch-3.svg)
 
 Using the following command we can switch back to the `master` branch. This will move the `HEAD` pointer back to `master`.
 
@@ -61,11 +61,11 @@ Using the following command we can switch back to the `master` branch. This will
 $ git checkout master
 ```
 
-![HEAD moves when a checkout is performed](/images/posts/2020/05/10/git-branch-4.png)
+![HEAD moves when a checkout is performed](/images/posts/2020/05/10/git-branch-4.svg)
 
 Creating a new commit at this point will result in diverged history. Both commits are isolated in separate branches, and can be merged together when you're ready.
 
-![Divergent history](/images/posts/2020/05/10/git-branch-5.png)
+![Divergent history](/images/posts/2020/05/10/git-branch-5.svg)
 
 This can also be shown using the `git log --oneline --decorate --graph --all` command. By default the `git log` command will not show all of the branch, this the `--all` options is required.
 
@@ -90,7 +90,7 @@ $ git checkout -b <branchname>
 
 What if instead of creating a commit directory on the `master` branch we would have created branch called `hotfix`, made a single commit, and wanted to merge it back into `master`?
 
-![Hotfix branch containg a single commit](/images/posts/2020/05/10/git-branch-8.png)
+![Hotfix branch containg a single commit](/images/posts/2020/05/10/git-branch-8.svg)
 
 You can do that using the `git merge` command. This example below will merge the `hotfix` branch back into `master`. 
 
@@ -106,11 +106,11 @@ Fast-forward
 
 Because the commit `C4` pointed to by the branch `hotfix` was directly ahead of the commit `C3`, the commit previously pointed to by the`master` branch, Git was able to perform a "_fast-forward_" merge. During a fast-forward merge the pointer is moved forward. This only happens when you try to merge one commit that can be reached by following the firs commit's history. After merging the `master` and `hotfix` branch point to the same commit.
 
-![The master branch is fast-forwarded](/images/posts/2020/05/10/git-branch-9.png)
+![The master branch is fast-forwarded](/images/posts/2020/05/10/git-branch-9.svg)
 
 While the `hotfix` branch was merged into `master` the `develop` branch diverged from master, containing two extra commits. If we wanted to merge `develop` into `master` the situation would look similar to this:
 
-![Merging](/images/posts/2020/05/10/git-branch-7.png)
+![Merging](/images/posts/2020/05/10/git-branch-7.svg)
 
 Using the `git merge` command we can merge `develop` into `master`:
 
@@ -125,7 +125,7 @@ Merge made by the 'recursive' strategy.
 
 Instead of the "_fast-forward_" stategy it now used a "_recursive_" strategy. This is because the commit on the `develop` branch isn't a clear ancestor of the `master` branch. Git simply does a three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two, this results in a merge commit (`C7`). Compared to a normal commit, a merge commits has more than one parent.
 
-![Merging](/images/posts/2020/05/10/git-branch-6.png)
+![Merging](/images/posts/2020/05/10/git-branch-6.svg)
 
 After merging `develop`, the branch can be removed using the `git branch` command combined with the `-b` option:
 
@@ -202,7 +202,7 @@ Your branch is up to date with 'origin/master'.
 
 If the `master` branch contains a few commits, this results in the following situation:
 
-![Remote and local master branch](/images/posts/2020/05/10/git-branch-10.png)
+![Remote and local master branch](/images/posts/2020/05/10/git-branch-10.svg)
 
 The `origin` remote isn't different from other remotes it's, just the default alias for the remote after running `git clone`. You can show all the remotes using the `git remote -v` command:
 
@@ -216,7 +216,7 @@ origin	https://github.com/roaldnefs/roaldnefs.com.git (push)
 
 Just like normal branches, local and remote work can diverge. In the example below the local `master` branch in one commit forward of the remote-tracking `origin/master` branch:
 
-![Commit on the local master branch](/images/posts/2020/05/10/git-branch-11.png)
+![Commit on the local master branch](/images/posts/2020/05/10/git-branch-11.svg)
 
 To synchronize your work you can run the `git fetch <remote>` command, e.g. `git fetch origin`. In the above example this will lookup the alias `alias` (in this case _[https://github.com/roaldnefs/roaldnefs.com.git](https://github.com/roaldnefs/roaldnefs.com.git)_), and fetch any data from it, and update your local database, moving the `origin/master` pointer forward if a new commit has been added the to remote repository in the meanwhile.
 
@@ -271,11 +271,11 @@ As the `git pull` wil often be confusing it's better to simply use the `git fetc
 
 Within Git there are two ways to integrate changes from one branch into another: using `merge` or `rebase`.  In the example below the history has diverged; there are commits on both the branches you would like to integrate. 
 
-![Divergent history](/images/posts/2020/05/10/git-branch-12.png)
+![Divergent history](/images/posts/2020/05/10/git-branch-12.svg)
 
 The most simple way to integrate the work of the `hotfix` would be to use the `git merge` command. This will result in a three-way merge between the two latests snapshots (`C4` and `C5`) and there common ancestor (`C3`) creating a merge-commit (`C6`). 
 
-![Using merging to integrate diverged work](/images/posts/2020/05/10/git-branch-13.png)
+![Using merging to integrate diverged work](/images/posts/2020/05/10/git-branch-13.svg)
 
 Instead of `merge` you could've used `rebase` to integrate the changes in the `hotfix` in the `master` branch. When rebasing, Git will take all the changes that were committed on one branch and replay them on a different branch.  We could for example rebase the `hotfix` branch onto the `master` branch:
 
@@ -293,7 +293,7 @@ When performing the rebase, Git wil do the following actions:
 3. Reset the current branch to the branch you're rebasing onto (`master`).
 4. Applying each change (re-apply `C4`, now known as `C4'`).
 
-![Using rebasing to integrate diverged work](/images/posts/2020/05/10/git-branch-14.png)
+![Using rebasing to integrate diverged work](/images/posts/2020/05/10/git-branch-14.svg)
 
 Because the commit `C4'` pointed to by the branch `hotfix` was directly ahead of the commit `C5`, the commit pointed to by the`master` branch, Git is able to perform a "_fast-forward_" merge:
 
@@ -309,7 +309,7 @@ Fast-forward
 
 This result in both the `hotfix` and `master` branch pointing to the `C4'` commit:
 
-![Rebased branch](/images/posts/2020/05/10/git-branch-15.png)
+![Rebased branch](/images/posts/2020/05/10/git-branch-15.svg)
 
 Both `C4'` (using rebase) and `C6` (using merge) resulted in the same file contents, but the Git history is different. The rebase made the history a bit cleaner, resulting in a linear history. Even though the history shows that the work happened in series, it actually happened in parallel.
 
@@ -319,7 +319,7 @@ During a rebase you will be abandoning commits and create new ones that have the
 
 Suppose you've started working on the `master` branch locally while in the meanwhile another collaborator forcefully pushed his rebased `master` branch, resulting in some part of the history being rewritten on the remote `origin/master` branch. When you execute a `git pull`, Git will merge the rebased `origin/master` branch into your local `master` branch.
 
-![Diverged history](/images/posts/2020/05/10/git-branch-16.png)
+![Diverged history](/images/posts/2020/05/10/git-branch-16.svg)
 
 The history between the `origin/master` and `master` branch have been diverged, forcing you to rebase you local `master` branch onto `origin/master`, which might further confuse other colleborators.
 
@@ -336,7 +336,7 @@ The `git cherry-pick` isn't directly related to Git branches, it however allows 
 
 Git `cherry-pick` will however cause duplicate commits, and in most cases a normal `merge` is perferred. Even though the changes in the cherry-picked commit are the same, the SHA-1 checksum changes. This might confuse other colleborators as the original and picked commit might look different.
 
-![The master branch before the cherry-pick](/images/posts/2020/05/10/git-branch-18.png)
+![The master branch before the cherry-pick](/images/posts/2020/05/10/git-branch-18.svg)
 
 Let's assume we want to apply the hotfix `C4` already merged in the `develop` to the `master` branch without merging all the other changes currently in the `develop` branch. You can execute a `git cherry-pick` command to pick `C4` into the `master` branch:
 
@@ -347,7 +347,7 @@ $ git cherry-pick C4
 
 Where `C4` should be the commit SHA1-checksum of the original `C4` commit. This results in only the hotfix being picked into the `master` branch:
 
-![The master-branch after the cherry-pick](/images/posts/2020/05/10/git-branch-17.png)
+![The master-branch after the cherry-pick](/images/posts/2020/05/10/git-branch-17.svg)
 
 It's also possible to cherry-pick multiple commits. We could've have picked the commits `C4`  up to `C7` using the following command:
 

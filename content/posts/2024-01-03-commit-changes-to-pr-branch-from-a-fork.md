@@ -10,7 +10,6 @@ categories:
 tags:
   - featured
 draft: false
-featured: true
 ---
 Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don't want to force the required work on the pull requests original author. You're allowed to make changes to the pull request if they are opened to a repository you have push access to, the fork is user-owned, the user has granted the [required permissions](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork) and there aren't any branch restrictions that will prevent committing.
 

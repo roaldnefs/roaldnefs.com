@@ -5,7 +5,7 @@
     <img src="{{ partial "cover.html" $page.Title }}" alt="" width="1600" height="900" loading="lazy">
     {{ if .tags }}
       <span class="card-tags">
-        {{ if $page.Params.featured }}<span class="label label--primary">Featured</span>{{ end }}
+        {{ if in $page.Params.tags "featured" }}<span class="label label--primary">Featured</span>{{ end }}
         {{ with partial "category.html" $page }}<span class="label">{{ . }}</span>{{ end }}
       </span>
     {{ end }}
