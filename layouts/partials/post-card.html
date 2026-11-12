@@ -1,14 +1,18 @@
-{{- $page := . -}}
-<article class="cell card">
-  {{ with partial "tags.html" $page }}
-    <div class="kicker">{{ index . 0 }}</div>
-  {{ end }}
-  <h3 class="cell-title">
-    <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
-  </h3>
-  <p class="cell-summary">{{ $page.Summary | plainify | truncate 160 }}</p>
-  <div class="cell-meta">
-    <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
-    <span>&middot; {{ $page.ReadingTime }} min read</span>
-  </div>
-</article>
+{{- /* Call with (dict "page" . "heading" "h3" "tags" true). "tags" shows the Featured and category labels on the picture. */ -}}
+{{- $page := .page -}}
+<a class="card" href="{{ $page.RelPermalink }}">
+  <span class="card-media">
+    <img src="{{ partial "cover.html" $page.Title }}" alt="" width="1600" height="900" loading="lazy">
+    {{ if .tags }}
+      <span class="card-tags">
+        {{ if $page.Params.featured }}<span class="label label--primary">Featured</span>{{ end }}
+        {{ with partial "category.html" $page }}<span class="label">{{ . }}</span>{{ end }}
+      </span>
+    {{ end }}
+  </span>
+  <span class="card-body">
+    {{ printf "<%s class=\"card-title\">" .heading | safeHTML }}{{ $page.Title }}{{ printf "</%s>" .heading | safeHTML }}
+    <span class="card-summary">{{ $page.Summary | plainify | truncate 160 }}</span>
+    {{ partial "post-author.html" $page }}
+  </span>
+</a>

@@ -1,5 +1,6 @@
 ---
 title: Roald Nefs
+headline: Software, security, and the hardware I take apart
 description: Notes on software engineering, security, and AI, plus workshops and hardware hacking — a personal site by Roald Nefs.
 ---
 

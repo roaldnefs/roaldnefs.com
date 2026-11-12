@@ -1,27 +1,38 @@
 <header class="site-header">
-  <div class="site-header-inner">
-    <a class="site-title" href="{{ "/" | relURL }}">
-      <span>{{ site.Title }}</span>
-    </a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-cb" aria-hidden="true">
+  <div class="site-header-bg" aria-hidden="true"></div>
+  <div class="container site-header-inner">
+    <a class="wordmark" href="{{ "/" | relURL }}">{{ site.Title }}</a>
     <nav class="site-nav" aria-label="Primary">
-      <div class="site-nav-links">
-        {{ range site.Menus.main }}
-          {{ if not .Params.icon }}
-            {{ $url := relURL .PageRef }}
-            {{ $current := or (eq $.RelPermalink $url) (and (ne $url "/") (hasPrefix $.RelPermalink $url)) }}
-            <a href="{{ $url }}" class="nav-link"{{ if $current }} aria-current="page"{{ end }}>
-              <span>{{ .Name }}</span>
-              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          {{ end }}
+      {{ range site.Menus.main }}
+        {{ if and (not .Params.icon) (ne .PageRef "/") }}
+          {{ $url := relURL .PageRef }}
+          <a href="{{ $url }}" class="nav-link"{{ if hasPrefix $.RelPermalink $url }} aria-current="page"{{ end }}>{{ .Name }}</a>
         {{ end }}
-      </div>
+      {{ end }}
     </nav>
-    <label for="nav-toggle" class="nav-toggle" aria-label="Toggle menu" role="button" tabindex="0">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </label>
+    <div class="site-header-actions">
+      <a class="btn header-cta" href="{{ "/training/#book-a-session" | relURL }}">Book a workshop</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="menu" id="menu">
+    <nav class="menu-links" aria-label="Menu">
+      {{ range site.Menus.main }}
+        {{ if not .Params.icon }}
+          {{ $url := relURL .PageRef }}
+          <a href="{{ $url }}"{{ if eq $.RelPermalink $url }} aria-current="page"{{ end }}>{{ .Name }}{{ partial "icon.html" "chevron" }}</a>
+        {{ end }}
+      {{ end }}
+    </nav>
+    <div class="menu-follow">
+      <span>Follow</span>
+      {{ range $entry := site.Menus.main }}
+        {{ with $entry.Params.icon }}
+          <a href="{{ $entry.URL }}" rel="me noopener" target="_blank" aria-label="{{ $entry.Name }}">{{ partial "icon.html" . }}</a>
+        {{ end }}
+      {{ end }}
+    </div>
   </div>
 </header>

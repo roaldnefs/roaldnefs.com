@@ -1,0 +1,20 @@
+{{- /* Call with (dict "pages" $pages "eyebrow" "…" "title" "…"). A sideways-scrolling row of post cards. */ -}}
+<div class="carousel" data-carousel>
+  <div class="container carousel-head">
+    <div>
+      <p class="eyebrow">{{ .eyebrow }}</p>
+      <h2 class="section-title">{{ .title }}</h2>
+    </div>
+    <div class="carousel-arrows">
+      <button type="button" data-carousel-prev aria-label="Previous posts">{{ partial "icon.html" "arrow-left" }}</button>
+      <button type="button" data-carousel-next aria-label="Next posts">{{ partial "icon.html" "arrow-right" }}</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="carousel-track" data-carousel-track tabindex="0" role="group" aria-label="{{ .title }}">
+      {{ range .pages }}
+        {{ partial "post-card.html" (dict "page" . "heading" "h3" "tags" true) }}
+      {{ end }}
+    </div>
+  </div>
+</div>

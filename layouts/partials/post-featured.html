@@ -1,0 +1,13 @@
+{{- /* Call with (dict "page" . "heading" "h2"). */ -}}
+{{- $page := .page -}}
+<a class="card card--wide" href="{{ $page.RelPermalink }}">
+  <span class="card-media">
+    <img src="{{ partial "cover.html" $page.Title }}" alt="" width="1600" height="900">
+  </span>
+  <span class="card-body">
+    <span class="card-flag">Featured</span>
+    {{ printf "<%s class=\"card-title\">" .heading | safeHTML }}{{ $page.Title }}{{ printf "</%s>" .heading | safeHTML }}
+    <span class="card-summary">{{ $page.Summary | plainify | truncate 200 }}</span>
+    {{ partial "post-author.html" $page }}
+  </span>
+</a>

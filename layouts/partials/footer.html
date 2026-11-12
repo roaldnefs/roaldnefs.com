@@ -1,126 +1,51 @@
 <footer class="site-footer">
-  <div class="site-footer-main">
+  <div class="container site-footer-inner">
     <div class="footer-brand">
-      <a class="site-title" href="{{ "/" | relURL }}">
-        <span>{{ site.Title }}</span>
-      </a>
-      <p>{{ site.Params.description }}</p>
-    </div>
-    <nav class="footer-col" aria-label="Pages">
-      <h2 class="footer-heading">Pages</h2>
-      <ul class="footer-links">
-        {{ range site.Menus.main }}
-          {{ if and (not .Params.icon) (ne .PageRef "/") }}
-            <li><a href="{{ relURL .PageRef }}">{{ .Name }}</a></li>
-          {{ end }}
-        {{ end }}
-      </ul>
-    </nav>
-    <div class="footer-col">
-      <h2 class="footer-heading">Companies</h2>
-      <ul class="footer-links">
-        {{ range site.Data.companies }}
-          <li><a href="{{ .url }}" rel="noopener noreferrer" target="_blank">{{ .name }}</a></li>
-        {{ end }}
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h2 class="footer-heading">Follow</h2>
-      <ul class="footer-links">
+      <a class="wordmark" href="{{ "/" | relURL }}">{{ site.Title }}</a>
+      <ul class="footer-follow">
         {{ range $entry := site.Menus.main }}
           {{ with $entry.Params.icon }}
-            <li><a class="inline-icon" href="{{ $entry.URL }}" rel="me noopener" target="_blank">{{ partial "icon.html" . }}<span>{{ $entry.Name }}</span></a></li>
+            <li><a href="{{ $entry.URL }}" rel="me noopener" target="_blank">{{ partial "icon.html" . }}<span>{{ $entry.Name }}</span></a></li>
           {{ end }}
         {{ end }}
-        <li><a class="inline-icon" href="/rss.xml">{{ partial "icon.html" "rss" }}<span>RSS</span></a></li>
+        <li><a href="/rss.xml">{{ partial "icon.html" "rss" }}<span>RSS</span></a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h2 class="footer-heading">Agents</h2>
-      <ul class="footer-links footer-links--mono">
-        <li><a href="/rss.xml">rss.xml</a></li>
-        <li><a href="/sitemap.md">sitemap.md</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="site-footer-bottom">
-    <div>{{ i18n "copyright" | default (printf "© %d %s" now.Year site.Title) }}</div>
-    <div class="site-footer-legal">
-      <a href="/privacy/">Privacy</a>
-      <a href="/cookies/">Cookies</a>
-      <div class="theme-menu">
-        <button type="button" class="theme-toggle" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu-list">
-          {{ partial "icon.html" "sun" }}
-          {{ partial "icon.html" "moon" }}
-          <span class="theme-toggle-label">System Theme</span>
-        </button>
-        <div class="theme-menu-list" id="theme-menu-list" role="menu" aria-label="Theme" hidden>
-          <div class="theme-menu-heading">Theme</div>
-          {{ range slice "light" "dark" "system" }}
-            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="{{ . }}">
-              <span>{{ title . }}</span>
-              {{ partial "icon.html" "check" }}
-            </button>
+    <div class="footer-cols">
+      <nav class="footer-col" aria-label="Pages">
+        <h2 class="footer-heading">Pages</h2>
+        <ul class="footer-links">
+          {{ range site.Menus.main }}
+            {{ if and (not .Params.icon) (ne .PageRef "/") }}
+              {{ $url := relURL .PageRef }}
+              <li><a href="{{ $url }}"{{ if hasPrefix $.RelPermalink $url }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+            {{ end }}
           {{ end }}
-        </div>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2 class="footer-heading">Companies</h2>
+        <ul class="footer-links">
+          {{ range site.Data.companies }}
+            <li><a href="{{ .url }}" rel="noopener noreferrer" target="_blank">{{ .name }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Agents</h2>
+        <ul class="footer-links">
+          <li><a href="/rss.xml">rss.xml</a></li>
+          <li><a href="/sitemap.md">sitemap.md</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Legal</h2>
+        <ul class="footer-links">
+          <li><a href="/privacy/"{{ if eq .RelPermalink "/privacy/" }} aria-current="page"{{ end }}>Privacy</a></li>
+          <li><a href="/cookies/"{{ if eq .RelPermalink "/cookies/" }} aria-current="page"{{ end }}>Cookies</a></li>
+        </ul>
       </div>
     </div>
   </div>
-  <script>
-    (function () {
-      var root = document.documentElement;
-      var toggle = document.querySelector(".theme-toggle");
-      var label = toggle.querySelector(".theme-toggle-label");
-      var list = document.getElementById("theme-menu-list");
-      var items = list.querySelectorAll(".theme-menu-item");
-
-      function sync() {
-        var theme = root.dataset.theme || "system";
-        label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1) + " Theme";
-        items.forEach(function (item) {
-          item.setAttribute("aria-checked", item.dataset.themeValue === theme);
-        });
-      }
-
-      function setOpen(open) {
-        list.hidden = !open;
-        toggle.setAttribute("aria-expanded", open);
-      }
-
-      toggle.addEventListener("click", function () {
-        setOpen(list.hidden);
-      });
-
-      items.forEach(function (item) {
-        item.addEventListener("click", function () {
-          var theme = item.dataset.themeValue;
-          try {
-            if (theme === "system") {
-              delete root.dataset.theme;
-              localStorage.removeItem("theme");
-            } else {
-              root.dataset.theme = theme;
-              localStorage.setItem("theme", theme);
-            }
-          } catch (e) {}
-          sync();
-          setOpen(false);
-          toggle.focus();
-        });
-      });
-
-      document.addEventListener("click", function (e) {
-        if (!e.target.closest(".theme-menu")) setOpen(false);
-      });
-
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && !list.hidden) {
-          setOpen(false);
-          toggle.focus();
-        }
-      });
-
-      sync();
-    })();
-  </script>
+  <div class="container site-footer-note">{{ i18n "copyright" | default (printf "© %d %s" now.Year site.Title) }}</div>
 </footer>

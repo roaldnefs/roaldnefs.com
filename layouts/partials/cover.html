@@ -1,0 +1,89 @@
+{{- /*
+  Generates a cover image as an SVG file and returns its URL.
+  Call with a string, usually a page title. The picture is derived from
+  that string, so every title gets its own and it stays the same between builds.
+
+  Scenes: 0 = streaks along a horizon, 1 = beams rising from the horizon,
+  2 = a burst of lines from one point, 3 = rings spreading from one point.
+*/ -}}
+{{- $seed := . -}}
+{{- $n := hash.FNV32a $seed -}}
+{{- $scene := mod $n 4 -}}
+{{- $palettes := slice
+  (slice "#a9b8c6" "#6f879a" "#1d3550" "#06121d")
+  (slice "#0b1c2e" "#113a5c" "#0a2440" "#030a14")
+  (slice "#02060c" "#08203a" "#06162a" "#010408")
+  (slice "#333c48" "#7a6650" "#152638" "#040b14")
+-}}
+{{- $p := index $palettes (mod (div $n 4) 4) -}}
+{{- $warm := slice "#ffe2b8" "#ffb56b" "#ff8a45" "#ff5a36" "#f6f1e7" -}}
+{{- $cool := slice "#8fc8ff" "#3f8fe0" "#d9ebff" -}}
+
+{{- $hx := add 380 (mod (div $n 16) 840) -}}
+{{- $hy := add 470 (mod (div $n 128) 150) -}}
+{{- if ge $scene 2 }}{{ $hy = add 330 (mod (div $n 128) 240) }}{{ end -}}
+
+{{- $marks := slice -}}
+{{- if eq $scene 3 -}}
+  {{- range $i := seq 1 9 -}}
+    {{- $r := mod (hash.FNV32a (print $seed "r" $i)) 1000 -}}
+    {{- $rx := add (mul $i 62) (div $r 14) -}}
+    {{- $color := index $warm (mod $r 5) -}}
+    {{- if eq (mod $i 3) 0 }}{{ $color = index $cool (mod $r 3) }}{{ end -}}
+    {{- $marks = $marks | append (printf `<ellipse cx="%d" cy="%d" rx="%d" ry="%d" fill="none" stroke="%s" stroke-width="%.1f" opacity="%.2f"/>` $hx $hy $rx (div (mul $rx 38) 100) $color (add 2.5 (div (float (mod $r 60)) 10)) (sub 0.9 (mul (float $i) 0.08))) -}}
+  {{- end -}}
+{{- else -}}
+  {{- range $i := seq 1 46 -}}
+    {{- $a := mod (hash.FNV32a (print $seed "a" $i)) 1000 -}}
+    {{- $b := mod (hash.FNV32a (print $seed "b" $i)) 1000 -}}
+    {{- $c := mod (hash.FNV32a (print $seed "c" $i)) 1000 -}}
+    {{- $color := index $warm (mod $a 5) -}}
+    {{- if eq (mod $i 6) 0 }}{{ $color = index $cool (mod $a 3) }}{{ end -}}
+    {{- $h := add 1 (div (mul $c $c) 180000) -}}
+    {{- $opacity := add 0.25 (div (float $c) 1500) -}}
+    {{- if eq $scene 2 -}}
+      {{- /* Lines fan out left and right of one point, tighter near the middle */ -}}
+      {{- $w := add 260 (mul $a 1) -}}
+      {{- $angle := sub (div (float (mul $b $b)) 14000) 36 -}}
+      {{- if eq (mod $i 2) 0 }}{{ $angle = add $angle 180 }}{{ end -}}
+      {{- $marks = $marks | append (printf `<rect x="%d" y="%d" width="%d" height="%d" fill="%s" opacity="%.2f" transform="rotate(%.1f %d %d)"/>` (add $hx 14) $hy $w $h $color $opacity $angle $hx $hy) -}}
+    {{- else -}}
+      {{- /* Lines hug the horizon; most are short, a few run long */ -}}
+      {{- $w := add 90 (div (mul $a $a) 1300) -}}
+      {{- $spread := sub (div (mul $b $b) 5200) 96 -}}
+      {{- $x := sub (add $hx (sub (div (mul $c 9) 10) 450)) (div $w 2) -}}
+      {{- $marks = $marks | append (printf `<rect x="%d" y="%d" width="%d" height="%d" fill="%s" opacity="%.2f"/>` $x (add $hy $spread) $w $h $color $opacity) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $turn := "" -}}
+{{- if eq $scene 1 }}{{ $turn = printf ` transform="rotate(-90 %d %d)"` $hx $hy }}{{ end -}}
+{{- $smear := "9 0.5" -}}
+{{- if eq $scene 2 }}{{ $smear = "2" }}{{ end -}}
+{{- if eq $scene 3 }}{{ $smear = "3" }}{{ end -}}
+
+{{- $svg := printf `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="%s"/><stop offset="%.2f" stop-color="%s"/><stop offset="%.2f" stop-color="%s"/><stop offset="1" stop-color="%s"/></linearGradient>
+<radialGradient id="sun"><stop offset="0" stop-color="#fff1d6" stop-opacity=".95"/><stop offset=".18" stop-color="#ffb56b" stop-opacity=".6"/><stop offset=".5" stop-color="#ff7a3d" stop-opacity=".16"/><stop offset="1" stop-color="#ff7a3d" stop-opacity="0"/></radialGradient>
+<radialGradient id="edge" cx=".5" cy=".5" r=".75"><stop offset=".45" stop-color="#01050a" stop-opacity="0"/><stop offset="1" stop-color="#01050a" stop-opacity=".78"/></radialGradient>
+<filter id="haze" x="0" y="0" width="100%%" height="100%%"><feTurbulence type="fractalNoise" baseFrequency=".0016 .011" numOctaves="3" seed="%d"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  .9 0 0 0 -.38"/></filter>
+<filter id="grain" x="0" y="0" width="100%%" height="100%%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="%d"/><feColorMatrix values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 .2"/></filter>
+<filter id="smear" x="-20%%" y="-20%%" width="140%%" height="140%%"><feGaussianBlur stdDeviation="%s"/></filter>
+<filter id="bloom" x="-30%%" y="-30%%" width="160%%" height="160%%"><feGaussianBlur stdDeviation="26"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<rect width="1600" height="900" filter="url(#haze)" opacity=".2"/>
+<ellipse cx="%d" cy="%d" rx="560" ry="150" fill="url(#sun)" opacity=".8"/>
+<g%s>
+<g filter="url(#bloom)" opacity=".8">%s</g>
+<g filter="url(#smear)">%s</g>
+</g>
+<ellipse cx="%d" cy="%d" rx="34" ry="9" fill="#fff6e6" filter="url(#smear)"/>
+<rect width="1600" height="900" fill="url(#edge)"/>
+<rect width="1600" height="900" filter="url(#grain)" style="mix-blend-mode:overlay"/>
+</svg>` (index $p 0) (sub (div (float $hy) 900) 0.04) (index $p 1) (add (div (float $hy) 900) 0.03) (index $p 2) (index $p 3) (mod $n 97) (mod $n 89) $smear $hx $hy $turn (delimit $marks "") (delimit $marks "") $hx $hy -}}
+
+{{- $file := resources.FromString (printf "covers/%s.svg" (urlize $seed)) $svg -}}
+{{- return $file.RelPermalink -}}

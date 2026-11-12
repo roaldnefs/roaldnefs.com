@@ -1,169 +1,108 @@
 {{ define "main" }}
-<section class="band hero">
-  <div class="hero-content">
-    <h1 class="hero-title">{{ .Title }}</h1>
-    {{ with site.Data.companies }}
-      <p class="hero-byline">
-        <span>CTO at</span>
-        {{ range $i, $c := . }}
-          {{ if $i }}<span>&amp;</span>{{ end }}
-          <a class="chip chip--{{ $c.theme }}" href="{{ $c.url }}" rel="noopener noreferrer" target="_blank">
-            {{ partial "company-logo.html" $c }}
-            {{ if eq $c.theme "warpnet" }}<span>{{ $c.name }}</span>{{ else }}<span class="sr-only">{{ $c.name }}</span>{{ end }}
-          </a>
-        {{ end }}
-      </p>
-    {{ end }}
-    {{ with .Content }}
-      <div class="hero-subtitle">{{ . }}</div>
-    {{ end }}
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="{{ "/posts/" | relURL }}">Read the blog</a>
-      <a class="btn btn-secondary" href="{{ "/training/" | relURL }}">Hands-on workshops</a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <canvas class="hero-field" aria-hidden="true"></canvas>
-    <img class="hero-cutout"
-         src="{{ "/images/authors/roald-nefs-cutout.webp" | relURL }}"
-         alt="Roald Nefs"
-         width="584" height="776" loading="eager" fetchpriority="high">
-  </div>
-</section>
+{{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+{{ $featured := index (where $posts "Params.featured" true) 0 }}
 
-<section class="band">
-  <div class="band-head">
-    <h2 class="band-title">Companies</h2>
-  </div>
-  {{ partial "companies.html" . }}
-</section>
-
-<section class="band">
-  <div class="band-head">
-    <h2 class="band-title">Community &amp; training</h2>
-    <a href="{{ "/training/" | relURL }}">See past sessions &rarr;</a>
-  </div>
-  <div class="grid two">
-    <article class="cell">
-      <div class="kicker">community</div>
-      <h3 class="cell-title">Co-organizer</h3>
-      <p class="cell-summary">Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
-    </article>
-    <article class="cell">
-      <div class="kicker">training</div>
-      <h3 class="cell-title">Workshops &amp; talks</h3>
-      <p class="cell-summary">Hands-on automotive security and hardware hacking sessions for conferences, meetups, and internal training days. From a one-hour talk to a full day in the lab.</p>
-      <div class="cell-actions">
-        <a class="btn btn-primary" href="{{ "/training/#book-a-session" | relURL }}">Book a session &rarr;</a>
+<section class="hero">
+  <img class="hero-art" src="{{ partial "cover.html" "overcast" }}" alt="" width="1600" height="900" fetchpriority="high">
+  <div class="hero-inner">
+    <h1 class="hero-title reveal">{{ .Params.headline }}</h1>
+    <p class="hero-lede">{{ site.Params.description }}</p>
+    <a class="btn btn--lg" href="{{ "/posts/" | relURL }}">Read the blog</a>
+    {{ with $featured }}
+      <div class="hero-panel">
+        {{ partial "post-featured.html" (dict "page" . "heading" "h2") }}
       </div>
-    </article>
+    {{ end }}
   </div>
-  <figure class="home-feature">
-    <div class="home-feature-images">
-      <img src="{{ "/images/training/car-hacking-village-bsides-luxembourg-2026.jpeg" | relURL }}"
-           alt="Attendees at the Car Hacking Village booth at BSides Luxembourg 2026, with instrument clusters and laptops on a workshop table."
-           loading="lazy">
-      <img src="{{ "/images/training/car-hacking-village-cluster.jpeg" | relURL }}"
-           alt="A powered Škoda Fabia instrument cluster on a workshop bench beside a laptop running the WebUSB CAN console."
-           loading="lazy">
-    </div>
-    <figcaption>
-      Car Hacking Village at BSides Luxembourg 2026 ·
-      Photos: DLH
-    </figcaption>
-  </figure>
 </section>
 
-{{ $featuredPosts := where site.RegularPages "Params.featured" true }}
-{{ $featuredPosts = $featuredPosts.ByDate.Reverse }}
-{{ with $featuredPosts | first 3 }}
-  <section class="band">
-    <div class="band-head">
-      <h2 class="band-title">Featured posts</h2>
-      <a href="/posts/">All posts &rarr;</a>
-    </div>
-    <div class="grid three">
-      {{ range . }}
-        {{ partial "post-card.html" . }}
-      {{ end }}
-    </div>
-  </section>
+<section class="orgs">
+  <h2 class="orgs-label">Where I work and organize</h2>
+  <ul class="orgs-grid">
+    {{ range site.Data.companies }}
+      <li>
+        <a href="{{ .url }}" rel="noopener noreferrer" target="_blank">
+          <span class="orgs-role">CTO</span>
+          {{ partial "company-logo.html" . }}
+          <span class="{{ if eq .theme "warpnet" }}orgs-name{{ else }}sr-only{{ end }}">{{ .name }}</span>
+        </a>
+      </li>
+    {{ end }}
+    <li><a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank"><span class="orgs-role">Co-organizer</span><span class="orgs-name">BSides Groningen</span></a></li>
+    <li><a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank"><span class="orgs-role">Co-organizer</span><span class="orgs-name">BSides Amsterdam</span></a></li>
+    <li><a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank"><span class="orgs-role">Co-organizer</span><span class="orgs-name">Cloud Native Groningen</span></a></li>
+  </ul>
+</section>
+
+{{ with .Content }}
+  <section class="statement">{{ . }}</section>
 {{ end }}
 
 <section class="band">
-  <div class="band-head">
-    <h2 class="band-title">Recent posts</h2>
-    <a href="/posts/">Browse archive &rarr;</a>
+  <div class="container section section--compact">
+    <p class="eyebrow">Community and training</p>
+    <h2 class="section-title section-title--narrow">Hands-on workshops, from a one-hour talk to a full day in the lab</h2>
+
+    <div class="features">
+      <article class="feature">
+        <figure class="feature-media">
+          <img src="{{ "/images/training/car-hacking-village-bsides-luxembourg-2026.jpeg" | relURL }}"
+               alt="Attendees at the Car Hacking Village booth at BSides Luxembourg 2026, with instrument clusters and laptops on a workshop table."
+               loading="lazy">
+        </figure>
+        <div class="feature-text">
+          <h3>Automotive security and hardware hacking, on a real lab bench</h3>
+          <p>Hands-on automotive security and hardware hacking sessions for conferences, meetups, and internal training days. From a one-hour talk to a full day in the lab.</p>
+          <a class="text-link" href="{{ "/training/" | relURL }}">See past sessions</a>
+        </div>
+      </article>
+      <article class="feature">
+        <figure class="feature-media">
+          <img src="{{ "/images/training/car-hacking-village-cluster.jpeg" | relURL }}"
+               alt="A powered Škoda Fabia instrument cluster on a workshop bench beside a laptop running the WebUSB CAN console."
+               loading="lazy">
+        </figure>
+        <div class="feature-text">
+          <h3>Co-organizer of grassroots events</h3>
+          <p>Helping run <a href="https://bsidesgrunn.org/" rel="noopener noreferrer" target="_blank">BSides Groningen</a>, <a href="https://www.bsidesams.org/" rel="noopener noreferrer" target="_blank">BSides Amsterdam</a>, and <a href="https://cloudnativegroningen.nl/" rel="noopener noreferrer" target="_blank">Cloud Native Groningen</a>, grassroots events for the curious, the technical, and the occasionally reckless.</p>
+        </div>
+      </article>
+      <p class="features-credit">Car Hacking Village at BSides Luxembourg 2026. Photos: DLH</p>
+    </div>
+
+    <dl class="stats">
+      <div>
+        <dt>{{ len $posts }}</dt>
+        <dd><strong>Posts</strong> on hardware hacking, security, and development.</dd>
+      </div>
+      <div>
+        <dt>{{ (index (last 1 $posts) 0).Date.Year }}</dt>
+        <dd><strong>Writing here since</strong> the first post on software defined radio.</dd>
+      </div>
+      <div>
+        <dt>10+</dt>
+        <dd><strong>Community events</strong> co-organized in Groningen and Amsterdam.</dd>
+      </div>
+      <div>
+        <dt>{{ len site.Data.companies }}</dt>
+        <dd><strong>Companies</strong> as CTO: {{ range $i, $c := site.Data.companies }}{{ if $i }} and {{ end }}{{ $c.name }}{{ end }}.</dd>
+      </div>
+    </dl>
+
+    <p class="section-action"><a class="btn" href="{{ "/training/#book-a-session" | relURL }}">Book a session</a></p>
   </div>
-  {{ partial "post-list.html" (dict "pages" (first 5 (where site.RegularPages "Section" "posts").ByDate.Reverse) "heading" "h3" "truncate" 200) }}
 </section>
-<script>
-  (function () {
-    var canvas = document.querySelector(".hero-field");
-    if (!canvas || !canvas.getContext) return;
-    var ctx = canvas.getContext("2d");
-    var gap = 18, radius = 110, push = 6;
-    var w = 0, h = 0, dots = [], visible = true, pointerAt = 0;
-    var target = { x: 0.6, y: 0.45 }, pos = { x: 0.6, y: 0.45 };
-    var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function resize() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      dots = [];
-      for (var y = gap / 2; y < h; y += gap)
-        for (var x = gap / 2; x < w; x += gap) dots.push(x, y);
-    }
+<section class="section section--posts">
+  {{ partial "carousel.html" (dict "pages" (first 8 $posts) "eyebrow" "From the blog" "title" "Latest posts") }}
+  <p class="container carousel-more"><a class="text-link" href="{{ "/posts/" | relURL }}">All posts</a></p>
+</section>
 
-    function draw(t) {
-      var px = pos.x * w, py = pos.y * h;
-      ctx.clearRect(0, 0, w, h);
-
-      // Dots bend away from the cursor and light up near it
-      ctx.fillStyle = getComputedStyle(canvas).color;
-      for (var i = 0; i < dots.length; i += 2) {
-        var dx = dots[i] - px, dy = dots[i + 1] - py;
-        var d = Math.sqrt(dx * dx + dy * dy) || 1;
-        var f = Math.exp(-(d * d) / (2 * radius * radius));
-        var wave = Math.sin(t / 1400 + dots[i] * 0.02 + dots[i + 1] * 0.03) * 0.025;
-        var x = dots[i] + (dx / d) * f * push, y = dots[i + 1] + (dy / d) * f * push;
-        var s = 1.2 + f * 0.8;
-        ctx.globalAlpha = Math.min(1, 0.14 + wave + f * 0.25);
-        ctx.fillRect(x - s / 2, y - s / 2, s, s);
-      }
-      ctx.globalAlpha = 1;
-    }
-
-    function loop(t) {
-      if (visible && !document.hidden) {
-        // Drift on a slow loop when the cursor hasn't moved for a while
-        if (t - pointerAt > 3000) {
-          target.x = 0.55 + Math.sin(t / 3100) * 0.25;
-          target.y = 0.5 + Math.cos(t / 2300) * 0.25;
-        }
-        pos.x += (target.x - pos.x) * 0.08;
-        pos.y += (target.y - pos.y) * 0.08;
-        draw(t);
-      }
-      requestAnimationFrame(loop);
-    }
-
-    window.addEventListener("pointermove", function (e) {
-      var r = canvas.getBoundingClientRect();
-      if (!r.width) return;
-      // Keep the effect inside the visible area, leaning towards the cursor
-      target.x = Math.min(0.95, Math.max(0.1, (e.clientX - r.left) / r.width));
-      target.y = Math.min(0.95, Math.max(0.05, (e.clientY - r.top) / r.height));
-      pointerAt = performance.now();
-    }, { passive: true });
-
-    new ResizeObserver(function () { resize(); draw(0); }).observe(canvas);
-    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }).observe(canvas);
-    if (!still) requestAnimationFrame(loop);
-  })();
-</script>
+<section class="closing">
+  <img class="closing-art" src="{{ partial "cover.html" "long exposure" }}" alt="" width="1600" height="900" loading="lazy">
+  <div class="closing-inner">
+    <h2 class="closing-title">Hardware hacking for your conference, meetup, or team day.</h2>
+    <a class="btn btn--lg" href="{{ "/training/#book-a-session" | relURL }}">Book a workshop</a>
+  </div>
+</section>
 {{ end }}

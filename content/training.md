@@ -18,8 +18,6 @@ I run hands-on workshops on **automotive security** and **hardware hacking**. Th
   <figcaption><em>Photos: DLH, BSides Luxembourg 2026.</em></figcaption>
 </figure>
 
-{{< toc >}}
-
 ## Hands-on Hacking Automotive Systems
 Modern vehicles are computers on wheels. Dozens of ECUs talk over CAN, LIN, and increasingly automotive Ethernet. Yet most engineers, and most security teams, have never put a probe on one. This workshop closes that gap.
 

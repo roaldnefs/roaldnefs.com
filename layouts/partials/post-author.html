@@ -1,0 +1,7 @@
+<span class="author">
+  <img class="author-avatar" src="{{ "/images/authors/roald-nefs-avatar.webp" | relURL }}" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">{{ index (.Params.authors | default (slice site.Params.author.name)) 0 }}</span>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+  </span>
+</span>

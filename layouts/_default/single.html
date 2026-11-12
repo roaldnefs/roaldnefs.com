@@ -1,53 +1,95 @@
 {{ define "main" }}
+{{ $isPost := eq .Section "posts" }}
+{{ $hasToc := and (or $isPost .Params.toc) (strings.Contains .TableOfContents "<li>") }}
 <article>
-  <header class="band page-header">
-    {{ if eq .Section "posts" }}
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="{{ "/" | relURL }}">Home</a>
-        <span class="breadcrumb-sep">/</span>
-        <a href="{{ "/posts/" | relURL }}">Blog</a>
-        {{ with partial "tags.html" . }}
-          {{ $first := index . 0 }}
-          <span class="breadcrumb-sep">/</span>
-          <a href="{{ "/tags/" | relURL }}{{ $first | urlize }}/">{{ $first | title }}</a>
-        {{ end }}
-      </nav>
-    {{ end }}
-    <h1 class="page-title">{{ .Title }}</h1>
-    {{ if eq .Section "posts" }}
-      <div class="byline">
-        {{ with .Params.authors }}
-          <span>Written by <span class="author">{{ index . 0 }}</span></span>
-          <span class="dot">·</span>
-        {{ else }}
-          {{ with site.Params.author.name }}
-            <span>Written by <span class="author">{{ . }}</span></span>
-            <span class="dot">·</span>
+  {{ if $isPost }}
+    <header class="post-hero">
+      <img class="post-hero-art" src="{{ partial "cover.html" .Title }}" alt="" width="1600" height="900" fetchpriority="high">
+      <div class="container post-hero-inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="{{ "/posts/" | relURL }}">Blog</a>
+          {{ $term := index (.GetTerms "categories") 0 }}
+          {{ if not $term }}
+            {{ range .GetTerms "tags" }}
+              {{ if and (not $term) (ne .Data.Term "featured") }}{{ $term = . }}{{ end }}
+            {{ end }}
           {{ end }}
-        {{ end }}
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-        <span class="dot">·</span>
-        <span class="read-time">{{ .ReadingTime }} min read</span>
+          {{ with $term }}
+            {{ partial "icon.html" "chevron" }}
+            <a href="{{ .RelPermalink }}">{{ .LinkTitle | title }}</a>
+          {{ end }}
+        </nav>
+        <h1 class="post-title reveal">{{ .Title }}</h1>
+        <dl class="post-meta">
+          <div>
+            <dt>Author</dt>
+            <dd>{{ index (.Params.authors | default (slice site.Params.author.name)) 0 }}</dd>
+          </div>
+          <div>
+            <dt>Published</dt>
+            <dd><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></dd>
+          </div>
+          <div>
+            <dt>Reading time</dt>
+            <dd>{{ .ReadingTime }} min</dd>
+          </div>
+        </dl>
       </div>
-    {{ end }}
-  </header>
-  <div class="band">
-    <div class="prose">
-      {{ .Content }}
+    </header>
+  {{ else }}
+    <header class="container page-head">
+      <h1 class="page-title reveal">{{ .Title }}</h1>
+    </header>
+  {{ end }}
+
+  <div class="container post-layout{{ if not (or $isPost $hasToc) }} post-layout--single{{ end }}">
+    <div class="post-main">
+      {{ if $hasToc }}
+        <details class="toc-box">
+          <summary>{{ partial "icon.html" "list" }}<span>On this page</span>{{ partial "icon.html" "chevron" }}</summary>
+          {{ .TableOfContents }}
+        </details>
+      {{ end }}
+      <div class="prose">
+        {{ .Content }}
+      </div>
+      {{ with partial "tags.html" . }}
+        {{ if $isPost }}
+          <ul class="tag-list">
+            {{ range . }}
+              <li><a class="label" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a></li>
+            {{ end }}
+          </ul>
+        {{ end }}
+      {{ end }}
     </div>
-    {{ $visibleTags := partial "tags.html" . }}
-    {{ if and (eq .Section "posts") $visibleTags }}
-      <div class="post-footer">
-        <ul class="tag-list">
-          {{ range $visibleTags }}
-            <li><a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a></li>
-          {{ end }}
-        </ul>
-      </div>
+    {{ if or $isPost $hasToc }}
+      <aside class="post-aside">
+        {{ if $hasToc }}
+          <nav class="toc" aria-label="On this page" data-toc>
+            <p class="toc-title"><span>On this page</span></p>
+            {{ .TableOfContents }}
+          </nav>
+        {{ end }}
+        {{ if $isPost }}
+          <div class="aside-box">
+            <p class="aside-box-head">
+              <img class="author-avatar" src="{{ "/images/authors/roald-nefs-avatar.webp" | relURL }}" alt="" width="135" height="180" loading="lazy">
+              <span>Written by {{ site.Params.author.name }}</span>
+            </p>
+            <p>I run hands-on workshops on automotive security and hardware hacking.</p>
+            <a class="btn btn--sm" href="{{ "/training/#book-a-session" | relURL }}">Book a workshop</a>
+          </div>
+        {{ end }}
+      </aside>
     {{ end }}
   </div>
-  {{ if eq .Section "posts" }}
-    {{ partial "author-box.html" . }}
-  {{ end }}
 </article>
+
+{{ if $isPost }}
+  {{ $others := complement (slice .) (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+  <section class="more">
+    {{ partial "carousel.html" (dict "pages" (first 6 $others) "eyebrow" "Keep reading" "title" "More posts") }}
+  </section>
+{{ end }}
 {{ end }}
