@@ -3,7 +3,7 @@ title: Cookie Statement
 type: about
 ---
 
-*Last updated: October 3, 2026*
+*Last updated: November 12, 2026*
 
 ## Cookies
 
@@ -11,19 +11,11 @@ This website doesn't use cookies. There are no analytics, tracking, advertising,
 
 ## Browser storage
 
-The site stores a single value in your browser's local storage, and only if you use the light/dark mode toggle in the header:
-
-| Name    | Purpose                                     | Retention                              |
-|---------|---------------------------------------------|----------------------------------------|
-| `theme` | Remembers whether you chose light or dark mode | Until you clear your browser's site data |
-
-This value is strictly necessary to provide the feature you asked for. It never leaves your device and isn't readable by anyone else. If you never use the toggle, nothing is stored and the site follows your system's light or dark setting.
-
-You can remove it at any time by clearing this site's data in your browser settings.
+The site doesn't store anything in your browser's local storage or session storage either.
 
 ## Third parties
 
-The fonts on this site are loaded from Google Fonts. Google doesn't set cookies for these requests, but it does receive your IP address. The site is hosted on GitHub Pages, which also receives your IP address. See the [privacy statement](/privacy/) for details.
+The site is hosted on GitHub Pages, which receives your IP address when you visit. Fonts, scripts, and images are served from this website itself, so no other third party is contacted. See the [privacy statement](/privacy/) for details.
 
 ## Questions
 
