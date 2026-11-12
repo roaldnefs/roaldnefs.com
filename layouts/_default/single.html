@@ -4,7 +4,7 @@
 <article>
   {{ if $isPost }}
     <header class="post-hero">
-      <img class="post-hero-art" src="{{ partial "post-cover.html" . }}" alt="" width="1600" height="900" fetchpriority="high">
+      <img class="post-hero-art" src="{{ partial "cover.html" .Title }}" alt="" width="1600" height="900" fetchpriority="high">
       <div class="container post-hero-inner">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="{{ "/posts/" | relURL }}">Blog</a>
