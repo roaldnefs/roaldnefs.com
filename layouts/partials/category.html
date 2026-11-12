@@ -1,0 +1,4 @@
+{{- /* The label shown for a post: its first category, or else its first tag. */ -}}
+{{- $label := "" -}}
+{{- with .Params.categories }}{{ $label = index . 0 }}{{ else }}{{ with partial "tags.html" . }}{{ $label = index . 0 | title }}{{ end }}{{ end -}}
+{{- return $label -}}

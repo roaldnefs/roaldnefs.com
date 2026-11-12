@@ -1,0 +1,7 @@
+<div class="code">
+  <div class="code-head">
+    <span>{{ .Type }}</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  {{ (transform.HighlightCodeBlock .).Wrapped }}
+</div>

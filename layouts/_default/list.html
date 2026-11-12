@@ -1,21 +1,37 @@
 {{ define "main" }}
-<section>
-  <header class="band page-header">
-    <h1 class="page-title">{{ .Title }}</h1>
-    {{ with .Content }}
-      <div class="page-subtitle">{{ . }}</div>
+{{ $all := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+{{ $pages := $all }}
+{{ if eq .Kind "term" }}{{ $pages = .Pages.ByDate.Reverse }}{{ end }}
+
+<header class="container page-head">
+  <h1 class="page-title reveal">Blog</h1>
+</header>
+
+<div class="container filters">
+  <ul class="filters-list">
+    <li><a href="{{ "/posts/" | relURL }}"{{ if ne .Kind "term" }} aria-current="page"{{ end }}>All</a></li>
+    <li class="filters-sep" aria-hidden="true"></li>
+    {{ range site.Taxonomies.categories.Alphabetical }}
+      <li><a href="{{ .Page.RelPermalink }}"{{ if eq $.RelPermalink .Page.RelPermalink }} aria-current="page"{{ end }}>{{ .Page.Title }}</a></li>
     {{ end }}
-  </header>
+  </ul>
+  <a class="filters-rss" href="/rss.xml">{{ partial "icon.html" "rss" }}RSS</a>
+</div>
 
-  {{ $pages := .RegularPagesRecursive }}
-  {{ if .IsHome }}
-    {{ $pages = where site.RegularPages "Section" "posts" }}
-  {{ end }}
-
-  {{ if $pages }}
-    <div class="band">
-      {{ partial "post-list.html" (dict "pages" $pages.ByDate.Reverse "heading" "h2" "truncate" 240) }}
+{{ if ne .Kind "term" }}
+  {{ with index (where $pages "Params.featured" true) 0 }}
+    <div class="container featured">
+      {{ partial "post-featured.html" (dict "page" . "heading" "h2") }}
     </div>
+    {{ $pages = complement (slice .) $pages }}
   {{ end }}
-</section>
+{{ end }}
+
+<div class="container post-grid">
+  {{ range $pages }}
+    {{ partial "post-card.html" (dict "page" . "heading" "h2") }}
+  {{ else }}
+    <p class="empty">No posts here yet. <a href="{{ "/posts/" | relURL }}">See all posts</a>.</p>
+  {{ end }}
+</div>
 {{ end }}
