@@ -3,15 +3,8 @@
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
-<script>
-  try {
-    var theme = localStorage.getItem("theme");
-    if (theme) document.documentElement.dataset.theme = theme;
-  } catch (e) {}
-</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#04090f">
 
 <title>Building a Car Hacking Test Bench — Roald Nefs</title>
 
@@ -38,121 +31,191 @@
 
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap">
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 
   
-  <link rel="stylesheet" href="/css/main.min.f596c62cbe6bd63d42d92a65306cc0f2056c2fa306f8760ff6c2142a0e151281.css" integrity="sha256-9ZbGLL5r1j1C2SplMGzA8gVsL6MG&#43;HYP9sIUKg4VEoE=">
+  <link rel="stylesheet" href="/css/main.min.42671717c9faa9de4f33d261fb0ea0cfd120bebc3b33cd7b42668f542db73e48.css" integrity="sha256-QmcXF8n6qd5PM9Jh&#43;w6gz9Egvrw7M817QmaPVC23Pkg=">
+
+
+
+  
+  <script src="/js/main.min.45f023d2efa202a25c6cd76e38eb6e47fde44895e1b385d1f741ff92e70eea03.js" integrity="sha256-RfAj0u&#43;iAqJcbNduOOtuR/3kSJXhs4XR90H/kucO6gM=" defer></script>
 
 
 </head>
-<body>
+<body class="has-aside">
   <a href="#main" class="skip-link">Skip to content</a>
-  <div class="frame">
-    <header class="site-header">
-  <div class="site-header-inner">
-    <a class="site-title" href="/">
-      <span>Roald Nefs</span>
-    </a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-cb" aria-hidden="true">
+  <div class="backdrop" aria-hidden="true"></div>
+  <header class="site-header">
+  <div class="site-header-bg" aria-hidden="true"></div>
+  <div class="container site-header-inner">
+    <a class="wordmark" href="/">Roald Nefs</a>
     <nav class="site-nav" aria-label="Primary">
-      <div class="site-nav-links">
+      
+        
+      
         
           
-            
-            
-            <a href="/" class="nav-link">
-              <span>Home</span>
-              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          
+          <a href="/posts/" class="nav-link" aria-current="page">Blog</a>
+        
+      
         
           
-            
-            
-            <a href="/posts/" class="nav-link" aria-current="page">
-              <span>Blog</span>
-              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          
+          <a href="/training/" class="nav-link">Training</a>
+        
+      
         
           
-            
-            
-            <a href="/training/" class="nav-link">
-              <span>Training</span>
-              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          
+          <a href="/tools/" class="nav-link">Tools</a>
+        
+      
         
           
-            
-            
-            <a href="/tools/" class="nav-link">
-              <span>Tools</span>
-              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          
+          <a href="/about/" class="nav-link">About</a>
         
-          
-            
-            
-            <a href="/about/" class="nav-link">
-              <span>About</span>
-              <svg class="nav-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          
+      
         
-          
+      
         
-          
+      
         
-          
-        
-      </div>
+      
     </nav>
-    <label for="nav-toggle" class="nav-toggle" aria-label="Toggle menu" role="button" tabindex="0">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </label>
+    <div class="site-header-actions">
+      <a class="btn header-cta" href="/training/#book-a-session">Book a workshop</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="menu" id="menu">
+    <nav class="menu-links" aria-label="Menu">
+      
+        
+          
+          <a href="/">Home<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/posts/">Blog<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/training/">Training<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/tools/">Tools<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/about/">About<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="menu-follow">
+      <span>Follow</span>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/roaldnefs" rel="me noopener" target="_blank" aria-label="GitHub"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg></a>
+        
+      
+        
+          <a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank" aria-label="LinkedIn"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        
+      
+        
+          <a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank" aria-label="Mastodon"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg></a>
+        
+      
+    </div>
   </div>
 </header>
 
-    <main id="main">
-      
+  <main id="main">
+    
+
+
 <article>
-  <header class="band page-header">
-    
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span class="breadcrumb-sep">/</span>
-        <a href="/posts/">Blog</a>
-        
+  
+    <header class="post-hero">
+      <img class="post-hero-art" src="/covers/building-a-car-hacking-test-bench.svg" alt="" width="1600" height="900" fetchpriority="high">
+      <div class="container post-hero-inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/posts/">Blog</a>
           
-          <span class="breadcrumb-sep">/</span>
-          <a href="/tags/automotive/">Automotive</a>
-        
-      </nav>
-    
-    <h1 class="page-title">Building a Car Hacking Test Bench</h1>
-    
-      <div class="byline">
-        
-          <span>Written by <span class="author">Roald Nefs</span></span>
-          <span class="dot">·</span>
-        
-        <time datetime="2026-01-04">Jan 4, 2026</time>
-        <span class="dot">·</span>
-        <span class="read-time">4 min read</span>
+          
+            
+              
+            
+              
+            
+              
+            
+          
+          
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            <a href="/tags/automotive/">Automotive</a>
+          
+        </nav>
+        <h1 class="post-title reveal">Building a Car Hacking Test Bench</h1>
+        <dl class="post-meta">
+          <div>
+            <dt>Author</dt>
+            <dd>Roald Nefs</dd>
+          </div>
+          <div>
+            <dt>Published</dt>
+            <dd><time datetime="2026-01-04">Jan 4, 2026</time></dd>
+          </div>
+          <div>
+            <dt>Reading time</dt>
+            <dd>4 min</dd>
+          </div>
+        </dl>
       </div>
-    
-  </header>
-  <div class="band">
-    <div class="prose">
-      <h2 id="introduction">Introduction</h2>
+    </header>
+  
+
+  <div class="container post-layout">
+    <div class="post-main">
+      
+        <details class="toc-box">
+          <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>On this page</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></summary>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#mercedes-benz-w203-cclass">Mercedes-Benz W203 (C‑Class)</a></li>
+    <li><a href="#current-state">Current State</a></li>
+    <li><a href="#emulating-the-electronic-steering-lock-esl">Emulating the Electronic Steering Lock (ESL)</a></li>
+    <li><a href="#to-be-continued">To Be Continued&hellip;</a></li>
+  </ul>
+</nav>
+        </details>
+      
+      <div class="prose">
+        <h2 id="introduction">Introduction</h2>
 <p>Modern cars are computers on wheels: dozens of ECUs, multiple buses, wireless interfaces, and a threat model that keeps expanding. Over the past few years, I&rsquo;ve dipped my toes into the automotive security scene. Now it&rsquo;s time to take a deeper dive. So I bought a car.</p>
 <p>The goal of this project is to turn that car into a <strong>portable car hacking test bench</strong>, a self-contained platform for experimenting with CAN, LIN, diagnostics, firmware extraction, fault injection, and whatever else I end up curious about along the way.</p>
 <p>This post marks the beginning of that journey. It&rsquo;s intentionally incomplete and will be updated as the project unfolds: hardware choices, mistakes, dead ends, tooling, wiring diagrams, attack ideas that work (and many that don’t), and the lessons learned along the way. Think of it less as a tutorial and more as a research log, one I&rsquo;m making public in the hope that it&rsquo;s useful to others exploring automotive security.</p>
@@ -206,235 +269,319 @@
 </ol>
 </div>
 
+      </div>
+      
+        
+          <ul class="tag-list">
+            
+              <li><a class="label" href="/tags/automotive/">automotive</a></li>
+            
+              <li><a class="label" href="/tags/hardware-hacking/">hardware hacking</a></li>
+            
+          </ul>
+        
+      
     </div>
     
+      <aside class="post-aside">
+        
+          <nav class="toc" aria-label="On this page" data-toc>
+            <p class="toc-title"><span>On this page</span></p>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#mercedes-benz-w203-cclass">Mercedes-Benz W203 (C‑Class)</a></li>
+    <li><a href="#current-state">Current State</a></li>
+    <li><a href="#emulating-the-electronic-steering-lock-esl">Emulating the Electronic Steering Lock (ESL)</a></li>
+    <li><a href="#to-be-continued">To Be Continued&hellip;</a></li>
+  </ul>
+</nav>
+          </nav>
+        
+        
+          <div class="aside-box">
+            <p class="aside-box-head">
+              <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+              <span>Written by Roald Nefs</span>
+            </p>
+            <p>I run hands-on workshops on automotive security and hardware hacking.</p>
+            <a class="btn btn--sm" href="/training/#book-a-session">Book a workshop</a>
+          </div>
+        
+      </aside>
     
-      <div class="post-footer">
-        <ul class="tag-list">
+  </div>
+</article>
+
+
+  
+  <section class="more">
+    <div class="carousel" data-carousel>
+  <div class="container carousel-head">
+    <div>
+      <p class="eyebrow">Keep reading</p>
+      <h2 class="section-title">More posts</h2>
+    </div>
+    <div class="carousel-arrows">
+      <button type="button" data-carousel-prev aria-label="Previous posts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 12H1m0 0 6-6m-6 6 6 6"/></svg></button>
+      <button type="button" data-carousel-next aria-label="Next posts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12h22m0 0-6-6m6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="carousel-track" data-carousel-track tabindex="0" role="group" aria-label="More posts">
+      
+        <a class="card" href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">
+  <span class="card-media">
+    <img src="/covers/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">How to extract an AppImage and add it to the Ubuntu Sidebar</h3>
+    <span class="card-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2024-12-25">December 25, 2024</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">
+  <span class="card-media">
+    <img src="/covers/committing-changes-to-a-pull-request-branch-created-from-a-fork.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Information security</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Committing Changes to a Pull Request Branch Created from a Fork</h3>
+    <span class="card-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2024-01-03">January 3, 2024</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">
+  <span class="card-media">
+    <img src="/covers/spoofing-microchips-used-for-animal-identification.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Information security</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Spoofing Microchips used for Animal Identification</h3>
+    <span class="card-summary">A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2022-11-30">November 30, 2022</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/">
+  <span class="card-media">
+    <img src="/covers/how-to-automatically-generate-clients-for-your-rest-api.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Development</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">How to Automatically Generate Clients for your REST API</h3>
+    <span class="card-summary">While helping a colleague with adding some code to the bunq Python SDK to allow him to retrieve some additional information from the API (bunq/sdk_python#148), …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2020-12-19">December 19, 2020</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2020/05/git-branching/">
+  <span class="card-media">
+    <img src="/covers/git-branching.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        
+        <span class="label">Development</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Git Branching</h3>
+    <span class="card-summary">Introduction Like other version control systems Git also support a way to diverge from the main line of development and continue to do work without messing with …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2020-05-10">May 10, 2020</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+        <a class="card" href="/posts/2020/04/getting-started-with-git/">
+  <span class="card-media">
+    <img src="/covers/getting-started-with-git.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        
+        <span class="label">Development</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title">Getting Started with Git</h3>
+    <span class="card-summary">Introduction Git is a free and opensource distributed version control system designed to handle everything from small to very large projects with speed and …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2020-04-20">April 20, 2020</time>
+  </span>
+</span>
+
+  </span>
+</a>
+
+      
+    </div>
+  </div>
+</div>
+
+  </section>
+
+
+  </main>
+  <footer class="site-footer">
+  <div class="container site-footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="/">Roald Nefs</a>
+      <ul class="footer-follow">
+        
           
-            <li><a class="tag" href="/tags/automotive/">automotive</a></li>
+        
           
-            <li><a class="tag" href="/tags/hardware-hacking/">hardware hacking</a></li>
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
+          
+        
+        <li><a href="/rss.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-cols">
+      <nav class="footer-col" aria-label="Pages">
+        <h2 class="footer-heading">Pages</h2>
+        <ul class="footer-links">
+          
+            
+          
+            
+              
+              <li><a href="/posts/" aria-current="page">Blog</a></li>
+            
+          
+            
+              
+              <li><a href="/training/">Training</a></li>
+            
+          
+            
+              
+              <li><a href="/tools/">Tools</a></li>
+            
+          
+            
+              
+              <li><a href="/about/">About</a></li>
+            
+          
+            
+          
+            
+          
+            
+          
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2 class="footer-heading">Companies</h2>
+        <ul class="footer-links">
+          
+            <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
+          
+            <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
           
         </ul>
       </div>
-    
-  </div>
-  
-    <section class="band hero author-hero" aria-label="About the author">
-  <div class="hero-content">
-    <div class="kicker">Written by</div>
-    <h2 class="hero-title author-title">Roald Nefs</h2>
-    <p class="hero-byline">
-      <span>CTO at</span>
-      
-        
-        <a class="chip chip--warpnet" href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">
-          <span class="company-logo"><svg fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148.82 148.82"><path d="M0 0v148.82h148.82V0zm52.14 42.3h1.88L66.9 16.54l5.15 25.76h-1.88l.98 4.92h1.88l1.55 7.73 1.55-7.73h-1.88l.98-4.92h1.88l5.15-25.76L95.14 42.3h-1.88l2.46 4.92h1.88l.03.05-5.88 17.65h-1.52l-1.8 5.4-5.4-5.4h1.52l-9.97-9.97-9.97 9.97h-1.52l-5.4 5.4-1.8-5.4h1.52l-5.88-17.65.03-.05h-1.88zM20.8 62.63l7.71-15.41h-1.88l2.46-4.92h1.88l5.2-10.4 3.49 10.4h-1.88l1.65 4.92h1.88l5.93 17.7h-1.52l.51 1.51L36.16 76.5h1.52L25.9 88.28 23.56 76.5h-1.52l-2.29-11.58h1.52l-.45-2.29Zm95.05 43.59-3.35 3.4h-2.7L98.41 121.2h2.7L90.2 132.28 79.12 121.2h-2.7l-4.53-4.53-4.53 4.53h2.7l-10.65 10.65-10.78-10.65h-2.7l-11.72-11.58h2.7l-3.45-3.4h-7.68l-4.97-4.92h7.68l23.05-23.05 7.68 23.05 15.37-15.37 15.37 15.37 7.68-23.05 23.05 23.05h-7.68l-4.84 4.92zm12.04-41.31h-1.52l-2.31 11.58h1.52l-2.35 11.78-11.78-11.78h-1.52l-9.84-9.84.57-1.74h1.52l5.79-17.7h-1.88l1.61-4.92h1.88l3.4-10.38 5.19 10.38h-1.88l2.46 4.92h1.88l7.72 15.44-.45 2.26Z" data-name="Layer 1" style="fill:#fff"/></svg>
-</span>
-          <span>Warpnet</span>
-        </a>
-      
-        <span>&amp;</span>
-        <a class="chip chip--enlite" href="https://enlite.nl" rel="noopener noreferrer" target="_blank">
-          <img class="company-logo" src="/images/companies/enlite.png" alt="" width="1536" height="356" loading="lazy">
-          <span class="sr-only">Enlite</span>
-        </a>
-      
-    </p>
-    <p class="hero-subtitle">Software engineer based in the Netherlands, working across security, platform engineering, and AI. I run hands-on workshops on automotive security and hardware hacking, from a one-hour talk to a full day in the lab.</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="/training/#book-a-session">Book a workshop &rarr;</a>
-      <a class="btn btn-secondary" href="/about/">About me</a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-dots" aria-hidden="true"></div>
-    <img class="hero-cutout" src="/images/authors/roald-nefs-cutout.webp" alt="" width="584" height="776" loading="lazy">
-  </div>
-</section>
-
-  
-</article>
-
-    </main>
-    <footer class="site-footer">
-  <div class="site-footer-main">
-    <div class="footer-brand">
-      <a class="site-title" href="/">
-        <span>Roald Nefs</span>
-      </a>
-      <p>Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.</p>
-    </div>
-    <nav class="footer-col" aria-label="Pages">
-      <h2 class="footer-heading">Pages</h2>
-      <ul class="footer-links">
-        
-          
-        
-          
-            <li><a href="/posts/">Blog</a></li>
-          
-        
-          
-            <li><a href="/training/">Training</a></li>
-          
-        
-          
-            <li><a href="/tools/">Tools</a></li>
-          
-        
-          
-            <li><a href="/about/">About</a></li>
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </nav>
-    <div class="footer-col">
-      <h2 class="footer-heading">Companies</h2>
-      <ul class="footer-links">
-        
-          <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
-        
-          <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
-        
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h2 class="footer-heading">Follow</h2>
-      <ul class="footer-links">
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-            <li><a class="inline-icon" href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
-          
-        
-          
-            <li><a class="inline-icon" href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
-          
-        
-          
-            <li><a class="inline-icon" href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
-          
-        
-        <li><a class="inline-icon" href="/rss.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h2 class="footer-heading">Agents</h2>
-      <ul class="footer-links footer-links--mono">
-        <li><a href="/rss.xml">rss.xml</a></li>
-        <li><a href="/sitemap.md">sitemap.md</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="site-footer-bottom">
-    <div>© 2026 Roald Nefs</div>
-    <div class="site-footer-legal">
-      <a href="/privacy/">Privacy</a>
-      <a href="/cookies/">Cookies</a>
-      <div class="theme-menu">
-        <button type="button" class="theme-toggle" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu-list">
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <span class="theme-toggle-label">System Theme</span>
-        </button>
-        <div class="theme-menu-list" id="theme-menu-list" role="menu" aria-label="Theme" hidden>
-          <div class="theme-menu-heading">Theme</div>
-          
-            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="light">
-              <span>Light</span>
-              <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            </button>
-          
-            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="dark">
-              <span>Dark</span>
-              <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            </button>
-          
-            <button type="button" class="theme-menu-item" role="menuitemradio" aria-checked="false" data-theme-value="system">
-              <span>System</span>
-              <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            </button>
-          
-        </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Agents</h2>
+        <ul class="footer-links">
+          <li><a href="/rss.xml">rss.xml</a></li>
+          <li><a href="/sitemap.md">sitemap.md</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Legal</h2>
+        <ul class="footer-links">
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/cookies/">Cookies</a></li>
+        </ul>
       </div>
     </div>
   </div>
-  <script>
-    (function () {
-      var root = document.documentElement;
-      var toggle = document.querySelector(".theme-toggle");
-      var label = toggle.querySelector(".theme-toggle-label");
-      var list = document.getElementById("theme-menu-list");
-      var items = list.querySelectorAll(".theme-menu-item");
-
-      function sync() {
-        var theme = root.dataset.theme || "system";
-        label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1) + " Theme";
-        items.forEach(function (item) {
-          item.setAttribute("aria-checked", item.dataset.themeValue === theme);
-        });
-      }
-
-      function setOpen(open) {
-        list.hidden = !open;
-        toggle.setAttribute("aria-expanded", open);
-      }
-
-      toggle.addEventListener("click", function () {
-        setOpen(list.hidden);
-      });
-
-      items.forEach(function (item) {
-        item.addEventListener("click", function () {
-          var theme = item.dataset.themeValue;
-          try {
-            if (theme === "system") {
-              delete root.dataset.theme;
-              localStorage.removeItem("theme");
-            } else {
-              root.dataset.theme = theme;
-              localStorage.setItem("theme", theme);
-            }
-          } catch (e) {}
-          sync();
-          setOpen(false);
-          toggle.focus();
-        });
-      });
-
-      document.addEventListener("click", function (e) {
-        if (!e.target.closest(".theme-menu")) setOpen(false);
-      });
-
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && !list.hidden) {
-          setOpen(false);
-          toggle.focus();
-        }
-      });
-
-      sync();
-    })();
-  </script>
+  <div class="container site-footer-note">© 2026 Roald Nefs</div>
 </footer>
 
-  </div>
 </body>
 </html>
