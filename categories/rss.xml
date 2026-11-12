@@ -8,7 +8,17 @@
     <language>en-us</language>
     <managingEditor>info@roaldnefs.com (Roald Nefs)</managingEditor>
     <webMaster>info@roaldnefs.com (Roald Nefs)</webMaster>
-    <lastBuildDate>Thu, 12 Nov 2026 22:45:00 +0100</lastBuildDate><atom:link href="https://roaldnefs.com/categories/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 Nov 2026 00:00:00 +0100</lastBuildDate><atom:link href="https://roaldnefs.com/categories/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hardware Hacking</title>
+      <link>https://roaldnefs.com/categories/hardware-hacking/</link>
+      <pubDate>Fri, 13 Nov 2026 00:00:00 +0100</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/categories/hardware-hacking/</guid>
+      <description></description>
+      <featured>no</featured>
+    </item>
+    
     <item>
       <title>AI</title>
       <link>https://roaldnefs.com/categories/ai/</link>
@@ -25,16 +35,6 @@
       <pubDate>Thu, 12 Nov 2026 22:45:00 +0100</pubDate>
       <author>info@roaldnefs.com (Roald Nefs)</author>
       <guid>https://roaldnefs.com/categories/information-security/</guid>
-      <description></description>
-      <featured>no</featured>
-    </item>
-    
-    <item>
-      <title>Hardware Hacking</title>
-      <link>https://roaldnefs.com/categories/hardware-hacking/</link>
-      <pubDate>Wed, 03 Jan 2024 20:00:00 +0200</pubDate>
-      <author>info@roaldnefs.com (Roald Nefs)</author>
-      <guid>https://roaldnefs.com/categories/hardware-hacking/</guid>
       <description></description>
       <featured>no</featured>
     </item>

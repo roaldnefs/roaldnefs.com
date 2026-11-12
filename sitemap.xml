@@ -2,13 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://roaldnefs.com/categories/ai/</loc>
-    <lastmod>2026-11-12T22:45:00+01:00</lastmod>
+    <loc>https://roaldnefs.com/posts/2026/11/a-can-bus-console-in-a-browser-tab/</loc>
+    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/tags/automotive/</loc>
+    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/posts/</loc>
-    <lastmod>2026-11-12T22:45:00+01:00</lastmod>
+    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/categories/</loc>
+    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/categories/hardware-hacking/</loc>
+    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/</loc>
+    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/tags/</loc>
+    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/categories/ai/</loc>
     <lastmod>2026-11-12T22:45:00+01:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/tags/featured/</loc>
@@ -17,17 +32,8 @@
     <loc>https://roaldnefs.com/categories/information-security/</loc>
     <lastmod>2026-11-12T22:45:00+01:00</lastmod>
   </url><url>
-    <loc>https://roaldnefs.com/</loc>
-    <lastmod>2026-11-12T22:45:00+01:00</lastmod>
-  </url><url>
-    <loc>https://roaldnefs.com/tags/</loc>
-    <lastmod>2026-11-12T22:45:00+01:00</lastmod>
-  </url><url>
     <loc>https://roaldnefs.com/posts/2026/11/your-coding-agent-runs-as-you/</loc>
     <lastmod>2026-11-12T22:45:00+01:00</lastmod>
-  </url><url>
-    <loc>https://roaldnefs.com/tags/automotive/</loc>
-    <lastmod>2026-01-04T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/posts/2026/01/building-a-car-hacking-test-bench/</loc>
     <lastmod>2026-01-04T00:00:00+02:00</lastmod>
@@ -39,9 +45,6 @@
     <lastmod>2024-12-25T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/</loc>
-    <lastmod>2024-01-03T20:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://roaldnefs.com/categories/hardware-hacking/</loc>
     <lastmod>2024-01-03T20:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/posts/2022/11/spoofing-microchips-used-for-animal-identification/</loc>
