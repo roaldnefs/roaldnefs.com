@@ -1,6 +1,6 @@
 ---
 title: Your Coding Agent Runs as You
-date: 2026-11-13T00:00:00+02:00
+date: 2026-11-12T22:45:00+01:00
 type: post
 authors:
   - Roald Nefs
