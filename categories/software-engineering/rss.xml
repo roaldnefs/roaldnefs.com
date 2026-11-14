@@ -8,7 +8,17 @@
     <language>en-us</language>
     <managingEditor>info@roaldnefs.com (Roald Nefs)</managingEditor>
     <webMaster>info@roaldnefs.com (Roald Nefs)</webMaster>
-    <lastBuildDate>Sat, 19 Dec 2020 15:00:00 +0200</lastBuildDate><atom:link href="https://roaldnefs.com/categories/software-engineering/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Nov 2026 13:30:00 +0100</lastBuildDate><atom:link href="https://roaldnefs.com/categories/software-engineering/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Slides as a Single HTML File</title>
+      <link>https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/</link>
+      <pubDate>Sat, 14 Nov 2026 13:30:00 +0100</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/</guid>
+      <description>I want to spend my time on what a talk says, not on building PowerPoints. deckfile puts the slides, the engine and the theme in one HTML file that opens straight from disk, with a presenter view, an edit view in the browser and a skill that lets a coding agent write the deck.</description>
+      <featured>no</featured>
+    </item>
+    
     <item>
       <title>How to Automatically Generate Clients for your REST API</title>
       <link>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</link>

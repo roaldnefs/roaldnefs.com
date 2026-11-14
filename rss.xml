@@ -8,7 +8,17 @@
     <language>en-us</language>
     <managingEditor>info@roaldnefs.com (Roald Nefs)</managingEditor>
     <webMaster>info@roaldnefs.com (Roald Nefs)</webMaster>
-    <lastBuildDate>Fri, 13 Nov 2026 00:00:00 +0100</lastBuildDate><atom:link href="https://roaldnefs.com/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Nov 2026 13:30:00 +0100</lastBuildDate><atom:link href="https://roaldnefs.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Slides as a Single HTML File</title>
+      <link>https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/</link>
+      <pubDate>Sat, 14 Nov 2026 13:30:00 +0100</pubDate>
+      <author>info@roaldnefs.com (Roald Nefs)</author>
+      <guid>https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/</guid>
+      <description>I want to spend my time on what a talk says, not on building PowerPoints. deckfile puts the slides, the engine and the theme in one HTML file that opens straight from disk, with a presenter view, an edit view in the browser and a skill that lets a coding agent write the deck.</description>
+      <featured>no</featured>
+    </item>
+    
     <item>
       <title>A CAN Bus Console in a Browser Tab</title>
       <link>https://roaldnefs.com/posts/2026/11/a-can-bus-console-in-a-browser-tab/</link>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  var analyticsConsent = "denied";
+  try {
+    if (localStorage.getItem("consent") === "granted") analyticsConsent = "granted";
+  } catch (e) {}
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: analyticsConsent
+  });
+  gtag("js", new Date());
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WXSC6L3R"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#04090f">
+
+<title>Slides as a Single HTML File — Roald Nefs</title>
+<meta name="description" content="deckfile puts a whole presentation in one HTML file, with no build step or dependencies. It has a presenter view, an edit view and a skill for coding agents.">
+
+<meta name="author" content="Roald Nefs">
+
+<meta property="og:site_name" content="Roald Nefs">
+<meta property="og:title" content="Slides as a Single HTML File">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/">
+<meta property="og:description" content="deckfile puts a whole presentation in one HTML file, with no build step or dependencies. It has a presenter view, an edit view and a skill for coding agents.">
+<meta property="og:image" content="https://roaldnefs.com/images/posts/default.png">
+<meta property="article:published_time" content="2026-11-14T13:30:00&#43;01:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Slides as a Single HTML File">
+<meta name="twitter:description" content="deckfile puts a whole presentation in one HTML file, with no build step or dependencies. It has a presenter view, an edit view and a skill for coding agents.">
+<meta name="twitter:image" content="https://roaldnefs.com/images/posts/default.png">
+
+<link rel="canonical" href="https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/">
+<link rel="alternate" hreflang="en" href="https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/">
+<link rel="alternate" hreflang="x-default" href="https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/">
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Roald Nefs","url":"https://roaldnefs.com/about/"},"dateModified":"2026-11-14T13:30:00+01:00","datePublished":"2026-11-14T13:30:00+01:00","description":"deckfile puts a whole presentation in one HTML file, with no build step or dependencies. It has a presenter view, an edit view and a skill for coding agents.","headline":"Slides as a Single HTML File","image":"https://roaldnefs.com/images/posts/default.png","inLanguage":"en","mainEntityOfPage":"https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/","url":"https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://roaldnefs.com/posts/","name":"Blog","position":1},{"@type":"ListItem","item":"https://roaldnefs.com/categories/software-engineering/","name":"Software Engineering","position":2},{"@type":"ListItem","item":"https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/","name":"Slides as a Single HTML File","position":3}]}</script>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+
+
+  <link rel="alternate" type="text/markdown" href="https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/index.md" title="Roald Nefs">
+
+
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  <link rel="stylesheet" href="/css/main.min.03b9af5185e2d55a09b10ab2446f5245b8ca79c1ca8333e197865b68c88cef3f.css" integrity="sha256-A7mvUYXi1VoJsQqyRG9SRbjKecHKgzPhl4ZbaMiM7z8=">
+
+
+
+  
+  <script src="/js/main.min.227d83880a590ea7b2e5a387c3fa9394dd7e54b1c9b9bad1bf23988c0d46aa9b.js" integrity="sha256-In2DiApZDqey5aOHw/qTlN1&#43;VLHJubrRvyOYjA1Gqps=" defer></script>
+
+
+</head>
+<body class="has-aside">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"></div>
+  <header class="site-header">
+  <div class="site-header-bg" aria-hidden="true"></div>
+  <div class="container site-header-inner">
+    <a class="wordmark" href="/">Roald Nefs</a>
+    <nav class="site-nav" aria-label="Primary">
+      
+        
+      
+        
+          
+          <a href="/posts/" class="nav-link" aria-current="page">Blog</a>
+        
+      
+        
+          
+          <a href="/training/" class="nav-link">Training</a>
+        
+      
+        
+          
+          <a href="/tools/" class="nav-link">Tools</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav-link">About</a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="site-header-actions">
+      <a class="btn header-cta" href="/training/#book-a-session">Book a workshop</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="menu" id="menu">
+    <nav class="menu-links" aria-label="Menu">
+      
+        
+          
+          <a href="/">Home<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/posts/">Blog<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/training/">Training<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/tools/">Tools<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/about/">About<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="menu-follow">
+      <span>Follow</span>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/roaldnefs" rel="me noopener" target="_blank" aria-label="GitHub"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg></a>
+        
+      
+        
+          <a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank" aria-label="LinkedIn"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        
+      
+        
+          <a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank" aria-label="Mastodon"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg></a>
+        
+      
+    </div>
+  </div>
+</header>
+
+  <main id="main">
+    
+
+
+<article>
+  
+    <header class="post-hero">
+      <img class="post-hero-art" src="/covers/slides-as-a-single-html-file.svg" alt="" width="1600" height="900" fetchpriority="high">
+      <div class="container post-hero-inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/posts/">Blog</a>
+          
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            <a href="/categories/software-engineering/">Software Engineering</a>
+          
+        </nav>
+        <h1 class="post-title reveal">Slides as a Single HTML File</h1>
+        <dl class="post-meta">
+          <div>
+            <dt>Author</dt>
+            <dd>Roald Nefs</dd>
+          </div>
+          <div>
+            <dt>Published</dt>
+            <dd><time datetime="2026-11-14">Nov 14, 2026</time></dd>
+          </div>
+          <div>
+            <dt>Reading time</dt>
+            <dd>6 min</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+  
+
+  <div class="container post-layout">
+    <div class="post-main">
+      
+        <details class="toc-box">
+          <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>On this page</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></summary>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#a-deck-is-one-file">A deck is one file</a></li>
+    <li><a href="#writing-a-slide">Writing a slide</a></li>
+    <li><a href="#presenting">Presenting</a></li>
+    <li><a href="#editing-in-the-browser">Editing in the browser</a></li>
+    <li><a href="#letting-an-agent-write-the-deck">Letting an agent write the deck</a></li>
+    <li><a href="#keeping-the-engine-up-to-date">Keeping the engine up to date</a></li>
+    <li><a href="#limitations">Limitations</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+        </details>
+      
+      <div class="prose">
+        <h2 id="introduction">Introduction</h2>
+<p>When I prepare a talk, I want to spend my time on the content. In practice a lot of it goes into the slides themselves: nudging text boxes, fixing a template, lining things up. That is time spent on PowerPoint and not on the talk.</p>
+<p>As an engineer I also want the things I am used to. A deck should be a text file that lives in git and shows up in a diff. It should work on a laptop without Wi-Fi. And it should not need a toolchain that has to be installed again a year later, when I want to give the talk a second time.</p>
+<p><a href="https://github.com/roaldnefs/deckfile" rel="noopener noreferrer" target="_blank">deckfile</a> is what I built for that. A presentation is one <code>index.html</code> that holds the slides, the engine and the theme. There is no build step, no bundler and no dependencies. You can click through the <a href="https://roaldnefs.github.io/deckfile/" rel="noopener noreferrer" target="_blank">live demo</a>, which is itself a deck about deckfile. The source is on GitHub under the MIT license.</p>
+<h2 id="a-deck-is-one-file">A deck is one file</h2>
+<p>To start, copy <a href="https://github.com/roaldnefs/deckfile/blob/main/template.html" rel="noopener noreferrer" target="_blank"><code>template.html</code></a> from the repository to <code>my-talk/index.html</code> and open it in a browser. Press <code>→</code> to step through it. The template explains deckfile and shows every slide type of the default theme, so you start by replacing its slides with your own.</p>
+<p>The engine is about 1,700 lines of plain JavaScript and 50 lines of CSS, inlined in the file. The template is around 130 KB in total. Because everything is in the file, the deck opens from disk with a double-click and works the same from any static host. The one thing it fetches is a web font, and without a network the text falls back to a system font.</p>
+<h2 id="writing-a-slide">Writing a slide</h2>
+<p>The engine needs very little markup. This is a complete slide with two build steps and speaker notes:</p>
+<div class="code">
+  <div class="code-head">
+    <span>html</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stage&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">section</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;slide&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h2</span>&gt;One idea per slide&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">li</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;build&#34;</span>&gt;Revealed on the first →&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">li</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;build&#34;</span>&gt;and this one on the second&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;s-notes&#34;</span>&gt;&lt;<span style="color:#f92672">p</span>&gt;What to say here.&lt;/<span style="color:#f92672">p</span>&gt;&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">section</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;</span></span></code></pre></div>
+</div>
+<p>Every <code>&lt;section class=&quot;slide&quot;&gt;</code> is a slide, in the order of the document. An element with <code>class=&quot;build&quot;</code> is revealed one key press at a time. A <code>&lt;div class=&quot;s-notes&quot;&gt;</code> holds the speaker notes.</p>
+<p>The stage is a fixed canvas of 1920 by 1080 pixels, scaled to the screen with a single CSS transform. You position everything in canvas pixels and it looks the same on a laptop and on a projector.</p>
+<p>The rest comes from the theme: title slides, dividers, dark slides, rows of big numbers, two columns and a terminal panel for code. To brand a deck you change a handful of CSS variables for the colours, the fonts and the logo. The theme sits in its own <code>&lt;style&gt;</code> block, separate from the engine, so you can change it as much as you like.</p>
+<h2 id="presenting">Presenting</h2>
+<p>Press <code>S</code> and a second window opens with the presenter view. It shows the current slide, what the next press brings, your notes, a clock and a timer. Drag the deck window to the projector, press <code>F</code> for fullscreen and keep the presenter view on the laptop. The arrow keys, Space or a clicker work from either window.</p>
+<p><img src="/images/posts/2026/11/14/deckfile-presenter-view.png" alt="The deckfile presenter view with a timer on top, the current slide on the left, and the next slide above the speaker notes on the right"></p>
+<p>The deck, the presenter view and its slide previews are all the same file, opened with a different query string. The two windows stay in step with <code>postMessage</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, which also works between pages opened from <code>file://</code>. So the presenter view needs no server either.</p>
+<p>A few details are there for the moment something goes wrong on stage:</p>
+<ul>
+<li><strong>A reload keeps your place.</strong> The current slide is stored in <code>sessionStorage</code>, so a reload during a talk lands on the same slide.</li>
+<li><strong>The screen stays awake.</strong> The deck asks the browser for a screen wake lock<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, so the laptop does not dim halfway through.</li>
+<li><strong>A PDF is one key away.</strong> Press <code>P</code> to print, with one page per slide and all builds shown.</li>
+</ul>
+<h2 id="editing-in-the-browser">Editing in the browser</h2>
+<p>You can write a deck in your editor, but small changes are faster on the slide itself. Press <code>E</code> for the edit view. Double-click a text to type in it, select an element to move, duplicate or delete it, and add or reorder slides from the thumbnails. <strong>Save</strong> writes the result back to the HTML file<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
+<p><img src="/images/posts/2026/11/14/deckfile-edit-view.png" alt="The deckfile edit view with slide thumbnails on the left, a slide with a suggestion on its heading in the middle, speaker notes below, and the list of suggestions on the right"></p>
+<p>The edit view has a second mode, <strong>Suggest</strong>. It does not change the deck. You click an element, pin a spot or drag a box around an area, and type what should change. <strong>Copy prompt</strong> then puts every suggestion on the clipboard as one Markdown prompt, each with its slide, its position and a selector for the element. You paste that into a coding agent and it knows what you were pointing at.</p>
+<p>That makes a review one pass: go through the slides, leave a note where something is off, and hand the whole list over in one go.</p>
+<h2 id="letting-an-agent-write-the-deck">Letting an agent write the deck</h2>
+<p>A deck that is plain HTML in one file is easy for a coding agent to write. The repository is also a Claude Code plugin with a <code>deck</code> skill:</p>
+<div class="code">
+  <div class="code-head">
+    <span>text</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>/plugin marketplace add roaldnefs/deckfile
+</span></span><span style="display:flex;"><span>/plugin install deckfile@deckfile</span></span></code></pre></div>
+</div>
+<p>The skill writes a deck from a brief. It asks what the talk is about and who it is for, proposes an outline, and only writes slides once you agree with that outline. After the slides come the speaker notes and a self-check.</p>
+<p>This is where the time goes back to the content. You think about the story, the order and what each slide has to say. The agent turns that into markup, and you correct it in the edit view.</p>
+<h2 id="keeping-the-engine-up-to-date">Keeping the engine up to date</h2>
+<p>Inlining the engine means every deck carries its own copy. When a new version comes out, one command replaces it:</p>
+<div class="code">
+  <div class="code-head">
+    <span>bash</span>
+    <button type="button" class="code-copy" hidden>Copy</button>
+  </div>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npx github:roaldnefs/deckfile update my-talk/index.html</span></span></code></pre></div>
+</div>
+<p>This only touches what is between the engine tags. The theme, the slides and your own scripts stay as they are. With <code>update --check</code> it writes nothing and exits with 1 when a deck is out of date, which is useful in CI.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>The presenter view needs a second window.</strong> You have to allow pop-ups for the page.</li>
+<li><strong>The first save rewrites some markup.</strong> The edit view saves the page the way the browser read it, so self-closed SVG tags and table markup can change once. Later saves change only what you changed.</li>
+<li><strong>Photos live beside the file.</strong> A deck with photos travels as a folder, not as a single file.</li>
+<li><strong>No syntax highlighting.</strong> Code goes in a terminal panel, and you colour the parts that matter by hand.</li>
+<li><strong>No PowerPoint or Google Slides.</strong> The output is HTML and, through print, PDF.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>deckfile is for people who would rather write a talk than draw one. If you are comfortable with a bit of HTML, or with letting an agent write it for you, you get a deck that lives in git, opens anywhere and still works in a few years.</p>
+<p>If you let a coding agent build your slides, it is worth knowing what else that agent can reach. I wrote about that in <a href="https://roaldnefs.com/posts/2026/11/your-coding-agent-runs-as-you/">Your Coding Agent Runs as You</a>. If you try deckfile and something breaks, please open an issue on <a href="https://github.com/roaldnefs/deckfile/issues" rel="noopener noreferrer" target="_blank">GitHub</a>.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>MDN, Window: postMessage() method: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" rel="noopener noreferrer" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>MDN, Screen Wake Lock API: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API" rel="noopener noreferrer" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>In Chromium the edit view saves to a file you choose, with <code>showSaveFilePicker()</code>. In other browsers the deck is saved as a download. MDN: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker" rel="noopener noreferrer" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+      </div>
+      
+    </div>
+    
+      <aside class="post-aside">
+        
+          <nav class="toc" aria-label="On this page" data-toc>
+            <p class="toc-title"><span>On this page</span></p>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#a-deck-is-one-file">A deck is one file</a></li>
+    <li><a href="#writing-a-slide">Writing a slide</a></li>
+    <li><a href="#presenting">Presenting</a></li>
+    <li><a href="#editing-in-the-browser">Editing in the browser</a></li>
+    <li><a href="#letting-an-agent-write-the-deck">Letting an agent write the deck</a></li>
+    <li><a href="#keeping-the-engine-up-to-date">Keeping the engine up to date</a></li>
+    <li><a href="#limitations">Limitations</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+          </nav>
+        
+        
+          <div class="aside-box">
+            <p class="aside-box-head">
+              <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+              <span>Written by <a href="/about/" rel="author">Roald Nefs</a></span>
+            </p>
+            <p>CTO at Warpnet and Enlite, working across security, platform engineering and AI. I co-organize BSides Groningen and run hands-on workshops on automotive security and hardware hacking.</p>
+            <a class="btn btn--sm" href="/training/#book-a-session">Book a workshop</a>
+          </div>
+        
+      </aside>
+    
+  </div>
+</article>
+
+
+  
+  <section class="more">
+    <div class="carousel" data-carousel>
+  <div class="container carousel-head">
+    <div>
+      <p class="eyebrow">Keep reading</p>
+      <h2 class="section-title">More posts</h2>
+    </div>
+    <div class="carousel-arrows">
+      <button type="button" data-carousel-prev aria-label="Previous posts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 12H1m0 0 6-6m-6 6 6 6"/></svg></button>
+      <button type="button" data-carousel-next aria-label="Next posts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12h22m0 0-6-6m6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="carousel-track" data-carousel-track tabindex="0" role="group" aria-label="More posts">
+      
+        <article class="card">
+  <span class="card-media">
+    <img src="/covers/a-can-bus-console-in-a-browser-tab.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        
+        <span class="label">Hardware hacking</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title"><a href="/posts/2026/11/a-can-bus-console-in-a-browser-tab/">A CAN Bus Console in a Browser Tab</a></h3>
+    <span class="card-summary">WebUSB CAN is a CAN bus console that runs in a browser tab. It talks to a candleLight or CANable adapter over WebUSB, without drivers or installs, and ships …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2026-11-13">November 13, 2026</time>
+  </span>
+</span>
+
+  </span>
+</article>
+
+      
+        <article class="card">
+  <span class="card-media">
+    <img src="/covers/your-coding-agent-runs-as-you.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">AI</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title"><a href="/posts/2026/11/your-coding-agent-runs-as-you/">Your Coding Agent Runs as You</a></h3>
+    <span class="card-summary">A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2026-11-12">November 12, 2026</time>
+  </span>
+</span>
+
+  </span>
+</article>
+
+      
+        <article class="card">
+  <span class="card-media">
+    <img src="/covers/building-a-car-hacking-test-bench.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Automotive</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title"><a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a></h3>
+    <span class="card-summary">Modern cars are computers on wheels, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2026-01-04">January 4, 2026</time>
+  </span>
+</span>
+
+  </span>
+</article>
+
+      
+        <article class="card">
+  <span class="card-media">
+    <img src="/covers/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title"><a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">How to extract an AppImage and add it to the Ubuntu Sidebar</a></h3>
+    <span class="card-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2024-12-25">December 25, 2024</time>
+  </span>
+</span>
+
+  </span>
+</article>
+
+      
+        <article class="card">
+  <span class="card-media">
+    <img src="/covers/committing-changes-to-a-pull-request-branch-created-from-a-fork.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Information security</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title"><a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Committing Changes to a Pull Request Branch Created from a Fork</a></h3>
+    <span class="card-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2024-01-03">January 3, 2024</time>
+  </span>
+</span>
+
+  </span>
+</article>
+
+      
+        <article class="card">
+  <span class="card-media">
+    <img src="/covers/spoofing-microchips-used-for-animal-identification.svg" alt="" width="1600" height="900" loading="lazy">
+    
+      <span class="card-tags">
+        <span class="label label--primary">Featured</span>
+        <span class="label">Information security</span>
+      </span>
+    
+  </span>
+  <span class="card-body">
+    <h3 class="card-title"><a href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">Spoofing Microchips used for Animal Identification</a></h3>
+    <span class="card-summary">A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) …</span>
+    <span class="author">
+  <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
+  <span class="author-text">
+    <span class="author-name">Roald Nefs</span>
+    <time datetime="2022-11-30">November 30, 2022</time>
+  </span>
+</span>
+
+  </span>
+</article>
+
+      
+    </div>
+  </div>
+</div>
+
+  </section>
+
+
+  </main>
+  <footer class="site-footer">
+  <div class="container site-footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="/">Roald Nefs</a>
+      <ul class="footer-follow">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
+          
+        
+        <li><a href="/rss.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-cols">
+      <nav class="footer-col" aria-label="Pages">
+        <h2 class="footer-heading">Pages</h2>
+        <ul class="footer-links">
+          
+            
+          
+            
+              
+              <li><a href="/posts/" aria-current="page">Blog</a></li>
+            
+          
+            
+              
+              <li><a href="/training/">Training</a></li>
+            
+          
+            
+              
+              <li><a href="/tools/">Tools</a></li>
+            
+          
+            
+              
+              <li><a href="/about/">About</a></li>
+            
+          
+            
+          
+            
+          
+            
+          
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2 class="footer-heading">Companies</h2>
+        <ul class="footer-links">
+          
+            <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
+          
+            <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Agents</h2>
+        <ul class="footer-links">
+          <li><a href="/rss.xml">rss.xml</a></li>
+          <li><a href="/sitemap.md">sitemap.md</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Legal</h2>
+        <ul class="footer-links">
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/cookies/">Cookies</a></li>
+          
+            <li><button type="button" data-consent-open>Cookie settings</button></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container site-footer-note">© 2026 Roald Nefs</div>
+</footer>
+
+  <div class="consent" role="region" aria-label="Cookie consent" data-consent hidden>
+  <p>This site uses Google Analytics to see which posts get read. Cookies are only set if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
+  <div class="consent-actions">
+    <button class="btn btn--sm" type="button" data-consent-choice="granted">Accept</button>
+    <button class="btn btn--sm btn--ghost" type="button" data-consent-choice="denied">Decline</button>
+  </div>
+  <button class="consent-close" type="button" aria-label="Close and decline" data-consent-choice="denied">&times;</button>
+</div>
+
+</body>
+</html>

@@ -2,23 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://roaldnefs.com/categories/ai/</loc>
+    <lastmod>2026-11-14T13:30:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/posts/</loc>
+    <lastmod>2026-11-14T13:30:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/</loc>
+    <lastmod>2026-11-14T13:30:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/</loc>
+    <lastmod>2026-11-14T13:30:00+01:00</lastmod>
+  </url><url>
+    <loc>https://roaldnefs.com/categories/software-engineering/</loc>
+    <lastmod>2026-11-14T13:30:00+01:00</lastmod>
+  </url><url>
     <loc>https://roaldnefs.com/posts/2026/11/a-can-bus-console-in-a-browser-tab/</loc>
     <lastmod>2026-11-13T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/tags/automotive/</loc>
     <lastmod>2026-11-13T00:00:00+01:00</lastmod>
   </url><url>
-    <loc>https://roaldnefs.com/posts/</loc>
-    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
-  </url><url>
     <loc>https://roaldnefs.com/categories/hardware-hacking/</loc>
     <lastmod>2026-11-13T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://roaldnefs.com/</loc>
-    <lastmod>2026-11-13T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://roaldnefs.com/categories/ai/</loc>
-    <lastmod>2026-11-12T22:45:00+01:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/tags/featured/</loc>
     <lastmod>2026-11-12T22:45:00+01:00</lastmod>
@@ -45,9 +51,6 @@
     <lastmod>2022-11-30T15:19:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/posts/2020/12/how-to-automatically-generate-clients-for-your-rest-api/</loc>
-    <lastmod>2020-12-19T15:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://roaldnefs.com/categories/software-engineering/</loc>
     <lastmod>2020-12-19T15:00:00+02:00</lastmod>
   </url><url>
     <loc>https://roaldnefs.com/posts/2020/05/git-branching/</loc>
