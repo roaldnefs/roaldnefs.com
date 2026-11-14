@@ -63,7 +63,7 @@ Modulation allow data to be transmitted via radio via radio  frequencies. After 
 
 Amplitude modulation, as the name might suggest, modulates the  amplitude while frequency modulation will modulate the frequency. If you  are listing to 100.0 FM radio, the signal is actually send between  99.995MHz and 100.005MHz.
 
-![Modulation](/images/posts/2020/01/03/ding-dong-ditch_03.gif)
+![A signal wave compared with its amplitude modulated (AM) and frequency modulated (FM) versions](/images/posts/2020/01/03/ding-dong-ditch_03.gif)
 
 By the looks of it, the signal seems to be using amplitude  modulation. Using rtl_fm and sox you can record the AM data into a wav file:
 
@@ -83,7 +83,7 @@ When looking at the audio in Audacity it appears to be sending the same signal m
 
 If we zoom in to take a closer look at the signal, we can easily see the highs (1s) and lows (0s).
 
-![Closer look at the recorded signal in Audacity](/images/posts/2020/01/03/ding-dong-ditch_04.png)
+![Closer look at the recorded signal in Audacity](/images/posts/2020/01/03/ding-dong-ditch_05.png)
 
 The high and low signals aren’t appearing to be the same length, but the two same patterns keep reappearing:
 
@@ -96,7 +96,7 @@ This is something called [Pulse Width Modulation](https://en.wikipedia.org/wiki/
 
 You might want to check multiple samples because the signal isn’t  very clear on some spots. Examples of a 1 and 0 signal are shown below:
 
-![Signal in Audacity](/images/posts/2020/01/03/ding-dong-ditch_07.png)
+![The signal in Audacity with a long pulse marked as 1 and a short pulse marked as 0](/images/posts/2020/01/03/ding-dong-ditch_07.png)
 
 You will be able to get the same result much faster using [rtl_433](https://github.com/merbanan/rtl_433).  It might be a good idea to verify you manually demodulated signal using  rtl_433 before creating the Arduino. In my case it guesses the  modulation type to be Pulse Width Modulation, after demodulation using  rtl_433 I end up with the same 1s and 0s as I’ve found manually.
 
@@ -106,7 +106,7 @@ You will be able to get the same result much faster using [rtl_433](https://gith
 
 For sending signal we demodulated earlier, I’m using a 433MHz ASK  transmitter hooked up to my Arduino nano clone according to the  following Fritzing sketch:
 
-![Arduino schematic](/images/posts/2020/01/03/ding-dong-ditch_09.png)
+![Fritzing sketch of an FS1000A 433 MHz transmitter wired to an Arduino Nano](/images/posts/2020/01/03/ding-dong-ditch_09.png)
 
 The script for the Arduino can be found on the following GitHub repository: [github.com/roaldnefs/ding-dong-ditch](https://github.com/roaldnefs/ding-dong-ditch). It uses the [RCSwitch](https://github.com/sui77/rc-switch.git) library for sending the signal. This library is written for power outlet sockets but my doorbell uses the same protocol.
 

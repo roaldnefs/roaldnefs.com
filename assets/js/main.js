@@ -51,7 +51,15 @@
         else a.removeAttribute("aria-current");
       });
     };
-    window.addEventListener("scroll", mark, { passive: true });
+    var queued = false;
+    window.addEventListener("scroll", function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        mark();
+      });
+    }, { passive: true });
     mark();
   }
 

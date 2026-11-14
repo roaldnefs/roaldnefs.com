@@ -39,7 +39,7 @@ Within Git your files can reside in three states: `modified`, `staged` and `comm
 
 An example of a typical Git workflow using the specified stages:
 
-![Git working stages](/images/posts/2020/04/20/git-01.png)
+![Git working stages](/images/posts/2020/04/20/git-01.svg)
 
 When a project in checked out in the working directory, the files at a specific moment in time are pulled out of the Git database and placed in the Git directory to be modified. When a user has made some changes to the files, they can be staged to the next commit in the staging area. Within the Git terminology the _staging area_ is known as the _index_. When a commit is made, the changes that where staged, will be saved to the Git database.
 
@@ -148,7 +148,7 @@ After creating or cloning a repository you have a local copy of the project. In 
 
 Within the repository files can reside in two states: **tracked** or **untracked**. After cloning an existing repository all files are tracked, the moment you edit the file they become untracked. If a file has changed, (re)moved or renamed it become modified compared to the last commit. Those changes can be staged in the Git index to be added to the next commit. The lifecycle of files within the Git repository looks like this:
 
-![File States](/images/posts/2020/04/20/git-04.png)
+![How a file moves between the untracked, unmodified, modified and staged states in Git](/images/posts/2020/04/20/git-04.svg)
 
 The paragraphs below will further explain the files states.
 
@@ -322,7 +322,7 @@ After creating the commit the `git commit` command will show you the branch (`ma
 
 The image below shows four commits being created on the `master` branch:
 
-![Commiting Changes](/images/posts/2020/04/20/git-03.png)
+![A new commit added to the history, with HEAD of the master branch pointing to it](/images/posts/2020/04/20/git-03.svg)
 
 #### Removing Files
 

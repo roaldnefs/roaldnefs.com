@@ -22,7 +22,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#04090f">
 
-<title>{{ block "title" . }}{{ if and .Title (ne .Title site.Title) }}{{ .Title }} — {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}{{ end }}</title>
+<title>{{ block "title" . }}{{ if .IsHome }}{{ .Title }}{{ else if and .Title (ne .Title site.Title) }}{{ .Title }} — {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}{{ end }}</title>
 
 {{- $desc := .Description -}}
 {{- if and (not $desc) (eq .Kind "term") }}{{ $desc = printf "Posts about %s by %s." .Title site.Params.author.name }}{{ end -}}
@@ -57,6 +57,8 @@
 <meta name="robots" content="noindex">
 {{- else -}}
 <link rel="canonical" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="en" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
 {{- end }}
 
 {{ partial "schema.html" (dict "page" . "description" $desc "image" $image) }}

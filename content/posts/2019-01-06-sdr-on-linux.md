@@ -57,7 +57,7 @@ No E4000 tuner found, aborting.
 
 ## Gqrx SDR
 
-![Gqrx software](/images/posts/2019/01/06/sdr-01.png)
+![Gqrx showing the spectrum and waterfall around an FM radio station at 88.0 MHz](/images/posts/2019/01/06/sdr-01.png)
 
 Gqrx is an open source software defined radio receiver. The package  has been included in Ubuntu for many years, but you probably want to  install a newer version using the official personal package archive (PPA).
 
@@ -94,7 +94,7 @@ Lookup the frequency of one of your local radio stations and update the frequenc
 
 ## P2000
 
-![P2000](/images/posts/2019/01/06/sdr-02.png)
+![Terminal with multimon-ng decoding P2000 FLEX pager messages from the emergency services](/images/posts/2019/01/06/sdr-02.png)
 
 **P2000** is a one-way communications network for pagers  based on the FLEX-protocol developed by Motorola. The P2000 network is  used by the emergency services in the Netherlands. The FLEX-protocol  does not provide encryption, so you can read the messages yourself using  an RTL-SDR.
 
@@ -136,7 +136,7 @@ To run dump1090 in interactive mode, with networking support, you will need to r
 
 Open your browser and open `http://localhost:8080/` to see live air traffic:
 
-![dump1090](/images/posts/2019/01/06/sdr-03.png)
+![The dump1090 web interface showing a tracked aircraft on a map of the northern Netherlands](/images/posts/2019/01/06/sdr-03.png)
 
 ## Raspberry Pi as a RF transmitter
 
@@ -166,4 +166,4 @@ cd rpitx
 
 Using your SDR receiver you will be able to monitor the transmitted  signals. Try to send the some test signals on the 434 MHz, the rpitx  default band.
 
-![easytest](/images/posts/2019/01/06/sdr-05.png)
+![The rpitx easytest menu on a Raspberry Pi, listing transmit tests at 434 MHz](/images/posts/2019/01/06/sdr-05.png)

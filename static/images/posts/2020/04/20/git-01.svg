@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" role="img" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace">
+<title>Git working stages</title>
+<rect width="800" height="250" fill="#04090f"/>
+<path d="M150.0 44V230" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.5"/>
+<rect x="69.3" y="14.5" width="161.3" height="29" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.3)"/><text x="150.0" y="33.5" text-anchor="middle" font-size="13" fill="#f7f8f8">working directory</text>
+<path d="M400.0 44V230" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.5"/>
+<rect x="339.1" y="14.5" width="121.8" height="29" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.3)"/><text x="400.0" y="33.5" text-anchor="middle" font-size="13" fill="#f7f8f8">staging area</text>
+<path d="M650.0 44V230" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.5"/>
+<rect x="569.4" y="14.5" width="161.3" height="29" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.3)"/><text x="650.0" y="33.5" text-anchor="middle" font-size="13" fill="#f7f8f8">repository (.git)</text>
+<path d="M650.0 100H158.0" stroke="#7aa2ff" stroke-width="1.5"/><path d="M150.0 100l9 -5v10z" fill="#7aa2ff"/><text x="400.0" y="89" text-anchor="middle" font-size="13" fill="#f7f8f8">checkout the project</text>
+<path d="M150.0 150H392.0" stroke="#7aa2ff" stroke-width="1.5"/><path d="M400.0 150l-9 -5v10z" fill="#7aa2ff"/><text x="275.0" y="139" text-anchor="middle" font-size="13" fill="#f7f8f8">stage fixes</text>
+<path d="M400.0 200H642.0" stroke="#7aa2ff" stroke-width="1.5"/><path d="M650.0 200l-9 -5v10z" fill="#7aa2ff"/><text x="525.0" y="189" text-anchor="middle" font-size="13" fill="#f7f8f8">commit</text>
+</svg>

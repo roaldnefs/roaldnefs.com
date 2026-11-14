@@ -1,6 +1,6 @@
 {{- /* Call with (dict "page" . "heading" "h3" "tags" true). "tags" shows the Featured and category labels on the picture. */ -}}
 {{- $page := .page -}}
-<a class="card" href="{{ $page.RelPermalink }}">
+<article class="card">
   <span class="card-media">
     <img src="{{ partial "cover.html" $page.Title }}" alt="" width="1600" height="900" loading="lazy">
     {{ if .tags }}
@@ -11,8 +11,8 @@
     {{ end }}
   </span>
   <span class="card-body">
-    {{ printf "<%s class=\"card-title\">" .heading | safeHTML }}{{ $page.Title }}{{ printf "</%s>" .heading | safeHTML }}
+    {{ printf "<%s class=\"card-title\">" .heading | safeHTML }}<a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>{{ printf "</%s>" .heading | safeHTML }}
     <span class="card-summary">{{ $page.Summary | plainify | truncate 160 }}</span>
     {{ partial "post-author.html" $page }}
   </span>
-</a>
+</article>

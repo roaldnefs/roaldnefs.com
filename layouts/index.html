@@ -94,7 +94,7 @@
 </section>
 
 <section class="section section--posts">
-  {{ partial "carousel.html" (dict "pages" (first 8 $posts) "eyebrow" "From the blog" "title" "Latest posts") }}
+  {{ partial "carousel.html" (dict "pages" (first 8 (complement (slice $featured) $posts)) "eyebrow" "From the blog" "title" "Latest posts") }}
   <p class="container carousel-more"><a class="text-link" href="{{ "/posts/" | relURL }}">All posts</a></p>
 </section>
 

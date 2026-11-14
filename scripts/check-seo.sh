@@ -101,6 +101,44 @@ for path in glob.glob(os.path.join(out, "**", "*.html"), recursive=True):
     check('var analyticsConsent = "denied";' in page, "%s: analytics consent does not start as denied" % rel)
 check("data-consent" in home, "home: no consent banner")
 
+def text(markup):
+    return " ".join(html.unescape(re.sub(r"<[^>]+>", " ", markup)).split())
+
+title = text(re.search(r"<title>(.*?)</title>", home, re.S).group(1))
+check(50 <= len(title) <= 60, "home: title is %d characters, expected 50 to 60: %s" % (len(title), title))
+
+headings = [text(h) for h in re.findall(r"<h[1-6][^>]*>(.*?)</h[1-6]>", home, re.S)]
+for h in sorted(set(headings)):
+    check(headings.count(h) == 1, "home: heading used %d times: %s" % (headings.count(h), h))
+
+for href, body in re.findall(r'<a\s[^>]*href="?(/[^" >]*)"?[^>]*>(.*?)</a>', home, re.S):
+    check(len(text(body)) <= 80, "home: link text to %s is longer than 80 characters: %s" % (href, text(body)))
+
+def hreflangs(page):
+    return dict(re.findall(r'<link rel="?alternate"? hreflang="?([\w-]+)"? href="?([^" >]+)"?', page))
+
+for rel in ("index.html", os.path.relpath(posts[0], out)):
+    page = read(rel)
+    canonical = re.search(r'<link rel="?canonical"? href="?([^" >]+)"?', page).group(1)
+    check(hreflangs(page) == {"en": canonical, "x-default": canonical}, "%s: hreflang en and x-default should both be the canonical URL" % rel)
+check(not hreflangs(not_found), "404: has hreflang links")
+
+for path in glob.glob(os.path.join(out, "**", "*.html"), recursive=True):
+    rel = os.path.relpath(path, out)
+    page = read(rel)
+    if "<head>" not in page:
+        continue
+    check('name="viewport"' in page or "name=viewport" in page, "%s: no viewport meta" % rel)
+    for img in re.findall(r"<img\s[^>]*>", page):
+        check(re.search(r"\salt[=\s>]", img), "%s: image without alt attribute: %s" % (rel, img))
+
+for path in posts:
+    rel = os.path.relpath(path, out)
+    alts = [html.unescape(a) for a in re.findall(r'<img\s[^>]*src="?/images/posts/[^>]*\salt="([^"]+)"', read(rel))]
+    for alt in sorted(set(alts)):
+        check(len(alt.split()) >= 3, "%s: image alt is too short to describe the image: %s" % (rel, alt))
+        check(alts.count(alt) == 1, "%s: image alt used %d times: %s" % (rel, alts.count(alt), alt))
+
 for f in failures:
     print("FAIL " + f)
 print("%d check(s) failed" % len(failures) if failures else "all checks passed")

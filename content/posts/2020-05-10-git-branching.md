@@ -66,7 +66,7 @@ $ git checkout master
 
 Creating a new commit at this point will result in diverged history. Both commits are isolated in separate branches, and can be merged together when you're ready.
 
-![Divergent history](/images/posts/2020/05/10/git-branch-5.svg)
+![Divergent history between the master and develop branches](/images/posts/2020/05/10/git-branch-5.svg)
 
 This can also be shown using the `git log --oneline --decorate --graph --all` command. By default the `git log` command will not show all of the branch, this the `--all` options is required.
 
@@ -91,7 +91,7 @@ $ git checkout -b <branchname>
 
 What if instead of creating a commit directory on the `master` branch we would have created branch called `hotfix`, made a single commit, and wanted to merge it back into `master`?
 
-![Hotfix branch containg a single commit](/images/posts/2020/05/10/git-branch-8.svg)
+![Hotfix branch containing a single commit](/images/posts/2020/05/10/git-branch-8.svg)
 
 You can do that using the `git merge` command. This example below will merge the `hotfix` branch back into `master`. 
 
@@ -111,7 +111,7 @@ Because the commit `C4` pointed to by the branch `hotfix` was directly ahead of 
 
 While the `hotfix` branch was merged into `master` the `develop` branch diverged from master, containing two extra commits. If we wanted to merge `develop` into `master` the situation would look similar to this:
 
-![Merging](/images/posts/2020/05/10/git-branch-7.svg)
+![The two branch snapshots and their common ancestor used to merge develop into master](/images/posts/2020/05/10/git-branch-7.svg)
 
 Using the `git merge` command we can merge `develop` into `master`:
 
@@ -126,7 +126,7 @@ Merge made by the 'recursive' strategy.
 
 Instead of the "_fast-forward_" stategy it now used a "_recursive_" strategy. This is because the commit on the `develop` branch isn't a clear ancestor of the `master` branch. Git simply does a three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two, this results in a merge commit (`C7`). Compared to a normal commit, a merge commits has more than one parent.
 
-![Merging](/images/posts/2020/05/10/git-branch-6.svg)
+![The merge commit C7 joining the develop and master branches](/images/posts/2020/05/10/git-branch-6.svg)
 
 After merging `develop`, the branch can be removed using the `git branch` command combined with the `-b` option:
 
@@ -272,7 +272,7 @@ As the `git pull` wil often be confusing it's better to simply use the `git fetc
 
 Within Git there are two ways to integrate changes from one branch into another: using `merge` or `rebase`.  In the example below the history has diverged; there are commits on both the branches you would like to integrate. 
 
-![Divergent history](/images/posts/2020/05/10/git-branch-12.svg)
+![Divergent history between the master and hotfix branches](/images/posts/2020/05/10/git-branch-12.svg)
 
 The most simple way to integrate the work of the `hotfix` would be to use the `git merge` command. This will result in a three-way merge between the two latests snapshots (`C4` and `C5`) and there common ancestor (`C3`) creating a merge-commit (`C6`). 
 
@@ -310,7 +310,7 @@ Fast-forward
 
 This result in both the `hotfix` and `master` branch pointing to the `C4'` commit:
 
-![Rebased branch](/images/posts/2020/05/10/git-branch-15.svg)
+![The hotfix and master branches both pointing to the rebased commit C4'](/images/posts/2020/05/10/git-branch-15.svg)
 
 Both `C4'` (using rebase) and `C6` (using merge) resulted in the same file contents, but the Git history is different. The rebase made the history a bit cleaner, resulting in a linear history. Even though the history shows that the work happened in series, it actually happened in parallel.
 
@@ -320,7 +320,7 @@ During a rebase you will be abandoning commits and create new ones that have the
 
 Suppose you've started working on the `master` branch locally while in the meanwhile another collaborator forcefully pushed his rebased `master` branch, resulting in some part of the history being rewritten on the remote `origin/master` branch. When you execute a `git pull`, Git will merge the rebased `origin/master` branch into your local `master` branch.
 
-![Diverged history](/images/posts/2020/05/10/git-branch-16.svg)
+![Local master and the rebased origin/master branch after their histories diverged](/images/posts/2020/05/10/git-branch-16.svg)
 
 The history between the `origin/master` and `master` branch have been diverged, forcing you to rebase you local `master` branch onto `origin/master`, which might further confuse other colleborators.
 

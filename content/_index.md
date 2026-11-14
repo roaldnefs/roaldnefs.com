@@ -1,5 +1,5 @@
 ---
-title: Roald Nefs
+title: Roald Nefs — Blog on Software, Security, AI, and Hardware
 headline: Software, security, and the hardware I take apart
 description: Notes on software engineering, security, and AI, plus workshops and hardware hacking — a personal site by Roald Nefs.
 ---
