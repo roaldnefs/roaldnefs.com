@@ -2160,8 +2160,13 @@ button {
 }
 
 .consent-prompt {
-  margin-bottom: 0.25rem;
   color: var(--primary);
+}
+
+.consent-lines {
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
 }
 
 .consent a {
