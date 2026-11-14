@@ -8,6 +8,9 @@ categories:
   - Hardware hacking
 draft: false
 description: "How to update the outdated rfcat firmware on a YARD Stick One, the sub-1 GHz radio dongle from Great Scott Gadgets, using its USB bootloader on Ubuntu 18.04."
+faq:
+  - question: "How do I do this with Python 3 on a newer Ubuntu release (20.04, 22.04, 24.04)?"
+    answer: "Use rfcat 2.0.x, which supports Python 3, and build the firmware with SDCC 3.5.0 instead of a newer compiler. rfcat 2.0.1 is on [PyPI](https://pypi.org/project/rfcat/), and from a clone of the repo you can install it with `pip install -e .`. Avoid 1.9.x releases: on Ubuntu 20.04 with Python 3.8, `rfcat_bootloader` failed during `make installRfCatYS1CCBootloader` ([#88](https://github.com/atlas0fd00m/rfcat/issues/88)). Firmware built with SDCC 3.8.0 or later fails to run properly ([SDCC bug #3381](https://sourceforge.net/p/sdcc/bugs/3381/))."
 ---
 
 Today I received my [YARD Stick One](https://greatscottgadgets.com/yardstickone/) (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle  can transmit and receive digital wireless signals at frequencies below  1GHz. The YARD Stick One is not a SDR, because the I/Q  samples are directly demodulated by the chipset instead of send to the  host over USB. The YARD Stick One therefore isn’t compatible with any  SDR software, but you can use something called [rfcat](https://github.com/atlas0fd00m/rfcat.git).
