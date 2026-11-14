@@ -159,6 +159,20 @@ for path in posts:
         check(len(alt.split()) >= 3, "%s: image alt is too short to describe the image: %s" % (rel, alt))
         check(alts.count(alt) == 1, "%s: image alt used %d times: %s" % (rel, alts.count(alt), alt))
 
+training = read("training/index.html")
+booking = re.search(r"<form\s[^>]*data-book-form.*?</form>", training, re.S)
+check(booking, "training: no booking form")
+if booking:
+    booking = booking.group(0)
+    check("https://api-eu1.hsforms.com/submissions/v3/integration/submit/145914087/b25f6924-0eaf-4ccf-bd79-d8231c4cc72f" in booking, "training: booking form does not post to the HubSpot form")
+    for name in ("email", "firstname", "lastname", "company", "session_format", "session_audience", "session_date_location", "message"):
+        check(re.search(r'\sname="?%s[" >]' % name, booking), "training: booking form has no %s field" % name)
+check("hsforms.net" not in training, "training: loads a HubSpot script")
+check("mailto:info@roaldnefs.com" in training, "training: no email fallback next to the booking form")
+training_md = read("training/index.md")
+check("<form" not in training_md, "training: Markdown version contains the booking form markup")
+check("mailto:info@roaldnefs.com" in training_md, "training: Markdown version has no email address to book by")
+
 for f in failures:
     print("FAIL " + f)
 print("%d check(s) failed" % len(failures) if failures else "all checks passed")

@@ -1,0 +1,41 @@
+{{- with site.Params.hubspot -}}
+<form class="book-form" data-book-form hidden action="https://api-eu1.hsforms.com/submissions/v3/integration/submit/{{ .portalId }}/{{ .formId }}">
+  <label>First name
+    <input type="text" name="firstname" autocomplete="given-name" required>
+  </label>
+  <label>Last name
+    <input type="text" name="lastname" autocomplete="family-name">
+  </label>
+  <label>Email
+    <input type="email" name="email" autocomplete="email" required>
+  </label>
+  <label>Organisation
+    <input type="text" name="company" autocomplete="organization">
+  </label>
+  <label>Format
+    <select name="session_format">
+      <option value="">Not sure yet</option>
+      <option>Talk</option>
+      <option>Half-day</option>
+      <option>Full day</option>
+    </select>
+  </label>
+  <label>Audience size and background
+    <input type="text" name="session_audience">
+  </label>
+  <label class="book-form-wide">Tentative date and location
+    <input type="text" name="session_date_location">
+  </label>
+  <label class="book-form-wide">Anything else
+    <textarea name="message" rows="4"></textarea>
+  </label>
+  <label class="book-form-trap" aria-hidden="true">Website
+    <input type="text" name="website" tabindex="-1" autocomplete="off">
+  </label>
+  <p class="book-form-wide book-form-note">Your request is sent to Warpnet's HubSpot so I can reply. See the <a href="/privacy/">privacy statement</a>.</p>
+  <div class="book-form-wide book-form-actions">
+    <button class="btn" type="submit">Send request</button>
+    <span data-book-status role="status"></span>
+  </div>
+</form>
+{{- end -}}

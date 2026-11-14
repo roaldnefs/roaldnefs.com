@@ -77,6 +77,48 @@
     });
   }
 
+  // Booking form: sends the request to HubSpot. It starts hidden, so without
+  // JavaScript the email address below it is the way to book.
+  var booking = document.querySelector("[data-book-form]");
+  if (booking) {
+    var bookingStatus = booking.querySelector("[data-book-status]");
+    var bookingSend = booking.querySelector("button");
+    booking.hidden = false;
+    booking.addEventListener("submit", function (e) {
+      e.preventDefault();
+      // Only bots fill in the field that visitors can't see
+      if (booking.elements.website.value) return;
+      var fields = [];
+      var lines = [];
+      new FormData(booking).forEach(function (value, name) {
+        if (name === "website" || !value) return;
+        fields.push({ objectTypeId: "0-1", name: name, value: value });
+        lines.push(booking.elements[name].closest("label").firstChild.textContent.trim() + ": " + value);
+      });
+      bookingSend.disabled = true;
+      bookingStatus.textContent = "Sending…";
+      fetch(booking.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fields: fields, context: { pageUri: location.href, pageName: document.title } })
+      }).then(function (response) {
+        if (!response.ok) throw new Error(response.status);
+        booking.reset();
+        bookingStatus.textContent = "Thanks, your request is in. I'll reply by email.";
+      }).catch(function () {
+        // Content blockers often stop requests to HubSpot, so offer the same request as an email
+        var mail = document.createElement("a");
+        mail.href = "mailto:info@roaldnefs.com?subject=" + encodeURIComponent("Session request") +
+          "&body=" + encodeURIComponent(lines.join("\n"));
+        mail.textContent = "Send it by email instead";
+        bookingStatus.textContent = "That didn't go through, possibly because of a content blocker. ";
+        bookingStatus.appendChild(mail);
+      }).then(function () {
+        bookingSend.disabled = false;
+      });
+    });
+  }
+
   // Analytics: the Google tag in <head> starts with analytics consent denied,
   // unless the visitor accepted earlier. Accepting here grants it.
   // The tag and the banner are only rendered on production builds.

@@ -71,6 +71,9 @@ menu:
 
 params:
   googleTagManager: GTM-WXSC6L3R
+  hubspot:
+    portalId: "145914087"
+    formId: b25f6924-0eaf-4ccf-bd79-d8231c4cc72f
   description: Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.
   author:
     name: Roald Nefs
