@@ -21,6 +21,9 @@ rm -rf public/*
 echo "Generating site"
 hugo
 
+echo "Rendering cover images for link previews"
+scripts/render-covers.sh public
+
 echo "Updating gh-pages branch"
 cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
 

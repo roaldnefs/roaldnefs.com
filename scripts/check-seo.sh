@@ -8,9 +8,11 @@ out="$(mktemp -d)"
 trap 'rm -rf "$out"' EXIT
 
 hugo --quiet --destination "$out"
+scripts/render-covers.sh "$out"
 
 python3 - "$out" <<'EOF'
-import glob, html, json, os, re, sys
+import glob, html, json, os, re, struct, sys
+from urllib.parse import urlparse
 
 out = sys.argv[1]
 failures = []
@@ -34,12 +36,24 @@ def json_ld(page):
 def types(page):
     return [b.get("@type") for b in json_ld(page)]
 
+def cover_size(url):
+    """Width and height of the cover PNG a preview image URL points at, or None."""
+    path = os.path.join(out, urlparse(url or "").path.lstrip("/"))
+    if not re.search(r"/covers/[^/]+\.png$", path) or not os.path.isfile(path):
+        return None
+    with open(path, "rb") as f:
+        header = f.read(24)
+    if header[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return struct.unpack(">II", header[16:24])
+
 site_default = meta(read("404.html"), "name", "description")
 
 posts = sorted(glob.glob(os.path.join(out, "posts", "*", "*", "*", "index.html")))
 check(len(posts) >= 14, "expected at least 14 posts, found %d" % len(posts))
 
 seen = {}
+covers = {}
 for path in posts:
     rel = os.path.relpath(path, out)
     page = read(rel)
@@ -50,7 +64,11 @@ for path in posts:
     seen[desc] = rel
     check(desc and len(desc) <= 165, "%s: meta description longer than 165 characters" % rel)
     check(meta(page, "property", "og:description") == desc, "%s: og:description differs from meta description" % rel)
-    check(meta(page, "property", "og:image"), "%s: no og:image" % rel)
+    image = meta(page, "property", "og:image")
+    check(cover_size(image) == (1200, 630), "%s: og:image is not a 1200x630 generated cover PNG: %s" % (rel, image))
+    check(image not in covers, "%s: same og:image as %s" % (rel, covers.get(image)))
+    covers[image] = rel
+    check(meta(page, "name", "twitter:image") == image, "%s: twitter:image differs from og:image" % rel)
     check(meta(page, "property", "article:published_time"), "%s: no article:published_time" % rel)
     try:
         found = types(page)
@@ -68,6 +86,8 @@ try:
 except ValueError as e:
     check(False, "home: JSON-LD does not parse: %s" % e)
 check(meta(home, "property", "og:description") == meta(home, "name", "description"), "home: og:description differs from meta description")
+home_image = meta(home, "property", "og:image") or ""
+check(home_image.endswith("/covers/overcast.png") and cover_size(home_image) == (1200, 630), "home: og:image is not the 1200x630 hero cover PNG: %s" % home_image)
 
 robots = read("robots.txt")
 check("Sitemap: https://roaldnefs.com/sitemap.xml" in robots, "robots.txt: no Sitemap line")

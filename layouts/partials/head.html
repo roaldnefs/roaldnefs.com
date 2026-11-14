@@ -28,7 +28,10 @@
 {{- if and (not $desc) (eq .Kind "term") }}{{ $desc = printf "Posts about %s by %s." .Title site.Params.author.name }}{{ end -}}
 {{- if and (not $desc) .IsPage }}{{ $desc = .Summary | plainify | htmlUnescape | replaceRE `\s+` " " | truncate 160 }}{{ end -}}
 {{- $desc = $desc | default site.Params.description -}}
-{{- $image := "/images/posts/default.png" -}}
+{{- /* Link previews use the generated cover, as the PNG that scripts/render-covers.sh renders from it */ -}}
+{{- $cover := "overcast" -}}
+{{- if and .IsPage (eq .Section "posts") }}{{ $cover = .Title }}{{ end -}}
+{{- $image := partial "cover.html" $cover | replaceRE `\.svg$` ".png" -}}
 {{- with .Params.images }}{{ $image = index . 0 }}{{ end -}}
 {{- $image = $image | absURL -}}
 {{- $title := .Title | default site.Title }}
