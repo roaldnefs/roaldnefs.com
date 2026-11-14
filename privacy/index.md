@@ -46,6 +46,12 @@ Warpnet receives your request as a lead, and it is used to reply to you and to a
 
 The legal basis is the legitimate interest (Article 6(1)(f) GDPR) in responding to your request.
 
+### Videos
+
+The [videos page](/videos/) shows thumbnails that are served from this website itself. Nothing is requested from YouTube until you press play on a video. When you do, the player is loaded from YouTube, a service of Google, in its privacy-enhanced mode (`youtube-nocookie.com`). Google then receives your IP address and browser details, and YouTube may keep data in your browser to play the video. See the [Google Privacy Policy](https://policies.google.com/privacy) for how Google handles data.
+
+The legal basis is my legitimate interest (Article 6(1)(f) GDPR) in showing you the video you asked to play.
+
 ### Browser storage
 
 This site stores your answer to the cookie banner in your browser and, if you accept analytics, the Google Analytics cookies. See the [cookie statement](/cookies/) for details.
