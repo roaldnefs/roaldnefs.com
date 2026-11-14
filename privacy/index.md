@@ -2,7 +2,7 @@
 
 *Last updated: November 14, 2026*
 
-This privacy statement explains what personal data is processed when you visit roaldnefs.com, why, and what your rights are. The short version: this site uses Google Analytics only if you agree to it, has no advertising, and I don't collect personal data myself beyond that.
+This privacy statement explains what personal data is processed when you visit roaldnefs.com, why, and what your rights are. The short version: this site uses Google Analytics, which only sets cookies if you agree to it, has no advertising, and I don't collect personal data myself beyond that.
 
 ## Who is responsible
 
@@ -18,13 +18,15 @@ The legal basis is my legitimate interest (Article 6(1)(f) GDPR) in delivering t
 
 ### Analytics
 
-If you accept analytics in the cookie banner, this site loads Google Tag Manager, which runs Google Analytics 4, to see which pages are read and how visitors find them. Until you accept, nothing is loaded from Google and no data is sent to it.
+This site uses Google Tag Manager, which runs Google Analytics 4, to see which pages are read and how visitors find them. The script is loaded from Google on every visit, so Google receives your IP address and browser details as part of that request.
 
-Google Analytics collects the pages you view, the website you came from, your approximate location, your browser and device type, and an identifier kept in a cookie so a return visit can be recognised. Google Analytics 4 uses your IP address to work out the approximate location and doesn't store it. I only see the results as statistics, not as data about individual visitors.
+Until you accept analytics in the cookie banner, Google Analytics runs without cookies. It doesn't set or read any, and it only sends Google signals that a page was viewed, without an identifier that recognises you on a later page or visit.
+
+If you accept, Google Analytics collects the pages you view, the website you came from, your approximate location, your browser and device type, and an identifier kept in a cookie so a return visit can be recognised. Google Analytics 4 uses your IP address to work out the approximate location and doesn't store it. I only see the results as statistics, not as data about individual visitors.
 
 Google Ireland Limited provides both services and processes this data on my behalf. Data linked to the cookie identifier is deleted after 14 months at most. See the [Google Privacy Policy](https://policies.google.com/privacy) for how Google handles data.
 
-The legal basis is your consent (Article 6(1)(a) GDPR). You can withdraw it at any time with the "Cookie settings" link at the bottom of every page, which also removes the cookies.
+The legal basis for the cookies and the data linked to them is your consent (Article 6(1)(a) GDPR). For loading the script and the cookieless signals it is my legitimate interest (Article 6(1)(f) GDPR) in knowing which pages are read. You can withdraw your consent at any time with the "Cookie settings" link at the bottom of every page, which also removes the cookies.
 
 ### Fonts
 

@@ -2,6 +2,23 @@
 <html lang="en-us">
 <head>
   <meta charset="utf-8">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  var analyticsConsent = "denied";
+  try {
+    if (localStorage.getItem("consent") === "granted") analyticsConsent = "granted";
+  } catch (e) {}
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: analyticsConsent
+  });
+  gtag("js", new Date());
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WXSC6L3R"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#04090f">
@@ -45,7 +62,7 @@
 
 
   
-  <script src="/js/main.min.7b0c5255bbc7f37c15b137501940bae5bf38af2ccaa1979fe2b12cb526b5c3ea.js" integrity="sha256-ewxSVbvH83wVsTdQGUC65b84ryzKoZef4rEstSa1w&#43;o=" defer></script>
+  <script src="/js/main.min.0276e3dfa3aa1372e9beb0ac998cc30b11fb1ab937c661e0a364337cf95f9ecb.js" integrity="sha256-Anbj36OqE3LpvrCsmYzDCxH7Grk3xmHgo2QzfPlfnss=" defer></script>
 
 
 </head>
@@ -331,8 +348,8 @@
   <div class="container site-footer-note">© 2026 Roald Nefs</div>
 </footer>
 
-  <div class="consent" role="region" aria-label="Cookie consent" data-consent data-gtm-id="GTM-WXSC6L3R" hidden>
-  <p>This site uses Google Analytics to see which posts get read. It sets cookies, so it only runs if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
+  <div class="consent" role="region" aria-label="Cookie consent" data-consent hidden>
+  <p>This site uses Google Analytics to see which posts get read. Cookies are only set if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
   <div class="consent-actions">
     <button class="btn btn--sm" type="button" data-consent-choice="granted">Accept</button>
     <button class="btn btn--sm btn--ghost" type="button" data-consent-choice="denied">Decline</button>

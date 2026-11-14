@@ -2,6 +2,23 @@
 <html lang="en-us">
 <head>
   <meta charset="utf-8">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  var analyticsConsent = "denied";
+  try {
+    if (localStorage.getItem("consent") === "granted") analyticsConsent = "granted";
+  } catch (e) {}
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: analyticsConsent
+  });
+  gtag("js", new Date());
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WXSC6L3R"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#04090f">
@@ -45,7 +62,7 @@
 
 
   
-  <script src="/js/main.min.7b0c5255bbc7f37c15b137501940bae5bf38af2ccaa1979fe2b12cb526b5c3ea.js" integrity="sha256-ewxSVbvH83wVsTdQGUC65b84ryzKoZef4rEstSa1w&#43;o=" defer></script>
+  <script src="/js/main.min.0276e3dfa3aa1372e9beb0ac998cc30b11fb1ab937c661e0a364337cf95f9ecb.js" integrity="sha256-Anbj36OqE3LpvrCsmYzDCxH7Grk3xmHgo2QzfPlfnss=" defer></script>
 
 
 </head>
@@ -176,7 +193,7 @@
         <p><em>Last updated: November 14, 2026</em></p>
 <h2 id="cookies">Cookies</h2>
 <p>This website only sets cookies if you accept analytics in the cookie banner. If you decline, or don&rsquo;t make a choice, no cookies are set.</p>
-<p>When you accept, the site loads Google Tag Manager, which runs Google Analytics. Google Analytics sets two cookies:</p>
+<p>When you accept, Google Analytics sets two cookies:</p>
 <ul>
 <li><code>_ga</code> tells visitors apart. It expires after two years.</li>
 <li><code>_ga_H1NMFLLZ06</code> keeps track of your visit. It expires after two years.</li>
@@ -188,7 +205,7 @@
 <p>The &ldquo;Cookie settings&rdquo; link at the bottom of every page opens the banner again. If you decline there after accepting earlier, the Google Analytics cookies are removed.</p>
 <h2 id="third-parties">Third parties</h2>
 <p>The site is hosted on GitHub Pages, which receives your IP address when you visit. Fonts, scripts, and images are served from this website itself.</p>
-<p>Google Tag Manager and Google Analytics are the one exception. If you accept, your browser loads scripts from Google and sends usage data to Google. Until you accept, no request is made to Google. See the <a href="/privacy/">privacy statement</a> for details.</p>
+<p>Google is the one exception. The Google Tag Manager script, which runs Google Analytics, is loaded from Google on every visit, so Google receives your IP address. Until you accept, it sets no cookies and only tells Google that a page was viewed. If you accept, it sets the cookies above and sends usage data to Google. See the <a href="/privacy/">privacy statement</a> for details.</p>
 <h2 id="questions">Questions</h2>
 <p>If you have questions about this statement, email <a href="mailto:info@roaldnefs.com">info@roaldnefs.com</a>.</p>
 
@@ -301,8 +318,8 @@
   <div class="container site-footer-note">© 2026 Roald Nefs</div>
 </footer>
 
-  <div class="consent" role="region" aria-label="Cookie consent" data-consent data-gtm-id="GTM-WXSC6L3R" hidden>
-  <p>This site uses Google Analytics to see which posts get read. It sets cookies, so it only runs if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
+  <div class="consent" role="region" aria-label="Cookie consent" data-consent hidden>
+  <p>This site uses Google Analytics to see which posts get read. Cookies are only set if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
   <div class="consent-actions">
     <button class="btn btn--sm" type="button" data-consent-choice="granted">Accept</button>
     <button class="btn btn--sm btn--ghost" type="button" data-consent-choice="denied">Decline</button>
