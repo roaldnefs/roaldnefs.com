@@ -18,11 +18,11 @@ The legal basis is my legitimate interest (Article 6(1)(f) GDPR) in delivering t
 
 ### Analytics
 
-If you accept analytics in the cookie banner, this site uses Google Analytics 4 to see which pages are read and how visitors find them. Until you accept, nothing is loaded from Google and no data is sent to it.
+If you accept analytics in the cookie banner, this site loads Google Tag Manager, which runs Google Analytics 4, to see which pages are read and how visitors find them. Until you accept, nothing is loaded from Google and no data is sent to it.
 
 Google Analytics collects the pages you view, the website you came from, your approximate location, your browser and device type, and an identifier kept in a cookie so a return visit can be recognised. Google Analytics 4 uses your IP address to work out the approximate location and doesn't store it. I only see the results as statistics, not as data about individual visitors.
 
-Google Ireland Limited provides the service and processes this data on my behalf. Data linked to the cookie identifier is deleted after 14 months at most. See the [Google Privacy Policy](https://policies.google.com/privacy) for how Google handles data.
+Google Ireland Limited provides both services and processes this data on my behalf. Data linked to the cookie identifier is deleted after 14 months at most. See the [Google Privacy Policy](https://policies.google.com/privacy) for how Google handles data.
 
 The legal basis is your consent (Article 6(1)(a) GDPR). You can withdraw it at any time with the "Cookie settings" link at the bottom of every page, which also removes the cookies.
 
