@@ -179,6 +179,23 @@ training_md = read("training/index.md")
 check("<form" not in training_md, "training: Markdown version contains the booking form markup")
 check("mailto:info@roaldnefs.com" in training_md, "training: Markdown version has no email address to book by")
 
+video_ids = ("HH47sE9umsA", "ujLLlRNcvJ8", "nlmlmfh0YHw", "Wnn3krHydwE", "s22WKWZO1Eg", "ii90UM4S5B0")
+check(os.path.exists(os.path.join(out, "videos", "index.html")), "videos: page missing")
+if os.path.exists(os.path.join(out, "videos", "index.html")):
+    videos = read("videos/index.html")
+    videos_md = read("videos/index.md")
+    for video in video_ids:
+        check(re.search(r'<button\s[^>]*data-video-id="?%s[" >]' % video, videos), "videos: no play button for %s" % video)
+        check("https://www.youtube.com/watch?v=%s" % video in videos, "videos: no YouTube link for %s" % video)
+        check(os.path.exists(os.path.join(out, "images", "videos", video + ".jpg")), "videos: no thumbnail for %s" % video)
+        check("https://www.youtube.com/watch?v=%s" % video in videos_md, "videos: Markdown version has no link for %s" % video)
+    video_cards = re.findall(r'<article class="?card video-card.*?</article>', videos, re.S)
+    check(len(video_cards) == len(video_ids) and all("card-summary" in card for card in video_cards), "videos: not every video has a description")
+    check("<iframe" not in videos, "videos: a player is embedded before the visitor asks for it")
+    check("ytimg.com" not in videos, "videos: thumbnails are loaded from YouTube")
+    check("<button" not in videos_md and "<article" not in videos_md, "videos: Markdown version contains the card markup")
+check(re.search(r'<a\s[^>]*href="?/videos/[" >]', home), "home: navigation has no link to the videos page")
+
 for f in failures:
     print("FAIL " + f)
 print("%d check(s) failed" % len(failures) if failures else "all checks passed")
