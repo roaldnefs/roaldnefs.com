@@ -10,6 +10,9 @@ tags:
   - hardware hacking
 draft: false
 description: "A quick start for Software Defined Radio on Linux with a cheap RTL-SDR dongle: build the drivers, listen with Gqrx, decode P2000 pagers and track air traffic."
+faq:
+  - question: "rtl_test says `usb_claim_interface error -6`. What's wrong?"
+    answer: "It means the dongle is busy: libusb error -6 is `LIBUSB_ERROR_BUSY`, which you get when another program or driver has already claimed the USB interface. Usually that's the Linux DVB-T TV driver `dvb_usb_rtl28xxu`, which grabs the stick by default. Sometimes it's a second copy of an rtl-sdr program, such as rtl_test or rtl_fm, that's still running. Close the other program, or unload the driver with `sudo rmmod dvb_usb_rtl28xxu`, and make sure your blacklist file in `/etc/modprobe.d/` ends in `.conf` and that you rebooted after creating it."
 ---
 
 In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are  instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.
