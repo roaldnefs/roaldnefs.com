@@ -23,4 +23,12 @@
   {{- $breadcrumb := merge $context (dict "@type" "BreadcrumbList" "itemListElement" $items) }}
 <script type="application/ld+json">{{ $posting | jsonify | safeJS }}</script>
 <script type="application/ld+json">{{ $breadcrumb | jsonify | safeJS }}</script>
+  {{- with $page.Params.faq -}}
+    {{- $questions := slice -}}
+    {{- range . -}}
+      {{- $questions = $questions | append (dict "@type" "Question" "name" .question "acceptedAnswer" (dict "@type" "Answer" "text" (.answer | markdownify | plainify | htmlUnescape))) -}}
+    {{- end -}}
+    {{- $faq := merge $context (dict "@type" "FAQPage" "mainEntity" $questions) }}
+<script type="application/ld+json">{{ $faq | jsonify | safeJS }}</script>
+  {{- end -}}
 {{- end -}}

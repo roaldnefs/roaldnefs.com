@@ -8,3 +8,13 @@ By {{ index (.Params.authors | default (slice site.Params.author.name)) 0 }}, {{
 
 {{ end -}}
 {{ .RenderShortcodes | string | strings.TrimSpace }}
+{{- with .Params.faq }}
+
+## Frequently asked questions
+{{- range . }}
+
+### {{ .question }}
+
+{{ .answer }}
+{{- end }}
+{{- end }}

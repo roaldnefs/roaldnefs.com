@@ -47,6 +47,7 @@
       <div class="prose">
         {{ .Content }}
       </div>
+      {{- partial "faq.html" . }}
       {{ with partial "tags.html" . }}
         {{ if $isPost }}
           <ul class="tag-list">

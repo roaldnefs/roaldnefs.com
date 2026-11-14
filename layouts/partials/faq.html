@@ -1,0 +1,9 @@
+{{- with .Params.faq }}
+  <section class="prose faq">
+    <h2 id="faq">Frequently asked questions</h2>
+    {{ range . }}
+      <h3>{{ .question }}</h3>
+      <p>{{ .answer | markdownify }}</p>
+    {{ end }}
+  </section>
+{{- end -}}

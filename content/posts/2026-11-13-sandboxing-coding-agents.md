@@ -12,6 +12,9 @@ tags:
 draft: false
 description: "A coding agent on your laptop runs as your user, with every key you have. Why that needs a sandbox, what a sandbox has to limit, and five places to run one."
 summary: A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a sandbox has to limit, and five places to run an agent instead.
+faq:
+  - question: "Does this also work for Claude Desktop?"
+    answer: "The problem is the same in the Code tab of the Claude Desktop app, and so is the advice. Local sessions there run Claude Code on your machine with direct access to your files, and its Bypass permissions mode is the equivalent of `--dangerously-skip-permissions`, which the documentation says to use only in sandboxed containers or VMs. Cowork is different: it runs Claude's code in an isolated, temporary environment on Anthropic's servers, but Claude can still read the folders you connect, and computer use has no sandbox between Claude and your screen."
 ---
 ## Introduction
 This post is the written version of the talk I gave at aiGrunn in Groningen on 13 November 2026. I build with coding agents every day, and my other job is breaking into things. This is where those two meet.

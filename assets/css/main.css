@@ -1446,6 +1446,10 @@ button {
   display: none;
 }
 
+.faq {
+  margin-top: 3.5rem;
+}
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;

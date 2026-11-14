@@ -74,6 +74,12 @@ for path in posts:
         found = types(page)
         check("BlogPosting" in found, "%s: no BlogPosting JSON-LD" % rel)
         check("BreadcrumbList" in found, "%s: no BreadcrumbList JSON-LD" % rel)
+        faq = re.search(r'<section class="prose faq">(.*?)</section>', page, re.S)
+        if faq:
+            questions = [q for b in json_ld(page) if b.get("@type") == "FAQPage" for q in b["mainEntity"]]
+            check(questions and len(questions) == faq.group(1).count("<h3"), "%s: FAQPage JSON-LD does not match the FAQ on the page" % rel)
+            check(all(q["name"] and q["acceptedAnswer"]["text"] and "<" not in q["acceptedAnswer"]["text"] for q in questions), "%s: FAQPage JSON-LD has an empty answer or HTML in an answer" % rel)
+            check("## Frequently asked questions" in read(os.path.join(os.path.dirname(rel), "index.md")), "%s: FAQ missing from the Markdown version" % rel)
     except ValueError as e:
         check(False, "%s: JSON-LD does not parse: %s" % (rel, e))
     check(os.path.exists(os.path.join(os.path.dirname(path), "index.md")), "%s: no Markdown version" % rel)
