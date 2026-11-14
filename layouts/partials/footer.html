@@ -44,7 +44,7 @@
         <ul class="footer-links">
           <li><a href="/privacy/"{{ if eq .RelPermalink "/privacy/" }} aria-current="page"{{ end }}>Privacy</a></li>
           <li><a href="/cookies/"{{ if eq .RelPermalink "/cookies/" }} aria-current="page"{{ end }}>Cookies</a></li>
-          {{ if and hugo.IsProduction site.Config.Services.GoogleAnalytics.ID }}
+          {{ if and hugo.IsProduction site.Params.googleTagManager }}
             <li><button type="button" data-consent-open>Cookie settings</button></li>
           {{ end }}
         </ul>

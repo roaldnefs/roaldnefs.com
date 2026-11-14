@@ -69,19 +69,17 @@
     });
   }
 
-  // Analytics: Google Analytics loads only after the visitor accepts.
+  // Analytics: Google Tag Manager loads only after the visitor accepts.
   // The banner is only rendered on production builds.
   var consent = document.querySelector("[data-consent]");
   if (consent) {
-    var id = consent.dataset.gaId;
+    var id = consent.dataset.gtmId;
     var loadAnalytics = function () {
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function () { window.dataLayer.push(arguments); };
-      window.gtag("js", new Date());
-      window.gtag("config", id);
+      window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
       var script = document.createElement("script");
       script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+      script.src = "https://www.googletagmanager.com/gtm.js?id=" + id;
       document.head.appendChild(script);
     };
 
@@ -97,7 +95,7 @@
         consent.hidden = true;
         if (next === "granted" && previous !== "granted") loadAnalytics();
         if (next === "denied" && previous === "granted") {
-          // Withdrawn: remove the Google Analytics cookies and stop the running tag
+          // Withdrawn: remove the Google Analytics cookies and stop the running tags
           document.cookie.split("; ").forEach(function (cookie) {
             var name = cookie.split("=")[0];
             if (name.indexOf("_ga") === 0) {

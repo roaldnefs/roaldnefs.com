@@ -6,10 +6,6 @@ enableRobotsTXT: true
 
 disableKinds: [taxonomy]
 
-services:
-  googleAnalytics:
-    id: G-H1NMFLLZ06
-
 outputFormats:
   RSS:
     baseName: rss
@@ -74,6 +70,7 @@ menu:
         icon: mastodon
 
 params:
+  googleTagManager: GTM-WXSC6L3R
   description: Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.
   author:
     name: Roald Nefs
