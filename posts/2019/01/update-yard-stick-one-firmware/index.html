@@ -7,10 +7,7 @@
 <meta name="theme-color" content="#04090f">
 
 <title>Update YARD Stick One Firmware — Roald Nefs</title>
-
-
-<meta name="description" content="Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.">
-
+<meta name="description" content="How to update the outdated rfcat firmware on a YARD Stick One, the sub-1 GHz radio dongle from Great Scott Gadgets, using its USB bootloader on Ubuntu 18.04.">
 
 <meta name="author" content="Roald Nefs">
 
@@ -18,11 +15,19 @@
 <meta property="og:title" content="Update YARD Stick One Firmware">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/">
-<meta property="og:description" content="Today I received my YARD Stick One (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle can transmit and receive digital wireless signals at frequencies below 1GHz. The YARD Stick One is not a SDR, because the I/Q samples are directly demodulated by the chipset instead of send to the host over USB. The YARD Stick One therefore isn’t compatible with any SDR software, but you can use something called rfcat.
-">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="How to update the outdated rfcat firmware on a YARD Stick One, the sub-1 GHz radio dongle from Great Scott Gadgets, using its USB bootloader on Ubuntu 18.04.">
+<meta property="og:image" content="https://roaldnefs.com/images/posts/default.png">
+<meta property="article:published_time" content="2019-01-17T00:00:00&#43;02:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Update YARD Stick One Firmware">
+<meta name="twitter:description" content="How to update the outdated rfcat firmware on a YARD Stick One, the sub-1 GHz radio dongle from Great Scott Gadgets, using its USB bootloader on Ubuntu 18.04.">
+<meta name="twitter:image" content="https://roaldnefs.com/images/posts/default.png">
 
 <link rel="canonical" href="https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/">
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Roald Nefs","url":"https://roaldnefs.com/about/"},"dateModified":"2019-01-17T00:00:00+02:00","datePublished":"2019-01-17T00:00:00+02:00","description":"How to update the outdated rfcat firmware on a YARD Stick One, the sub-1 GHz radio dongle from Great Scott Gadgets, using its USB bootloader on Ubuntu 18.04.","headline":"Update YARD Stick One Firmware","image":"https://roaldnefs.com/images/posts/default.png","inLanguage":"en","mainEntityOfPage":"https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/","url":"https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://roaldnefs.com/posts/","name":"Blog","position":1},{"@type":"ListItem","item":"https://roaldnefs.com/categories/hardware-hacking/","name":"Hardware Hacking","position":2},{"@type":"ListItem","item":"https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/","name":"Update YARD Stick One Firmware","position":3}]}</script>
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -31,17 +36,19 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
 
 
+  <link rel="alternate" type="text/markdown" href="https://roaldnefs.com/posts/2019/01/update-yard-stick-one-firmware/index.md" title="Roald Nefs">
+
 
 <link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 
   
-  <link rel="stylesheet" href="/css/main.min.42671717c9faa9de4f33d261fb0ea0cfd120bebc3b33cd7b42668f542db73e48.css" integrity="sha256-QmcXF8n6qd5PM9Jh&#43;w6gz9Egvrw7M817QmaPVC23Pkg=">
+  <link rel="stylesheet" href="/css/main.min.60f9c014dffc32fc03d43d038e072d43ae536436d270b99e8cd42b3cb17695f5.css" integrity="sha256-YPnAFN/8MvwD1D0DjgctQ65TZDbScLmejNQrPLF2lfU=">
 
 
 
   
-  <script src="/js/main.min.45f023d2efa202a25c6cd76e38eb6e47fde44895e1b385d1f741ff92e70eea03.js" integrity="sha256-RfAj0u&#43;iAqJcbNduOOtuR/3kSJXhs4XR90H/kucO6gM=" defer></script>
+  <script src="/js/main.min.8a77d9b4284e434df2df66cab37abb053ecd7fff5775c047d0224b2961f391da.js" integrity="sha256-infZtChOQ03y32bKs3q7BT7Nf/9XdcBH0CJLKWHzkdo=" defer></script>
 
 
 </head>
@@ -165,8 +172,6 @@
       <div class="container post-hero-inner">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/posts/">Blog</a>
-          
-          
           
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
             <a href="/categories/hardware-hacking/">Hardware Hacking</a>
@@ -406,7 +411,7 @@
           <div class="aside-box">
             <p class="aside-box-head">
               <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
-              <span>Written by Roald Nefs</span>
+              <span>Written by <a href="/about/" rel="author">Roald Nefs</a></span>
             </p>
             <p>CTO at Warpnet and Enlite, working across security, platform engineering and AI. I co-organize BSides Groningen and run hands-on workshops on automotive security and hardware hacking.</p>
             <a class="btn btn--sm" href="/training/#book-a-session">Book a workshop</a>
@@ -496,7 +501,7 @@
   </span>
   <span class="card-body">
     <h3 class="card-title">Building a Car Hacking Test Bench</h3>
-    <span class="card-summary">Modern cars are computers on wheel, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</span>
+    <span class="card-summary">Modern cars are computers on wheels, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
   <span class="author-text">
@@ -673,6 +678,7 @@
         <ul class="footer-links">
           <li><a href="/rss.xml">rss.xml</a></li>
           <li><a href="/sitemap.md">sitemap.md</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -680,12 +686,24 @@
         <ul class="footer-links">
           <li><a href="/privacy/">Privacy</a></li>
           <li><a href="/cookies/">Cookies</a></li>
+          
+            <li><button type="button" data-consent-open>Cookie settings</button></li>
+          
         </ul>
       </div>
     </div>
   </div>
   <div class="container site-footer-note">© 2026 Roald Nefs</div>
 </footer>
+
+  <div class="consent" role="region" aria-label="Cookie consent" data-consent data-ga-id="G-H1NMFLLZ06" hidden>
+  <p>This site uses Google Analytics to see which posts get read. It sets cookies, so it only runs if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
+  <div class="consent-actions">
+    <button class="btn btn--sm" type="button" data-consent-choice="granted">Accept</button>
+    <button class="btn btn--sm btn--ghost" type="button" data-consent-choice="denied">Decline</button>
+  </div>
+  <button class="consent-close" type="button" aria-label="Close and decline" data-consent-choice="denied">&times;</button>
+</div>
 
 </body>
 </html>
