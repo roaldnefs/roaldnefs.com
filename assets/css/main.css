@@ -229,6 +229,15 @@ button {
   font-size: 0.75rem;
 }
 
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--fg);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .eyebrow {
   display: flex;
   align-items: center;
@@ -2095,12 +2104,14 @@ button {
   line-height: 1.25rem;
 }
 
-.footer-links a {
+.footer-links a,
+.footer-links button {
   color: var(--muted);
   transition: color 0.15s;
 }
 
-.footer-links a:hover {
+.footer-links a:hover,
+.footer-links button:hover {
   color: var(--fg);
 }
 
@@ -2124,6 +2135,61 @@ button {
   .footer-cols {
     grid-template-columns: repeat(4, minmax(0, 10.75rem));
   }
+}
+
+/* ---------- Cookie consent ---------- */
+
+.consent {
+  position: fixed;
+  z-index: 60;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  max-width: 45rem;
+  margin-inline: auto;
+  padding: 1rem 2.75rem 1rem 1.25rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--fg-prose);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.consent[hidden] {
+  display: none;
+}
+
+.consent p {
+  flex: 1 1 16rem;
+}
+
+.consent a {
+  color: var(--primary);
+}
+
+.consent-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.consent-close {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.consent-close:hover {
+  color: var(--fg);
 }
 
 /* ---------- Accessibility ---------- */

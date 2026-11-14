@@ -4,6 +4,12 @@ languageCode: en-us
 
 enableRobotsTXT: true
 
+disableKinds: [taxonomy]
+
+services:
+  googleAnalytics:
+    id: G-H1NMFLLZ06
+
 outputFormats:
   RSS:
     baseName: rss
@@ -11,9 +17,15 @@ outputFormats:
     mediaType: text/markdown
     baseName: sitemap
     isPlainText: true
+  LLMS:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
+    notAlternative: true
 
 outputs:
-  home: [html, rss, sitemapmd]
+  home: [html, rss, sitemapmd, llms]
+  page: [html, markdown]
 
 permalinks:
   posts: /posts/:year/:month/:slug/

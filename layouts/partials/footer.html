@@ -36,6 +36,7 @@
         <ul class="footer-links">
           <li><a href="/rss.xml">rss.xml</a></li>
           <li><a href="/sitemap.md">sitemap.md</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -43,6 +44,9 @@
         <ul class="footer-links">
           <li><a href="/privacy/"{{ if eq .RelPermalink "/privacy/" }} aria-current="page"{{ end }}>Privacy</a></li>
           <li><a href="/cookies/"{{ if eq .RelPermalink "/cookies/" }} aria-current="page"{{ end }}>Cookies</a></li>
+          {{ if and hugo.IsProduction site.Config.Services.GoogleAnalytics.ID }}
+            <li><button type="button" data-consent-open>Cookie settings</button></li>
+          {{ end }}
         </ul>
       </div>
     </div>

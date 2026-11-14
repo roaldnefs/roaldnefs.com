@@ -7,6 +7,7 @@ authors:
 tags:
   - featured
 draft: false
+description: "Extract an AppImage, move it to a permanent location and add a desktop entry so it shows up in the Ubuntu sidebar, with the CAN bus tool SavvyCAN as example."
 ---
 
 In this post, we'll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we'll use **SavvyCAN**, a CANBus reverse engineering tool.
