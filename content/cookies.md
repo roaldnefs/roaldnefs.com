@@ -3,19 +3,32 @@ title: Cookie Statement
 type: about
 ---
 
-*Last updated: November 12, 2026*
+*Last updated: November 14, 2026*
 
 ## Cookies
 
-This website doesn't use cookies. There are no analytics, tracking, advertising, or social media cookies, which is why you won't see a cookie banner here.
+This website only sets cookies if you accept analytics in the cookie banner. If you decline, or don't make a choice, no cookies are set.
+
+When you accept, Google Analytics sets two cookies:
+
+- `_ga` tells visitors apart. It expires after two years.
+- `_ga_H1NMFLLZ06` keeps track of your visit. It expires after two years.
+
+There are no advertising or social media cookies.
 
 ## Browser storage
 
-The site doesn't store anything in your browser's local storage or session storage either.
+The site keeps your answer to the cookie banner in your browser's local storage, under the key `consent`, so it doesn't have to ask again on every page. Nothing else is stored.
+
+## Changing your choice
+
+The "Cookie settings" link at the bottom of every page opens the banner again. If you decline there after accepting earlier, the Google Analytics cookies are removed.
 
 ## Third parties
 
-The site is hosted on GitHub Pages, which receives your IP address when you visit. Fonts, scripts, and images are served from this website itself, so no other third party is contacted. See the [privacy statement](/privacy/) for details.
+The site is hosted on GitHub Pages, which receives your IP address when you visit. Fonts, scripts, and images are served from this website itself.
+
+Google is the one exception. The Google Tag Manager script, which runs Google Analytics, is loaded from Google on every visit, so Google receives your IP address. Until you accept, it sets no cookies and only tells Google that a page was viewed. If you accept, it sets the cookies above and sends usage data to Google. See the [privacy statement](/privacy/) for details.
 
 ## Questions
 

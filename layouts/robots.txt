@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# AI crawlers and assistants are welcome, for search, answers and training.
+{{ range slice "GPTBot" "OAI-SearchBot" "ChatGPT-User" "ClaudeBot" "Claude-User" "Claude-SearchBot" "PerplexityBot" "Perplexity-User" "Google-Extended" "Applebot-Extended" "CCBot" -}}
+User-agent: {{ . }}
+{{ end -}}
+Allow: /
+
+Sitemap: {{ "sitemap.xml" | absURL }}

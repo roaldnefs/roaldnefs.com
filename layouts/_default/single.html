@@ -8,13 +8,7 @@
       <div class="container post-hero-inner">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="{{ "/posts/" | relURL }}">Blog</a>
-          {{ $term := index (.GetTerms "categories") 0 }}
-          {{ if not $term }}
-            {{ range .GetTerms "tags" }}
-              {{ if and (not $term) (ne .Data.Term "featured") }}{{ $term = . }}{{ end }}
-            {{ end }}
-          {{ end }}
-          {{ with $term }}
+          {{ with partial "post-term.html" . }}
             {{ partial "icon.html" "chevron" }}
             <a href="{{ .RelPermalink }}">{{ .LinkTitle | title }}</a>
           {{ end }}
@@ -75,7 +69,7 @@
           <div class="aside-box">
             <p class="aside-box-head">
               <img class="author-avatar" src="{{ "/images/authors/roald-nefs-avatar.webp" | relURL }}" alt="" width="135" height="180" loading="lazy">
-              <span>Written by {{ site.Params.author.name }}</span>
+              <span>Written by <a href="{{ "/about/" | relURL }}" rel="author">{{ site.Params.author.name }}</a></span>
             </p>
             <p>CTO at Warpnet and Enlite, working across security, platform engineering and AI. I co-organize BSides Groningen and run hands-on workshops on automotive security and hardware hacking.</p>
             <a class="btn btn--sm" href="{{ "/training/#book-a-session" | relURL }}">Book a workshop</a>

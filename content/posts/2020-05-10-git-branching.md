@@ -7,6 +7,7 @@ authors:
 categories:
   - Software engineering
 draft: false
+description: "How Git branching works: creating and switching branches, merging and resolving conflicts, remote branches, rebasing and cherry picking, with examples."
 ---
 
 

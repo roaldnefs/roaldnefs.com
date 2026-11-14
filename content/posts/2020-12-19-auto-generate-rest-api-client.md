@@ -9,6 +9,7 @@ categories:
 tags:
   - featured
 draft: false
+description: "Generate a Python client for a REST API from an OpenAPI specification, with the xkcd JSON interface as the example, then improve the spec to get a better SDK."
 ---
 
 While helping a colleague with adding some code to the [bunq Python SDK][bunq-sdk] to allow him to retrieve some additional information from the API ([bunq/sdk_python#148][bunq-issue]), we noticed that the [SDK][bunq-sdk] was automatically generated. We've eventually ended up monkey patching the [SDK][bunq-sdk], as we couldn't make a pull request to the [SDK][bunq-sdk] and the API specification or SDK generator wasn't publicly available. However, this aroused some interest about the automatic generation of API clients.

@@ -9,6 +9,7 @@ categories:
 tags:
   - hardware hacking
 draft: false
+description: "A quick start for Software Defined Radio on Linux with a cheap RTL-SDR dongle: build the drivers, listen with Gqrx, decode P2000 pagers and track air traffic."
 ---
 
 In the quick start guide for Software Defined Radio (SDR) on Linux we will listen to some very common frequencies using a RTL-SDR. SDR is a radio communication system where traditional hardware components are  instead implemented in software. Some common low-cost DVB-T USB dongles with the Realtek RTL2832U controller and tuner can be used as a wide-band SDR receiver.

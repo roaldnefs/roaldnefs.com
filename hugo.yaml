@@ -4,6 +4,8 @@ languageCode: en-us
 
 enableRobotsTXT: true
 
+disableKinds: [taxonomy]
+
 outputFormats:
   RSS:
     baseName: rss
@@ -11,9 +13,15 @@ outputFormats:
     mediaType: text/markdown
     baseName: sitemap
     isPlainText: true
+  LLMS:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
+    notAlternative: true
 
 outputs:
-  home: [html, rss, sitemapmd]
+  home: [html, rss, sitemapmd, llms]
+  page: [html, markdown]
 
 permalinks:
   posts: /posts/:year/:month/:slug/
@@ -62,6 +70,7 @@ menu:
         icon: mastodon
 
 params:
+  googleTagManager: GTM-WXSC6L3R
   description: Personal research blog on software engineering, security, AI, platform engineering, and hardware hacking.
   author:
     name: Roald Nefs

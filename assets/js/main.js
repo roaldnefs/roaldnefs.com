@@ -68,4 +68,36 @@
       });
     });
   }
+
+  // Analytics: the Google tag in <head> starts with analytics consent denied,
+  // unless the visitor accepted earlier. Accepting here grants it.
+  // The tag and the banner are only rendered on production builds.
+  var consent = document.querySelector("[data-consent]");
+  if (consent) {
+    if (!localStorage.getItem("consent")) consent.hidden = false;
+
+    consent.querySelectorAll("[data-consent-choice]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var previous = localStorage.getItem("consent");
+        var next = button.dataset.consentChoice;
+        localStorage.setItem("consent", next);
+        consent.hidden = true;
+        if (next === "granted") window.gtag("consent", "update", { analytics_storage: "granted" });
+        if (next === "denied" && previous === "granted") {
+          // Withdrawn: remove the Google Analytics cookies and reload, so the page starts denied
+          document.cookie.split("; ").forEach(function (cookie) {
+            var name = cookie.split("=")[0];
+            if (name.indexOf("_ga") === 0) {
+              document.cookie = name + "=; Max-Age=0; path=/; domain=" + location.hostname;
+            }
+          });
+          location.reload();
+        }
+      });
+    });
+
+    document.querySelector("[data-consent-open]").addEventListener("click", function () {
+      consent.hidden = false;
+    });
+  }
 })();
