@@ -10,6 +10,7 @@ categories:
 tags:
   - featured
 draft: false
+description: "Build a device that rings a wireless doorbell without touching the button: capture the RF signal with an RTL-SDR, demodulate it and replay it with an Arduino."
 ---
 
 In this post we will be building a device to play Ding Dong Ditch  digitally. The device will ring the doorbell every several seconds  without pressing the button. This project is all about reverse  engineering radio frequencies using a RLT-SDR and creating hardware  using an Arduino.

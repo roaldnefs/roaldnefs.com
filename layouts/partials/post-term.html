@@ -1,0 +1,7 @@
+{{- $term := index (.GetTerms "categories") 0 -}}
+{{- if not $term -}}
+  {{- range .GetTerms "tags" -}}
+    {{- if and (not $term) (ne .Data.Term "featured") -}}{{- $term = . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $term -}}

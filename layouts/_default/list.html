@@ -4,7 +4,7 @@
 {{ if eq .Kind "term" }}{{ $pages = .Pages.ByDate.Reverse }}{{ end }}
 
 <header class="container page-head">
-  <h1 class="page-title reveal">Blog</h1>
+  <h1 class="page-title reveal">{{ if eq .Kind "term" }}{{ .Title }}{{ else }}Blog{{ end }}</h1>
 </header>
 
 <div class="container filters">

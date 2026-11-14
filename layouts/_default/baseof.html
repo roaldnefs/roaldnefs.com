@@ -11,5 +11,6 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{ if and hugo.IsProduction site.Config.Services.GoogleAnalytics.ID }}{{ partial "consent.html" . }}{{ end }}
 </body>
 </html>

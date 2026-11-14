@@ -68,4 +68,49 @@
       });
     });
   }
+
+  // Analytics: Google Analytics loads only after the visitor accepts.
+  // The banner is only rendered on production builds.
+  var consent = document.querySelector("[data-consent]");
+  if (consent) {
+    var id = consent.dataset.gaId;
+    var loadAnalytics = function () {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", id);
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+      document.head.appendChild(script);
+    };
+
+    var choice = localStorage.getItem("consent");
+    if (choice === "granted") loadAnalytics();
+    else if (!choice) consent.hidden = false;
+
+    consent.querySelectorAll("[data-consent-choice]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var previous = localStorage.getItem("consent");
+        var next = button.dataset.consentChoice;
+        localStorage.setItem("consent", next);
+        consent.hidden = true;
+        if (next === "granted" && previous !== "granted") loadAnalytics();
+        if (next === "denied" && previous === "granted") {
+          // Withdrawn: remove the Google Analytics cookies and stop the running tag
+          document.cookie.split("; ").forEach(function (cookie) {
+            var name = cookie.split("=")[0];
+            if (name.indexOf("_ga") === 0) {
+              document.cookie = name + "=; Max-Age=0; path=/; domain=" + location.hostname;
+            }
+          });
+          location.reload();
+        }
+      });
+    });
+
+    document.querySelector("[data-consent-open]").addEventListener("click", function () {
+      consent.hidden = false;
+    });
+  }
 })();

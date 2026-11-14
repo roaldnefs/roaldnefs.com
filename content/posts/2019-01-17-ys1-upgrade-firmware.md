@@ -7,6 +7,7 @@ authors:
 categories:
   - Hardware hacking
 draft: false
+description: "How to update the outdated rfcat firmware on a YARD Stick One, the sub-1 GHz radio dongle from Great Scott Gadgets, using its USB bootloader on Ubuntu 18.04."
 ---
 
 Today I received my [YARD Stick One](https://greatscottgadgets.com/yardstickone/) (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle  can transmit and receive digital wireless signals at frequencies below  1GHz. The YARD Stick One is not a SDR, because the I/Q  samples are directly demodulated by the chipset instead of send to the  host over USB. The YARD Stick One therefore isn’t compatible with any  SDR software, but you can use something called [rfcat](https://github.com/atlas0fd00m/rfcat.git).

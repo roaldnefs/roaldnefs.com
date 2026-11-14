@@ -7,6 +7,7 @@ authors:
 categories:
   - Software engineering
 draft: false
+description: "A getting started guide and personal reference for Git: the terminology, the three states, first-time setup and recording changes to a repository."
 ---
 
 ## Introduction

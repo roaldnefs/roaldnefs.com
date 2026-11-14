@@ -5,20 +5,42 @@
 
 <title>{{ block "title" . }}{{ if and .Title (ne .Title site.Title) }}{{ .Title }} — {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}{{ end }}</title>
 
-{{ with .Description | default site.Params.description }}
-<meta name="description" content="{{ . }}">
-{{ end }}
+{{- $desc := .Description -}}
+{{- if and (not $desc) (eq .Kind "term") }}{{ $desc = printf "Posts about %s by %s." .Title site.Params.author.name }}{{ end -}}
+{{- if and (not $desc) .IsPage }}{{ $desc = .Summary | plainify | htmlUnescape | replaceRE `\s+` " " | truncate 160 }}{{ end -}}
+{{- $desc = $desc | default site.Params.description -}}
+{{- $image := "/images/posts/default.png" -}}
+{{- with .Params.images }}{{ $image = index . 0 }}{{ end -}}
+{{- $image = $image | absURL -}}
+{{- $title := .Title | default site.Title }}
+<meta name="description" content="{{ $desc }}">
 
 {{ with site.Params.author.name }}<meta name="author" content="{{ . }}">{{ end }}
 
 <meta property="og:site_name" content="{{ site.Title }}">
-<meta property="og:title" content="{{ .Title | default site.Title }}">
+<meta property="og:title" content="{{ $title }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ with .Summary }}<meta property="og:description" content="{{ . | plainify }}">{{ end }}
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:image" content="{{ $image }}">
+{{- if and .IsPage (eq .Section "posts") }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- if ne .Lastmod .Date }}
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end }}
+{{- end }}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $image }}">
 
+{{ if eq .Kind "404" -}}
+<meta name="robots" content="noindex">
+{{- else -}}
 <link rel="canonical" href="{{ .Permalink }}">
+{{- end }}
+
+{{ partial "schema.html" (dict "page" . "description" $desc "image" $image) }}
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

@@ -7,6 +7,7 @@ authors:
 categories:
   - Software engineering
 draft: false
+description: "Create a Visual Studio Code Extension Pack with Yeoman and the VS Code Extension Generator to share a curated set of extensions, with SaltStack as the example."
 ---
 
 Within Visual Studio Code you will often find yourself installing multiple extensions for a certain language or framework. You might want to share those collections of extensions with your friends or colleagues, be able to easily disable or enable the full collection of extensions or provide a curated list of extensions for a blog post. Then you will find the Visual Studio Code Extension Packs to be very useful. In this blogpost, we'll create a Extension Pack for SaltStack requested in [korekontrol/vscode-saltstack#5](https://github.com/korekontrol/vscode-saltstack/issues/5).

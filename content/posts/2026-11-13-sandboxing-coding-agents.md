@@ -10,6 +10,7 @@ categories:
 tags:
   - featured
 draft: false
+description: "A coding agent on your laptop runs as your user, with every key you have. Why that needs a sandbox, what a sandbox has to limit, and five places to run one."
 summary: A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a sandbox has to limit, and five places to run an agent instead.
 ---
 ## Introduction

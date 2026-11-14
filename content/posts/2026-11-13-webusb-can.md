@@ -9,6 +9,7 @@ categories:
 tags:
   - automotive
 draft: false
+description: "WebUSB CAN is a CAN bus console in a browser tab. It talks to candleLight and CANable adapters over WebUSB, with no drivers or installs to set up."
 summary: WebUSB CAN is a CAN bus console that runs in a browser tab. It talks to a candleLight or CANable adapter over WebUSB, without drivers or installs, and ships with a virtual instrument cluster for when you have no hardware at all.
 ---
 ## Introduction

@@ -1,0 +1,1 @@
+{{ partial "site-index.md" (dict "markdown" true) -}}
