@@ -229,6 +229,15 @@ button {
   font-size: 0.75rem;
 }
 
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--fg);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .eyebrow {
   display: flex;
   align-items: center;
@@ -2146,51 +2155,25 @@ button {
   background: var(--bg-raised);
   border: 1px solid var(--border);
   color: var(--fg-prose);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  line-height: 1.6;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .consent[hidden] {
   display: none;
 }
 
-.consent-text {
-  flex: 1 1 18rem;
-}
-
-.consent-prompt {
-  color: var(--primary);
-}
-
-.consent-lines {
-  padding: 0;
-  list-style: none;
-  color: var(--muted);
+.consent p {
+  flex: 1 1 16rem;
 }
 
 .consent a {
   color: var(--primary);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
 }
 
 .consent-actions {
   display: flex;
   gap: 0.75rem;
-}
-
-.consent-actions button {
-  padding: 0.375rem 0.75rem;
-  border: 1px solid var(--line);
-  color: var(--fg);
-  transition: border-color 0.15s, color 0.15s;
-}
-
-.consent-actions button:hover,
-.consent-actions button:focus-visible {
-  border-color: var(--primary);
-  color: var(--primary);
 }
 
 /* ---------- Accessibility ---------- */

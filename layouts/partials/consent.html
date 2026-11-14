@@ -1,15 +1,7 @@
 <div class="consent" role="region" aria-label="Cookie consent" data-consent data-ga-id="{{ site.Config.Services.GoogleAnalytics.ID }}" hidden>
-  <div class="consent-text">
-    <p class="consent-prompt"><span aria-hidden="true">$ </span>./google-analytics --request-consent</p>
-    <ul class="consent-lines">
-      <li><span aria-hidden="true">[*] </span>wants: 2 cookies, page views sent to Google</li>
-      <li><span aria-hidden="true">[*] </span>why: so I can see which posts get read</li>
-      <li><span aria-hidden="true">[!] </span>default: deny, nothing loads without a yes</li>
-    </ul>
-    <p>Run it? [y/N] <a href="{{ "/cookies/" | relURL }}">man cookies</a></p>
-  </div>
+  <p>This site uses Google Analytics to see which posts get read. It sets cookies, so it only runs if you accept. See the <a href="{{ "/cookies/" | relURL }}">cookie statement</a>.</p>
   <div class="consent-actions">
-    <button type="button" data-consent-choice="granted"><span aria-hidden="true">[y] </span>accept</button>
-    <button type="button" data-consent-choice="denied"><span aria-hidden="true">[n] </span>decline</button>
+    <button class="btn btn--sm" type="button" data-consent-choice="granted">Accept</button>
+    <button class="btn btn--sm btn--ghost" type="button" data-consent-choice="denied">Decline</button>
   </div>
 </div>
