@@ -488,3 +488,9 @@ An unsandboxed agent on your laptop has every key you have. Fixing that is easie
 [^mythos]: Anthropic, Claude Mythos Preview System Card, 7 April 2026, p. 55.
 [^monitoring]: Claude Code documentation, monitoring: https://code.claude.com/docs/en/monitoring-usage.
 [^canary]: Canarytokens documentation, AWS keys token: https://docs.canarytokens.org/guide/aws-keys-token.html.
+
+## Frequently asked questions
+
+### Does this also work for Claude Desktop?
+
+The problem is the same in the Code tab of the Claude Desktop app, and so is the advice. Local sessions there run Claude Code on your machine with direct access to your files, and its Bypass permissions mode is the equivalent of `--dangerously-skip-permissions`, which the documentation says to use only in sandboxed containers or VMs. Cowork is different: it runs Claude's code in an isolated, temporary environment on Anthropic's servers, but Claude can still read the folders you connect, and computer use has no sandbox between Claude and your screen.

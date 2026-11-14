@@ -159,3 +159,9 @@ cd rpitx
 Using your SDR receiver you will be able to monitor the transmitted  signals. Try to send the some test signals on the 434 MHz, the rpitx  default band.
 
 ![The rpitx easytest menu on a Raspberry Pi, listing transmit tests at 434 MHz](/images/posts/2019/01/06/sdr-05.png)
+
+## Frequently asked questions
+
+### rtl_test says `usb_claim_interface error -6`. What's wrong?
+
+It means the dongle is busy: libusb error -6 is `LIBUSB_ERROR_BUSY`, which you get when another program or driver has already claimed the USB interface. Usually that's the Linux DVB-T TV driver `dvb_usb_rtl28xxu`, which grabs the stick by default. Sometimes it's a second copy of an rtl-sdr program, such as rtl_test or rtl_fm, that's still running. Close the other program, or unload the driver with `sudo rmmod dvb_usb_rtl28xxu`, and make sure your blacklist file in `/etc/modprobe.d/` ends in `.conf` and that you rebooted after creating it.
