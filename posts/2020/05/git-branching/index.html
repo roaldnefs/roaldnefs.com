@@ -41,6 +41,8 @@
 <meta name="twitter:image" content="https://roaldnefs.com/images/posts/default.png">
 
 <link rel="canonical" href="https://roaldnefs.com/posts/2020/05/git-branching/">
+<link rel="alternate" hreflang="en" href="https://roaldnefs.com/posts/2020/05/git-branching/">
+<link rel="alternate" hreflang="x-default" href="https://roaldnefs.com/posts/2020/05/git-branching/">
 
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Roald Nefs","url":"https://roaldnefs.com/about/"},"dateModified":"2020-05-10T23:20:00+02:00","datePublished":"2020-05-10T23:20:00+02:00","description":"How Git branching works: creating and switching branches, merging and resolving conflicts, remote branches, rebasing and cherry picking, with examples.","headline":"Git Branching","image":"https://roaldnefs.com/images/posts/default.png","inLanguage":"en","mainEntityOfPage":"https://roaldnefs.com/posts/2020/05/git-branching/","url":"https://roaldnefs.com/posts/2020/05/git-branching/"}</script>
@@ -60,12 +62,12 @@
 
 
   
-  <link rel="stylesheet" href="/css/main.min.60f9c014dffc32fc03d43d038e072d43ae536436d270b99e8cd42b3cb17695f5.css" integrity="sha256-YPnAFN/8MvwD1D0DjgctQ65TZDbScLmejNQrPLF2lfU=">
+  <link rel="stylesheet" href="/css/main.min.03b9af5185e2d55a09b10ab2446f5245b8ca79c1ca8333e197865b68c88cef3f.css" integrity="sha256-A7mvUYXi1VoJsQqyRG9SRbjKecHKgzPhl4ZbaMiM7z8=">
 
 
 
   
-  <script src="/js/main.min.0276e3dfa3aa1372e9beb0ac998cc30b11fb1ab937c661e0a364337cf95f9ecb.js" integrity="sha256-Anbj36OqE3LpvrCsmYzDCxH7Grk3xmHgo2QzfPlfnss=" defer></script>
+  <script src="/js/main.min.227d83880a590ea7b2e5a387c3fa9394dd7e54b1c9b9bad1bf23988c0d46aa9b.js" integrity="sha256-In2DiApZDqey5aOHw/qTlN1&#43;VLHJubrRvyOYjA1Gqps=" defer></script>
 
 
 </head>
@@ -296,7 +298,7 @@
 </div>
 <p><img src="/images/posts/2020/05/10/git-branch-4.svg" alt="HEAD moves when a checkout is performed"></p>
 <p>Creating a new commit at this point will result in diverged history. Both commits are isolated in separate branches, and can be merged together when you&rsquo;re ready.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-5.svg" alt="Divergent history"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-5.svg" alt="Divergent history between the master and develop branches"></p>
 <p>This can also be shown using the <code>git log --oneline --decorate --graph --all</code> command. By default the <code>git log</code> command will not show all of the branch, this the <code>--all</code> options is required.</p>
 <div class="code">
   <div class="code-head">
@@ -321,7 +323,7 @@
 <h2 id="basic-branching-and-merging">Basic Branching and Merging</h2>
 <h3 id="basic-merging">Basic Merging</h3>
 <p>What if instead of creating a commit directory on the <code>master</code> branch we would have created branch called <code>hotfix</code>, made a single commit, and wanted to merge it back into <code>master</code>?</p>
-<p><img src="/images/posts/2020/05/10/git-branch-8.svg" alt="Hotfix branch containg a single commit"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-8.svg" alt="Hotfix branch containing a single commit"></p>
 <p>You can do that using the <code>git merge</code> command. This example below will merge the <code>hotfix</code> branch back into <code>master</code>.</p>
 <div class="code">
   <div class="code-head">
@@ -339,7 +341,7 @@ Fast-forward
 <p>Because the commit <code>C4</code> pointed to by the branch <code>hotfix</code> was directly ahead of the commit <code>C3</code>, the commit previously pointed to by the<code>master</code> branch, Git was able to perform a &ldquo;<em>fast-forward</em>&rdquo; merge. During a fast-forward merge the pointer is moved forward. This only happens when you try to merge one commit that can be reached by following the firs commit&rsquo;s history. After merging the <code>master</code> and <code>hotfix</code> branch point to the same commit.</p>
 <p><img src="/images/posts/2020/05/10/git-branch-9.svg" alt="The master branch is fast-forwarded"></p>
 <p>While the <code>hotfix</code> branch was merged into <code>master</code> the <code>develop</code> branch diverged from master, containing two extra commits. If we wanted to merge <code>develop</code> into <code>master</code> the situation would look similar to this:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-7.svg" alt="Merging"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-7.svg" alt="The two branch snapshots and their common ancestor used to merge develop into master"></p>
 <p>Using the <code>git merge</code> command we can merge <code>develop</code> into <code>master</code>:</p>
 <div class="code">
   <div class="code-head">
@@ -354,7 +356,7 @@ Merge made by the &#39;recursive&#39; strategy.
  create mode 100644 LICENSE</code></pre>
 </div>
 <p>Instead of the &ldquo;<em>fast-forward</em>&rdquo; stategy it now used a &ldquo;<em>recursive</em>&rdquo; strategy. This is because the commit on the <code>develop</code> branch isn&rsquo;t a clear ancestor of the <code>master</code> branch. Git simply does a three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two, this results in a merge commit (<code>C7</code>). Compared to a normal commit, a merge commits has more than one parent.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-6.svg" alt="Merging"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-6.svg" alt="The merge commit C7 joining the develop and master branches"></p>
 <p>After merging <code>develop</code>, the branch can be removed using the <code>git branch</code> command combined with the <code>-b</code> option:</p>
 <div class="code">
   <div class="code-head">
@@ -507,7 +509,7 @@ Switched to a new branch &#39;hotfix&#39;</code></pre>
 <p>As the <code>git pull</code> wil often be confusing it&rsquo;s better to simply use the <code>git fetch</code> and <code>git merge</code> commands explicitly. If you are uncertain about any diverged history you can run the <code>git pull --ff-only</code> command. The <code>--ff-only</code> option will resolve the merge as a fast-forward when possible. When this is impossible, it will refuse to merge and exit with an error.</p>
 <h2 id="rebasing">Rebasing</h2>
 <p>Within Git there are two ways to integrate changes from one branch into another: using <code>merge</code> or <code>rebase</code>.  In the example below the history has diverged; there are commits on both the branches you would like to integrate.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-12.svg" alt="Divergent history"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-12.svg" alt="Divergent history between the master and hotfix branches"></p>
 <p>The most simple way to integrate the work of the <code>hotfix</code> would be to use the <code>git merge</code> command. This will result in a three-way merge between the two latests snapshots (<code>C4</code> and <code>C5</code>) and there common ancestor (<code>C3</code>) creating a merge-commit (<code>C6</code>).</p>
 <p><img src="/images/posts/2020/05/10/git-branch-13.svg" alt="Using merging to integrate diverged work"></p>
 <p>Instead of <code>merge</code> you could&rsquo;ve used <code>rebase</code> to integrate the changes in the <code>hotfix</code> in the <code>master</code> branch. When rebasing, Git will take all the changes that were committed on one branch and replay them on a different branch.  We could for example rebase the <code>hotfix</code> branch onto the <code>master</code> branch:</p>
@@ -544,12 +546,12 @@ Fast-forward
  1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
 </div>
 <p>This result in both the <code>hotfix</code> and <code>master</code> branch pointing to the <code>C4'</code> commit:</p>
-<p><img src="/images/posts/2020/05/10/git-branch-15.svg" alt="Rebased branch"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-15.svg" alt="The hotfix and master branches both pointing to the rebased commit C4&rsquo;"></p>
 <p>Both <code>C4'</code> (using rebase) and <code>C6</code> (using merge) resulted in the same file contents, but the Git history is different. The rebase made the history a bit cleaner, resulting in a linear history. Even though the history shows that the work happened in series, it actually happened in parallel.</p>
 <p>Unfortunately rebasing has its drawbacks; <strong>you don not want to rebase commits that exists outside your repository and the other people my have based work on!</strong></p>
 <p>During a rebase you will be abandoning commits and create new ones that have the similar content but are actually different (e.g. pointer to another parent). If you (forcefully) push you work, you force other collaborators to rebase their work. Things won&rsquo;t become cleaner this way&hellip;</p>
 <p>Suppose you&rsquo;ve started working on the <code>master</code> branch locally while in the meanwhile another collaborator forcefully pushed his rebased <code>master</code> branch, resulting in some part of the history being rewritten on the remote <code>origin/master</code> branch. When you execute a <code>git pull</code>, Git will merge the rebased <code>origin/master</code> branch into your local <code>master</code> branch.</p>
-<p><img src="/images/posts/2020/05/10/git-branch-16.svg" alt="Diverged history"></p>
+<p><img src="/images/posts/2020/05/10/git-branch-16.svg" alt="Local master and the rebased origin/master branch after their histories diverged"></p>
 <p>The history between the <code>origin/master</code> and <code>master</code> branch have been diverged, forcing you to rebase you local <code>master</code> branch onto <code>origin/master</code>, which might further confuse other colleborators.</p>
 <p>If for some reason someone has rebased a branch you based your work on you can simplify things by running <code>git pull --rebase</code> instead of <code>git pull</code>. Or you could do is manually using the following commands:</p>
 <div class="code">
@@ -666,7 +668,7 @@ $ git cherry-pick C4^..C7</code></pre>
   <div class="container">
     <div class="carousel-track" data-carousel-track tabindex="0" role="group" aria-label="More posts">
       
-        <a class="card" href="/posts/2026/11/a-can-bus-console-in-a-browser-tab/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/a-can-bus-console-in-a-browser-tab.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -677,7 +679,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">A CAN Bus Console in a Browser Tab</h3>
+    <h3 class="card-title"><a href="/posts/2026/11/a-can-bus-console-in-a-browser-tab/">A CAN Bus Console in a Browser Tab</a></h3>
     <span class="card-summary">WebUSB CAN is a CAN bus console that runs in a browser tab. It talks to a candleLight or CANable adapter over WebUSB, without drivers or installs, and ships …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -688,10 +690,10 @@ $ git cherry-pick C4^..C7</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2026/11/your-coding-agent-runs-as-you/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/your-coding-agent-runs-as-you.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -702,7 +704,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Your Coding Agent Runs as You</h3>
+    <h3 class="card-title"><a href="/posts/2026/11/your-coding-agent-runs-as-you/">Your Coding Agent Runs as You</a></h3>
     <span class="card-summary">A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -713,10 +715,10 @@ $ git cherry-pick C4^..C7</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2026/01/building-a-car-hacking-test-bench/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/building-a-car-hacking-test-bench.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -727,7 +729,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Building a Car Hacking Test Bench</h3>
+    <h3 class="card-title"><a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a></h3>
     <span class="card-summary">Modern cars are computers on wheels, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -738,10 +740,10 @@ $ git cherry-pick C4^..C7</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -752,7 +754,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">How to extract an AppImage and add it to the Ubuntu Sidebar</h3>
+    <h3 class="card-title"><a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">How to extract an AppImage and add it to the Ubuntu Sidebar</a></h3>
     <span class="card-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -763,10 +765,10 @@ $ git cherry-pick C4^..C7</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/committing-changes-to-a-pull-request-branch-created-from-a-fork.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -777,7 +779,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Committing Changes to a Pull Request Branch Created from a Fork</h3>
+    <h3 class="card-title"><a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Committing Changes to a Pull Request Branch Created from a Fork</a></h3>
     <span class="card-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -788,10 +790,10 @@ $ git cherry-pick C4^..C7</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/spoofing-microchips-used-for-animal-identification.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -802,7 +804,7 @@ $ git cherry-pick C4^..C7</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Spoofing Microchips used for Animal Identification</h3>
+    <h3 class="card-title"><a href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">Spoofing Microchips used for Animal Identification</a></h3>
     <span class="card-summary">A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -813,7 +815,7 @@ $ git cherry-pick C4^..C7</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
     </div>

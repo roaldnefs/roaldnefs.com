@@ -41,6 +41,8 @@
 <meta name="twitter:image" content="https://roaldnefs.com/images/posts/default.png">
 
 <link rel="canonical" href="https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/">
+<link rel="alternate" hreflang="en" href="https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/">
+<link rel="alternate" hreflang="x-default" href="https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/">
 
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Roald Nefs","url":"https://roaldnefs.com/about/"},"dateModified":"2020-01-03T00:00:00+02:00","datePublished":"2020-01-03T00:00:00+02:00","description":"Build a device that rings a wireless doorbell without touching the button: capture the RF signal with an RTL-SDR, demodulate it and replay it with an Arduino.","headline":"Ding Dong Ditch using SDR and Arduino","image":"https://roaldnefs.com/images/posts/default.png","inLanguage":"en","mainEntityOfPage":"https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/","url":"https://roaldnefs.com/posts/2020/01/ding-dong-ditch-using-sdr-and-arduino/"}</script>
@@ -60,12 +62,12 @@
 
 
   
-  <link rel="stylesheet" href="/css/main.min.60f9c014dffc32fc03d43d038e072d43ae536436d270b99e8cd42b3cb17695f5.css" integrity="sha256-YPnAFN/8MvwD1D0DjgctQ65TZDbScLmejNQrPLF2lfU=">
+  <link rel="stylesheet" href="/css/main.min.03b9af5185e2d55a09b10ab2446f5245b8ca79c1ca8333e197865b68c88cef3f.css" integrity="sha256-A7mvUYXi1VoJsQqyRG9SRbjKecHKgzPhl4ZbaMiM7z8=">
 
 
 
   
-  <script src="/js/main.min.0276e3dfa3aa1372e9beb0ac998cc30b11fb1ab937c661e0a364337cf95f9ecb.js" integrity="sha256-Anbj36OqE3LpvrCsmYzDCxH7Grk3xmHgo2QzfPlfnss=" defer></script>
+  <script src="/js/main.min.227d83880a590ea7b2e5a387c3fa9394dd7e54b1c9b9bad1bf23988c0d46aa9b.js" integrity="sha256-In2DiApZDqey5aOHw/qTlN1&#43;VLHJubrRvyOYjA1Gqps=" defer></script>
 
 
 </head>
@@ -262,7 +264,7 @@
 <li><a href="http://en.wikipedia.org/wiki/Phase_modulation" rel="noopener noreferrer" target="_blank">Phase Modulation</a> (PM)</li>
 </ul>
 <p>Amplitude modulation, as the name might suggest, modulates the  amplitude while frequency modulation will modulate the frequency. If you  are listing to 100.0 FM radio, the signal is actually send between  99.995MHz and 100.005MHz.</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_03.gif" alt="Modulation"></p>
+<p><img src="/images/posts/2020/01/03/ding-dong-ditch_03.gif" alt="A signal wave compared with its amplitude modulated (AM) and frequency modulated (FM) versions"></p>
 <p>By the looks of it, the signal seems to be using amplitude  modulation. Using rtl_fm and sox you can record the AM data into a wav file:</p>
 <div class="code">
   <div class="code-head">
@@ -281,7 +283,7 @@
 <p>When looking at the audio in Audacity it appears to be sending the same signal multiple times in a row.</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_04.png" alt="Recorded signal in Audacity"></p>
 <p>If we zoom in to take a closer look at the signal, we can easily see the highs (1s) and lows (0s).</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_04.png" alt="Closer look at the recorded signal in Audacity"></p>
+<p><img src="/images/posts/2020/01/03/ding-dong-ditch_05.png" alt="Closer look at the recorded signal in Audacity"></p>
 <p>The high and low signals aren’t appearing to be the same length, but the two same patterns keep reappearing:</p>
 <ul>
 <li><code>﹍|﹉﹉|</code>, the high signal seems to be twice as long as the low signal</li>
@@ -290,12 +292,12 @@
 <p>This is something called <a href="https://en.wikipedia.org/wiki/Pulse-width_modulation" rel="noopener noreferrer" target="_blank">Pulse Width Modulation</a> (PWM). If we interpret the first signal as a 1 and the second signal as a 0, then we will end up with something like this:</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_06.jpg" alt="Signal demodulated by hand"></p>
 <p>You might want to check multiple samples because the signal isn’t  very clear on some spots. Examples of a 1 and 0 signal are shown below:</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_07.png" alt="Signal in Audacity"></p>
+<p><img src="/images/posts/2020/01/03/ding-dong-ditch_07.png" alt="The signal in Audacity with a long pulse marked as 1 and a short pulse marked as 0"></p>
 <p>You will be able to get the same result much faster using <a href="https://github.com/merbanan/rtl_433" rel="noopener noreferrer" target="_blank">rtl_433</a>.  It might be a good idea to verify you manually demodulated signal using  rtl_433 before creating the Arduino. In my case it guesses the  modulation type to be Pulse Width Modulation, after demodulation using  rtl_433 I end up with the same 1s and 0s as I’ve found manually.</p>
 <p><img src="/images/posts/2020/01/03/ding-dong-ditch_08.png" alt="Signal demodulated by rtl_433"></p>
 <h2 id="creating-the-arduino">Creating the Arduino</h2>
 <p>For sending signal we demodulated earlier, I’m using a 433MHz ASK  transmitter hooked up to my Arduino nano clone according to the  following Fritzing sketch:</p>
-<p><img src="/images/posts/2020/01/03/ding-dong-ditch_09.png" alt="Arduino schematic"></p>
+<p><img src="/images/posts/2020/01/03/ding-dong-ditch_09.png" alt="Fritzing sketch of an FS1000A 433 MHz transmitter wired to an Arduino Nano"></p>
 <p>The script for the Arduino can be found on the following GitHub repository: <a href="https://github.com/roaldnefs/ding-dong-ditch" rel="noopener noreferrer" target="_blank">github.com/roaldnefs/ding-dong-ditch</a>. It uses the <a href="https://github.com/sui77/rc-switch.git" rel="noopener noreferrer" target="_blank">RCSwitch</a> library for sending the signal. This library is written for power outlet sockets but my doorbell uses the same protocol.</p>
 <p>Once the Arduino is powered over USB or by battery, the doorbell should start ringing!</p>
 
@@ -354,7 +356,7 @@
   <div class="container">
     <div class="carousel-track" data-carousel-track tabindex="0" role="group" aria-label="More posts">
       
-        <a class="card" href="/posts/2026/11/a-can-bus-console-in-a-browser-tab/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/a-can-bus-console-in-a-browser-tab.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -365,7 +367,7 @@
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">A CAN Bus Console in a Browser Tab</h3>
+    <h3 class="card-title"><a href="/posts/2026/11/a-can-bus-console-in-a-browser-tab/">A CAN Bus Console in a Browser Tab</a></h3>
     <span class="card-summary">WebUSB CAN is a CAN bus console that runs in a browser tab. It talks to a candleLight or CANable adapter over WebUSB, without drivers or installs, and ships …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -376,10 +378,10 @@
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2026/11/your-coding-agent-runs-as-you/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/your-coding-agent-runs-as-you.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -390,7 +392,7 @@
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Your Coding Agent Runs as You</h3>
+    <h3 class="card-title"><a href="/posts/2026/11/your-coding-agent-runs-as-you/">Your Coding Agent Runs as You</a></h3>
     <span class="card-summary">A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -401,10 +403,10 @@
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2026/01/building-a-car-hacking-test-bench/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/building-a-car-hacking-test-bench.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -415,7 +417,7 @@
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Building a Car Hacking Test Bench</h3>
+    <h3 class="card-title"><a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a></h3>
     <span class="card-summary">Modern cars are computers on wheels, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -426,10 +428,10 @@
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -440,7 +442,7 @@
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">How to extract an AppImage and add it to the Ubuntu Sidebar</h3>
+    <h3 class="card-title"><a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">How to extract an AppImage and add it to the Ubuntu Sidebar</a></h3>
     <span class="card-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -451,10 +453,10 @@
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/committing-changes-to-a-pull-request-branch-created-from-a-fork.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -465,7 +467,7 @@
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Committing Changes to a Pull Request Branch Created from a Fork</h3>
+    <h3 class="card-title"><a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Committing Changes to a Pull Request Branch Created from a Fork</a></h3>
     <span class="card-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -476,10 +478,10 @@
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/spoofing-microchips-used-for-animal-identification.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -490,7 +492,7 @@
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Spoofing Microchips used for Animal Identification</h3>
+    <h3 class="card-title"><a href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">Spoofing Microchips used for Animal Identification</a></h3>
     <span class="card-summary">A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -501,7 +503,7 @@
 </span>
 
   </span>
-</a>
+</article>
 
       
     </div>

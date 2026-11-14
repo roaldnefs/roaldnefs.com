@@ -24,11 +24,11 @@ $ yo code
 
 Select the `New Extension Pack` option in the dropdown list:
 
-![Yeoman](/images/posts/2020/04/17/vscode_01.png)
+![The Yeoman generator in the terminal asking which type of extension to create, with New Extension Pack selected](/images/posts/2020/04/17/vscode_01.png)
 
 Fill out the prompted fields for a new extension pack:
 
-![Yeoman](/images/posts/2020/04/17/vscode_02.jpg)
+![The Yeoman generator output after creating the saltstack-extension-pack extension](/images/posts/2020/04/17/vscode_02.jpg)
 
 After scaffolding the extenions pack you can open the project in VS Code and update the `package.json` to include the extensions you would like to add to your extension pack:
 

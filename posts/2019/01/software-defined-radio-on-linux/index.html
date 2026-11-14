@@ -41,6 +41,8 @@
 <meta name="twitter:image" content="https://roaldnefs.com/images/posts/default.png">
 
 <link rel="canonical" href="https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/">
+<link rel="alternate" hreflang="en" href="https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/">
+<link rel="alternate" hreflang="x-default" href="https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/">
 
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Roald Nefs","url":"https://roaldnefs.com/about/"},"dateModified":"2019-01-06T00:00:00+02:00","datePublished":"2019-01-06T00:00:00+02:00","description":"A quick start for Software Defined Radio on Linux with a cheap RTL-SDR dongle: build the drivers, listen with Gqrx, decode P2000 pagers and track air traffic.","headline":"Software Defined Radio on Linux","image":"https://roaldnefs.com/images/posts/default.png","inLanguage":"en","keywords":["hardware hacking"],"mainEntityOfPage":"https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/","url":"https://roaldnefs.com/posts/2019/01/software-defined-radio-on-linux/"}</script>
@@ -60,12 +62,12 @@
 
 
   
-  <link rel="stylesheet" href="/css/main.min.60f9c014dffc32fc03d43d038e072d43ae536436d270b99e8cd42b3cb17695f5.css" integrity="sha256-YPnAFN/8MvwD1D0DjgctQ65TZDbScLmejNQrPLF2lfU=">
+  <link rel="stylesheet" href="/css/main.min.03b9af5185e2d55a09b10ab2446f5245b8ca79c1ca8333e197865b68c88cef3f.css" integrity="sha256-A7mvUYXi1VoJsQqyRG9SRbjKecHKgzPhl4ZbaMiM7z8=">
 
 
 
   
-  <script src="/js/main.min.0276e3dfa3aa1372e9beb0ac998cc30b11fb1ab937c661e0a364337cf95f9ecb.js" integrity="sha256-Anbj36OqE3LpvrCsmYzDCxH7Grk3xmHgo2QzfPlfnss=" defer></script>
+  <script src="/js/main.min.227d83880a590ea7b2e5a387c3fa9394dd7e54b1c9b9bad1bf23988c0d46aa9b.js" integrity="sha256-In2DiApZDqey5aOHw/qTlN1&#43;VLHJubrRvyOYjA1Gqps=" defer></script>
 
 
 </head>
@@ -283,7 +285,7 @@ Sampling at 2048000 S/s.
 No E4000 tuner found, aborting.</code></pre>
 </div>
 <h2 id="gqrx-sdr">Gqrx SDR</h2>
-<p><img src="/images/posts/2019/01/06/sdr-01.png" alt="Gqrx software"></p>
+<p><img src="/images/posts/2019/01/06/sdr-01.png" alt="Gqrx showing the spectrum and waterfall around an FM radio station at 88.0 MHz"></p>
 <p>Gqrx is an open source software defined radio receiver. The package  has been included in Ubuntu for many years, but you probably want to  install a newer version using the official personal package archive (PPA).</p>
 <div class="code">
   <div class="code-head">
@@ -324,7 +326,7 @@ LNB LO: 0 MHz</code></pre>
 <p><strong>Note:</strong> you can always change your device configuration by clicking the circuit board icon in the menu.</p>
 <p>Lookup the frequency of one of your local radio stations and update the frequency in the <em>Receiver Options</em> tab on the right side of Gqrx. Don’t forget to set the mode to <em>WFM (mono)</em> or <em>WFM (stereo)</em>. You might need to change the gain in order to hear something.</p>
 <h2 id="p2000">P2000</h2>
-<p><img src="/images/posts/2019/01/06/sdr-02.png" alt="P2000"></p>
+<p><img src="/images/posts/2019/01/06/sdr-02.png" alt="Terminal with multimon-ng decoding P2000 FLEX pager messages from the emergency services"></p>
 <p><strong>P2000</strong> is a one-way communications network for pagers  based on the FLEX-protocol developed by Motorola. The P2000 network is  used by the emergency services in the Netherlands. The FLEX-protocol  does not provide encryption, so you can read the messages yourself using  an RTL-SDR.</p>
 <p>In order to receive and decode the FLEX messages we will be using <code>multimon-ng</code>, which can be installed from source:</p>
 <div class="code">
@@ -373,7 +375,7 @@ LNB LO: 0 MHz</code></pre>
 </span></span></code></pre></div>
 </div>
 <p>Open your browser and open <code>http://localhost:8080/</code> to see live air traffic:</p>
-<p><img src="/images/posts/2019/01/06/sdr-03.png" alt="dump1090"></p>
+<p><img src="/images/posts/2019/01/06/sdr-03.png" alt="The dump1090 web interface showing a tracked aircraft on a map of the northern Netherlands"></p>
 <h2 id="raspberry-pi-as-a-rf-transmitter">Raspberry Pi as a RF transmitter</h2>
 <p>Using the <code>rpitx</code> package you can turn your Raspberry Pi  in a simple radio frequency transmitter. It will be able to handle  frequencies between 5KHz and 1500MHz. This includes some common  frequencies (e.g. 433MHz).</p>
 <p><strong>Note:</strong> it might not be legal to transmit on all available frequencies, check your local regulations before transmitting anything!</p>
@@ -402,7 +404,7 @@ LNB LO: 0 MHz</code></pre>
 </span></span></code></pre></div>
 </div>
 <p>Using your SDR receiver you will be able to monitor the transmitted  signals. Try to send the some test signals on the 434 MHz, the rpitx  default band.</p>
-<p><img src="/images/posts/2019/01/06/sdr-05.png" alt="easytest"></p>
+<p><img src="/images/posts/2019/01/06/sdr-05.png" alt="The rpitx easytest menu on a Raspberry Pi, listing transmit tests at 434 MHz"></p>
 
       </div>
       
@@ -463,7 +465,7 @@ LNB LO: 0 MHz</code></pre>
   <div class="container">
     <div class="carousel-track" data-carousel-track tabindex="0" role="group" aria-label="More posts">
       
-        <a class="card" href="/posts/2026/11/a-can-bus-console-in-a-browser-tab/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/a-can-bus-console-in-a-browser-tab.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -474,7 +476,7 @@ LNB LO: 0 MHz</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">A CAN Bus Console in a Browser Tab</h3>
+    <h3 class="card-title"><a href="/posts/2026/11/a-can-bus-console-in-a-browser-tab/">A CAN Bus Console in a Browser Tab</a></h3>
     <span class="card-summary">WebUSB CAN is a CAN bus console that runs in a browser tab. It talks to a candleLight or CANable adapter over WebUSB, without drivers or installs, and ships …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -485,10 +487,10 @@ LNB LO: 0 MHz</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2026/11/your-coding-agent-runs-as-you/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/your-coding-agent-runs-as-you.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -499,7 +501,7 @@ LNB LO: 0 MHz</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Your Coding Agent Runs as You</h3>
+    <h3 class="card-title"><a href="/posts/2026/11/your-coding-agent-runs-as-you/">Your Coding Agent Runs as You</a></h3>
     <span class="card-summary">A coding agent on your laptop runs as your user, with every key you have. This is the written version of my aiGrunn talk on why that needs a sandbox, what a …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -510,10 +512,10 @@ LNB LO: 0 MHz</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2026/01/building-a-car-hacking-test-bench/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/building-a-car-hacking-test-bench.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -524,7 +526,7 @@ LNB LO: 0 MHz</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Building a Car Hacking Test Bench</h3>
+    <h3 class="card-title"><a href="/posts/2026/01/building-a-car-hacking-test-bench/">Building a Car Hacking Test Bench</a></h3>
     <span class="card-summary">Modern cars are computers on wheels, dozens of ECUs, multiple busses, wireless interfaces, and a threat model that keeps expanding. For the past few years I …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -535,10 +537,10 @@ LNB LO: 0 MHz</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -549,7 +551,7 @@ LNB LO: 0 MHz</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">How to extract an AppImage and add it to the Ubuntu Sidebar</h3>
+    <h3 class="card-title"><a href="/posts/2024/12/how-to-extract-an-appimage-and-add-it-to-the-ubuntu-sidebar/">How to extract an AppImage and add it to the Ubuntu Sidebar</a></h3>
     <span class="card-summary">In this post, we&rsquo;ll guide you through extracting an AppImage and integrating it into the Ubuntu sidebar for easy access. As an example, we&rsquo;ll use …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -560,10 +562,10 @@ LNB LO: 0 MHz</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/committing-changes-to-a-pull-request-branch-created-from-a-fork.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -574,7 +576,7 @@ LNB LO: 0 MHz</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Committing Changes to a Pull Request Branch Created from a Fork</h3>
+    <h3 class="card-title"><a href="/posts/2024/01/committing-changes-to-a-pull-request-branch-created-from-a-fork/">Committing Changes to a Pull Request Branch Created from a Fork</a></h3>
     <span class="card-summary">Sometimes a pull request on GitHub.com needs some work before it can be merged into the project but you don&rsquo;t want to force the required work on the pull …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -585,10 +587,10 @@ LNB LO: 0 MHz</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
-        <a class="card" href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">
+        <article class="card">
   <span class="card-media">
     <img src="/covers/spoofing-microchips-used-for-animal-identification.svg" alt="" width="1600" height="900" loading="lazy">
     
@@ -599,7 +601,7 @@ LNB LO: 0 MHz</code></pre>
     
   </span>
   <span class="card-body">
-    <h3 class="card-title">Spoofing Microchips used for Animal Identification</h3>
+    <h3 class="card-title"><a href="/posts/2022/11/spoofing-microchips-used-for-animal-identification/">Spoofing Microchips used for Animal Identification</a></h3>
     <span class="card-summary">A microchip implanted under the skin of an animal can be used for identification purposes. The microchips are using Radio Frequency Identification (RFID) …</span>
     <span class="author">
   <img class="author-avatar" src="/images/authors/roald-nefs-avatar.webp" alt="" width="135" height="180" loading="lazy">
@@ -610,7 +612,7 @@ LNB LO: 0 MHz</code></pre>
 </span>
 
   </span>
-</a>
+</article>
 
       
     </div>
