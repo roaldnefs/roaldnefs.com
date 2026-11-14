@@ -93,9 +93,13 @@ check('rel="canonical"' not in not_found, "404: has a canonical link")
 
 for path in glob.glob(os.path.join(out, "**", "*.html"), recursive=True):
     page = read(os.path.relpath(path, out))
-    check("googletagmanager.com" not in page, "%s: loads Google Tag Manager without consent" % os.path.relpath(path, out))
+    rel = os.path.relpath(path, out)
+    default = page.find('gtag("consent", "default"')
+    tag = page.find("https://www.googletagmanager.com/gtm.js?id=GTM-WXSC6L3R")
+    check(tag != -1, "%s: no Google tag" % rel)
+    check(-1 < default < tag, "%s: consent default is not set before the Google tag loads" % rel)
+    check('var analyticsConsent = "denied";' in page, "%s: analytics consent does not start as denied" % rel)
 check("data-consent" in home, "home: no consent banner")
-check("GTM-WXSC6L3R" in home, "home: Tag Manager container ID not passed to the page")
 
 for f in failures:
     print("FAIL " + f)
