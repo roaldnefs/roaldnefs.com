@@ -119,6 +119,19 @@
     });
   }
 
+  // Videos: the YouTube player is only loaded once the visitor presses play
+  document.querySelectorAll("[data-video-id]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var player = document.createElement("iframe");
+      player.src = "https://www.youtube-nocookie.com/embed/" + button.dataset.videoId + "?autoplay=1";
+      player.title = button.getAttribute("aria-label").replace(/^Play: /, "");
+      player.allow = "autoplay; encrypted-media; picture-in-picture";
+      player.allowFullscreen = true;
+      button.replaceWith(player);
+      player.focus();
+    });
+  });
+
   // Analytics: the Google tag in <head> starts with analytics consent denied,
   // unless the visitor accepted earlier. Accepting here grants it.
   // The tag and the banner are only rendered on production builds.

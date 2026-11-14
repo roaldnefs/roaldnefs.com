@@ -1,0 +1,25 @@
+{{- /* Cards for data/videos.yaml: the newest video wide, the rest in a grid. The player is only loaded from YouTube after a click on the thumbnail (assets/js/main.js). */ -}}
+{{ range $i, $video := site.Data.videos }}
+  {{ if eq $i 1 }}<div class="post-grid">{{ end }}
+  <article class="card video-card{{ if eq $i 0 }} card--wide{{ end }}">
+    <span class="card-media">
+      <button class="video-play" type="button" data-video-id="{{ .id }}" aria-label="Play: {{ .title }}">
+        <img src="/images/videos/{{ .id }}.jpg" alt="" width="1280" height="720"{{ if $i }} loading="lazy"{{ end }}>
+      </button>
+      <span class="card-tags"><span class="label">{{ .channel }}</span></span>
+    </span>
+    <span class="card-body">
+      {{ if eq $i 0 }}<span class="card-flag">Latest</span>{{ end }}
+      <h2 class="card-title"><a href="https://www.youtube.com/watch?v={{ .id }}" rel="noopener noreferrer" target="_blank">{{ .title }}</a></h2>
+      <span class="card-summary">{{ .description }}</span>
+      <span class="author">
+        <img class="author-avatar" src="{{ "/images/authors/roald-nefs-avatar.webp" | relURL }}" alt="" width="135" height="180" loading="lazy">
+        <span class="author-text">
+          <span class="author-name">{{ site.Params.author.name }}</span>
+          <time datetime="{{ time.Format "2006-01-02" .date }}">{{ time.Format "January 2, 2006" .date }}</time>
+        </span>
+      </span>
+    </span>
+  </article>
+{{ end }}
+{{ if gt (len site.Data.videos) 1 }}</div>{{ end }}

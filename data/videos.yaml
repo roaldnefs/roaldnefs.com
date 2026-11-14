@@ -1,0 +1,33 @@
+# Public talk recordings on YouTube, newest first. `id` is the YouTube video ID,
+# `description` a one-sentence summary, `date` the day the recording was published, and the thumbnail lives in
+# static/images/videos/<id>.jpg.
+- id: HH47sE9umsA
+  title: "Auto's hacken voor beginners: van keyless entry tot CAN-bus exploits"
+  description: "A Dutch-language session on car hacking with cheap hardware: rolljam and relay attacks on keyless entry, and spoofing CAN frames on an instrument cluster."
+  channel: EHGN
+  date: 2026-05-28
+- id: ujLLlRNcvJ8
+  title: "Revving Up with Java: A Beginner's Journey into Automotive Hacking"
+  description: "An introduction to automotive security for Java developers: how vehicle networks work, and sending, receiving and analysing CAN bus messages from Java."
+  channel: NLJUG
+  date: 2025-12-22
+- id: ii90UM4S5B0
+  title: Teaching AI to Hunt for Vulnerabilities
+  description: "How Truffler, an experimental tool built on large language models, explores software like a curious ethical hacker, with a human steering the hunt."
+  channel: pyGrunn and aiGrunn
+  date: 2025-12-09
+- id: Wnn3krHydwE
+  title: "Python on Wheels: Hacking Automotive Systems"
+  description: "Using Python to get into vehicle networks, analyse their security flaws, and build defences for cars that are networks of software and hardware."
+  channel: pyGrunn and aiGrunn
+  date: 2025-06-03
+- id: nlmlmfh0YHw
+  title: Pwning your Java service
+  description: "Security from a breaker's point of view: step-by-step demonstrations of how attackers exploit Java web applications, and how to defend against them."
+  channel: NLJUG
+  date: 2025-01-23
+- id: s22WKWZO1Eg
+  title: An Introduction to Hardware Hacking using Python
+  description: "A primer on hardware hacking with Python, covering GPIO control, radio communication and talking to sensors, with examples and demonstrations."
+  channel: pyGrunn and aiGrunn
+  date: 2024-06-28

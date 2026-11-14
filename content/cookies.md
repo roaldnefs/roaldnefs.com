@@ -28,7 +28,9 @@ The "Cookie settings" link at the bottom of every page opens the banner again. I
 
 The site is hosted on GitHub Pages, which receives your IP address when you visit. Fonts, scripts, and images are served from this website itself.
 
-Google is the one exception. The Google Tag Manager script, which runs Google Analytics, is loaded from Google on every visit, so Google receives your IP address. Until you accept, it sets no cookies and only tells Google that a page was viewed. If you accept, it sets the cookies above and sends usage data to Google. See the [privacy statement](/privacy/) for details.
+Google is the exception. The Google Tag Manager script, which runs Google Analytics, is loaded from Google on every visit, so Google receives your IP address. Until you accept, it sets no cookies and only tells Google that a page was viewed. If you accept, it sets the cookies above and sends usage data to Google. See the [privacy statement](/privacy/) for details.
+
+The [videos page](/videos/) loads a video from YouTube, which is also part of Google, only after you press play on it. YouTube's player may then keep data in your browser to play the video.
 
 ## Questions
 

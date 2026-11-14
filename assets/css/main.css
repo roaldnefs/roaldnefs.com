@@ -2040,6 +2040,70 @@ button {
   opacity: 0.6;
 }
 
+/* ---------- Video cards (videos page) ---------- */
+
+.videos > p {
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+  color: var(--muted);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* The thumbnail plays the video here, so the title link doesn't cover the card */
+.video-card .card-title a::after {
+  content: none;
+}
+
+.video-card .card-title a:hover {
+  color: var(--primary);
+}
+
+.video-card .card-tags {
+  pointer-events: none;
+}
+
+.video-card .card-media:has(iframe) .card-tags {
+  display: none;
+}
+
+.video-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: none;
+}
+
+.video-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: rgb(4 9 15 / 0.75) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f7f8f8'%3E%3Cpath d='M9 7v10l8-5z'/%3E%3C/svg%3E") center / 2.5rem no-repeat;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.3s;
+}
+
+.video-play:hover::after,
+.video-play:focus-visible::after {
+  background-color: var(--primary);
+}
+
+.video-play:focus-visible {
+  outline-offset: -2px;
+}
+
+.video-card iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ---------- Company cards (about page) ---------- */
 
 .companies {
