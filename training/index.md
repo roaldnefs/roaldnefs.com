@@ -88,7 +88,11 @@ All formats use owned, controlled devices. No production systems are touched.
 - Hardware hacking sessions for the [Warpnet](https://warpnet.nl) team and at community meetups.
 
 ## Book a session
-Hosting a meetup, internal training day, or a track at your conference? Reach out at [info@roaldnefs.com](mailto:info@roaldnefs.com) and include:
+Hosting a meetup, internal training day, or a track at your conference? I'd like to hear about it.
+
+
+
+To book by email, reach out at [info@roaldnefs.com](mailto:info@roaldnefs.com) and include:
 
 - Audience size and background.
 - Preferred format (talk, half-day, or full day).

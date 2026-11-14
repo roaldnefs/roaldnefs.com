@@ -2,7 +2,7 @@
 
 *Last updated: November 14, 2026*
 
-This privacy statement explains what personal data is processed when you visit roaldnefs.com, why, and what your rights are. The short version: this site uses Google Analytics, which only sets cookies if you agree to it, has no advertising, and I don't collect personal data myself beyond that.
+This privacy statement explains what personal data is processed when you visit roaldnefs.com, why, and what your rights are. The short version: this site uses Google Analytics, which only sets cookies if you agree to it, has no advertising, and the only other personal data collected is what you send in a booking request or an email.
 
 ## Who is responsible
 
@@ -38,13 +38,21 @@ If you email me, I use your email address and the contents of your message only 
 
 The legal basis is my legitimate interest (Article 6(1)(f) GDPR) in responding to your message.
 
+### Booking form
+
+The form on the [training page](/training/#book-a-session) sends what you fill in to the [HubSpot](https://www.hubspot.com/) account of [Warpnet](https://warpnet.nl), the company I work for: your name, email address, organisation, and the details of the session you have in mind, together with the address of the page the form is on. Nothing is sent until you submit the form, no HubSpot script is loaded, and the form sets no cookies.
+
+Warpnet receives your request as a lead, and it is used to reply to you and to arrange the session. HubSpot stores this data in its data centre in the European Union and processes it on Warpnet's behalf. See the [HubSpot Privacy Policy](https://legal.hubspot.com/privacy-policy) for how HubSpot handles data.
+
+The legal basis is the legitimate interest (Article 6(1)(f) GDPR) in responding to your request.
+
 ### Browser storage
 
 This site stores your answer to the cookie banner in your browser and, if you accept analytics, the Google Analytics cookies. See the [cookie statement](/cookies/) for details.
 
 ## International transfers
 
-GitHub and Google are based in the United States, so the data described above may be processed outside the European Economic Area. Both participate in the [EU-U.S. Data Privacy Framework](https://www.dataprivacyframework.gov/).
+GitHub, Google, and HubSpot are based in the United States, so the data described above may be processed outside the European Economic Area. All three participate in the [EU-U.S. Data Privacy Framework](https://www.dataprivacyframework.gov/).
 
 ## Links to other websites
 
@@ -52,7 +60,7 @@ This site links to other websites, such as GitHub, LinkedIn, Mastodon, and the s
 
 ## Your rights
 
-Under the GDPR you have the right to access, rectify, or erase your personal data, to restrict or object to its processing, and to data portability. To exercise these rights, email [info@roaldnefs.com](mailto:info@roaldnefs.com). For data processed by GitHub or Google, you can also contact them directly.
+Under the GDPR you have the right to access, rectify, or erase your personal data, to restrict or object to its processing, and to data portability. To exercise these rights, email [info@roaldnefs.com](mailto:info@roaldnefs.com). For data processed by GitHub, Google, or HubSpot, you can also contact them directly, and for a booking request you can also contact Warpnet.
 
 You also have the right to lodge a complaint with a supervisory authority. In the Netherlands, that is the [Autoriteit Persoonsgegevens](https://www.autoriteitpersoonsgegevens.nl/).
 
