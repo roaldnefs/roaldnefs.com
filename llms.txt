@@ -15,6 +15,7 @@
 
 ## Posts
 
+- [Does an FAQ Help AI Assistants Find Your Blog Post?](https://roaldnefs.com/posts/2026/11/does-an-faq-help-ai-assistants-find-your-blog-post/index.md): What generative engine optimization is, what the research says works, and when an FAQ on a blog post helps an AI assistant find the answer.
 - [Slides as a Single HTML File](https://roaldnefs.com/posts/2026/11/slides-as-a-single-html-file/index.md): deckfile puts a whole presentation in one HTML file, with no build step or dependencies. It has a presenter view, an edit view and a skill for coding agents.
 - [A CAN Bus Console in a Browser Tab](https://roaldnefs.com/posts/2026/11/a-can-bus-console-in-a-browser-tab/index.md): WebUSB CAN is a CAN bus console in a browser tab. It talks to candleLight and CANable adapters over WebUSB, with no drivers or installs to set up.
 - [Your Coding Agent Runs as You](https://roaldnefs.com/posts/2026/11/your-coding-agent-runs-as-you/index.md): A coding agent on your laptop runs as your user, with every key you have. Why that needs a sandbox, what a sandbox has to limit, and five places to run one.
