@@ -2149,9 +2149,9 @@ button {
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem 1.5rem;
-  max-width: 42rem;
+  max-width: 45rem;
   margin-inline: auto;
-  padding: 1rem 1.25rem;
+  padding: 1rem 2.75rem 1rem 1.25rem;
   background: var(--bg-raised);
   border: 1px solid var(--border);
   color: var(--fg-prose);
@@ -2174,6 +2174,22 @@ button {
 .consent-actions {
   display: flex;
   gap: 0.75rem;
+}
+
+.consent-close {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.consent-close:hover {
+  color: var(--fg);
 }
 
 /* ---------- Accessibility ---------- */
