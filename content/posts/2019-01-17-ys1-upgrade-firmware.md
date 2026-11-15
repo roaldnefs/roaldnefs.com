@@ -8,6 +8,9 @@ categories:
   - Hardware hacking
 draft: false
 description: "How to update the outdated rfcat firmware on a YARD Stick One, the sub-1 GHz radio dongle from Great Scott Gadgets, using its USB bootloader on Ubuntu 18.04."
+faq:
+  - question: "Flashing just loops forever or says the device is being used by something else. How do I fix it?"
+    answer: "This usually means `rfcat_bootloader` can't open the dongle's bootloader port, so it keeps retrying with a message that blames Modem Manager. The common fix is to install the project's udev rules: copy `etc/udev/rules.d/20-rfcat.rules` to `/etc/udev/rules.d` and run `sudo udevadm control --reload-rules`. That rule creates `/dev/RFCAT_BL_YS1`, which the firmware Makefile expects, and it also tells ModemManager to ignore the port. It also gives the `dialout` group access, so make sure your user is in `dialout` too."
 ---
 
 Today I received my [YARD Stick One](https://greatscottgadgets.com/yardstickone/) (Yet Another Radio Dongle) created by Great Scott Gadgets. The dongle  can transmit and receive digital wireless signals at frequencies below  1GHz. The YARD Stick One is not a SDR, because the I/Q  samples are directly demodulated by the chipset instead of send to the  host over USB. The YARD Stick One therefore isn’t compatible with any  SDR software, but you can use something called [rfcat](https://github.com/atlas0fd00m/rfcat.git).
