@@ -160,3 +160,9 @@ The bootloader mode on the YARD Stick One can be triggered by connecting pins 7 
 **EDIT:** I’m currently running Ubuntu 19.04 and thus installed sdcc version 3.9.0, which results in the same errors as [#42](https://github.com/atlas0fd00m/rfcat/issues/42). Version 3.5.0 of sdcc seems to work fine. I was able to ground pin 7 and pin 9 on the YS1 using a paperclip.
 
 ![Enable bootloader mode on the YARD Stick One using a paperclip](/images/posts/2019/01/17/ys1_bootloader.jpg)
+
+## Frequently asked questions
+
+### Flashing just loops forever or says the device is being used by something else. How do I fix it?
+
+This usually means `rfcat_bootloader` can't open the dongle's bootloader port, so it keeps retrying with a message that blames Modem Manager. The common fix is to install the project's udev rules: copy `etc/udev/rules.d/20-rfcat.rules` to `/etc/udev/rules.d` and run `sudo udevadm control --reload-rules`. That rule creates `/dev/RFCAT_BL_YS1`, which the firmware Makefile expects, and it also tells ModemManager to ignore the port. It also gives the `dialout` group access, so make sure your user is in `dialout` too.
