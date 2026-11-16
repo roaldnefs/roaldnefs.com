@@ -166,3 +166,7 @@ The bootloader mode on the YARD Stick One can be triggered by connecting pins 7 
 ### Flashing just loops forever or says the device is being used by something else. How do I fix it?
 
 This usually means `rfcat_bootloader` can't open the dongle's bootloader port, so it keeps retrying with a message that blames Modem Manager. The common fix is to install the project's udev rules: copy `etc/udev/rules.d/20-rfcat.rules` to `/etc/udev/rules.d` and run `sudo udevadm control --reload-rules`. That rule creates `/dev/RFCAT_BL_YS1`, which the firmware Makefile expects, and it also tells ModemManager to ignore the port. It also gives the `dialout` group access, so make sure your user is in `dialout` too.
+
+### Can I update the firmware on Windows or macOS?
+
+Not with the documented steps, which are written for Linux. The rfcat firmware-update instructions use Linux commands, and `make installRfCatYS1CCBootloader` flashes to the Linux device path `/dev/RFCAT_BL_YS1`. The CC Bootloader shows up as a USB serial port on macOS without drivers, and on Windows with its `CCBootloader.inf` driver, so running `rfcat_bootloader` by hand against that port might work. I found no confirmed report of a successful firmware update on either system.
