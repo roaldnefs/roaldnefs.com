@@ -62,7 +62,7 @@
 
 
   
-  <link rel="stylesheet" href="/css/main.min.5fd3e97618db7e5aa9dcb2ff3979e80cf843cbd09bf3804d6f0cb0ef24de341f.css" integrity="sha256-X9Ppdhjbflqp3LL/OXnoDPhDy9Cb84BNbwyw7yTeNB8=">
+  <link rel="stylesheet" href="/css/main.min.974f2848c8acf5e9335c58472de0faa6b7e4efac0172cb32a40872076c4eff04.css" integrity="sha256-l08oSMis9ekzXFhHLeD6prfk76wBcssypAhyB2xO/wQ=">
 
 
 
@@ -287,7 +287,7 @@
 <p><strong>Start Simulator</strong> replaces the USB device with a virtual bus inside the page. A floating instrument cluster shows a speedometer, a tachometer, turn signals, door indicators and warning lamps, with buttons for the accelerator, the brake, the signals and the doors.</p>
 <p>The cluster reacts to any frame on that bus, whether it comes from its own buttons, the send bar or the fuzzer. The log, the sniffer and the UDS panel behave the same as with a real adapter.</p>
 <p>The CAN IDs for speed, turn signals and doors match ICSim<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, the instrument cluster simulator that many car hacking workshops are built on. Exercises written for ICSim carry over, without Linux.</p>
-<p>A <strong>Bogus traffic</strong> option adds random IDs, so finding the frame you are after takes some work. The cluster also has a few challenges and easter eggs built in. I will leave those for you to find.</p>
+<p>A <strong>Bogus traffic</strong> option adds random IDs, so finding the frame you are after takes some work. The cluster also has a few challenges and easter eggs built in. I will leave those for you to find. If you would rather be guided, <a href="https://roaldnefs.com/playground/virtual-cluster/">Hack the Virtual Cluster</a> walks you through 16 challenges on it, with hints and solutions.</p>
 <h2 id="scripting-from-the-console">Scripting from the console</h2>
 <p>Everything the buttons do is also available from the DevTools console as <code>window.api</code>. Start the simulator and print the speed that the cluster broadcasts:</p>
 <div class="code">

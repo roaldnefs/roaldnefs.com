@@ -81,6 +81,10 @@
   </url><url>
     <loc>https://roaldnefs.com/cookies/</loc>
   </url><url>
+    <loc>https://roaldnefs.com/playground/virtual-cluster/</loc>
+  </url><url>
+    <loc>https://roaldnefs.com/playground/</loc>
+  </url><url>
     <loc>https://roaldnefs.com/privacy/</loc>
   </url><url>
     <loc>https://roaldnefs.com/tools/</loc>
@@ -88,5 +92,7 @@
     <loc>https://roaldnefs.com/training/</loc>
   </url><url>
     <loc>https://roaldnefs.com/videos/</loc>
+  </url><url>
+    <loc>https://roaldnefs.com/playground/pretext/</loc>
   </url>
 </urlset>

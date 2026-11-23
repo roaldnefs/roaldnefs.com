@@ -75,6 +75,9 @@ Pick the format that fits your audience, time, and how deep you want to go.
 
 All formats use owned, controlled devices. No production systems are touched.
 
+Try it first in the [playground](https://roaldnefs.com/playground/): free, hands-on exercises you can do in your browser, each with hints, solutions and a score.
+
+
 ## Past sessions
 - **OrangeCon 2026**: Car Hacking Village.
 - **BSides Luxembourg 2026**: automotive hacking workshop and Car Hacking Village. [View slides](/bsidesluxembourg.pdf).

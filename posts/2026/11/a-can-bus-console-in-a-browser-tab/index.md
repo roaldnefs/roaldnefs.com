@@ -53,7 +53,7 @@ The cluster reacts to any frame on that bus, whether it comes from its own butto
 
 The CAN IDs for speed, turn signals and doors match ICSim[^icsim], the instrument cluster simulator that many car hacking workshops are built on. Exercises written for ICSim carry over, without Linux.
 
-A **Bogus traffic** option adds random IDs, so finding the frame you are after takes some work. The cluster also has a few challenges and easter eggs built in. I will leave those for you to find.
+A **Bogus traffic** option adds random IDs, so finding the frame you are after takes some work. The cluster also has a few challenges and easter eggs built in. I will leave those for you to find. If you would rather be guided, [Hack the Virtual Cluster](https://roaldnefs.com/playground/virtual-cluster/) walks you through 16 challenges on it, with hints and solutions.
 
 ## Scripting from the console
 Everything the buttons do is also available from the DevTools console as `window.api`. Start the simulator and print the speed that the cluster broadcasts:

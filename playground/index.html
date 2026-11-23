@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  var analyticsConsent = "denied";
+  try {
+    if (localStorage.getItem("consent") === "granted") analyticsConsent = "granted";
+  } catch (e) {}
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: analyticsConsent
+  });
+  gtag("js", new Date());
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WXSC6L3R"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#04090f">
+
+<title>Playground — Roald Nefs</title>
+<meta name="description" content="Hands-on security exercises you can do in a browser tab, with hints, solutions and a score.">
+
+<meta name="author" content="Roald Nefs">
+
+<meta property="og:site_name" content="Roald Nefs">
+<meta property="og:title" content="Playground">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://roaldnefs.com/playground/">
+<meta property="og:description" content="Hands-on security exercises you can do in a browser tab, with hints, solutions and a score.">
+<meta property="og:image" content="https://roaldnefs.com/covers/overcast.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Playground">
+<meta name="twitter:description" content="Hands-on security exercises you can do in a browser tab, with hints, solutions and a score.">
+<meta name="twitter:image" content="https://roaldnefs.com/covers/overcast.png">
+
+<link rel="canonical" href="https://roaldnefs.com/playground/">
+<link rel="alternate" hreflang="en" href="https://roaldnefs.com/playground/">
+<link rel="alternate" hreflang="x-default" href="https://roaldnefs.com/playground/">
+
+
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+
+
+
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  <link rel="stylesheet" href="/css/main.min.974f2848c8acf5e9335c58472de0faa6b7e4efac0172cb32a40872076c4eff04.css" integrity="sha256-l08oSMis9ekzXFhHLeD6prfk76wBcssypAhyB2xO/wQ=">
+
+
+
+  
+  <script src="/js/main.min.523bd8ec03609585bebb76be684c52cbad46201504206251443d81e8d9a9ab32.js" integrity="sha256-UjvY7ANglYW&#43;u3a&#43;aExSy61GIBUEIGJRRD2B6NmpqzI=" defer></script>
+
+
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"></div>
+  <header class="site-header">
+  <div class="site-header-bg" aria-hidden="true"></div>
+  <div class="container site-header-inner">
+    <a class="wordmark" href="/">Roald Nefs</a>
+    <nav class="site-nav" aria-label="Primary">
+      
+        
+      
+        
+          
+          <a href="/posts/" class="nav-link">Blog</a>
+        
+      
+        
+          
+          <a href="/videos/" class="nav-link">Videos</a>
+        
+      
+        
+          
+          <a href="/training/" class="nav-link">Training</a>
+        
+      
+        
+          
+          <a href="/tools/" class="nav-link">Tools</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav-link">About</a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="site-header-actions">
+      <a class="btn header-cta" href="/training/#book-a-session">Book a workshop</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="menu" id="menu">
+    <nav class="menu-links" aria-label="Menu">
+      
+        
+          
+          <a href="/">Home<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/posts/">Blog<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/videos/">Videos<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/training/">Training<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/tools/">Tools<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/about/">About<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="menu-follow">
+      <span>Follow</span>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/roaldnefs" rel="me noopener" target="_blank" aria-label="GitHub"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg></a>
+        
+      
+        
+          <a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank" aria-label="LinkedIn"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        
+      
+        
+          <a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank" aria-label="Mastodon"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg></a>
+        
+      
+    </div>
+  </div>
+</header>
+
+  <main id="main">
+    
+<header class="container page-head">
+  <h1 class="page-title reveal">Playground</h1>
+</header>
+
+<div class="container post-layout post-layout--single">
+  <div class="post-main prose">
+    <p>Hands-on exercises that run in a browser tab. Each one comes with hints, full solutions and a score that is kept in your browser.</p>
+
+  </div>
+</div>
+
+<div class="container post-grid">
+  
+    <article class="card">
+      <span class="card-media">
+        <img src="/images/virtual-cluster/simulator.png" alt="" width="1600" height="900" loading="lazy">
+      </span>
+      <span class="card-body">
+        <h2 class="card-title"><a href="/playground/virtual-cluster/">Hack the Virtual Cluster</a></h2>
+        <span class="card-summary">16 hands-on CAN bus and UDS challenges against a virtual car instrument cluster that runs in your browser. No hardware needed.</span>
+      </span>
+    </article>
+  
+    <article class="card">
+      <span class="card-media">
+        <img src="/images/pretext/email.png" alt="" width="1600" height="900" loading="lazy">
+      </span>
+      <span class="card-body">
+        <h2 class="card-title"><a href="/playground/pretext/">Write the Pretext</a></h2>
+        <span class="card-summary">An authorised social engineering exercise. Research a consenting target from public sources, write a believable pretext, then learn to spot and stop it.</span>
+      </span>
+    </article>
+  
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container site-footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="/">Roald Nefs</a>
+      <ul class="footer-follow">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
+          
+        
+        <li><a href="/rss.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-cols">
+      <nav class="footer-col" aria-label="Pages">
+        <h2 class="footer-heading">Pages</h2>
+        <ul class="footer-links">
+          
+            
+          
+            
+              
+              <li><a href="/posts/">Blog</a></li>
+            
+          
+            
+              
+              <li><a href="/videos/">Videos</a></li>
+            
+          
+            
+              
+              <li><a href="/training/">Training</a></li>
+            
+          
+            
+              
+              <li><a href="/tools/">Tools</a></li>
+            
+          
+            
+              
+              <li><a href="/about/">About</a></li>
+            
+          
+            
+          
+            
+          
+            
+          
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2 class="footer-heading">Companies</h2>
+        <ul class="footer-links">
+          
+            <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
+          
+            <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Agents</h2>
+        <ul class="footer-links">
+          <li><a href="/rss.xml">rss.xml</a></li>
+          <li><a href="/sitemap.md">sitemap.md</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Legal</h2>
+        <ul class="footer-links">
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/cookies/">Cookies</a></li>
+          
+            <li><button type="button" data-consent-open>Cookie settings</button></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container site-footer-note">© 2026 Roald Nefs</div>
+</footer>
+
+  <div class="consent" role="region" aria-label="Cookie consent" data-consent hidden>
+  <p>This site uses Google Analytics to see which posts get read. Cookies are only set if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
+  <div class="consent-actions">
+    <button class="btn btn--sm" type="button" data-consent-choice="granted">Accept</button>
+    <button class="btn btn--sm btn--ghost" type="button" data-consent-choice="denied">Decline</button>
+  </div>
+  <button class="consent-close" type="button" aria-label="Close and decline" data-consent-choice="denied">&times;</button>
+</div>
+
+</body>
+</html>

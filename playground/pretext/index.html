@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  var analyticsConsent = "denied";
+  try {
+    if (localStorage.getItem("consent") === "granted") analyticsConsent = "granted";
+  } catch (e) {}
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: analyticsConsent
+  });
+  gtag("js", new Date());
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WXSC6L3R"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#04090f">
+
+<title>Write the Pretext — Roald Nefs</title>
+<meta name="description" content="An authorised social engineering exercise. Research a consenting target from public sources, write a believable pretext, then learn to spot and stop it.">
+
+<meta name="author" content="Roald Nefs">
+
+<meta property="og:site_name" content="Roald Nefs">
+<meta property="og:title" content="Write the Pretext">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://roaldnefs.com/playground/pretext/">
+<meta property="og:description" content="An authorised social engineering exercise. Research a consenting target from public sources, write a believable pretext, then learn to spot and stop it.">
+<meta property="og:image" content="https://roaldnefs.com/images/pretext/email.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Write the Pretext">
+<meta name="twitter:description" content="An authorised social engineering exercise. Research a consenting target from public sources, write a believable pretext, then learn to spot and stop it.">
+<meta name="twitter:image" content="https://roaldnefs.com/images/pretext/email.png">
+
+<link rel="canonical" href="https://roaldnefs.com/playground/pretext/">
+<link rel="alternate" hreflang="en" href="https://roaldnefs.com/playground/pretext/">
+<link rel="alternate" hreflang="x-default" href="https://roaldnefs.com/playground/pretext/">
+
+
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+
+
+
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  <link rel="stylesheet" href="/css/main.min.974f2848c8acf5e9335c58472de0faa6b7e4efac0172cb32a40872076c4eff04.css" integrity="sha256-l08oSMis9ekzXFhHLeD6prfk76wBcssypAhyB2xO/wQ=">
+
+
+
+  
+  <script src="/js/main.min.523bd8ec03609585bebb76be684c52cbad46201504206251443d81e8d9a9ab32.js" integrity="sha256-UjvY7ANglYW&#43;u3a&#43;aExSy61GIBUEIGJRRD2B6NmpqzI=" defer></script>
+
+  
+    
+    <link rel="stylesheet" href="/css/challenge.min.52463d8c5cd9b3724464607649f6dc06acae8ccab9cd89b347c64e14dd4e2618.css" integrity="sha256-UkY9jFzZs3JEZGB2SfbcBqyujMq5zYmzR8ZOFN1OJhg=">
+  
+  
+    
+    <script src="/js/challenge.min.e0dc7540612c8f843c7cc5725d56a22ae566474281b6cdd66738c4de872fb52a.js" integrity="sha256-4Nx1QGEsj4Q8fMVyXVaiKuVmR0KBts3WZzjE3ocvtSo=" defer></script>
+  
+
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"></div>
+  <header class="site-header">
+  <div class="site-header-bg" aria-hidden="true"></div>
+  <div class="container site-header-inner">
+    <a class="wordmark" href="/">Roald Nefs</a>
+    <nav class="site-nav" aria-label="Primary">
+      
+        
+      
+        
+          
+          <a href="/posts/" class="nav-link">Blog</a>
+        
+      
+        
+          
+          <a href="/videos/" class="nav-link">Videos</a>
+        
+      
+        
+          
+          <a href="/training/" class="nav-link">Training</a>
+        
+      
+        
+          
+          <a href="/tools/" class="nav-link">Tools</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav-link">About</a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="site-header-actions">
+      <a class="btn header-cta" href="/training/#book-a-session">Book a workshop</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="menu" id="menu">
+    <nav class="menu-links" aria-label="Menu">
+      
+        
+          
+          <a href="/">Home<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/posts/">Blog<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/videos/">Videos<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/training/">Training<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/tools/">Tools<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+          
+          <a href="/about/">About<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+    <div class="menu-follow">
+      <span>Follow</span>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/roaldnefs" rel="me noopener" target="_blank" aria-label="GitHub"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg></a>
+        
+      
+        
+          <a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank" aria-label="LinkedIn"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        
+      
+        
+          <a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank" aria-label="Mastodon"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg></a>
+        
+      
+    </div>
+  </div>
+</header>
+
+  <main id="main">
+    
+<article class="vcc" data-store="pretext-challenges">
+
+  <section class="vcc-hero">
+    <div class="hero-bus" id="heroBus" aria-hidden="true" data-words='["From: IT Service Desk","Subject: Action required","Re: your invoice","Reply-To: noreply","Sent from my phone","Fwd: quick question","Subject: Password expiry","To: you","Please confirm today","Kind regards","Subject: Meeting moved","From: HR","Urgent: see attached","Are you at your desk?","Subject: Delivery failed","Thanks in advance"]'></div>
+    <h1 class="vcc-title">Write the <span>Pretext</span></h1>
+    <p class="lede">A social engineering exercise with a willing target. You look me up, write a message that could fool me, and then work out how I could have seen through it.</p>
+    <div class="hero-actions">
+      <a class="btn btn--lg" href="#rules">Read the rules first</a>
+      <a class="btn btn--lg btn--ghost" href="#section-1">Jump to challenges</a>
+    </div>
+    <dl class="vcc-stats">
+      <div><dd id="statChallenges">9</dd><dt>Challenges</dt></div>
+      <div><dd id="statObjectives">35</dd><dt>Objectives</dt></div>
+      <div><dd id="statPoints">505</dd><dt>Points</dt></div>
+    </dl>
+    <figure class="hero-shot mail">
+      <div class="mail-bar" aria-hidden="true"><i></i><i></i><i></i><span>Inbox</span><b>1 unread</b></div>
+      <div class="mail-app">
+        <ul class="mail-list" aria-hidden="true">
+          <li class="is-open"><b>BSides Groningen Crew</b><span>BSides Groningen 2027: venue contract needs your...</span><time>16:12</time></li>
+          <li><b>Marit</b><span>Re: lunch on Thursday?</span><time>15:40</time></li>
+          <li><b>Build server</b><span>Nightly build passed</span><time>14:02</time></li>
+          <li><b>Newsletter</b><span>This week in hardware hacking</span><time>11:27</time></li>
+        </ul>
+        <div class="mail-message">
+          <div class="mail-head">
+            <p class="mail-subject">BSides Groningen 2027: venue contract needs your signature today</p>
+            <div class="mail-from">
+              <span class="mail-avatar" aria-hidden="true">BG</span>
+              <span class="mail-who"><b>BSides Groningen Crew</b><span>crew@bsides-gr0ningen.example</span></span>
+              <span class="mail-meta"><span class="mail-chip">External</span><span class="mail-time">16:12</span></span>
+            </div>
+          </div>
+          <div class="mail-body">
+            <p>Hi Roald,</p>
+            <p>Good news, the venue can give us the same weekend again for BSides Groningen 2027, and there is room for a bigger Car Hacking Village this time.</p>
+            <p>They only hold the date <b>until 17:00 today</b>. The rest of the crew has signed, yours is the last signature missing. Can you sign before then?</p>
+            <p><span class="mail-btn">Review and sign the contract</span></p>
+            <p>Sign in with your work account to open the document.</p>
+            <p class="mail-sign">Thanks, see you at the next crew call,<br>The BSides Groningen crew</p>
+            <p class="mail-file" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 7.5 8 12.5a3.2 3.2 0 0 1-4.5-4.5l5.200-5.200a2.100 2.100 0 0 1 3 3L6.500 11a1 1 0 0 1-1.500-1.500L9.500 5"/></svg>Venue-contract-2027.pdf<span>184 KB</span></p>
+          </div>
+        </div>
+      </div>
+      <figcaption>A made-up example, built from public details about your trainer. BSides Groningen did not send this. By the end you can name every tell in it.</figcaption>
+    </figure>
+    <nav class="vcc-nav" aria-label="On this page">
+      <a href="#start-here">Start here</a>
+      <a href="#primer">Intro</a>
+      <a href="#target">Target</a>
+      <a href="#rules">Rules</a>
+      <a href="#section-1">Challenges</a>
+      <a href="#reference">Reference</a>
+    </nav>
+  </section>
+
+  <div class="prose">
+
+  <h2 id="start-here">First time? Start here</h2>
+
+  <h3>What a pretext is</h3>
+  <p>A <strong>pretext</strong> is the story an attacker tells to get someone to do something. It has an invented sender, a reason why it is happening now, and a small request that seems reasonable at that moment. Phishing is a pretext sent by email. A phone call from "the help desk" is a pretext too. Any malware or fake login page comes afterwards. The pretext is the part that gets a careful person to go along.</p>
+  <p>You learn to write one here for a simple reason: it is hard to recognise something you have never seen being made. By the end you can say which lever a message pulls, how to tell, and what stops it.</p>
+
+  <h3>The loop you will repeat</h3>
+  <ol class="loop">
+    <li><span class="loop-num">01</span><strong>Research</strong><p>Gather what is public and note where each detail came from.</p></li>
+    <li><span class="loop-num">02</span><strong>Profile</strong><p>Pick out what makes the target reachable.</p></li>
+    <li><span class="loop-num">03</span><strong>Pretext</strong><p>Build a sender, a reason and one small ask.</p></li>
+    <li><span class="loop-num">04</span><strong>Pressure-test</strong><p>Attack your own story and find where it breaks.</p></li>
+    <li class="loop-end"><span class="loop-num">05</span><strong>Debrief</strong><p>Name the lever, list the tells, write the control.</p></li>
+  </ol>
+  <aside class="callout">
+    <span class="callout-prefix">note:</span>
+    <div class="callout-body"><p>Every challenge has hints and a full walkthrough, so you cannot get stuck. Read the <a href="#rules">rules of engagement</a> before you start.</p></div>
+  </aside>
+
+  <h2 id="primer">An introduction to social engineering</h2>
+  <p>Some background before you start. None of it is specific to this exercise. It is how these attacks work everywhere.</p>
+
+  <h3>Attacking the person, not the system</h3>
+  <p><strong>Social engineering</strong> is getting someone to do something they would not do if they saw the whole picture: open a file, share a code, approve a payment, hold a door. It goes around the technology. A firewall does not help when an employee is talked into letting the attacker in.</p>
+  <p>It is popular because it is cheap and it works. Finding a flaw in well-kept software can take weeks. Writing a convincing email takes an afternoon, and it only needs one person to act on it. That is why most real intrusions start with a message or a phone call and not with an exploit.</p>
+  <p>The people who fall for it are not stupid or careless. They are busy and helpful, and they trust that a message is what it looks like. Those are normal and useful habits, and that is exactly what makes them a target.</p>
+
+  <h3>Two ways of thinking</h3>
+  <p>The psychologist Daniel Kahneman describes two modes of thinking in <em>Thinking, Fast and Slow</em>. <strong>System 1</strong> is fast and automatic. It recognises a face, reads a word, and decides that an email from a colleague looks fine, all without effort. <strong>System 2</strong> is slow and deliberate. It checks a sum, compares two addresses letter by letter, and asks whether a request makes sense.</p>
+  <div class="systems">
+    <div class="system system-1" data-num="1">
+      <p class="system-tag">System 1</p>
+      <p class="system-name">Fast and automatic</p>
+      <dl>
+        <div><dt>Speed</dt><dd><span class="system-bar"><i style="width:96%"></i></span>Instant</dd></div>
+        <div><dt>Effort</dt><dd><span class="system-bar"><i style="width:6%"></i></span>None, it runs by itself</dd></div>
+        <div><dt>Works on</dt><dd>Habit, feeling, first impressions</dd></div>
+      </dl>
+      <p class="system-quote"><span>In your inbox</span>"Looks like the usual request, click."</p>
+    </div>
+    <div class="system system-2" data-num="2">
+      <p class="system-tag">System 2</p>
+      <p class="system-name">Slow and deliberate</p>
+      <dl>
+        <div><dt>Speed</dt><dd><span class="system-bar"><i style="width:22%"></i></span>Slow</dd></div>
+        <div><dt>Effort</dt><dd><span class="system-bar"><i style="width:82%"></i></span>Takes attention, and tires you</dd></div>
+        <div><dt>Works on</dt><dd>Rules, comparison, doubt</dd></div>
+      </dl>
+      <p class="system-quote"><span>In your inbox</span>"Wait, why is this coming from that address?"</p>
+    </div>
+  </div>
+  <p>We spend most of the day in System 1, because System 2 is tiring and there is too much to do. A pretext is built to keep the target there. It looks familiar so nothing stands out, it is urgent so there is no time to think, and the ask is small so checking feels like more work than complying. A pretext fails the moment the target slows down and switches to System 2.</p>
+  <p>This gives you both sides of the exercise. As the attacker you try to keep me in System 1. As the defender you look for what would wake System 2 up: a habit, a rule or a pause.</p>
+
+  <h3>The levers</h3>
+  <p>To keep someone in System 1, an attacker leans on a small number of shortcuts that people use to decide quickly. Robert Cialdini described them in his research on persuasion. They are useful shortcuts in daily life, which is why they are so easy to abuse.</p>
+  <ul>
+    <li><strong>Authority:</strong> we do what someone in charge asks. "This is the CFO, I need this done now."</li>
+    <li><strong>Urgency:</strong> a deadline pushes us to act before we think. "Your account closes in ten minutes."</li>
+    <li><strong>Scarcity:</strong> we want what is about to run out. "Only three seats left."</li>
+    <li><strong>Reciprocity:</strong> we return favours. "I fixed that for you last week, can you help me with one thing?"</li>
+    <li><strong>Liking:</strong> we say yes to people we know or like. A message in the voice of a friend or a colleague.</li>
+    <li><strong>Commitment:</strong> after a small yes, a bigger one follows more easily. "You already confirmed your address, now just confirm the code."</li>
+  </ul>
+  <p>A good pretext usually leans on one lever and does it well. In Section 2 you pick yours, and in Section 3 you learn to name the lever in someone else's message. The <a href="#influence">reference</a> lists what blunts each one.</p>
+
+  <h2 id="target">Your target</h2>
+  <p>The target is the person running this session: me. I have agreed to be researched and to receive a simulated pretext as part of the training. That consent is the whole basis for the exercise. It covers me and nobody else, and it ends when the session ends.</p>
+  <div class="target">
+    <div class="target-sheet">
+      <div class="target-top">
+        <p class="target-title">Target file</p>
+        <p class="target-case">Case no. <b>RN-001</b><br>Opened: start of session<br>Closes: end of session</p>
+      </div>
+      <div class="target-main">
+        <div class="target-mug">
+          <div class="target-photo">
+            <img src="/images/authors/roald-nefs-avatar.webp" alt="Portrait of Roald Nefs" width="135" height="180" loading="lazy">
+          </div>
+          <p class="target-board"><b>NEFS, R.</b><span>RN-001</span></p>
+        </div>
+        <dl class="target-facts">
+          <div><dt>Name</dt><dd>Roald Nefs</dd></div>
+          <div><dt>Role</dt><dd>Your trainer, and the only person in scope</dd></div>
+          <div><dt>Last seen</dt><dd>On this website. Start here, the rest is for you to find</dd></div>
+          <div><dt>Approach</dt><dd>Do not approach. Nothing is sent, I review your pretext in the room</dd></div>
+        </dl>
+        <p class="target-stamp" aria-label="Consent given">Consent<br>given</p>
+      </div>
+      <div class="target-scope">
+        <div class="target-in">
+          <p>Cleared for research</p>
+          <ul>
+            <li>What I have published myself</li>
+            <li>What is openly indexed</li>
+          </ul>
+        </div>
+        <div class="target-out">
+          <p>Off limits</p>
+          <ul>
+            <li>My family, friends and colleagues</li>
+            <li>My employer's systems</li>
+            <li>Any account that needs a login</li>
+          </ul>
+        </div>
+      </div>
+      <p class="target-foot"><span>Valid for this session only. Destroy your notes afterwards.</span><i aria-hidden="true"></i></p>
+    </div>
+  </div>
+  <p>This file is short on purpose. Filling it in is Section 1. If you find something you think I would not want public, tell me instead of using it.</p>
+
+  <h2 id="rules">Rules of engagement</h2>
+  <p>You research <strong>only me</strong>, and only through <strong>public sources</strong>: what I have published myself or what a search engine finds. My family, friends and colleagues are off limits, even when they show up in your search, and so is anything that needs a login or a guessed password. You write a pretext, but you <strong>send nothing</strong>: no email, message or call, to me or to anyone else. I review it with you in the room. Your pretext may ask me to click a harmless link, and it <strong>never asks for a password, a payment, a code or access</strong>. Keep your notes on your own machine and <strong>delete them when we finish</strong>.</p>
+  <p>These rules are what makes this a training exercise and not an attack. They hold only because I agreed to this, for this session. Used on someone who has not agreed, or to get money, passwords or access, the same techniques are harassment or fraud.</p>
+
+  <h2 id="route">Choose your route</h2>
+  <p>Pick the short route if you have about half an hour. It takes you through the whole loop once. The full route adds finding the hook, testing your own pretext and writing the defence. You can switch at any time and your progress is kept.</p>
+  <div class="routes" role="radiogroup" aria-label="Route">
+    <button type="button" class="route" role="radio" aria-checked="false" data-route="short">
+      <span class="route-name">Short</span>
+      <span class="route-meta" id="routeShortMeta">5 challenges</span>
+      <span class="route-desc">Once through the loop, start to finish.</span>
+      <span class="route-track" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <button type="button" class="route" role="radio" aria-checked="true" data-route="full">
+      <span class="route-name">Full</span>
+      <span class="route-meta" id="routeFullMeta">9 challenges</span>
+      <span class="route-desc">Every step, including the pressure-test.</span>
+      <span class="route-track" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </button>
+  </div>
+
+  <h2 id="score">Your score</h2>
+  <p>Tick an objective when you have done it. Nobody checks your notes, so be honest with yourself. Only the quiz in Section 3 is checked by the page. Your progress is stored in this browser.</p>
+  <div class="score" data-ranks='[[0,"Bystander"],[0.15,"Lurker"],[0.35,"Profiler"],[0.55,"Pretext Author"],[0.80,"Red Teamer"],[1,"Social Engineer"]]'>
+    <button class="reset" id="scoreReset" type="button">Reset all</button>
+    <div class="gauge gauge--pretext">
+      <svg viewBox="0 0 240 240" aria-hidden="true">
+        <defs>
+          <radialGradient id="pFace" cx=".5" cy=".4" r=".62"><stop offset="0" stop-color="#16213a"/><stop offset=".7" stop-color="#0a101c"/><stop offset="1" stop-color="#05080e"/></radialGradient>
+          <radialGradient id="pHalo"><stop offset="0" stop-color="#7aa2ff" stop-opacity=".45"/><stop offset="1" stop-color="#7aa2ff" stop-opacity="0"/></radialGradient>
+          <linearGradient id="pFill" gradientUnits="userSpaceOnUse" x1="20" y1="0" x2="220" y2="0"><stop offset="0" stop-color="#3f6bf5"/><stop offset=".6" stop-color="#7aa2ff"/><stop offset="1" stop-color="#e6eeff"/></linearGradient>
+          <linearGradient id="pMail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7aa2ff" stop-opacity=".3"/><stop offset="1" stop-color="#7aa2ff" stop-opacity=".05"/></linearGradient>
+          <mask id="pSeg"><path d="M25.6 174.5A109 109 0 1 1 214.4 174.5" pathLength="100" fill="none" stroke="#fff" stroke-width="12" stroke-dasharray="1.9 0.6"/></mask>
+        </defs>
+        <circle class="p-face" cx="120" cy="120" r="96"/>
+        <circle class="p-ring" cx="120" cy="120" r="84"/>
+        <g class="p-arc"><g mask="url(#pSeg)">
+          <path class="g-track" d="M25.6 174.5A109 109 0 1 1 214.4 174.5" pathLength="100"/>
+          <path class="g-fill" id="scoreFill" d="M25.6 174.5A109 109 0 1 1 214.4 174.5" pathLength="100" stroke-dasharray="0 100"/>
+        </g></g>
+        <circle class="p-halo" cx="120" cy="88" r="52"/>
+        <path class="p-brackets" d="M72 66v-12h12M156 54h12v12M168 110v12h-12M84 122h-12v-12"/>
+        <g class="p-mail"><rect x="88" y="66" width="64" height="44" rx="4"/><path d="M88 71l32 24 32-24"/></g>
+        <g class="g-needle" id="scoreNeedle"><circle class="p-dot-halo" cx="120" cy="11" r="11"/><circle class="p-dot" cx="120" cy="11" r="5"/></g>
+      </svg>
+      <div class="digits">
+        <span class="total" id="scoreTotal">0</span>
+        <span class="of">/ <span id="scoreMax">0</span> pts</span>
+      </div>
+    </div>
+    <div class="score-side">
+      <p class="eyebrow">Your rank</p>
+      <p class="rank" id="scoreRank">Bystander</p>
+      <p class="count"><span id="scoreCount">0</span> of <span id="scoreOf">0</span> objectives done</p>
+      <ul class="score-sections" id="scoreSections"></ul>
+    </div>
+    <div class="celebration" id="celebration" role="status" aria-live="polite" data-title-full="Social Engineer" data-text-full="You researched a pretext, built it, then took it apart. That full loop is what makes a defender hard to fool." data-title-short="Short route complete" data-text-short="You have been once through the loop. Switch to the full route for the pressure-test and the rest of the debrief.">
+      <p class="title" id="celebrationTitle">Social Engineer</p>
+      <p id="celebrationText">You researched a pretext, built it, then took it apart.</p>
+    </div>
+  </div>
+
+  
+  <header class="section-head" data-num="01">
+    <p class="eyebrow section-label">Section 1</p>
+    <h2 id="section-1" class="vcc-section-title">Research</h2>
+  </header>
+  <p>Before you can write to me as if you know me, you need to know me a little. In this section you collect what I have made public and sort it. Keep to the rules: only me, only public sources, and write down where you found each thing.</p>
+
+  <article class="challenge" data-min="5" data-short>
+  <h3 id="challenge-01">Challenge 01 // Set the rules</h3>
+  <p>Start by writing down the boundaries. It takes five minutes, and on a real assignment it is the document that separates a test from a crime. Testers call it the <strong>rules of engagement</strong> and get it signed before they touch anything.</p>
+  <p class="criterion"><span>Done when</span> your notes say who the target is, what you may use, what you may not, and when you stop.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Write down who the target is and that I agreed to it</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">List what you may use (public sources) and what you may not (logins, private accounts, other people)</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Open a notes file on your own laptop. You will delete it at the end</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Set a timer for your research, for example twenty minutes</span><span class="pts">+10</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Not sure whether a source is allowed? Ask yourself whether I put it there for anyone to read. If you need to log in, guess or ask someone else, it is not allowed.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>Four lines are enough. Target: Roald Nefs, consent given for this session. Allowed: my own website and posts, public profiles, talks, public code. Not allowed: anything behind a login, private messages, my family and colleagues. Stop: when the timer ends, and the notes are deleted when the session ends.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You wrote the scope down before you looked anything up. It protects the tester as much as the target, because it shows afterwards what was agreed.</p></div>
+  </article>
+
+  <article class="challenge" data-min="8" data-short>
+  <h3 id="challenge-02">Challenge 02 // Public footprint</h3>
+  <p>Find out what I have put online about myself. You are not looking for secrets. You are looking for ordinary details that would make a message sound like it comes from someone who knows me: where I work, what I organise, what I talk about, what I build.</p>
+  <p class="criterion"><span>Done when</span> you have five to ten facts about me, each with the place you found it.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Find where I work and what I do there</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Find one thing I do next to my job: an event, a talk, a project</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Write the source next to every fact</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Mark what you are not sure about as unconfirmed</span><span class="pts">+10</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Start at this website and follow the links out: the about page, the talks, the profiles in the menu. One source usually points to the next.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>The useful details are rarely the headline facts. Look at the edges: an event I mention, a tool I recommend, a person I thank, the way I sign off.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>Read the about and training pages here, then the public profiles linked from the menu. Note my role, the events I am involved in, the projects I maintain and the topics I speak about. Put the URL behind each fact. If two sources disagree, or a fact is years old, mark it unconfirmed.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You built a small, sourced profile from things I published myself. Nobody had to be hacked for it. That is the uncomfortable part: this is all an attacker needs to get started.</p></div>
+  </article>
+
+  <article class="challenge" data-min="5">
+  <h3 id="challenge-03">Challenge 03 // Find the hook</h3>
+  <p>A list of facts is not yet a way in. The <strong>hook</strong> is the one fact that gives a stranger a believable reason to contact me: something I am expecting, something I care about, or something I do regularly.</p>
+  <p class="criterion"><span>Done when</span> you have picked one hook and can explain in one sentence why a message about it would not surprise me.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Write down three possible hooks from your profile</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Pick the one I would find most ordinary</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Write one sentence on why a message about it would not surprise me</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Note what you are guessing and would want to confirm first</span><span class="pts">+10</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>The best hook is something I am already waiting for or already busy with. A message about that does not need to explain why it exists.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>Go through your facts and ask of each one: who would normally contact me about this, and how? An event I help organise means venues, sponsors and speakers write to me. A project I maintain means users and contributors do. Pick the one with the most everyday reason, and be honest about what you are assuming.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You went from what is true about me to what is usable. A defender asks the same question the other way round: which of my public details gives a stranger a reason to write to me?</p></div>
+  </article>
+
+  
+  <header class="section-head" data-num="02">
+    <p class="eyebrow section-label">Section 2</p>
+    <h2 id="section-2" class="vcc-section-title">Pretext</h2>
+  </header>
+  <p>Now you write the story. A pretext has three parts: who the message seems to come from, why it comes now, and one small thing it asks for. Keep to the rules here too. You write it down, you do not send it, and the ask is never more than clicking a harmless link.</p>
+
+  <article class="challenge" data-min="5" data-short>
+  <h3 id="challenge-04">Challenge 04 // Choose the frame</h3>
+  <p>Decide the outline before you write a sentence. Four choices: the sender, the channel, the lever and the ask. Fixing them first keeps the message simple, and simple messages are the ones people believe.</p>
+  <p class="criterion"><span>Done when</span> you can say all four in one breath: sender, channel, lever, ask.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Choose who the message seems to come from, and how they know me</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Choose the channel (email, chat, a phone call) that this sender would normally use</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Choose one lever from the <a href="#primer">introduction</a></span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Choose the one thing you ask me to do: click a harmless link, nothing more</span><span class="pts">+15</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Use one lever. A message that is urgent, flattering and official all at once reads like a scam. The ones that work do a single thing well.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Let the hook pick the sender. If your hook is an event, the sender is someone who would write to me about that event.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>Example of a frame: sender is the organiser of an event I spoke at, channel is email, lever is liking, ask is to open a link to "the photos from your talk". Yours will differ, but it should fit in one line like this.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You fixed the frame before writing. A reviewer does the same in reverse: who does it claim to be, which lever does it pull, and what does it want?</p></div>
+  </article>
+
+  <article class="challenge" data-min="8" data-short>
+  <h3 id="challenge-05">Challenge 05 // Write the brief</h3>
+  <p>Write your pretext as a short brief that a teammate can read in a minute. It is a brief and not a finished message, because nothing gets sent and because a brief is easier to discuss in the group.</p>
+  <div class="code">
+    <div class="code-head"><span>a brief, to fill in</span></div>
+<pre><span class="k">Sender</span>   who it seems to come from, and how they know me
+<span class="k">Channel</span>  email, chat or phone, and why that fits
+<span class="k">Hook</span>     the public detail the story is built on
+<span class="k">Lever</span>    the one shortcut it leans on
+<span class="k">Opening</span>  the first line or two, in your own words
+<span class="k">Ask</span>      the one small thing, and by when
+<span class="k">Tell</span>     what you expect me to overlook</pre>
+  </div>
+  <p class="criterion"><span>Done when</span> someone who reads your brief can explain back to you how it is meant to work.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Fill in sender, channel, hook and lever</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Write the opening line and the ask in your own words</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Check every claim: could you back it up if I asked?</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Check the ask against the rules: no password, payment, code or access</span><span class="pts">+15</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Make the ask the easy way out. If clicking is less work than checking, most people click. That difference is the whole mechanism.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Leave out what you cannot back up. One detail that is off does more damage than three details that are missing.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>Fill in the template line by line. Keep the opening to one or two sentences that mention the hook naturally, and the ask to one sentence with a soft deadline. Then read it aloud. If it sounds like a scam to you, it will to me.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You wrote a pretext that fits on a postcard. Notice how little it takes. Your colleagues receive messages built this way every week.</p></div>
+  </article>
+
+  <article class="challenge" data-min="5">
+  <h3 id="challenge-06">Challenge 06 // Pressure-test it</h3>
+  <p>Now read your brief as I would on a day when I am paying attention. Every pretext has weak spots. Find yours before someone else does.</p>
+  <p class="criterion"><span>Done when</span> you have found two weak spots and repaired or removed the worst one.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Write down two ways I could find out it is fake</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Repair or remove the weakest claim</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Check that it still follows the rules after your changes</span><span class="pts">+15</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Assume I check through another channel: I call the real organiser, or I reply to an address I already had. Does your story survive that?</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Swap briefs with a neighbour. Other people see in ten seconds what you have stopped seeing.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>Go through sender, timing and ask. Does the sender exist, and would they write like this? Is there a real reason for the deadline? Would I normally get this request this way? Fix the weakest point, then check you did not make the ask bigger while fixing it.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You attacked your own work. Every weak spot you found is also a point where a defender can catch the message, which is what the next section is about.</p></div>
+  </article>
+
+  
+  <header class="section-head" data-num="03">
+    <p class="eyebrow section-label">Section 3</p>
+    <h2 id="section-3" class="vcc-section-title">Defend</h2>
+  </header>
+  <p>This is what the exercise is for. You take a pretext apart and turn it into something useful: which lever it pulls, how you can tell, and what stops it. The quiz answers are checked in the page.</p>
+
+  <article class="challenge" data-min="4" data-short>
+  <h3 id="challenge-07">Challenge 07 // Name the lever</h3>
+  <p>A lever loses much of its force once you can name it. Read each line and type the lever it leans on most. They are listed in the <a href="#primer">introduction</a>.</p>
+  <p class="criterion"><span>Done when</span> all five are answered.</p>
+  <ul class="mission">
+    <li class="ask" data-answer="5bdd4973aca54d0a13b808e3ea72457a8dae05add9a8c8699c68785f71f5a47f" data-mode="loose"><input type="checkbox" hidden><div class="task">"This is the director. I need you to handle this now, I will explain later." Which lever?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="one word" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+    <li class="ask" data-answer="e80c912421f9e9307530f78486d757043df14cc5581911a749ee0ce02120b379 19d78ead91a44d42581ef5c4d21f8a932f939638f7277990080c13a42eb4ae5c" data-mode="loose"><input type="checkbox" hidden><div class="task">"Reply within ten minutes or your account will be closed." Which lever?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="one word" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+    <li class="ask" data-answer="20d6ca6900c2769b8c750dd2e98127d15bee36984171d9941929d00538e3400f" data-mode="loose"><input type="checkbox" hidden><div class="task">"Only three seats left, and the offer ends at noon." Which lever?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="one word" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+    <li class="ask" data-answer="026d7d8c3a816150fa4bf797b34b722653976748e9ba74ad9edd754e3b232f4f" data-mode="loose"><input type="checkbox" hidden><div class="task">"I sorted out that problem for you last week. Could you do me one quick favour?" Which lever?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="one word" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+    <li class="ask" data-answer="6fe0683189c64aeeddae84787abb86242f838ea6422c97f78668de1b202f2d97 341367c0a29f39e4c6bfeff2078ec60a0f649e19af317538e21cc4c5d0ba6acf" data-mode="loose"><input type="checkbox" hidden><div class="task">A message that seems to come from a good friend, in their usual tone. Which lever?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="one word" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>The six are authority, urgency, scarcity, reciprocity, liking and commitment. Pick the one that does most of the work in each line.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>In order: authority (the rank is the reason), urgency (a deadline forces a decision), scarcity (there is little left), reciprocity (a favour that has to be returned) and liking (a sender you know and trust).</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You put a name to five levers. Someone who thinks "that is just urgency" while reading a message is a lot harder to rush.</p></div>
+  </article>
+
+  <article class="challenge" data-min="5">
+  <h3 id="challenge-08">Challenge 08 // Spot the tells</h3>
+  <p>Scroll up to the example email at the top of this page. It was written to fool me, and it leaves traces. Find them, then look for the same traces in your own brief.</p>
+  <p class="criterion"><span>Done when</span> you have found at least four tells in the example and written down the one check that would have stopped it.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Find what is wrong with the sender of the example email</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Find where it puts pressure on me, and why that pressure is odd</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Find what it asks for that a real message of this kind would not</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Write down the one check that would have exposed it</span><span class="pts">+15</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Ask three questions of any message: who is it really from, how does it make me feel, and is this the normal way to get this request?</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Look at the times. When was it sent, and when does the deadline end?</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>The address has a zero where an "o" should be and comes from outside, as the External label shows. It was sent at 16:12 with a deadline of 17:00, which leaves no time to ask anyone. "Yours is the last signature missing" adds group pressure. A contract does not need my work account to open, and the attachment is one I did not expect. The check that stops it: ask a crew member through a channel I already use.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You read a message the way a defender does. Those three questions (who, how does it feel, is this normal) work on almost every pretext, and they are easier to remember than a list of warning signs.</p></div>
+  </article>
+
+  <article class="challenge" data-min="5">
+  <h3 id="challenge-09">Challenge 09 // Write the defence</h3>
+  <p>Finish with something people can use. For your own pretext, write down what would have stopped it: one habit for the person receiving it, and one measure for the organisation around them. Then share it with the group.</p>
+  <p class="criterion"><span>Done when</span> you have one habit and one measure, and you have told the group.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Write one habit a colleague could use tomorrow</span><span class="pts">+20</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Write one measure an organisation could put in place</span><span class="pts">+20</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Tell the group your lever, your tells and your defence</span><span class="pts">+20</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>A habit is something to do, not something to be afraid of. "Check urgent requests through a channel you already had" is useful. "Be careful with email" is not.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>For the measure, think about what makes the habit easy: a known number to call, a report button, a rule that payments always need a second person.</p></div></details>
+    <details class="solution"><summary>Show the walkthrough</summary><div><p>Pair a habit with a measure. Habit: when a message asks for speed, slow down and check it another way. Measure: an easy way to report a suspicious message, a call-back rule for payments and account changes, and a label on mail from outside. The habit catches what the measure misses, and the other way round.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>The exercise started as an attack and ends as advice. That is why it is worth learning how these messages are made.</p></div>
+  </article>
+
+  <h2 id="reference">Quick reference</h2>
+
+  <h3 id="influence">The levers and what blunts them</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Lever</th><th>How it is used</th><th>What blunts it</th></tr></thead>
+    <tbody>
+      <tr><td>Authority</td><td>The message seems to come from someone senior or official</td><td>Check the person, not the title, through a channel you already had</td></tr>
+      <tr><td>Urgency</td><td>A deadline or a crisis leaves no time to think</td><td>Treat the hurry as the warning sign and slow down</td></tr>
+      <tr><td>Scarcity</td><td>Something is about to run out or close</td><td>Ask who gains if you hurry</td></tr>
+      <tr><td>Reciprocity</td><td>A small favour or gift comes first, the request after</td><td>Judge the request as if the favour never happened</td></tr>
+      <tr><td>Liking</td><td>The sender is familiar, friendly or flattering</td><td>Check that it really is them, not only their tone</td></tr>
+      <tr><td>Commitment</td><td>A small yes is followed by a bigger request</td><td>Judge each request separately</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Three questions for any message</h3>
+  <dl class="steps">
+    <dt>01</dt><dd><strong>Who is it really from?</strong> Look at the address or the number, not the name next to it.</dd>
+    <dt>02</dt><dd><strong>How does it make me feel?</strong> Hurried, flattered, worried or guilty are all reasons to slow down.</dd>
+    <dt>03</dt><dd><strong>Is this the normal way?</strong> If this request usually comes another way, check it that way.</dd>
+  </dl>
+
+  <h3>When you get one yourself</h3>
+  <ul>
+    <li><strong>Stop.</strong> Nothing in your inbox is so urgent that it cannot wait two minutes.</li>
+    <li><strong>Check another way.</strong> Call or message the sender through contact details you already had, not the ones in the message.</li>
+    <li><strong>Report it.</strong> Tell your IT or security team, also when you already clicked. Reporting early is what limits the damage.</li>
+  </ul>
+
+  <h3>Where public information comes from</h3>
+  <ul>
+    <li><strong>Work:</strong> employer and team pages, conference talks and slides, articles, public code.</li>
+    <li><strong>Social:</strong> public profiles and posts that someone keeps themselves.</li>
+    <li><strong>Records:</strong> company registers, event programmes, anything a search engine has indexed.</li>
+  </ul>
+
+  <h3>Ethics and the law</h3>
+  <p>Doing this to someone who has not agreed is not a grey area. Pretending to be someone else to get money, passwords or access is fraud. Collecting personal data about a person without a good reason can break privacy law such as the GDPR. This exercise is allowed because I agreed, because the scope is written down, and because the notes are deleted afterwards.</p>
+
+  <h3 id="going-deeper">Going deeper</h3>
+  <ul>
+    <li><em>Thinking, Fast and Slow</em> by Daniel Kahneman: the book behind System 1 and System 2.</li>
+    <li><em>Influence</em> by Robert Cialdini: where the levers come from.</li>
+    <li><a href="/training/">Training and workshops</a>: run this as a guided session for your team, meetup or conference.</li>
+    <li><a href="/playground/">More in the playground</a>: other exercises you can do in a browser.</li>
+  </ul>
+
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container site-footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="/">Roald Nefs</a>
+      <ul class="footer-follow">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/roaldnefs" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.33.73-4.03-1.6-4.03-1.6-.55-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.08 1.83 2.8 1.3 3.5 1 .1-.78.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.22 0 4.6-2.8 5.63-5.47 5.92.42.36.82 1.1.82 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/roaldnefs/" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://infosec.exchange/@roald" rel="me noopener" target="_blank"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.27 5.32c-.36-2.67-2.7-4.78-5.5-5.19C17.3.06 15.48 0 12.14 0h-.03c-3.34 0-4.05.06-4.52.13-2.72.4-5.18 2.3-5.77 5-.28 1.33-.31 2.8-.26 4.15.07 1.95.08 3.89.26 5.83.12 1.28.33 2.56.6 3.82.5 2.33 2.83 4.27 5.11 5.06 2.45.85 5.08.99 7.61.4.28-.06.55-.14.82-.23.6-.2 1.3-.42 1.81-.8a.06.06 0 0 0 .03-.05v-1.76a.05.05 0 0 0-.07-.05c-1.57.37-3.18.56-4.8.56-2.78 0-3.53-1.32-3.74-1.87a5.76 5.76 0 0 1-.33-1.5.05.05 0 0 1 .06-.05c1.55.37 3.13.56 4.72.56.38 0 .76 0 1.14-.01 1.6-.04 3.28-.13 4.85-.43.04 0 .08-.01.11-.02 2.48-.48 4.84-1.97 5.08-5.74.01-.15.04-1.56.04-1.71.01-.53.18-3.74-.03-5.7zm-3.9 9.46h-2.42V8.9c0-1.24-.52-1.87-1.56-1.87-1.15 0-1.72.74-1.72 2.22v3.2h-2.4v-3.2c0-1.47-.58-2.22-1.73-2.22-1.04 0-1.56.63-1.56 1.87v5.88H5.56V8.72c0-1.23.31-2.22.94-2.94.65-.72 1.5-1.1 2.56-1.1 1.22 0 2.15.47 2.77 1.4l.6 1.01.6-1.01c.63-.93 1.55-1.4 2.77-1.4 1.05 0 1.9.38 2.56 1.1.63.72.94 1.71.94 2.94v6.06z"/></svg><span>Mastodon</span></a></li>
+          
+        
+        <li><a href="/rss.xml"><svg role="img" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415a3.3 3.3 0 1 1 0 6.591 3.3 3.3 0 0 1 0-6.591zM15.502 24h-4.533c0-6.05-4.918-10.967-10.969-10.967V8.5c8.546 0 15.502 6.954 15.502 15.5z"/></svg><span>RSS</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-cols">
+      <nav class="footer-col" aria-label="Pages">
+        <h2 class="footer-heading">Pages</h2>
+        <ul class="footer-links">
+          
+            
+          
+            
+              
+              <li><a href="/posts/">Blog</a></li>
+            
+          
+            
+              
+              <li><a href="/videos/">Videos</a></li>
+            
+          
+            
+              
+              <li><a href="/training/">Training</a></li>
+            
+          
+            
+              
+              <li><a href="/tools/">Tools</a></li>
+            
+          
+            
+              
+              <li><a href="/about/">About</a></li>
+            
+          
+            
+          
+            
+          
+            
+          
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2 class="footer-heading">Companies</h2>
+        <ul class="footer-links">
+          
+            <li><a href="https://warpnet.nl" rel="noopener noreferrer" target="_blank">Warpnet</a></li>
+          
+            <li><a href="https://enlite.nl" rel="noopener noreferrer" target="_blank">Enlite</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Agents</h2>
+        <ul class="footer-links">
+          <li><a href="/rss.xml">rss.xml</a></li>
+          <li><a href="/sitemap.md">sitemap.md</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Legal</h2>
+        <ul class="footer-links">
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/cookies/">Cookies</a></li>
+          
+            <li><button type="button" data-consent-open>Cookie settings</button></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container site-footer-note">© 2026 Roald Nefs</div>
+</footer>
+
+  <div class="consent" role="region" aria-label="Cookie consent" data-consent hidden>
+  <p>This site uses Google Analytics to see which posts get read. Cookies are only set if you accept. See the <a href="/cookies/">cookie statement</a>.</p>
+  <div class="consent-actions">
+    <button class="btn btn--sm" type="button" data-consent-choice="granted">Accept</button>
+    <button class="btn btn--sm btn--ghost" type="button" data-consent-choice="denied">Decline</button>
+  </div>
+  <button class="consent-close" type="button" aria-label="Close and decline" data-consent-choice="denied">&times;</button>
+</div>
+
+</body>
+</html>
