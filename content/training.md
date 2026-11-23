@@ -79,6 +79,8 @@ Pick the format that fits your audience, time, and how deep you want to go.
 
 All formats use owned, controlled devices. No production systems are touched.
 
+{{< try-playground >}}
+
 ## Past sessions
 - **OrangeCon 2026**: Car Hacking Village.
 - **BSides Luxembourg 2026**: automotive hacking workshop and Car Hacking Village. [View slides](/bsidesluxembourg.pdf).
