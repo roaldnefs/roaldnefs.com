@@ -1,0 +1,801 @@
+{{ define "main" }}
+<article class="vcc">
+
+  <section class="vcc-hero">
+    <div class="hero-bus" id="heroBus" aria-hidden="true"></div>
+    <h1 class="vcc-title">Hack the <span>Virtual Cluster</span></h1>
+    <p class="lede">16 car hacking challenges you can do from a browser tab. The target is a simulated instrument cluster on a simulated CAN bus, so you don't need a car, an adapter or any software.</p>
+    <div class="hero-actions">
+      <a class="btn btn--lg" href="https://roaldnefs.github.io/webusb-can/" target="_blank" rel="noopener">Launch simulator</a>
+      <a class="btn btn--lg btn--ghost" href="#section-1">Jump to challenges</a>
+    </div>
+    <dl class="vcc-stats">
+      <div><dd id="statChallenges">16</dd><dt>Challenges</dt></div>
+      <div><dd id="statObjectives">49</dd><dt>Objectives</dt></div>
+      <div><dd id="statPoints">905</dd><dt>Points</dt></div>
+    </dl>
+    <figure class="hero-shot">
+      <img src="/images/virtual-cluster/simulator.png" width="1600" height="1000" alt="The webusb-can simulator: a virtual instrument cluster with speedometer, rev counter and warning lamps next to a live CAN frame log.">
+    </figure>
+    <nav class="vcc-nav" aria-label="On this page">
+      <a href="#can-primer">Intro</a>
+      <a href="#launch">Simulator</a>
+      <a href="#section-1">Challenges</a>
+      <a href="#quick-reference">Reference</a>
+    </nav>
+  </section>
+
+  <div class="prose">
+
+  <h2 id="start-here">First time? Start here</h2>
+
+  <h3>CAN bus in one minute</h3>
+  <p>A modern car is full of small computers called <strong>ECUs</strong>. They are all connected to the same pair of wires, the <strong>CAN bus</strong>, and they talk by sending short messages called <strong>frames</strong>. A frame has an <strong>arbitration ID</strong>, which tells you what kind of message it is, and up to <strong>8 bytes</strong> of data.</p>
+  <p>Frames are not addressed to anyone and they don't say who sent them. Every ECU receives everything, and any device on the bus can send any ID. The instrument cluster has no way to check where a frame came from, so it shows whatever it is told. These challenges are about using that.</p>
+  <div class="code">
+    <div class="code-head"><span>a frame, as the simulator shows it</span></div>
+<pre><span class="c"># ID    DLC  data</span>
+<span class="k">123</span>     8    <span class="p">00 00 1A 2B 00 00 05 34</span></pre>
+  </div>
+
+  <h3>Your target</h3>
+  <p>The simulator is a small car with an engine, a gearbox, four doors, an instrument cluster and one diagnostic ECU. Besides the real traffic it sends about two dozen <strong>decoy IDs</strong> that mean nothing. The decoys get new IDs every time you start the simulator, so you can't copy them from someone else's notes.</p>
+
+  <h3>The loop you'll repeat</h3>
+  <ol class="loop">
+    <li><span class="loop-num">01</span><strong>Listen</strong><p>Look at the traffic before you send anything.</p></li>
+    <li><span class="loop-num">02</span><strong>Isolate</strong><p>Change one thing in the car and see which bytes change.</p></li>
+    <li><span class="loop-num">03</span><strong>Decode</strong><p>Find the byte or bit, and how the value is scaled.</p></li>
+    <li><span class="loop-num">04</span><strong>Inject</strong><p>Send your own version of that frame.</p></li>
+    <li class="loop-end"><span class="loop-num">05</span><strong>Verify</strong><p>Check the cluster. If nothing happened, something else is checked too.</p></li>
+  </ol>
+  <aside class="callout">
+    <span class="callout-prefix">note:</span>
+    <div class="callout-body"><p>Every challenge has a hint you can open, and the <a href="#quick-reference">quick reference</a> at the bottom explains the notation. The hints point you in a direction. They don't give the answer.</p></div>
+  </aside>
+  <p>If CAN is new to you, read the <a href="#can-primer">introduction to CAN</a> below first. Otherwise skip to <a href="#launch">launching the simulator</a>.</p>
+
+  <h2 id="can-primer">An introduction to CAN</h2>
+  <p>Some background before you start. None of this is specific to the simulator. Real cars work the same way.</p>
+
+  <h3>Why cars have a bus</h3>
+  <p>Until the 1980s, two control units that needed to share a signal got their own wire between them. With every new feature the wiring loom got heavier and more expensive. Bosch developed the <strong>Controller Area Network</strong> to fix that: one shared pair of wires that all control units connect to. The first production cars with CAN appeared in the early 1990s, and it is still in nearly every car built today.</p>
+  <p>A current car has dozens of ECUs, for the engine, gearbox, ABS, airbags, doors, climate control and so on. Each one puts its own measurements on the bus and reads what it needs from the others. The instrument cluster mostly reads. Speed, RPM, warning lamps and door status all arrive as frames from other ECUs.</p>
+  <figure class="diagram">
+    <div class="diagram-scroll">
+    <svg viewBox="0 64 800 346" role="img" aria-labelledby="arch-title arch-desc">
+      <title id="arch-title">CAN architecture in a car</title>
+      <desc id="arch-desc">Top view of a car with two CAN buses joined by a gateway. Airbag, ABS, gearbox, engine and the instrument cluster share the fast powertrain bus. Infotainment, doors, climate and lights share the slower comfort bus. The OBD-II port connects to the gateway, and your tool plugs into that port. Each bus has a 120 ohm terminator at both ends.</desc>
+      <defs>
+        <linearGradient id="archBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16233c"/><stop offset=".18" stop-color="#0a121f"/><stop offset=".5" stop-color="#070c15"/><stop offset=".82" stop-color="#0a121f"/><stop offset="1" stop-color="#16233c"/></linearGradient>
+        <radialGradient id="archGround"><stop offset="0" stop-color="#7aa2ff" stop-opacity=".16"/><stop offset="1" stop-color="#7aa2ff" stop-opacity="0"/></radialGradient>
+        <linearGradient id="archBeam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <linearGradient id="archGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7aa2ff" stop-opacity=".22"/><stop offset=".5" stop-color="#7aa2ff" stop-opacity=".06"/><stop offset="1" stop-color="#7aa2ff" stop-opacity=".22"/></linearGradient>
+      </defs>
+      <ellipse cx="450" cy="220" rx="380" ry="165" fill="url(#archGround)"/>
+      <path class="d-beam" d="M752 150L800 118V206L758 178ZM752 290L800 322V234L758 262Z"/>
+      <g class="d-wheel"><rect x="214" y="88" width="92" height="28" rx="9"/><rect x="214" y="324" width="92" height="28" rx="9"/><rect x="580" y="88" width="92" height="28" rx="9"/><rect x="580" y="324" width="92" height="28" rx="9"/></g>
+      <path class="d-mirror" d="M548 104l5-15q2-5 8-5h9q5 0 4 6l-3 14ZM548 336l5 15q2 5 8 5h9q5 0 4-6l-3-14Z"/>
+      <path class="d-car" d="M198 102C162 102 143 124 141 162V278C143 316 162 338 198 338H636C700 338 742 318 754 282C764 252 764 188 754 158C742 122 700 102 636 102Z"/>
+      <path class="d-window" d="M664 128Q700 220 664 312L690 324Q734 220 690 116ZM226 134Q204 220 226 306L204 318Q174 220 204 122Z"/>
+      <path class="d-hood" d="M716 142Q746 220 716 298"/>
+      <g class="d-head"><path d="M741 138q14 14 17 34l-6 3q-4-18-16-31Z"/><path d="M741 302q14-14 17-34l-6-3q-4 18-16 31Z"/></g>
+      <g class="d-tail"><path d="M149 132q-6 14-6 34h5q1-18 6-31Z"/><path d="M149 308q-6-14-6-34h5q1 18 6 31Z"/></g>
+
+      <path class="d-stub1" d="M250 150V178M370 150V178M490 150V178M610 150V178M430 178V205M590 178V205"/>
+      <path class="d-stub2" d="M250 262V290M370 262V290M490 262V290M610 262V290M430 235V262"/>
+      <path class="d-link" d="M330 220H380"/>
+      <path class="d-link d-dash" d="M110 220H230"/>
+      <path class="d-bus d-glow" d="M220 178H680"/>
+      <path class="d-bus2" d="M220 262H680"/>
+      <path class="d-flow" d="M220 178H680"/><path class="d-flow d-flow2" d="M680 262H220"/>
+      <g class="d-term1"><rect x="212" y="171" width="8" height="14"/><rect x="680" y="171" width="8" height="14"/></g>
+      <g class="d-term2"><rect x="212" y="255" width="8" height="14"/><rect x="680" y="255" width="8" height="14"/></g>
+      <g class="d-dot1"><circle cx="250" cy="178" r="3.5"/><circle cx="370" cy="178" r="3.5"/><circle cx="490" cy="178" r="3.5"/><circle cx="610" cy="178" r="3.5"/><circle cx="430" cy="178" r="3.5"/><circle cx="590" cy="178" r="3.5"/></g>
+      <g class="d-dot2"><circle cx="250" cy="262" r="3.5"/><circle cx="370" cy="262" r="3.5"/><circle cx="490" cy="262" r="3.5"/><circle cx="610" cy="262" r="3.5"/><circle cx="430" cy="262" r="3.5"/></g>
+
+      <g class="d-ecu">
+        <rect x="200" y="120" width="100" height="30"/><rect x="320" y="120" width="100" height="30"/><rect x="440" y="120" width="100" height="30"/><rect x="560" y="120" width="100" height="30"/>
+        <rect x="200" y="290" width="100" height="30"/><rect x="320" y="290" width="100" height="30"/><rect x="440" y="290" width="100" height="30"/><rect x="560" y="290" width="100" height="30"/>
+        <rect x="230" y="205" width="100" height="30"/>
+      </g>
+      <rect class="d-ecu d-gateway" x="380" y="205" width="100" height="30"/>
+      <rect class="d-ecu d-target d-glow" x="540" y="205" width="100" height="30"/>
+      <rect class="d-ecu d-you" x="20" y="205" width="90" height="30"/>
+      <g class="d-text" text-anchor="middle">
+        <text x="250" y="140">Airbag</text><text x="370" y="140">ABS</text><text x="490" y="140">Gearbox</text><text x="610" y="140">Engine</text>
+        <text x="280" y="225">OBD-II port</text><text x="430" y="225">Gateway</text><text x="590" y="225">Cluster</text>
+        <text x="250" y="310">Infotainment</text><text x="370" y="310">Doors</text><text x="490" y="310">Climate</text><text x="610" y="310">Lights</text>
+        <text x="65" y="225">Your tool</text>
+      </g>
+      <path class="d-bus" d="M150 385H176"/><text class="d-legend" x="184" y="389">Powertrain CAN, 500 kbit/s</text>
+      <path class="d-bus2" d="M390 385H416"/><text class="d-legend" x="424" y="389">Comfort CAN, 125 kbit/s</text>
+      <rect class="d-term1" x="618" y="378" width="8" height="14"/><text class="d-legend" x="634" y="389">120 Ω terminator</text>
+    </svg>
+    </div>
+    <figcaption>A typical layout, seen from above: two buses joined by a gateway. In the simulator you sit directly on the bus, right next to the cluster.</figcaption>
+  </figure>
+  <p>Most cars have more than one bus. The engine, gearbox and brakes are on a fast <strong>powertrain bus</strong>, and things like doors and climate control are on a slower <strong>comfort bus</strong>. A <strong>gateway</strong> connects them and passes on only the frames the other side needs. In newer cars the diagnostic port is connected to the gateway as well, so you don't always see the raw bus traffic from there.</p>
+
+  <h3>Two wires, one conversation</h3>
+  <p>The bus is two wires, <strong>CAN-H</strong> and <strong>CAN-L</strong>, twisted together, with a 120 Ω resistor at each end. A bit is sent as a voltage <em>difference</em> between the two wires. Interference from the rest of the car hits both wires equally, so the difference stays readable.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Bit</th><th>Name</th><th>On the wire</th></tr></thead>
+    <tbody>
+      <tr><td><code>0</code></td><td>Dominant</td><td>CAN-H pulled up, CAN-L pulled down: a clear difference</td></tr>
+      <tr><td><code>1</code></td><td>Recessive</td><td>Both wires resting at the same level: no difference</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <figure class="diagram">
+    <div class="diagram-scroll">
+    <svg viewBox="0 0 800 280" role="img" aria-labelledby="wave-title wave-desc">
+      <title id="wave-title">CAN-H and CAN-L voltage over eight bits</title>
+      <desc id="wave-desc">For a recessive 1 both wires rest at 2.5 volts. For a dominant 0, CAN-H rises to 3.5 volts and CAN-L drops to 1.5 volts, a difference of 2 volts. The example shows the bits 1 0 1 1 0 0 1 0.</desc>
+      <g class="d-dom"><rect x="190" y="66" width="80" height="168"/><rect x="430" y="66" width="160" height="168"/><rect x="670" y="66" width="80" height="168"/></g>
+      <path class="d-grid" d="M110 90H750M110 150H750M110 210H750"/>
+      <path class="d-grid" d="M110 66V234M190 66V234M270 66V234M350 66V234M430 66V234M510 66V234M590 66V234M670 66V234M750 66V234"/>
+      <g class="d-small" text-anchor="end"><text x="100" y="94">3.5 V</text><text x="100" y="154">2.5 V</text><text x="100" y="214">1.5 V</text></g>
+      <g class="d-bit" text-anchor="middle"><text x="150" y="48">1</text><text x="230" y="48">0</text><text x="310" y="48">1</text><text x="390" y="48">1</text><text x="470" y="48">0</text><text x="550" y="48">0</text><text x="630" y="48">1</text><text x="710" y="48">0</text></g>
+      <g class="d-small" text-anchor="middle"><text x="150" y="258">recessive</text><text class="d-accent" x="230" y="258">dominant</text><text class="d-accent" x="510" y="258">dominant</text></g>
+      <path class="d-trace2" pathLength="1" d="M110 152H190L198 210H270L278 152H430L438 210H590L598 152H670L678 210H750"/>
+      <path class="d-trace d-glow" pathLength="1" d="M110 148H190L198 90H270L278 148H430L438 90H590L598 148H670L678 90H750"/>
+      <path class="d-link d-dash" d="M510 96V204"/>
+      <text class="d-small d-halo" x="518" y="154">2 V apart</text>
+      <text class="d-small d-accent" x="756" y="94">CAN-H</text><text class="d-small d-amber" x="756" y="214">CAN-L</text>
+    </svg>
+    </div>
+    <figcaption>Eight bits on the wire. The receiver measures the difference between the two lines, not the absolute voltages.</figcaption>
+  </figure>
+  <p>If one ECU sends a <code>0</code> while another sends a <code>1</code>, the bus carries the <code>0</code>. That is why a 0 is called dominant, and arbitration (explained below) depends on it. Common speeds are 500 kbit/s for the powertrain and 125 kbit/s or lower for comfort functions. On a real car you connect through the <strong>OBD-II port</strong> under the dashboard, where CAN is on pins 6 and 14. In the simulator you are connected from the start.</p>
+
+  <h3>Anatomy of a frame</h3>
+  <p>On the wire a frame has seven fields. CAN tools show three of them: ID, DLC and data. The CAN controller chip takes care of the rest.</p>
+  <div class="frame" role="img" aria-label="CAN frame layout: start bit, 11-bit arbitration ID, control field with DLC, 0 to 8 data bytes, CRC, acknowledge slot, end of frame.">
+    <span>SOF<small>1 bit</small></span>
+    <span class="hl">ID<small>11 bits</small></span>
+    <span class="hl">DLC<small>4 bits</small></span>
+    <span class="hl grow">Data<small>0 to 8 bytes</small></span>
+    <span>CRC<small>15 bits</small></span>
+    <span>ACK<small>2 bits</small></span>
+    <span>EOF<small>7 bits</small></span>
+  </div>
+  <dl class="steps">
+    <dt>ID</dt><dd>The <strong>arbitration ID</strong> identifies the type of message, for example wheel speeds or door status. It does not identify the sender or the receiver. Each manufacturer chooses its own IDs and usually keeps them to itself. Standard IDs are 11 bits (<code>000</code> to <code>7FF</code>). There is also an extended format with 29 bits.</dd>
+    <dt>DLC</dt><dd>The <strong>data length code</strong>: how many data bytes follow, 0 to 8.</dd>
+    <dt>Data</dt><dd>The <strong>payload</strong>, at most eight bytes. One frame often holds several values, and some values take only a single bit.</dd>
+    <dt>CRC</dt><dd>A checksum for detecting transmission errors. It is not a security feature. Your adapter calculates a correct CRC for every frame you send.</dd>
+    <dt>ACK</dt><dd>Every ECU that received the frame correctly sets this bit. The sender learns that at least one node heard it, but not which one.</dd>
+  </dl>
+
+  <h3>Who gets to talk</h3>
+  <p>No ECU is in charge of the bus, and there is no schedule. An ECU can start sending whenever the bus is idle. When two start at the same moment, each sends its ID one bit at a time and reads the bus back. An ECU that sends a recessive <code>1</code> but reads a dominant <code>0</code> has lost. It stops and tries again once the bus is free.</p>
+  <figure class="diagram">
+    <div class="diagram-scroll">
+    <svg viewBox="0 0 800 290" role="img" aria-labelledby="arb-title arb-desc">
+      <title id="arb-title">Arbitration between three ECUs</title>
+      <desc id="arb-desc">Three ECUs start sending their 11-bit IDs at the same time. ECU A with ID 1A3 sends a 1 on the fourth bit while the bus carries a 0, and backs off. ECU B with ID 12B loses the same way on the eighth bit. ECU C with ID 123, the lowest ID, never notices a conflict and wins the bus.</desc>
+      <text class="d-small" x="210" y="40">ID bits, sent one at a time →</text>
+      <g class="d-text"><text x="20" y="78">ECU A</text><text x="20" y="128">ECU B</text><text x="20" y="178">ECU C</text><text x="20" y="250">On the bus</text></g>
+      <g class="d-small"><text x="20" y="94">ID 1A3</text><text x="20" y="144">ID 12B</text><text class="d-accent" x="20" y="194">ID 123 · wins</text><text x="20" y="266">dominant 0 wins</text></g>
+      <path class="d-cells" d="M210 80H410M210 130H610M210 180H760"/>
+      <path class="d-cells d-cells-bus d-glow" d="M210 250H760"/>
+      <g class="d-lose"><rect x="360" y="63" width="46" height="34"/><rect x="560" y="113" width="46" height="34"/></g>
+      <g class="d-bit" text-anchor="middle">
+        <text y="85" x="233 283 333 383">0011</text>
+        <text y="135" x="233 283 333 383 433 483 533 583">00100101</text>
+        <text y="185" x="233 283 333 383 433 483 533 583 633 683 733">00100100011</text>
+        <text class="d-on-primary" y="255" x="233 283 333 383 433 483 533 583 633 683 733">00100100011</text>
+      </g>
+      <g class="d-small"><text x="422" y="84">sent 1, heard 0: lost, now only listens</text><text x="622" y="134">sent 1, heard 0: lost</text></g>
+      <path class="d-grid" d="M20 215H760"/>
+    </svg>
+    </div>
+    <figcaption>Three ECUs start sending at the same time. The two with the higher IDs drop out, and the frame with ID 123 goes out without any delay.</figcaption>
+  </figure>
+  <p>This is called <strong>arbitration</strong>, and the result is that <strong>the lowest ID wins</strong>. Manufacturers give urgent messages such as braking a low ID and comfort messages a high one. A device that keeps sending a very low ID can block the whole bus, which is the basis of a simple denial-of-service attack.</p>
+
+  <h3>Everyone hears everything</h3>
+  <p>CAN is a <strong>broadcast</strong> network. A frame is not sent to a particular ECU. All ECUs receive it, and each one decides whether it needs that ID. A frame doesn't contain a sender either, so a receiver can't tell which ECU it came from.</p>
+  <p>In 1986 that was fine, because the bus was a closed network and nothing on it was connected to the outside world. Classic CAN therefore has <strong>no authentication and no encryption</strong>. Anything that can send on the bus can pretend to be any ECU.</p>
+
+  <h3>Cyclic messages</h3>
+  <p>Most frames are sent at a fixed interval, even when the value hasn't changed. Engine speed might be sent every 20 ms, door status every 100 ms and the odometer once a second. That interval is the <strong>cycle time</strong>. Some frames are only sent when something happens, such as a button press.</p>
+  <p>This matters in two ways when you start sending frames yourself:</p>
+  <ul>
+    <li>A receiver notices when an expected frame stops arriving and usually reports a fault, for example with a warning lamp.</li>
+    <li>The real ECU keeps sending. Your spoofed value is replaced by the real one a few milliseconds later, so you have to keep sending yours, and more often than the real ECU does.</li>
+  </ul>
+  <figure class="diagram">
+    <div class="diagram-scroll">
+    <svg viewBox="0 0 800 250" role="img" aria-labelledby="cyc-title cyc-desc">
+      <title id="cyc-title">Why a spoofed frame has to be repeated</title>
+      <desc id="cyc-desc">A timeline with three lanes. The real ECU sends a frame at a steady interval. A single spoofed frame changes what the cluster shows only until the next real frame arrives. Spoofed frames repeated faster than the real ones keep the cluster on your value almost all the time.</desc>
+      <g class="d-label"><text x="200" y="34">One frame</text><text x="480" y="34">Repeated, faster than the real sender</text></g>
+      <path class="d-grid" d="M455 20V225"/>
+      <g class="d-text"><text x="20" y="85">Real ECU</text><text x="20" y="140">You</text><text x="20" y="195">Cluster shows</text></g>
+      <path class="d-grid" d="M200 80H760M200 135H760"/>
+      <path class="d-tick" d="M220 67V93M320 67V93M420 67V93M520 67V93M620 67V93M720 67V93"/>
+      <path class="d-tick d-tick-you d-glow" d="M260 122V148M480 122V148M505 122V148M530 122V148M555 122V148M580 122V148M605 122V148M630 122V148M655 122V148M680 122V148M705 122V148M730 122V148M755 122V148"/>
+      <rect class="d-strip" x="200" y="179" width="560" height="22"/>
+      <g class="d-strip-you d-glow"><rect x="260" y="179" width="60" height="22"/><rect x="480" y="179" width="40" height="22"/><rect x="530" y="179" width="90" height="22"/><rect x="630" y="179" width="90" height="22"/><rect x="730" y="179" width="30" height="22"/></g>
+      <g class="d-small"><text x="200" y="222">real</text><text class="d-accent" x="260" y="222">yours, briefly</text><text class="d-accent" x="530" y="222">yours, almost all the time</text></g>
+    </svg>
+    </div>
+    <figcaption>The cluster shows the value from the last frame it received. One spoofed frame is visible for a moment. A repeated one is visible most of the time.</figcaption>
+  </figure>
+
+  <h3>From bytes to signals</h3>
+  <p>A value inside a frame is called a <strong>signal</strong>. To decode one you need to know which bytes it uses, which bits, the byte order and the scaling. Frame data is written in <strong>hexadecimal</strong>: one byte is two hex digits, from <code>00</code> to <code>FF</code> (0 to 255).</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Kind of signal</th><th>Example bytes</th><th>How to read it</th></tr></thead>
+    <tbody>
+      <tr><td>Flags</td><td><code>05</code></td><td>Binary <code>0000 0101</code>: bit 0 and bit 2 are set. Each bit is one on/off thing.</td></tr>
+      <tr><td>One byte</td><td><code>5A</code></td><td>90 in decimal. Often with an offset, for example 90 − 40 = 50 °C.</td></tr>
+      <tr><td>Two bytes, big-endian</td><td><code>0B B8</code></td><td>High byte first: <code>0x0BB8</code> = 3000.</td></tr>
+      <tr><td>Two bytes, little-endian</td><td><code>B8 0B</code></td><td>Low byte first: also <code>0x0BB8</code> = 3000.</td></tr>
+      <tr><td>Scaled value</td><td><code>0B B8</code></td><td>Raw 3000 × 0.25 = 750. Scaling stores decimals in whole numbers.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>For a real car you don't get this information. You have to work it out: change one thing in the car, see which bytes change, and repeat. Section 1 is practice in exactly that.</p>
+  <p>Many safety-related frames also carry an <strong>alive counter</strong> that increments with every frame and a <strong>checksum</strong> over the payload. They let a receiver detect a frozen or corrupted sender, and some receivers reject frames where they are wrong.</p>
+
+  <h3>More than eight bytes: diagnostics</h3>
+  <p>Broadcast frames are how ECUs talk to each other. Workshop testers talk to one ECU at a time, with requests and responses. That needs longer messages, so a transport layer called <strong>ISO-TP</strong> splits them across several frames. On top of it runs <strong>UDS</strong>, the diagnostic protocol used to read identification data, fault codes and live values, and to unlock protected functions.</p>
+  <p>Each ECU listens for requests on one ID and answers on another. The simulator's tool takes care of ISO-TP for you. Section 3 uses UDS.</p>
+
+  <h2 id="launch">Launch the simulator</h2>
+  <p>The challenges run in <a href="https://github.com/roaldnefs/webusb-can" target="_blank" rel="noopener">webusb-can</a>, a browser-based CAN tool with a built-in virtual car. Open it in a second window and keep this page next to it.</p>
+  <p><a class="btn" href="https://roaldnefs.github.io/webusb-can/" target="_blank" rel="noopener">Launch simulator</a></p>
+  <dl class="steps">
+    <dt>01</dt><dd>Use <strong>Chrome</strong> or <strong>Edge</strong> on a laptop or desktop. If a "WebUSB not supported" notice appears, close it. The simulator works without it.</dd>
+    <dt>02</dt><dd>Click <strong>Start simulator</strong> in the top bar. You don't need <em>Connect device</em>, that is for a real USB adapter.</dd>
+  </dl>
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-start.png" width="1080" height="102" loading="lazy" alt="The top bar of the tool with the buttons Connect device and Start simulator.">
+    <figcaption>The top bar. <strong>Start simulator</strong> is the second button.</figcaption>
+  </figure>
+  <dl class="steps">
+    <dt>03</dt><dd>The <strong>Simulated car</strong> panel appears. Hold <strong>Accelerate</strong> or <strong>Brake</strong>, or use the arrow keys: <kbd>↑</kbd> accelerate, <kbd>↓</kbd> brake, <kbd>←</kbd> <kbd>→</kbd> turn signals.</dd>
+  </dl>
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-car.png" width="963" height="635" loading="lazy" alt="The Simulated car panel: a rev counter and a speedometer, a display with gear, doors and odometer, four warning lamps, and buttons for signals, brake, accelerate and doors.">
+    <figcaption>The car. Rev counter on the left, speedometer on the right. The display in the middle shows the gear, the doors and the odometer, with the four warning lamps below it. The <strong>FL FR RL RR</strong> buttons open the doors, and <strong>Bogus traffic</strong> switches the decoy frames on and off.</figcaption>
+  </figure>
+
+  <h3 id="interface">The interface</h3>
+  <p>Everything the car sends ends up in the large panel on the right. It has two views of the same traffic, <strong>Log</strong> and <strong>Sniffer</strong>, and you switch between them at the top.</p>
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-sniffer.png" width="1611" height="519" loading="lazy" alt="The Sniffer view: one row per ID with the columns Cycle, Count, DLC, Data and ASCII. Some data bytes are highlighted.">
+    <figcaption>The <strong>Sniffer</strong> has one row per ID. <em>Cycle</em> is the time between two frames in milliseconds and <em>Count</em> is how many have arrived. A byte lights up when it has just changed, and <em>ASCII</em> shows the same bytes as text.</figcaption>
+  </figure>
+  <p class="example"><span>Example</span> In the screenshot, ID <code>296</code> arrives about every 200 ms and none of its bytes are lit, so nothing in it is changing. A row where bytes keep lighting up while you drive is a better place to look.</p>
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-log.png" width="1611" height="414" loading="lazy" alt="The Log view filtered on ID 123, showing transmitted frames with the data DE AD BE EF 00 00 00 00.">
+    <figcaption>The <strong>Log</strong> lists every frame in order: time, direction, ID, length and data. <em>RX</em> rows come from the car and <em>TX</em> rows are frames you sent. Type an ID in the filter box to see only that ID, and use <strong>Pause</strong> to stop the scrolling.</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-send.png" width="1587" height="132" loading="lazy" alt="The Send bar with fields for ID, DLC and data, a Send button, an interval in milliseconds and a Repeat button.">
+    <figcaption>The <strong>Send bar</strong> at the bottom. Fill in the ID and the data bytes in hex and click <strong>Send</strong> for one frame. <strong>Repeat</strong> keeps sending it at the interval in <em>Every (ms)</em>.</figcaption>
+  </figure>
+  <p class="example"><span>Example</span> ID <code>123</code>, DLC <code>8</code>, data <code>DE AD BE EF 00 00 00 00</code>, then <strong>Send</strong>. The frame shows up in the Log as <em>TX</em>, as in the screenshot above.</p>
+  <p>The panel on the left has three tools, one per tab.</p>
+  <div class="shots-3">
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-signals.png" width="552" height="303" loading="lazy" alt="The Signals tab with one saved signal that is switched on.">
+    <figcaption><strong>Signals</strong>: saved frames that repeat while their switch is on. Use it when you need two or more frames running at once.</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-uds.png" width="552" height="729" loading="lazy" alt="The UDS tab with request and response IDs, a list of common requests, a request field and a positive response.">
+    <figcaption><strong>UDS</strong>: type a diagnostic request, click <strong>Send request</strong> and read the answer below it. The list has ready-made requests.</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="/images/virtual-cluster/ui-fuzzer.png" width="552" height="729" loading="lazy" alt="The Fuzzer tab with modes for ID, length and data.">
+    <figcaption><strong>Fuzzer</strong>: sends frames with random, counting or fixed IDs and data. Section 2 uses it with a fixed ID and random data.</figcaption>
+  </figure>
+  </div>
+  <p class="example"><span>Example</span> In the UDS tab, type <code>3E 00</code> and click <strong>Send request</strong>. The ECU answers <em>Positive response</em>. <code>3E</code> is Tester Present, a request that does nothing except show that you are still there.</p>
+  <p>For anything you can't do by hand there is a scripting API in the browser console, see <a href="#quick-reference">the quick reference</a>.</p>
+
+  <h3 id="warm-up">Warm-up: your first five minutes</h3>
+  <p>A quick tour of the tool. There are no points for this part.</p>
+  <dl class="steps">
+    <dt>01</dt><dd><strong>Watch the log.</strong> With the simulator started, every row is one frame: time, direction, ID, length and data. <code>RX</code> rows come from the car.</dd>
+    <dt>02</dt><dd><strong>Switch to the Sniffer.</strong> Same traffic, one row per ID. Compare the cycle times, and notice that some rows never change while others flicker constantly.</dd>
+    <dt>03</dt><dd><strong>Drive.</strong> Hold <kbd>↑</kbd> for a few seconds and watch the Sniffer. Some bytes start moving with the car. Those are the ones worth your attention.</dd>
+    <dt>04</dt><dd><strong>Filter.</strong> Back in the Log, type an ID you saw into the filter box to follow just that message. Use <strong>Pause</strong> to freeze it and read at your own pace.</dd>
+    <dt>05</dt><dd><strong>Send a frame.</strong> In the Send bar at the bottom, enter ID <code>123</code>, DLC <code>8</code>, data <code>DE AD BE EF 00 00 00 00</code> and click <strong>Send</strong>. It appears in the log as <code>TX</code>. Nothing reacts, because no ECU cares about that ID.</dd>
+    <dt>06</dt><dd><strong>Repeat it.</strong> Set the interval to <code>100</code> ms and click <strong>Repeat</strong>. The frame now goes out every 100 ms, the same way the car's ECUs send theirs. Click it again to stop.</dd>
+  </dl>
+  <p>You will use these four things in every challenge: reading the log, filtering, sending a frame and repeating it.</p>
+
+  <aside class="callout callout-warning">
+    <span class="callout-prefix">warning:</span>
+    <div class="callout-body"><p>Nothing can break in the simulator. On a real vehicle the same frames can switch off safety systems. <strong>Only test cars and ECUs that you own or have explicit permission to test</strong>, and never do it on a public road.</p></div>
+  </aside>
+
+  <h2 id="route">Choose your route</h2>
+  <p>Pick the short route if you have half an hour. It takes you through reading the bus, sending your own frames and talking to the ECU. The full route has every challenge. You can switch at any time and your progress is kept.</p>
+  <div class="routes" role="radiogroup" aria-label="Route">
+    <button type="button" class="route" role="radio" aria-checked="false" data-route="short">
+      <span class="route-name">Short</span>
+      <span class="route-meta" id="routeShortMeta">6 challenges</span>
+      <span class="route-desc">The essentials, one step at a time.</span>
+      <span class="route-track" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <button type="button" class="route" role="radio" aria-checked="true" data-route="full">
+      <span class="route-name">Full</span>
+      <span class="route-meta" id="routeFullMeta">16 challenges</span>
+      <span class="route-desc">Everything, up to security access.</span>
+      <span class="route-track" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </button>
+  </div>
+
+  <h2 id="score">Your score</h2>
+  <p>Tick an objective when you have done it. Your progress is stored in this browser only, and nobody checks your answers.</p>
+  <div class="score">
+    <button class="reset" id="scoreReset" type="button">Reset all</button>
+    <div class="gauge">
+      <svg viewBox="0 0 240 240" aria-hidden="true">
+        <defs>
+          <linearGradient id="gRim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa3b5"/><stop offset=".5" stop-color="#3a4150"/><stop offset="1" stop-color="#6b7384"/></linearGradient>
+          <radialGradient id="gFace" cx=".5" cy=".42" r=".6"><stop offset="0" stop-color="#151c29"/><stop offset="1" stop-color="#04070c"/></radialGradient>
+          <radialGradient id="gHub" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#4a5262"/><stop offset="1" stop-color="#11151c"/></radialGradient>
+          <linearGradient id="gGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        </defs>
+        <circle cx="120" cy="120" r="117" fill="url(#gFace)" stroke="url(#gRim)" stroke-width="5"/>
+        <path class="g-track" d="M25.6 174.5A109 109 0 1 1 214.4 174.5" pathLength="100"/>
+        <path class="g-fill" id="scoreFill" d="M25.6 174.5A109 109 0 1 1 214.4 174.5" pathLength="100" stroke-dasharray="0 100"/>
+        <path class="g-minor" d="M32.2 161.3L26.8 163.9M29.1 153.8L23.5 155.9M26.6 146.1L20.8 147.7M24.7 138.2L18.8 139.3M23.0 122.0L17.0 122.2M23.2 113.9L17.2 113.5M24.0 105.8L18.1 105.0M25.6 97.8L19.7 96.5M30.6 82.4L25.0 80.1M34.0 75.1L28.7 72.3M38.1 68.0L33.0 64.8M42.7 61.4L38.0 57.7M53.6 49.3L49.5 44.9M59.7 44.0L56.0 39.3M66.3 39.2L63.0 34.2M73.3 35.0L70.4 29.7M88.1 28.4L86.1 22.7M95.9 26.0L94.4 20.2M103.8 24.4L102.8 18.4M111.9 23.3L111.4 17.4M128.1 23.3L128.6 17.4M136.2 24.4L137.2 18.4M144.1 26.0L145.6 20.2M151.9 28.4L153.9 22.7M166.7 35.0L169.6 29.7M173.7 39.2L177.0 34.2M180.3 44.0L184.0 39.3M186.4 49.3L190.5 44.9M197.3 61.4L202.0 57.7M201.9 68.0L207.0 64.8M206.0 75.1L211.3 72.3M209.4 82.4L215.0 80.1M214.4 97.8L220.3 96.5M216.0 105.8L221.9 105.0M216.8 113.9L222.8 113.5M217.0 122.0L223.0 122.2M215.3 138.2L221.2 139.3M213.4 146.1L219.2 147.7M210.9 153.8L216.5 155.9M207.8 161.3L213.2 163.9"/>
+        <path class="g-major" d="M42.1 165.0L30.8 171.5M30.5 129.4L17.6 130.8M34.4 92.2L22.0 88.2M53.1 59.8L43.5 51.1M83.4 37.8L78.1 25.9M120.0 30.0L120.0 17.0M156.6 37.8L161.9 25.9M186.9 59.8L196.5 51.1M205.6 92.2L218.0 88.2M209.5 129.4L222.4 130.8M197.9 165.0L209.2 171.5"/>
+        <g class="g-labels" text-anchor="middle"><text x="55.0" y="162.0">0</text><text x="48.7" y="101.3">20</text><text x="89.5" y="56.0">40</text><text x="150.5" y="56.0">60</text><text x="191.3" y="101.3">80</text><text x="185.0" y="162.0">100</text></g>
+        <ellipse cx="120" cy="62" rx="92" ry="52" fill="url(#gGlass)"/>
+        <g class="g-needle" id="scoreNeedle"><path d="M117.2 120L119.3 26h1.4L122.8 120L121.2 142h-2.4Z"/></g>
+        <circle cx="120" cy="120" r="12" fill="url(#gHub)" stroke="#5a6272"/>
+        <circle cx="120" cy="120" r="4" fill="#05070a"/>
+      </svg>
+      <div class="digits">
+        <span class="total" id="scoreTotal">0</span>
+        <span class="of">/ <span id="scoreMax">0</span> pts</span>
+      </div>
+    </div>
+    <div class="score-side">
+      <p class="eyebrow">Your rank</p>
+      <p class="rank" id="scoreRank">Passenger</p>
+      <p class="count"><span id="scoreCount">0</span> of <span id="scoreOf">0</span> objectives done</p>
+      <ul class="score-sections" id="scoreSections"></ul>
+    </div>
+    <div class="celebration" id="celebration" role="status" aria-live="polite">
+      <p class="title" id="celebrationTitle">Cluster Overlord</p>
+      <p id="celebrationText">All objectives done. Nice work.</p>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 1 ============ -->
+  <header class="section-head" data-num="01">
+    <p class="eyebrow section-label">Section 1</p>
+    <h2 id="section-1" class="vcc-section-title">Listen</h2>
+  </header>
+  <p>In this section you only watch. Start the simulator, open the <strong>Sniffer</strong> and drive the car around. If the decoy traffic gets in the way, switch off <strong>Bogus traffic</strong> in the <em>Simulated car</em> panel. Only the real frames are left.</p>
+
+  <article class="challenge" data-min="3" data-short>
+  <h3 id="challenge-01">Challenge 01 // First contact</h3>
+  <p>Start the simulator and look at the traffic. There are dozens of IDs and each has its own cycle time. Some carry real signals, but most are decoys.</p>
+    <p class="criterion"><span>Done when</span> the Sniffer is filling up and you can point at the IDs that keep returning.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Start the simulator and see frames arrive</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Write down three IDs that keep coming back</span><span class="pts">+10</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Find one ID that repeats many times a second and one that only shows up about once a second</span><span class="pts">+10</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Use the Sniffer, not the Log: it keeps one row per ID and shows how often each one arrives.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>The <em>cycle time</em> column is the gap in milliseconds between two frames of the same ID. Small number means fast.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Click <b>Start simulator</b>, then open the <b>Sniffer</b> tab. Each row is one arbitration ID with a count and a cycle time. The fastest real frames arrive about every 20 ms; the slowest, like the odometer, about once a second (1000 ms).</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You now know the difference between the <b>Log</b> (every frame, in order) and the <b>Sniffer</b> (one row per ID). Reading the bus this way is the first thing anyone does on a real car.</p></div>
+  </article>
+
+  <article class="challenge" data-min="5" data-short>
+  <h3 id="challenge-02">Challenge 02 // Signal from noise</h3>
+  <p>Decoy frames stay the same whatever the car does. Real frames change when you drive. Accelerate, brake and coast, and watch which bytes follow.</p>
+    <p class="criterion"><span>Done when</span> you can name the IDs for speed, RPM and the pedals.</p>
+  <ul class="mission">
+  <li class="ask" data-answer="251cd365f3cbd78dd8f4f673ce7f05e4e9d10b5c30f066fe0a9cd8a1c0beb15c" data-mode="loose"><input type="checkbox" hidden><div class="task">Which ID carries <strong>vehicle speed</strong>?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 7DF" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+10</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="3c9701a8532b468b9f1e41ae722f8c6733d5416056dadbe7d0095be15d0f2fae 8c7da3062858816fab41d30171745f182e2ba2a1a55a2186d351ce2da92bb107" data-mode="loose"><input type="checkbox" hidden><div class="task">Which ID carries <strong>engine RPM</strong>?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 7DF" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+10</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="56533c51c710f81b3b1ac0286be7b5a7e9fa2bba86ebb5117fb2c14f119640f0" data-mode="loose"><input type="checkbox" hidden><div class="task">Which ID reports your <strong>pedals and gear</strong>?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 7DF" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+15</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Hold the accelerator and watch which rows in the Sniffer start changing. Let go and watch which ones freeze.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Speed keeps rising for a moment after you lift off; RPM drops at every gear change. A byte that flips the instant you press a key is the pedal, not the result.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Drive with the arrow keys and watch the Sniffer. Speed is on <code>244</code> (a value that climbs and falls smoothly), RPM is on <code>0AA</code> (jumps at gear changes), and the pedals and gear are on <code>1D0</code> (one byte flips to 0xFF the moment you hold the accelerator).</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>You separated signal from noise by changing one input at a time and watching what moved. On a real car, where nothing is labelled, this is exactly how a bus gets mapped.</p></div>
+  </article>
+
+  <article class="challenge" data-min="8">
+  <h3 id="challenge-03">Challenge 03 // Decode the dials</h3>
+  <p>Now work out how the bytes map to the numbers on the dials. Speed is one 16-bit number in bytes 3 and 4 of the speed frame (counting from 0, high byte first). RPM is a single byte, byte 4 of the RPM frame. The odometer is the only frame with 3 data bytes, and those 3 bytes are one number. Convert the hex to decimal and compare it with the cluster.</p>
+    <p class="criterion"><span>Done when</span> you can turn the raw bytes of the speed and RPM frames into the numbers on the dials.</p>
+  <ul class="mission">
+  <li class="ask" data-answer="a58ddeed140eca4e6704b263f78f195e94ef11bbe9a80730f18630ee570fc91e" data-mode="loose"><input type="checkbox" hidden><div class="task">By what number do you divide the raw speed value to get <strong>km/h</strong>?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="a number" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+15</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="ee2cf559e794f00ad2cfbe25608676953a6c15ed3a4b7025326d12e36abe2dba" data-mode="loose"><input type="checkbox" hidden><div class="task">How many RPM does <strong>one count</strong> of the RPM byte represent?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="a number" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+15</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="024dc4f2d4c70436c1bffbbf52348992f9acf936d382826879120c1e2539d8bb" data-mode="loose"><input type="checkbox" hidden><div class="task">By what number do you divide the raw odometer value to get <strong>km</strong>?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="a number" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+15</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Two bytes that change together are usually one 16-bit number. Read the high byte first (big-endian).</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Pick a steady RPM, read the raw byte as a decimal number, and divide the RPM on the dial by it. The answer is a round number.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>For speed, bytes 3 and 4 of <code>244</code> are one big-endian number equal to km/h times 100 (so <code>27 10</code> = 10000 = 100 km/h). For RPM, byte 4 of <code>0AA</code> times <b>32</b> gives the RPM. The odometer on <code>5C8</code> is a 24-bit big-endian number equal to km times 10.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Decoding a signal is always the same four questions: which bytes, which bits, what byte order, what scale. You will reuse the speed and RPM maps when you start sending frames in Section 2.</p></div>
+  </article>
+
+  <article class="challenge" data-min="4" data-short>
+  <h3 id="challenge-04">Challenge 04 // Read the VIN</h3>
+  <p>Every car has a 17-character <strong>Vehicle Identification Number</strong>. This car broadcasts it on the bus. 17 characters don't fit in one frame, so it is split over several.</p>
+    <p class="criterion"><span>Done when</span> you have read all 17 characters of the VIN off the bus.</p>
+  <ul class="mission">
+  <li class="ask" data-answer="595872437822cefd954b486acee59501ac74b7b930cb92e3c29880ac07876bea" data-mode="loose"><input type="checkbox" hidden><div class="task">Which ID broadcasts the VIN?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 7DF" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+10</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="0d1a3ff1cb2392722fd52c305f16302e34dc2a0a62c3427a49ab44d8958a0ef3" data-mode="strict"><input type="checkbox" hidden><div class="task">What is the full 17-character VIN?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="17 characters" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+15</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>The Sniffer has an ASCII column on the right. Look for a row whose bytes read as letters and digits.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>It arrives in three frames. The first byte of each frame is a 0, 1 or 2 that tells you the order; the other seven bytes are text.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>On <code>65D</code> the first data byte is an index (0, 1, 2) and the next seven bytes are ASCII. Stitch the three chunks together in order to get <code>WVWZZZ1KZAW123456</code>. You can also read it later over UDS with <code>22 F1 90</code>.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>A value too big for eight bytes gets split across several frames with an index byte. That multi-frame idea is the whole reason the UDS transport layer in Section 3 exists.</p></div>
+  </article>
+
+  <article class="challenge" data-min="6">
+  <h3 id="challenge-05">Challenge 05 // Count and check</h3>
+  <p>Look at the last two bytes of the speed frame. They change on every frame, even when the car is standing still. Byte 6 is a counter and byte 7 is a checksum over bytes 0 to 6. Real ECUs add these so a receiver can spot a stuck or corrupted sender.</p>
+    <p class="criterion"><span>Done when</span> you can predict the last two bytes of a speed frame before it is sent.</p>
+  <ul class="mission">
+  <li class="ask" data-answer="c8be1af8da3872e90e6685fd08cb7aecf066792862917ed835f54e5f03d19f60 0ad45df40c89b465e7b2d795abf087f025f0b64d1bedf27a25a70dee73b27e8c 7b8a2051d4aa34b9319c9d2a3b4a681e1958608c214f39c992b0d5b8af973489" data-mode="loose"><input type="checkbox" hidden><div class="task">What is the highest value the counter reaches before it wraps back to 0?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="a number" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+15</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="9e36327c4d6c91d4f9b5b812a7490f62b3eb9bfeca8540d05a22365157c26687" data-mode="loose"><input type="checkbox" hidden><div class="task">Which one-byte operation over the first seven bytes produces the checksum?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="one word" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Pause the Log and line up three frames with the same ID. One of the last two bytes steps by exactly one each time.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>The counter is byte 6 and runs 0..15 (one nibble). The checksum is byte 7, and it is not an addition. Try combining the first seven bytes with exclusive-or.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Byte 6 is an <b>alive counter</b> that counts 0 to 15 and wraps. Byte 7 is the <b>XOR</b> of bytes 0 to 6. The cluster in this simulator does not check either, but real ECUs often reject frames whose counter is stale or whose checksum is wrong.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Counters and checksums are how a receiver spots a dead or lying sender. Where they are enforced, a naive replay of a captured frame fails, because the counter you replay is soon out of date.</p></div>
+  </article>
+
+  <!-- ============ SECTION 2 ============ -->
+  <header class="section-head" data-num="02">
+    <p class="eyebrow section-label">Section 2</p>
+    <h2 id="section-2" class="vcc-section-title">Speak</h2>
+  </header>
+  <p>Now you send frames yourself. The cluster accepts what you send, but it falls back to the real value after a fraction of a second. For most of these challenges you need a frame that <strong>keeps repeating</strong>.</p>
+
+  <article class="challenge" data-min="5" data-short>
+  <h3 id="challenge-06">Challenge 06 // Turn signals</h3>
+  <p>Some IDs are only sent when something happens. The frame for the indicator arrows is one of them, so you won't see it while the car is idle.</p>
+    <p class="criterion"><span>Done when</span> you can light the left arrow, the right arrow and both, using only frames you send.</p>
+  <ul class="mission">
+  <li class="ask" data-answer="5319566d8d378ab9f713a222f264212582e51ed63d6cfc6b3f10ba7a0fb899c2" data-mode="loose"><input type="checkbox" hidden><div class="task">Which ID drives the indicator arrows?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 7DF" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+15</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li><label><input type="checkbox"><span class="task">Light the <strong>left</strong> arrow with your own frame</span><span class="pts">+15</span></label></li>
+  <li><label><input type="checkbox"><span class="task">Light the <strong>right</strong> arrow</span><span class="pts">+15</span></label></li>
+  <li><label><input type="checkbox"><span class="task">Hazards: both at once</span><span class="pts">+15</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>This ID is silent while the car is idle, so you cannot find it by watching. Make it appear first.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Press the left arrow key and watch for an ID that was not there a moment ago. Left and right are two separate bits in the same byte.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Press <kbd>&larr;</kbd> to make <code>188</code> appear. Byte 0 bit 0 is the left arrow and bit 1 is the right. Repeat <code>188: 01</code> for left, <code>188: 02</code> for right, and <code>188: 03</code> for both (hazards). Send it every 100 ms or so.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Some frames are event-driven and never show up on an idle bus. To find them you have to trigger the function first, then look.</p></div>
+  </article>
+
+  <article class="challenge" data-min="3">
+  <h3 id="challenge-07">Challenge 07 // Doors</h3>
+  <p>The door frame is always on the bus. Open a door with the on-screen buttons and see what changes. Then send the frame yourself instead of using the buttons.</p>
+    <p class="criterion"><span>Done when</span> the cluster shows all four doors open, then only the rear-left, from frames you send.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Show all four doors open</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Show <strong>only the rear-left</strong> door open</span><span class="pts">+20</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Open the doors one at a time with the on-screen buttons and watch which bit in the door frame changes.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>All four doors live in the low nibble of one byte. Front-left, front-right, rear-left, rear-right are bits 0, 1, 2, 3.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>The door frame is <code>19B</code>, and byte 2 holds the doors in its low nibble. Send <code>19B: 00 00 0F</code> for all four open, and <code>19B: 00 00 04</code> (bit 2) for only the rear-left.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>One byte, read as four bits, is a compact way to pack four on/off signals. Reading a byte in binary is a habit worth keeping.</p></div>
+  </article>
+
+  <article class="challenge" data-min="5" data-short>
+  <h3 id="challenge-08">Challenge 08 // Silence the warnings</h3>
+  <p>Two warning lamps are on from the start: <strong>immobilizer</strong> and <strong>airbag</strong>. Those two modules are missing from this bus, and the cluster reports a fault when it doesn't hear from them. You have one piece of documentation to go on: the immobilizer sends on <code>3D0</code>, the airbag on <code>050</code>, and a frame with only zeros means there is no fault.</p>
+    <p class="criterion"><span>Done when</span> both warning lamps stay dark while your frames keep arriving.</p>
+  <ul class="mission">
+  <li><label><input type="checkbox"><span class="task">Make the immobilizer lamp go dark and stay dark</span><span class="pts">+20</span></label></li>
+  <li><label><input type="checkbox"><span class="task">Do the same for the airbag lamp, at the same time</span><span class="pts">+15</span></label></li>
+  <li class="ask" data-answer="1141f3accbd94ef75a556f262eb99d7d46f8f7bb3d7af76a0d4be8eff366d249 a7a5a148cd520bda6d1f1dfc7e89b7b2ab0a280246ff1ac33e63aa45e2f3abc3 0938b6df0a53c15f8570078c1417bc16738f1a7471b2140cdb6f62c83add6449" data-mode="loose"><input type="checkbox" hidden><div class="task">About what is the longest interval, in milliseconds, that still keeps a lamp off? (nearest 10 ms)</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="milliseconds" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>One frame is not enough. The cluster wants to keep hearing from these modules, so your frame has to repeat.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Use the <b>Signals</b> tab to run <code>3D0</code> and <code>050</code> at the same time, both with all-zero data. Then slow one down until its lamp flickers.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Both modules report &ldquo;no fault&rdquo; as all zeros. Add two repeating signals, <code>3D0: 00 00 00 00 00 00 00 00</code> and <code>050: 00 00 00 00 00 00 00 00</code>, at about 100 ms. The lamp starts to flicker once the gap passes roughly <b>200 ms</b>, which is how long the cluster waits before it assumes the module is gone.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>A missing heartbeat is itself a fault to the cluster. This is why you cannot just send a value once: safety functions expect a steady stream.</p></div>
+  </article>
+
+  <article class="challenge" data-min="5">
+  <h3 id="challenge-09">Challenge 09 // Pin the RPM</h3>
+  <p>In Challenge 03 you decoded the RPM frame: byte 4 times 32 is the RPM. Now send one yourself. Divide the RPM you want by 32, convert that to hex and put it in byte 4, with zeros in the other bytes. The engine ECU keeps sending the real value, so repeat yours every 20 ms.</p>
+    <p class="criterion"><span>Done when</span> the rev needle sits where you put it, not where the engine wants it.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Move the rev needle with a frame of your own</span><span class="pts">+15</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Hold it in the red zone</span><span class="pts">+20</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Hold a steady 800 RPM while you floor the throttle</span><span class="pts">+20</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Reuse what you found in Challenge 03: byte 4 of the RPM frame, times 32.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>The engine keeps sending its own value, so repeat yours faster than it does, every 20 ms.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>RPM is byte 4 of <code>0AA</code>. For the red zone send <code>0AA: 00 00 00 00 F0</code> (0xF0 = 240, times 32 = 7680). For a steady idle send byte 4 = <code>19</code> (25 times 32 = 800). Repeat every 20 ms so the engine's own frame never wins.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Writing a frame is the same as reading one, in reverse: take the number you want, undo the scaling, place it in the right byte. Winning against the real sender is only a matter of sending more often.</p></div>
+  </article>
+
+  <article class="challenge" data-min="8">
+  <h3 id="challenge-10">Challenge 10 // Speedometer</h3>
+  <p>Try the same with the speed frame and the needle stays at zero. The cluster compares the speed with the <strong>wheel speeds</strong>, which are sent in a separate frame, and ignores values that don't match. Drive around and look for a frame with four nearly identical 16-bit values. Send that frame and the speed frame together, with the same value in both.</p>
+    <p class="criterion"><span>Done when</span> the speedometer holds a believable speed, not zero.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Show any non-zero speed while the car is parked</span><span class="pts">+25</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Hold a constant <strong>130 km/h</strong> for 10 seconds</span><span class="pts">+25</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Change the speed in steps: 50, 100, then 150 km/h</span><span class="pts">+30</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Spoofing <code>244</code> alone shows 0. The cluster is comparing your speed against another frame and ignoring the mismatch.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>While driving, look for a frame with four near-identical values that track the speed. That is the wheel-speed frame; send it to match.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>The cluster cross-checks <code>244</code> against the wheel speeds on <code>4A0</code>, four big-endian values in km/h times 100. Send both with matching numbers, for example <code>244: 00 00 00 32 C8</code> and <code>4A0: 32 C8 32 C8 32 C8 32 C8</code> for 130 km/h. For the steps, change the value in both frames: 50 km/h is <code>13 88</code>, 100 is <code>27 10</code> and 150 is <code>3A 98</code>.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>A plausibility check compares two sources that should agree. Beating it means keeping every related signal consistent, which is a realistic obstacle on modern vehicles.</p></div>
+  </article>
+
+  <article class="challenge" data-min="4">
+  <h3 id="challenge-11">Challenge 11 // Clock the miles</h3>
+  <p>Odometer fraud normally means lowering the mileage. Here you do the opposite and add kilometres to a parked car. The odometer is on the bottom line of the cluster display.</p>
+    <p class="criterion"><span>Done when</span> the odometer climbs while the needle stays at 0.</p>
+  <ul class="mission">
+    <li><label><input type="checkbox"><span class="task">Add a full kilometre in under ten seconds without touching the throttle</span><span class="pts">+25</span></label></li>
+    <li><label><input type="checkbox"><span class="task">Do it while the speedometer needle reads 0, and explain why that works</span><span class="pts">+15</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>The needle has the plausibility check from Challenge 10. Does the odometer use the same check?</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>The odometer integrates the raw speed value, not the displayed one. Think about the largest number two bytes can hold.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Send only <code>244</code> at a very high value, for example <code>244: 00 00 00 FF FF</code> (about 655 km/h), with no matching <code>4A0</code>. The needle reads 0 because the plausibility check fails, but the odometer still integrates the raw speed and climbs about 0.18 km per second.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Different consumers of the same signal can trust it differently. One display rejected your value while another quietly used it, which is exactly the kind of inconsistency that makes odometer fraud possible.</p></div>
+  </article>
+
+  <article class="challenge" data-min="8">
+  <h3 id="challenge-12">Challenge 12 // Fuzz responsibly</h3>
+  <p>Clusters often respond to frames that aren't in any documentation. Your notes list three more IDs without a description: <code>350</code>, <code>412</code> and <code>4F0</code>. Use the <strong>Fuzzer</strong> to send random data to one of them at a time and watch the cluster. Each one reacts to a single byte, either the first or the last.</p>
+  <aside class="callout callout-warning">
+    <span class="callout-prefix">warning:</span>
+    <div class="callout-body"><p>On a real car, fuzzing the whole ID range can put modules into a fault state that only a workshop can clear. Fuzz one ID at a time.</p></div>
+  </aside>
+    <p class="criterion"><span>Done when</span> you have found three undocumented reactions, including the exact byte that changes the display.</p>
+  <ul class="mission">
+  <li><label><input type="checkbox"><span class="task">Trigger a hidden warning lamp</span><span class="pts">+20</span></label></li>
+  <li><label><input type="checkbox"><span class="task">Trigger a second, different lamp</span><span class="pts">+20</span></label></li>
+  <li class="ask" data-answer="aa52ff0ee9d1d40d2c9529856b13d2783cfac94befbd0b5cd33c04f7c7b113a2" data-mode="loose"><input type="checkbox" hidden><div class="task">Which byte value in ID <code>412</code> makes the display change? (the value of byte 0)</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 1F" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+30</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Fuzz one ID at a time: fixed ID, random data, 8 bytes, a short gap. Watch the cluster, not the log.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>When something reacts, pause and look at the frames you just sent. Then narrow it to a single byte with the Send bar.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p><code>350</code> with byte 7 = <code>FF</code> lights the oil lamp; <code>4F0</code> with byte 0 = <code>A5</code> lights the check-engine lamp; <code>412</code> with byte 0 = <b><code>42</code></b> shows a message on the display. Fuzz each ID on its own, then confirm the exact byte in the Send bar.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Hardware often reacts to messages that appear in no documentation. Fuzzing one input at a time, then narrowing down, is how you find them without turning the whole thing into noise.</p></div>
+  </article>
+
+  <!-- ============ SECTION 3 ============ -->
+  <header class="section-head" data-num="03">
+    <p class="eyebrow section-label">Section 3</p>
+    <h2 id="section-3" class="vcc-section-title">Diagnose</h2>
+  </header>
+  <p>A workshop tester doesn't listen to broadcast traffic. It sends requests to one ECU and reads the responses, using a protocol called <strong>UDS</strong> (Unified Diagnostic Services). Open the <strong>UDS</strong> tab and type a request in hex. The tool takes care of the transport. A positive response starts with your service byte plus <code>0x40</code>. A negative response starts with <code>7F</code> and ends with a reason code.</p>
+  <figure class="diagram">
+    <div class="diagram-scroll">
+    <svg viewBox="0 0 800 400" role="img" aria-labelledby="uds-title uds-desc">
+      <title id="uds-title">A UDS conversation</title>
+      <desc id="uds-desc">The tester sends requests on ID 7E0 and the ECU answers on ID 7E8. Request 10 03 is answered with 50 03, the session is now extended. Request 22 F1 90 is answered with 62 F1 90 followed by the VIN. A request for a protected identifier is refused with 7F 22 33, security access denied.</desc>
+      <path class="d-link d-dash" d="M200 60V385M600 60V385"/>
+      <rect class="d-ecu d-you" x="130" y="24" width="140" height="36"/><rect class="d-ecu d-gateway" x="530" y="24" width="140" height="36"/>
+      <g class="d-text" text-anchor="middle"><text x="200" y="47">You · send on 7E0</text><text x="600" y="47">ECU · answers on 7E8</text></g>
+      <g class="d-req"><path d="M200 110H598M590 105L598 110L590 115M200 210H598M590 205L598 210L590 215M200 310H598M590 305L598 310L590 315"/></g>
+      <g class="d-res"><path d="M600 160H202M210 155L202 160L210 165M600 260H202M210 255L202 260L210 265"/></g>
+      <g class="d-neg"><path d="M600 360H202M210 355L202 360L210 365"/></g>
+      <g class="d-bit" text-anchor="middle"><text x="400" y="102">10 03</text><text x="400" y="152">50 03</text><text x="400" y="202">22 F1 90</text><text x="400" y="252">62 F1 90 …</text><text x="400" y="302">22 xx xx</text><text class="d-warn" x="400" y="352">7F 22 33</text></g>
+      <g class="d-small" text-anchor="middle"><text x="400" y="126">extended session, please</text><text x="400" y="176">positive: 0x10 + 0x40</text><text x="400" y="226">read the VIN</text><text x="400" y="276">positive: 0x22 + 0x40, then the data</text><text x="400" y="326">read something protected</text><text x="400" y="376">refused: security access denied</text></g>
+    </svg>
+    </div>
+    <figcaption>Three exchanges: a session change, a read, and a refusal.</figcaption>
+  </figure>
+
+  <article class="challenge" data-min="6" data-short>
+  <h3 id="challenge-13">Challenge 13 // Hello, ECU</h3>
+  <p>Start by reading some data. Service <code>22</code>, Read Data By Identifier, returns the value of a two-byte <strong>DID</strong>. To read DID <code>F190</code> you send <code>22 F1 90</code>. The identification data you need is between <code>F186</code> and <code>F195</code>. Live values use <code>F4</code> followed by the OBD-II PID number, and the PID for engine RPM is <code>0C</code>.</p>
+    <p class="criterion"><span>Done when</span> the ECU answers your reads and you can name the DIDs you used.</p>
+  <ul class="mission">
+  <li><label><input type="checkbox"><span class="task">Get any positive response out of the ECU</span><span class="pts">+15</span></label></li>
+  <li><label><input type="checkbox"><span class="task">Read the VIN over UDS and compare it with Challenge 04</span><span class="pts">+15</span></label></li>
+  <li class="ask" data-answer="e9d641e4f32af026ef96fccafe76108ea77315f4b59c9163207b20c682a0c04f 07f21b845eee6306387c0909ef6f6c705f9ce5758b374fb53860628585e8b674" data-mode="loose"><input type="checkbox" hidden><div class="task">Which two DIDs return the <strong>part number</strong> and the <strong>software version</strong>?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="two DIDs, e.g. F1A0 F1A1" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="430b556f4710b6d09c8bf242c3f14ab0eceaa0c54f346534fe6af6987128cdf3" data-mode="loose"><input type="checkbox" hidden><div class="task">Which DID returns live <strong>engine RPM</strong>?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. F123" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Open the UDS tab. A positive answer echoes your service byte plus 0x40, so a reply to <code>22</code> starts with <code>62</code>.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Walk the identification range <code>F180</code> to <code>F19F</code> by hand. An unknown DID is refused with reason <code>31</code>. Live values often mirror the OBD-II PID numbers in the <code>F4xx</code> range.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Send <code>22 F1 90</code> for the VIN, <code>22 F1 87</code> for the part number <code>1K0907115AB</code>, and <code>22 F1 95</code> for the software version <code>SW 1.4.2</code>. Live engine RPM is <code>22 F4 0C</code>: divide the returned 16-bit value by 4 and it matches the dial.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>UDS is request and response to one ECU, unlike the broadcast traffic in Sections 1 and 2. Read Data By Identifier is the safe way to enumerate what an ECU knows about itself.</p></div>
+  </article>
+
+  <article class="challenge" data-min="6">
+  <h3 id="challenge-14">Challenge 14 // Trouble codes</h3>
+  <p>An ECU stores a <strong>Diagnostic Trouble Code</strong> when it detects a fault. Service <code>19</code> reads the stored codes and service <code>14</code> erases them. A code comes back as three bytes. The first two give the code itself: <code>01 23</code> is P0123 and <code>C1 23</code> is U0123.</p>
+    <p class="criterion"><span>Done when</span> you have read the trouble codes, decoded them, and cleared them.</p>
+  <ul class="mission">
+  <li><label><input type="checkbox"><span class="task">Read the stored trouble codes</span><span class="pts">+20</span></label></li>
+  <li class="ask" data-answer="752f7eadf599c6ef7f971d4b4360a87cc14e9cc13e431ac9eb1553c186a45f1b a43a2108f947a45a6de0e6c463579182b727234cf15e5fcd2f94054a028a330c" data-mode="loose"><input type="checkbox" hidden><div class="task">Decode the stored codes. Write them in the usual letter-and-digits form.</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. P0123 U0456" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li><label><input type="checkbox"><span class="task">Clear them and prove they're gone</span><span class="pts">+20</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>Read them with <code>19 02 FF</code>. Each stored code is three bytes plus one status byte.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>The top two bits of the first byte choose the letter: 00 is P, 01 is C, 10 is B, 11 is U. The remaining bits are the digits.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p><code>19 02 FF</code> returns two records: <code>03 01 00</code> decodes to <b>P0301</b> (cylinder 1 misfire) and <code>C1 00 00</code> decodes to <b>U0100</b> (lost communication). Erase them with <code>14 FF FF FF</code>, then read again to confirm the list is empty.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Reading a trouble code is one service, erasing it is another. Being able to clear faults is useful in a workshop and is also how a fault can be hidden before a sale.</p></div>
+  </article>
+
+  <article class="challenge" data-min="6">
+  <h3 id="challenge-15">Challenge 15 // Sessions</h3>
+  <p>An ECU starts in the <strong>default session</strong>, where only harmless services work. The interesting ones need the <strong>extended session</strong>, and the ECU drops you back to default if you go quiet for too long.</p>
+    <p class="criterion"><span>Done when</span> you can enter the extended session, keep it alive, and let it drop on purpose.</p>
+  <ul class="mission">
+  <li><label><input type="checkbox"><span class="task">Enter the extended session and confirm it by reading the active session back</span><span class="pts">+15</span></label></li>
+  <li class="ask" data-answer="4c70aa00fda003dca92241912fb33066b05a414f93d13a2c65c4ba06f5e61f78" data-mode="loose"><input type="checkbox" hidden><div class="task">Roughly how many seconds of silence before the session drops back to default?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="a number" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+20</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li><label><input type="checkbox"><span class="task">Keep the extended session alive for a full minute</span><span class="pts">+20</span></label></li>
+  <li><label><input type="checkbox"><span class="task">Reset the ECU and watch what the cluster does</span><span class="pts">+20</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>The services you need, <code>10</code>, <code>3E</code> and <code>11</code>, are all in the preset dropdown.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Read the active session back with <code>22 F1 86</code>. Any request resets the idle timer, not just Tester Present.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>Send <code>10 03</code> to enter the extended session, then <code>22 F1 86</code> to confirm (it returns <code>...03</code>). Stop sending and after about <b>5</b> seconds it falls back to <code>...01</code>. Tick <b>Tester Present</b> (<code>3E 00</code> every 2 s) to hold it open. <code>11 01</code> resets the ECU and triggers the cluster's bulb check.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>An ECU only exposes its sensitive services in a non-default session, and it closes that session when the tester goes quiet. Keeping the session alive is a prerequisite for the final challenge.</p></div>
+  </article>
+
+  <article class="challenge" data-min="15">
+  <h3 id="challenge-16">Challenge 16 // Security access</h3>
+  <p>One DID between <code>1300</code> and <code>13FF</code> contains a flag. The ECU only returns it after <strong>Security Access</strong>, service <code>27</code>: you request a <strong>seed</strong>, calculate the matching <strong>key</strong> and send it back. The algorithm is in the ECU's firmware. On a real ECU you would have to extract that firmware and reverse engineer it. Here the ECU is a JavaScript file called <code>sim-ecu.js</code> that your browser has already downloaded.</p>
+  <p>256 DIDs is too many to try by hand. Paste this into the DevTools console of the simulator tab. It asks for every DID in the range and prints the ones that are not simply unknown.</p>
+  <div class="code">
+    <div class="code-head"><span>javascript</span></div>
+<pre>let did = <span class="p">0x1300</span>;
+const ask = () =&gt; api.<span class="k">send</span>({ id: <span class="p">0x7E0</span>, data: [<span class="p">0x03, 0x22</span>, did &gt;&gt; 8, did &amp; 0xFF, 0, 0, 0, 0] });
+api.<span class="k">onFrame</span>(<span class="p">0x7E8</span>, d =&gt; {
+  <span class="c">// d[3] is the refusal reason. 0x31 means "no such DID".</span>
+  if (d[3] !== <span class="p">0x31</span>) console.log(did.toString(16), 'reason', d[3].toString(16));
+  if (++did &lt;= <span class="p">0x13FF</span>) ask();
+});
+ask();</pre>
+  </div>
+    <p class="criterion"><span>Done when</span> you have unlocked the ECU and read the secret it was guarding.</p>
+  <ul class="mission">
+  <li class="ask" data-answer="e7fac0b6bae52750cd5168f252cc8316fc512a857591dd24ec05688c55d935bd" data-mode="loose"><input type="checkbox" hidden><div class="task">Which DID is refused with &ldquo;security access denied&rdquo; rather than &ldquo;out of range&rdquo;?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 1234" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+25</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li><label><input type="checkbox"><span class="task">Get the ECU to give you a seed</span><span class="pts">+20</span></label></li>
+  <li class="ask" data-answer="3903f6f55e6b4b26f0c62c9614514452ab3862b0763b93019a6f7cedfd6b914d" data-mode="loose"><input type="checkbox" hidden><div class="task">What 32-bit value is combined with the seed to make the key? (hex)</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="8 hex digits" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+30</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li class="ask" data-answer="f3d96b97bd23de49d64e54dc25f5099900f1be331b4d410d75f11f73e6f31922" data-mode="strict"><input type="checkbox" hidden><div class="task">What is the flag?</div><form class="answer"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="FLAG{...}" aria-label="Your answer"><button type="submit">Check</button><span class="pts">+30</span></form><p class="answer-msg" aria-live="polite"></p></li>
+  <li><label><input type="checkbox"><span class="task">Bonus: get yourself locked out with wrong keys, then get back in without waiting</span><span class="pts">+30</span></label></li>
+  </ul>
+  <div class="help">
+    <details class="hint"><summary>Hint 1</summary><div><p>You must be in the extended session from Challenge 15 before <code>27</code> will give you a seed.</p></div></details>
+    <details class="hint"><summary>Hint 2</summary><div><p>Run the script from the challenge text in the console of the simulator tab. A protected DID is refused with reason <code>33</code>, not <code>31</code>.</p></div></details>
+    <details class="hint"><summary>Hint 3</summary><div><p>The algorithm is in the ECU's firmware, and here the firmware is a JavaScript file your browser already downloaded. Open DevTools, go to Sources and open <code>js/sim-ecu.js</code>. Search for <code>27</code> or for the word key.</p></div></details>
+    <details class="solution"><summary>Show full solution</summary><div><p>In the extended session, <code>27 01</code> returns a four-byte seed. The key is the seed combined with a fixed 32-bit mask using XOR; read it out of the ECU source. Send <code>27 02</code> followed by your four key bytes, then read the protected DID <code>22 13 37</code>. If you send three wrong keys you are locked out for ten seconds, but <code>11 01</code> (ECU reset) clears the lockout at once.</p></div></details>
+  </div>
+  <div class="recap" hidden><p class="recap-label">What just happened</p><p>Security Access is a seed-and-key challenge: the strength is entirely in the secret algorithm. Once that algorithm leaks, as it does whenever firmware can be extracted, the lock is open. That is the central lesson of the whole page.</p></div>
+  </article>
+
+  <!-- ============ REFERENCE ============ -->
+  <h2 id="quick-reference">Quick reference</h2>
+
+  <h3>Reading a frame</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>ID</td><td>Arbitration ID in hex, 11 bits (<code>000</code> to <code>7FF</code>). Lower wins the bus.</td></tr>
+      <tr><td>DLC</td><td>Number of data bytes, 0 to 8.</td></tr>
+      <tr><td>Byte 0</td><td>The leftmost data byte. Bit 0 is the least significant bit.</td></tr>
+      <tr><td>Big-endian</td><td>High byte first: <code>32 C8</code> is <code>0x32C8</code> = 13000.</td></tr>
+      <tr><td>Cycle time</td><td>Milliseconds between two frames with the same ID.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>UDS services on this ECU</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Request</th><th>Service</th></tr></thead>
+    <tbody>
+      <tr><td><code>10 xx</code></td><td>Diagnostic Session Control (<code>01</code> default, <code>03</code> extended)</td></tr>
+      <tr><td><code>11 01</code></td><td>ECU Reset</td></tr>
+      <tr><td><code>14 FF FF FF</code></td><td>Clear Diagnostic Information</td></tr>
+      <tr><td><code>19 02 FF</code></td><td>Read DTC Information, by status mask</td></tr>
+      <tr><td><code>22 hh ll</code></td><td>Read Data By Identifier</td></tr>
+      <tr><td><code>27 01</code> / <code>27 02 kk kk kk kk</code></td><td>Security Access: request seed / send key</td></tr>
+      <tr><td><code>3E 00</code></td><td>Tester Present</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Negative response codes</h3>
+  <p>A refusal looks like <code>7F &lt;service&gt; &lt;reason&gt;</code>. The reason tells you what to fix.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>11</code></td><td>Service not supported</td></tr>
+      <tr><td><code>12</code></td><td>Sub-function not supported</td></tr>
+      <tr><td><code>13</code></td><td>Incorrect message length or format</td></tr>
+      <tr><td><code>24</code></td><td>Request sequence error</td></tr>
+      <tr><td><code>31</code></td><td>Request out of range</td></tr>
+      <tr><td><code>33</code></td><td>Security access denied</td></tr>
+      <tr><td><code>35</code></td><td>Invalid key</td></tr>
+      <tr><td><code>36</code></td><td>Exceeded number of attempts</td></tr>
+      <tr><td><code>37</code></td><td>Required time delay not expired</td></tr>
+      <tr><td><code>7F</code></td><td>Service not supported in active session</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Scripting from the console</h3>
+  <p>Open DevTools in the simulator tab (<kbd>F12</kbd>) and use <code>api</code>. Listeners only see frames from the car, never your own.</p>
+  <div class="code">
+    <div class="code-head"><span>javascript</span></div>
+<pre><span class="c">// send one frame</span>
+api.<span class="k">send</span>({ id: <span class="p">0x123</span>, data: [<span class="p">0x00, 0x01, 0x02</span>] });
+
+<span class="c">// repeat a frame, stop it later</span>
+const r = api.<span class="k">sendRepeat</span>({ id: <span class="p">0x123</span>, data: [<span class="p">0, 0, 0, 0, 0, 0, 0, 0</span>], intervalMs: <span class="p">50</span> });
+r.stop();
+
+<span class="c">// listen to one ID, or to everything</span>
+const off = api.<span class="k">onFrame</span>(<span class="p">0x123</span>, data =&gt; console.log(data));
+api.<span class="k">onAnyFrame</span>(({ id, data }) =&gt; { <span class="c">/* ... */</span> });
+off();
+
+<span class="c">// a short UDS request by hand: [length, service, ...] to 7E0, answer on 7E8</span>
+api.<span class="k">onFrame</span>(<span class="p">0x7E8</span>, data =&gt; console.log([...data].map(b =&gt; b.toString(16).padStart(2, '0')).join(' ')));
+api.<span class="k">send</span>({ id: <span class="p">0x7E0</span>, data: [<span class="p">0x03, 0x22, 0xF1, 0x90</span>, 0, 0, 0, 0] });</pre>
+  </div>
+
+  <h2 id="troubleshooting">Troubleshooting</h2>
+
+  <details class="vcc-faq"><summary>"WebUSB not supported" covers the page</summary><div><p>That notice is about real USB adapters. Close it and click <strong>Start simulator</strong>. Chrome and Edge give the best experience.</p></div></details>
+  <details class="vcc-faq"><summary>My frame works for a blink, then the cluster snaps back</summary><div><p>The car keeps sending its own values and the cluster forgets yours after a fraction of a second. Tick <strong>Repeat</strong> or add the frame under <strong>Signals</strong>, and keep the interval short.</p></div></details>
+  <details class="vcc-faq"><summary>I spoof the speed frame but the needle reads 0</summary><div><p>That is expected, see Challenge 10. The cluster compares your speed with another frame.</p></div></details>
+  <details class="vcc-faq"><summary>Lamps flicker or timing goes wrong when I switch tabs</summary><div><p>Browsers slow down timers in background tabs. Keep the simulator in its own visible window next to this page.</p></div></details>
+  <details class="vcc-faq"><summary>The ECU answers 7F ... 7F or forgot my session</summary><div><p>The extended session ends after a few seconds of silence. Tick <strong>Tester Present</strong> in the UDS tab, or enter the session again.</p></div></details>
+  <details class="vcc-faq"><summary>Every lamp lit up at once</summary><div><p>That's the bulb check the cluster runs when it powers up or the ECU resets. It passes in a second or two.</p></div></details>
+  <details class="vcc-faq"><summary>The IDs I wrote down are gone after a restart</summary><div><p>The decoy IDs are reshuffled on every start. The real ones never move.</p></div></details>
+
+  <h2 id="going-deeper">Going deeper</h2>
+  <ul>
+    <li><a href="https://github.com/roaldnefs/webusb-can" target="_blank" rel="noopener">webusb-can on GitHub</a>: the tool and simulator. Plug in a candleLight USB adapter and the same page talks to a real bus.</li>
+    <li><a href="https://roaldnefs.github.io/car-hacking-village/" target="_blank" rel="noopener">Hack the cluster</a>: these techniques on a real instrument cluster on a bench.</li>
+    <li><a href="https://github.com/zombieCraig/ICSim" target="_blank" rel="noopener">ICSim</a>: the Linux instrument cluster simulator that inspired this one, for practising with <code>can-utils</code>.</li>
+    <li><a href="https://nostarch.com/carhacking" target="_blank" rel="noopener">The Car Hacker's Handbook</a> by Craig Smith: the standard introduction.</li>
+    <li><a href="/training/">Training and workshops</a>: run this as a guided session for your team, meetup or conference.</li>
+  </ul>
+
+  </div>
+
+</article>
+{{ end }}

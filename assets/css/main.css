@@ -1913,6 +1913,51 @@ button {
   }
 }
 
+/* Pointer to the playground, used on the training page */
+.try {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid rgb(var(--primary-rgb) / 0.35);
+  background:
+    radial-gradient(ellipse 70% 120% at 100% 50%, rgb(var(--primary-rgb) / 0.16), transparent 70%),
+    var(--glass);
+}
+
+.try-title {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.prose .try-body p {
+  margin-bottom: 0.75rem;
+}
+
+.prose .try .btn {
+  margin-top: 0.75rem;
+  color: var(--on-primary);
+  text-decoration: none;
+}
+
+.prose .try-media img {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: none;
+}
+
+@media (min-width: 640px) {
+  .try {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+}
+
 /* ---------- Callouts ---------- */
 
 .callout {

@@ -1,0 +1,25 @@
+{{ define "main" }}
+<header class="container page-head">
+  <h1 class="page-title reveal">{{ .Title }}</h1>
+</header>
+
+<div class="container post-layout post-layout--single">
+  <div class="post-main prose">
+    {{ .Content }}
+  </div>
+</div>
+
+<div class="container post-grid">
+  {{ range .RegularPages.ByTitle }}
+    <article class="card">
+      <span class="card-media">
+        <img src="{{ with .Params.images }}{{ index . 0 }}{{ else }}{{ partial "cover.html" .Title }}{{ end }}" alt="" width="1600" height="900" loading="lazy">
+      </span>
+      <span class="card-body">
+        <h2 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <span class="card-summary">{{ .Description }}</span>
+      </span>
+    </article>
+  {{ end }}
+</div>
+{{ end }}
